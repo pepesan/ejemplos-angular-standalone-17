@@ -9,6 +9,8 @@ import {Dato} from "./propiedades/dato";
 import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/listado-partidos.component";
 import {UsoServiceComponent} from "./uso-service/uso-service.component";
 import {PrincipalEventosComponent} from "./principal-eventos/principal-eventos.component";
+import {SignalsComponent} from "./signals/signals.component";
+import {MainFormComponent} from "./main-form/main-form.component";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,9 @@ import {PrincipalEventosComponent} from "./principal-eventos/principal-eventos.c
     PropiedadesComponent,
     ListadoPartidosComponent,
     UsoServiceComponent,
-    PrincipalEventosComponent
+    PrincipalEventosComponent,
+    SignalsComponent,
+    MainFormComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

@@ -1,0 +1,11 @@
+<div>
+  Count: {{countSignal()}}
+  DoubleCount: {{doubleCount()}}
+  <h3>Listado de Cadenas</h3>
+  <input (click)="cambia()" type="button" value="Añade"/>
+  <ul>
+    <li *ngFor="let item of cadenasSignal()">
+        {{item}}
+    </li>
+  </ul>
+</div>

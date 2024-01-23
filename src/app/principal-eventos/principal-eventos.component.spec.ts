@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrincipalEventosComponent } from './principal-eventos.component';
+import { PrincipalEventosComponent} from './principal-eventos.component';
+
 
 describe('PrincipalEventosComponent', () => {
   let component: PrincipalEventosComponent;
@@ -8,12 +9,10 @@ describe('PrincipalEventosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrincipalEventosComponent ]
+      imports: [PrincipalEventosComponent]
     })
-    .compileComponents();
-  });
+      .compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(PrincipalEventosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

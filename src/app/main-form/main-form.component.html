@@ -1,0 +1,88 @@
+<h1>Formulario de Edición</h1>
+<form (ngSubmit)="onSubmit();heroForm.reset()" #heroForm="ngForm">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text"
+           class="form-control"
+           id="name"
+           required
+           minlength="4"
+           [(ngModel)]="model.name"
+           name="name"
+           #name="ngModel"/>
+    <div [hidden]="name.valid || name.untouched"
+         class="alert alert-danger">
+      <div *ngIf="name.errors?.['required']">
+        Name is required.
+      </div>
+      <div *ngIf="name.errors?.['minlength']">
+        Name must be at least 4 characters long.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="alterEgo">Alter Ego</label>
+    <input type="text" class="form-control" id="alterEgo"
+           [(ngModel)]="model.alterEgo" name="alterEgo">
+  </div>
+  <div class="form-group">
+    <label for="power">Hero Power</label>
+    <select class="form-control" id="power"
+            required
+            [(ngModel)]="model.power" name="power"
+            #power="ngModel">
+      <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+    </select>
+    <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+      Power is required
+    </div>
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+  <!--button type="button" class="btn btn-default"
+          (click)="newHero(); heroForm.reset()">New Hero</button-->
+</form>
+<div [hidden]="!heroForm.submitted">
+  <h2>You submitted the following:</h2>
+  <div class="row">
+    <div class="col-xs-3">Name</div>
+    <div class="col-xs-9  pull-left">{{ model.name }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Alter Ego</div>
+    <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Power</div>
+    <div class="col-xs-9 pull-left">{{ model.power }}</div>
+  </div>
+</div>
+<div class="form-group">
+  <h4>Validaciones de formulario</h4>
+  <ul>
+    <li>Valid: {{heroForm.form.valid}}</li>
+    <li>Invalid: {{heroForm.form.invalid}}</li>
+    <li>Touched: {{heroForm.form.touched}}</li>
+    <li>Untouched: {{heroForm.form.untouched}}</li>
+    <li>Pristine: {{heroForm.form.pristine}}</li>
+    <li>Dirty: {{heroForm.form.dirty}}</li>
+  </ul>
+</div>
+<div class="form-group">
+  <h4>Validaciones del campo name</h4>
+  <ul>
+    <li>Valid: {{name.valid}}</li>
+    <li>Invalid: {{name.invalid}}</li>
+    <li>Touched: {{name.touched}}</li>
+    <li>Untouched: {{name.untouched}}</li>
+    <li>Pristine: {{name.pristine}}</li>
+    <li>Dirty: {{name.dirty}}</li>
+  </ul>
+</div>
+
+<div class="container">
+  <ul>
+    <li *ngFor="let heroe of heroes" >
+      Nombre: {{heroe.name}}, AlterEgo: {{heroe.alterEgo}}, Poder: {{heroe.power}}
+    </li>
+  </ul>
+</div>
