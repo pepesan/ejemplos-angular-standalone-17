@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {JsonPipe} from "@angular/common";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Event} from "@angular/router";
 
 @Component({
   selector: 'app-principal-eventos',
@@ -8,7 +8,7 @@ import {JsonPipe} from "@angular/common";
   templateUrl: './principal-eventos.component.html',
   styleUrls: ['./principal-eventos.component.sass']
 })
-export class PrincipalEventosComponent implements OnInit {
+export class PrincipalEventosComponent implements OnInit, OnDestroy {
 
   public value: string = '';
 
@@ -24,19 +24,29 @@ export class PrincipalEventosComponent implements OnInit {
     console.log("pulsado");
   }
 
+  onInput(miInput: HTMLInputElement) {
+    console.log(miInput);
+    console.log(miInput.id);
+  }
+
   onEnter(value: string) {
     this.value = value;
     console.log(this.value);
   }
 
-  onEnterKeyBoard(event: Event) {
-    let kbEvent = event as KeyboardEvent;
-    // this.value = event.value;
-    console.log(this.value);
-  }
+  // onEnterKeyBoard(event: Event) {
+  //   let kbEvent = event as KeyboardEvent;
+  //   // this.value = event.value;
+  //   console.log(this.value);
+  // }
 
   onEnterKeyBoard2(elemento: HTMLInputElement) {
     // this.value = event.value;
     console.log(this.value);
   }
+
+  ngOnDestroy(): void {
+  }
+
+
 }
