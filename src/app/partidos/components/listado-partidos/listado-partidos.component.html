@@ -1,0 +1,54 @@
+<h3>Listado de partidos Asíncrono (Promesa)</h3>
+<ul>
+  <li *ngFor="let resultado of listado | async">
+    {{resultado.nombre}}: {{resultado.dipu}}
+    <img src="https://cursosdedesarrollo.com/pactometro/img/{{resultado.imagen}}"
+         width="90px"
+         height="40px" alt="Logo partido {{resultado.nombre}}"/>
+  </li>
+</ul>
+<h3>Listado de partidos Asíncrono (Observable)</h3>
+<ul>
+  <li *ngFor="let resultado of listadopartidosObservable | async">
+    {{resultado.nombre}}: {{resultado.dipu}}
+    <img src="https://cursosdedesarrollo.com/pactometro/img/{{resultado.imagen}}"
+         width="90px"
+         height="40px" alt="Logo partido {{resultado.nombre}}"/>
+  </li>
+</ul>
+<h3>Listado de partidos sin async</h3>
+<ul>
+  <li *ngFor="let resultado of listadoVisible">
+    {{resultado.nombre}}: {{resultado.dipu}}
+    <img src="https://cursosdedesarrollo.com/pactometro/img/{{resultado.imagen}}"
+         width="90px"
+         height="40px" alt="logotipo {{resultado.nombre}}"/>
+  </li>
+</ul>
+<h3>Listado de partidos con Promesa Procesada síncronamente</h3>
+<ul>
+  <li *ngFor="let resultado of listadoVisiblePromesa">
+    {{resultado.nombre}}: {{resultado.dipu}}
+    <img src="https://cursosdedesarrollo.com/pactometro/img/{{resultado.imagen}}"
+         width="90px"
+         height="40px"/>
+  </li>
+</ul>
+<h3>Listado de partidos con Promesa Procesada en Servicio síncronamente</h3>
+<ul>
+  <li *ngFor="let resultado of listadoVisiblePromesaProcesada">
+    {{resultado.nombre}}: {{resultado.dipu}}
+    <img src="https://cursosdedesarrollo.com/pactometro/img/{{resultado.imagen}}"
+         width="90px"
+         height="40px"/>
+  </li>
+</ul>
+<h3>Listado de partidos con Subscribe Procesada en Servicio síncronamente</h3>
+<ul>
+  <li *ngFor="let resultado of listadoVisibleSubscribeProcesado">
+    {{resultado.nombre}}: {{resultado.dipu}}
+    <img src="https://cursosdedesarrollo.com/pactometro/img/{{resultado.imagen}}"
+         width="90px"
+         height="40px"/>
+  </li>
+</ul>

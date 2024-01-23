@@ -6,6 +6,8 @@ import {ControlFlowComponent} from "./control-flow/control-flow.component";
 import {UsoPipesComponent} from "./uso-pipes/uso-pipes.component";
 import {PropiedadesComponent} from "./propiedades/propiedades.component";
 import {Dato} from "./propiedades/dato";
+import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/listado-partidos.component";
+import {UsoServiceComponent} from "./uso-service/uso-service.component";
 
 @Component({
   selector: 'app-root',
@@ -16,7 +18,9 @@ import {Dato} from "./propiedades/dato";
     CondicionalesComponent,
     ControlFlowComponent,
     UsoPipesComponent,
-    PropiedadesComponent
+    PropiedadesComponent,
+    ListadoPartidosComponent,
+    UsoServiceComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
