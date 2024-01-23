@@ -1,0 +1,41 @@
+<div>
+  <h2>Control Flow</h2>
+  <div>
+  @if (a > b) {
+    {{a}} is greater than {{b}}
+  }
+  </div>
+  <div>
+  @if (a > b) {
+    {{a}} is greater than {{b}}
+  } @else if (b > a) {
+    {{a}} is less than {{b}}
+  } @else {
+    {{a}} is equal to {{b}}
+  }
+  </div>
+  <h3>Bucles</h3>
+  <div>
+    @for (item of todos; track item.id) {
+      {{ item.text }}
+    }@empty {
+      <li> There are no items.</li>
+    }
+  </div>
+  <div>
+    <h2>Switch</h2>
+    <div>
+      @switch (condicion) {
+        @case ("A") {
+          Case A.
+        }
+        @case ("B") {
+          Case B.
+        }
+        @default {
+          Default case.
+        }
+      }
+    </div>
+  </div>
+</div>

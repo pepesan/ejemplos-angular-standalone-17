@@ -1,0 +1,23 @@
+<div>
+  <h2>Condicionales</h2>
+  <p *ngIf="booleano">
+    El booleano es true
+  </p>
+  <p *ngIf="!booleano">
+    El booleano es false
+  </p>
+  <ul>
+    <li *ngFor="let item of datos; index as i">
+      {{i}}: {{item.text}}
+    </li>
+  </ul>
+  <div [ngSwitch]="currentItem">
+    <p *ngSwitchCase="'stout'">Stout</p>
+    <p *ngSwitchCase="'stin'">Stin</p>
+    <!-- . . . -->
+    <p *ngSwitchDefault>default</p>
+  </div>
+  <div [ngClass]="isSpecial ? 'special' : ''">
+    This div is special
+  </div>
+</div>
