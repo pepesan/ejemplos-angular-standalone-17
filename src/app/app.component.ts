@@ -8,6 +8,7 @@ import {PropiedadesComponent} from "./propiedades/propiedades.component";
 import {Dato} from "./propiedades/dato";
 import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/listado-partidos.component";
 import {UsoServiceComponent} from "./uso-service/uso-service.component";
+import {PrincipalEventosComponent} from "./principal-eventos/principal-eventos.component";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ import {UsoServiceComponent} from "./uso-service/uso-service.component";
     UsoPipesComponent,
     PropiedadesComponent,
     ListadoPartidosComponent,
-    UsoServiceComponent
+    UsoServiceComponent,
+    PrincipalEventosComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

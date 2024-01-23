@@ -1,0 +1,9 @@
+<p>principal-eventos works!</p>
+<button (click)="clicked($event)">Púlsame</button>
+<div>
+  <!-- envío variable de vista # con sólo el value-->
+  <input #box (keyup.enter)="onEnter(box.value)"/>
+  <h2>{{box.value}}</h2>
+  <!-- envío variable de vista # entero-->
+  <input #box2 (keyup.enter)="onEnterKeyBoard2(box2)">
+</div>

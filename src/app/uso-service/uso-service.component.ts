@@ -15,6 +15,8 @@ import {Partido} from "./partido";
   styleUrl: './uso-service.component.css'
 })
 export class UsoServiceComponent {
-  partidos: Promise<Partido[]> = this._todoService.getData().toPromise();
-  constructor(private _todoService:TodoService) {}
+  partidos: Promise<Partido[]>;
+  constructor(private _todoService:TodoService) {
+    this.partidos = this._todoService.getData().toPromise();
+  }
 }

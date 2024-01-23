@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Partido} from "../models/partido";
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
@@ -62,17 +62,16 @@ export class ApiClientService {
   }
   async getProcesedSubscribeDataAsync(): Promise<Partido[]>
   {
-    let mipromesa = new Promise<Partido[]>(
+    return new Promise<Partido[]>(
       resolve => {
-        let observable = this._httpClient.get<Observable<Partido[]>>(this.url)
-        .pipe(catchError(this.handleError('get', [])));
-        observable.subscribe((data: Partido[])=>{
+        let observable: Observable<Partido[]> = this._httpClient.get<Observable<Partido[]>>(this.url)
+          .pipe(catchError(this.handleError('get', [])));
+        observable.subscribe((data: Partido[]) => {
+          // realizar cualquier tipo de procesado de datos necesario
           resolve(data);
         });
       }
     );
-
-    return mipromesa;
   }
 
   private handleError (operation = 'operation', result?: any) {
