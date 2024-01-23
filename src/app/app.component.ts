@@ -4,6 +4,8 @@ import {TodosComponent} from "./todos/todos.component";
 import {CondicionalesComponent} from "./condicionales/condicionales.component";
 import {ControlFlowComponent} from "./control-flow/control-flow.component";
 import {UsoPipesComponent} from "./uso-pipes/uso-pipes.component";
+import {PropiedadesComponent} from "./propiedades/propiedades.component";
+import {Dato} from "./propiedades/dato";
 
 @Component({
   selector: 'app-root',
@@ -13,10 +15,13 @@ import {UsoPipesComponent} from "./uso-pipes/uso-pipes.component";
     TodosComponent,
     CondicionalesComponent,
     ControlFlowComponent,
-    UsoPipesComponent],
+    UsoPipesComponent,
+    PropiedadesComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'proyecto';
+  objetoDato: Dato = new Dato("holiwi")
 }
