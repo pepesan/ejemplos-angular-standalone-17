@@ -27,7 +27,7 @@ export class UsoPipesComponent {
     apellido: "Perez"
   }
   porcentaje =  0.12;
-
+  numero: number = 2;
   fecha: Date = new Date();
   // fecha: Date = new Date(2023, 6, 15, 12, 30, 15);
 }
