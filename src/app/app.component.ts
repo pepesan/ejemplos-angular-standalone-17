@@ -10,6 +10,7 @@ import {UsoServiceComponent} from "./uso-service/uso-service.component";
 import {PrincipalEventosComponent} from "./principal-eventos/principal-eventos.component";
 import {SignalsComponent} from "./signals/signals.component";
 import {MainFormComponent} from "./formularios/main-form/main-form.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ import {MainFormComponent} from "./formularios/main-form/main-form.component";
     SignalsComponent,
     MainFormComponent,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    NgbModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

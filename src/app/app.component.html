@@ -17,47 +17,53 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <ul class="navbar-nav">
-        <li><a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active" >Home</a></li>
-        <li><a class="nav-link active" routerLink="/about" routerLinkActive="active" >About</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/props" id="Componentes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Componentes
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="Componentes">
-            <li><a class="nav-link" routerLink="/props" routerLinkActive="active" >Propiedades</a></li>
-            <li><a class="nav-link" routerLink="/directivas" routerLinkActive="active">Directivas Builtin</a></li>
-            <li><a class="nav-link" routerLink="/todos" routerLinkActive="active" >Todos</a></li>
-            <li><a class="nav-link" routerLink="/control-flow" routerLinkActive="active" >Control Flow</a></li>
-            <li><a class="nav-link" routerLink="/pipes" routerLinkActive="active" >Pipes</a></li>
-            <li><a class="nav-link" routerLink="/signals" routerLinkActive="active" >Signals</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/service" id="Servicios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Servicios
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="Servicios">
-            <li><a class="nav-link" routerLink="/service" routerLinkActive="active" >Services</a></li>
-            <li><a class="nav-link" routerLink="/partidos" routerLinkActive="active" >Partidos</a></li>
-          </ul>
-        </li>
-        <li><a class="nav-link" routerLink="/events" routerLinkActive="active" >Eventos</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/form" id="Formularios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Formularios
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="Formularios">
-            <li><a class="nav-link" routerLink="/form" routerLinkActive="active" >Form Básico</a></li>
-            <li><a class="nav-link" routerLink="/form-radios" routerLinkActive="active">Form con Radios</a></li>
-          </ul>
-        </li>
-        <li><a class="nav-link" routerLink="/reactivos" routerLinkActive="active" >Reactivos</a></li>
-        <li><a class="nav-link" routerLink="/subrutas" routerLinkActive="active" >SubRutas</a></li>
-        <li><a class="nav-link" routerLink="/nav" routerLinkActive="active" >Navegación</a></li>
-        <li><a class="nav-link" routerLink="/list" routerLinkActive="active" >Listado</a></li>
 
-      </ul>
+        <button class="btn btn-primary" aria-current="page" routerLink="/home" routerLinkActive="active" >Home</button>
+        <button class="btn btn-primary" routerLink="/about" routerLinkActive="active" >About</button>
+
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+          Componentes
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem routerLink="/props" routerLinkActive="active" >Propiedades</button>
+          <button ngbDropdownItem routerLink="/directivas" routerLinkActive="active">Directivas Builtin</button>
+          <button ngbDropdownItem routerLink="/todos" routerLinkActive="active" >Todos</button>
+          <button ngbDropdownItem routerLink="/control-flow" routerLinkActive="active" >Control Flow</button>
+          <button ngbDropdownItem routerLink="/pipes" routerLinkActive="active" >Pipes</button>
+          <button ngbDropdownItem routerLink="/signals" routerLinkActive="active" >Signals</button>
+        </div>
+      </div>
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="Servicios" ngbDropdownToggle>
+          Servicios
+        </button>
+        <div ngbDropdownMenu aria-labelledby="Servicios">
+          <button ngbDropdownItem routerLink="/service" routerLinkActive="active" >Services</button>
+          <button ngbDropdownItem routerLink="/partidos" routerLinkActive="active" >Partidos</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" routerLink="/events" routerLinkActive="active" >Eventos</button>
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="Formularios" ngbDropdownToggle>
+          Formularios
+        </button>
+        <div ngbDropdownMenu aria-labelledby="Formularios">
+          <button ngbDropdownItem routerLink="/form" routerLinkActive="active" >Form Básico</button>
+          <button ngbDropdownItem routerLink="/form-radios" routerLinkActive="active">Form con Radios</button>
+          <button ngbDropdownItem routerLink="/reactivos" routerLinkActive="active" >Reactivos</button>
+        </div>
+      </div>
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="Rutas" ngbDropdownToggle>
+          Rutas
+        </button>
+        <div ngbDropdownMenu aria-labelledby="Rutas">
+          <button ngbDropdownItem routerLink="/subrutas" routerLinkActive="active" >SubRutas</button>
+          <button ngbDropdownItem routerLink="/nav" routerLinkActive="active" >Navegación</button>
+          <button ngbDropdownItem routerLink="/list" routerLinkActive="active" >Listado</button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
