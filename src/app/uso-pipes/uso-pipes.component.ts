@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import {CurrencyPipe, DatePipe, JsonPipe, LowerCasePipe, PercentPipe, UpperCasePipe} from "@angular/common";
+import {
+  CommonModule,
+  CurrencyPipe,
+  DatePipe,
+  JsonPipe,
+  LowerCasePipe,
+  PercentPipe,
+  UpperCasePipe
+} from "@angular/common";
 import {MiaDirective} from "../directives/mia.directive";
 import {MiPipe} from "../pipes/mi-pipe.pipe";
 
@@ -7,12 +15,7 @@ import {MiPipe} from "../pipes/mi-pipe.pipe";
   selector: 'app-uso-pipes',
   standalone: true,
   imports: [
-    LowerCasePipe,
-    UpperCasePipe,
-    JsonPipe,
-    PercentPipe,
-    CurrencyPipe,
-    DatePipe,
+    CommonModule,
     MiaDirective,
     MiPipe
   ],

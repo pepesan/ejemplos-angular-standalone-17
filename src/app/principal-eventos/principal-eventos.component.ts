@@ -21,6 +21,11 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
     event.preventDefault();
     console.log(event);
     console.log(event.target);
+    let htmlButtonElement = event.target as HTMLButtonElement;
+    htmlButtonElement = <HTMLButtonElement>event.target;
+    console.log(htmlButtonElement.id);
+    let htmlElement = event.target as HTMLElement;
+    let element = event.target as Element;
     console.log("pulsado");
   }
 
