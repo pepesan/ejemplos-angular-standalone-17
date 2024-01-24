@@ -1,0 +1,14 @@
+<h2>Formulario con validación custom</h2>
+<form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <input type="text" id="name" name="name" class="form-control" formControlName="name"/>
+  <div *ngIf="profileForm.controls['name']?.invalid && profileForm.controls['name'].status=='INVALID'"
+       class="alert alert-danger">
+    <div *ngIf="profileForm.controls['name'].errors?.['required'] == true">
+      Name is required.
+    </div>
+    <div *ngIf="profileForm.controls['name'].errors?.['forbiddenName']">
+      El nombre no pude ser bob
+    </div>
+  </div>
+</form>
+<button class="btn btn-success" (click)="muestra()" type="button">Muestra</button>

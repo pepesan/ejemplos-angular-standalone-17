@@ -1,0 +1,23 @@
+<h1>Ejemplo FormControl</h1>
+<div class="form-group">
+  <label for="name">Name</label>
+  <input
+    id="name"
+    class="form-control"
+    type="text"
+    [formControl]="name">
+</div>
+<h2>{{name.value}}</h2>
+<button class="btn btn-success" (click)="mostrar()" >Mostrar</button>
+<button class="btn btn-warning" (click)="cambia()" >Cambia</button>
+
+<div class="form-group">
+  <label for="name">NameString</label>
+  <input
+    id="nameString"
+    class="form-control"
+    type="text"
+    name="nameString"
+    [formControl]="nameString">
+</div>
+<h2>{{nameString.value}}</h2>

@@ -1,0 +1,68 @@
+<h1>Ejemplo FormBuilderBásico</h1>
+<form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <label for="firstName">First Name:</label>
+  <input id="firstName" class="form-control" type="text" formControlName="firstName">
+  <div *ngIf="profileForm.controls['firstName']?.invalid && profileForm.controls['firstName'].status=='INVALID'"
+       class="alert alert-danger">
+    <div *ngIf="profileForm.controls['firstName'].errors?.['required'] == true">
+      Name is required.
+    </div>
+    <div *ngIf="profileForm.controls['firstName'].errors?.['minlength']">
+      Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
+      the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+    </div>
+  </div>
+  {{profileForm.get('firstName')?.errors?.['minlength']}}
+  <label for="lastName">Last Name:</label>
+  <input id="lastName" class="form-control" type="text" formControlName="lastName">
+  <div formGroupName="address">
+    <label for="street">Street:</label>
+    <input id="street" class="form-control" type="text" formControlName="street">
+    <label for="city">City:</label>
+    <input id="city" class="form-control" type="text" formControlName="city">
+    <label for="state">State:</label>
+    <input id="state" class="form-control" type="text" formControlName="state">
+    <label for="zip">ZIP:</label>
+    <input id="zip" class="form-control" type="text" formControlName="zip">
+  </div>
+  <input id="form-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="!profileForm.valid"/>
+</form>
+<button class="btn btn-success" (click)="muestra()" type="button">Muestra</button>
+<button class="btn btn-success" (click)="cambia()" type="button">Cambia</button>
+{{profileForm.valid }}
+{{profileForm.value['firstName'] }}
+{{profileForm.status}}
+<!--<h1>Ejemplo TypedFormBuilder Básico</h1>-->
+<!--<form class="form-group" [formGroup]="typedProfileForm" (ngSubmit)="onSubmit()">-->
+<!--  <label for="typedfirstName">First Name:</label>-->
+<!--  <input id="typedfirstName" class="form-control" type="text" formControlName="firstName">-->
+<!--  <div *ngIf="typedProfileForm.controls['firstName']?.invalid && typedProfileForm.controls['firstName'].status=='INVALID'"-->
+<!--       class="alert alert-danger">-->
+<!--    <div *ngIf="typedProfileForm.controls['firstName'].errors?.required == true">-->
+<!--      Name is required.-->
+<!--    </div>-->
+<!--    <div *ngIf="typedProfileForm.controls['firstName'].errors?.minlength">-->
+<!--      Your name has only {{typedProfileForm.controls['firstName'].errors?.minlength?.actualLength}} characters while-->
+<!--      the min lenght is {{typedProfileForm.controls['firstName'].errors?.minlength?.requiredLength}}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  {{typedProfileForm.get('firstName')?.errors?.minlength}}-->
+<!--  <label for="typedlastName">Last Name:</label>-->
+<!--  <input id="typedlastName" class="form-control" type="text" formControlName="lastName">-->
+<!--  <div formGroupName="address">-->
+<!--    <label for="typedstreet">Street:</label>-->
+<!--    <input id="typedstreet" class="form-control" type="text" formControlName="street">-->
+<!--    <label for="typedcity">City:</label>-->
+<!--    <input id="typedcity" class="form-control" type="text" formControlName="city">-->
+<!--    <label for="typedstate">State:</label>-->
+<!--    <input id="typedstate" class="form-control" type="text" formControlName="state">-->
+<!--    <label for="typedzip">ZIP:</label>-->
+<!--    <input id="typedzip" class="form-control" type="text" formControlName="zip">-->
+<!--  </div>-->
+<!--  <input id="typedform-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="!typedProfileForm.valid"/>-->
+<!--</form>-->
+<!--<button class="btn btn-success" (click)="muestra()" type="button">Muestra</button>-->
+<!--<button class="btn btn-success" (click)="cambia()" type="button">Cambia</button>-->
+<!--{{typedProfileForm.valid }}-->
+<!--{{typedProfileForm.value['firstName'] }}-->
+<!--{{typedProfileForm.status}}-->

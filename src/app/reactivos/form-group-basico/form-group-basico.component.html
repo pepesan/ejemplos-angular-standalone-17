@@ -1,0 +1,28 @@
+<h1>Ejemplo FormGroup Básico</h1>
+<form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <label for="firstName">First Name:</label>
+  <input id="firstName" class="form-control" type="text" formControlName="firstName">
+  <div *ngIf="profileForm.controls['firstName']?.invalid && profileForm.controls['firstName'].status=='INVALID'"
+       class="alert alert-danger">
+    <div *ngIf="profileForm.controls['firstName'].errors?.['required'] == true">
+      Name is required.
+    </div>
+    <div *ngIf="profileForm.controls['firstName'].errors?.['minlength']">
+      Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
+      the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+    </div>
+  </div>
+  <label for="lastName">Last Name:</label>
+  <input id="lastName" class="form-control" type="text" formControlName="lastName">
+  <input id="form-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="!profileForm.valid"/>
+</form>
+{{profileForm.valid }}
+<!--<h1>Ejemplo TypedFormGroup Básico</h1>-->
+<!--<form class="form-group" [formGroup]="typedProfileForm" (ngSubmit)="onSubmitTyped()">-->
+<!--  <label for="typedfirstName">First Name:</label>-->
+<!--  <input id="typedfirstName" class="form-control" type="text" formControlName="firstName">-->
+<!--  <label for="typedlastName">Last Name:</label>-->
+<!--  <input id="typedlastName" class="form-control" type="text" formControlName="lastName">-->
+<!--  <input id="typedform-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="!profileForm.valid"/>-->
+<!--</form>-->
+<!--{{profileForm.valid }}-->

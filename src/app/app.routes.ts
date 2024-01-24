@@ -18,6 +18,7 @@ import {ChildBComponent} from "./pages/child-b/child-b.component";
 import {NavegacionComponent} from "./pages/navegacion/navegacion.component";
 import {ListadoComponent} from "./pages/listado/listado.component";
 import {DetalleComponent} from "./pages/detalle/detalle.component";
+import {ReactivosComponent} from "./pages/reactivos/reactivos.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -34,6 +35,7 @@ export const routes: Routes = [
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
+  { path: 'reactivos', component: ReactivosComponent },
   { path: 'subrutas', component: SubRutasComponent,
     children: [
       {
