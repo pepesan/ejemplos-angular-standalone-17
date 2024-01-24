@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 
 @Component({
-  selector: 'app-condicionales',
+  selector: 'app-directivas-builtin',
   standalone: true,
   imports: [
     NgIf,
