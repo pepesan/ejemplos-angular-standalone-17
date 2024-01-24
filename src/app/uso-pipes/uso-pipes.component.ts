@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {CurrencyPipe, DatePipe, JsonPipe, LowerCasePipe, PercentPipe, UpperCasePipe} from "@angular/common";
+import {MiaDirective} from "../directives/mia.directive";
 
 @Component({
   selector: 'app-uso-pipes',
@@ -10,7 +11,8 @@ import {CurrencyPipe, DatePipe, JsonPipe, LowerCasePipe, PercentPipe, UpperCaseP
     JsonPipe,
     PercentPipe,
     CurrencyPipe,
-    DatePipe
+    DatePipe,
+    MiaDirective
   ],
   templateUrl: './uso-pipes.component.html',
   styleUrl: './uso-pipes.component.css'
