@@ -11,6 +11,7 @@ import {UsoServiceComponent} from "./uso-service/uso-service.component";
 import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/listado-partidos.component";
 import {SignalsComponent} from "./signals/signals.component";
 import {MainFormComponent} from "./main-form/main-form.component";
+import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,4 +26,5 @@ export const routes: Routes = [
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
+  { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
