@@ -12,10 +12,18 @@ import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/l
 import {SignalsComponent} from "./signals/signals.component";
 import {MainFormComponent} from "./main-form/main-form.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
+import {SubRutasComponent} from "./pages/sub-rutas/sub-rutas.component";
+import {ChildAComponent} from "./pages/child-a/child-a.component";
+import {ChildBComponent} from "./pages/child-b/child-b.component";
+import {NavegacionComponent} from "./pages/navegacion/navegacion.component";
+import {ListadoComponent} from "./pages/listado/listado.component";
+import {DetalleComponent} from "./pages/detalle/detalle.component";
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
+  { path: 'home', component: HomeComponent,
+    title: 'Home',},
+  { path: 'about', component: AboutComponent,
+    title: 'About', },
   { path: 'props', component: PropsPageComponent },
   { path: 'todos', component: TodosComponent },
   { path: 'directivas', component: CondicionalesComponent },
@@ -26,5 +34,21 @@ export const routes: Routes = [
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
+  { path: 'subrutas', component: SubRutasComponent,
+    children: [
+      {
+        path: 'a', // child route path
+        component: ChildAComponent, // child route component that the router renders
+      },
+      {
+        path: 'b',
+        component: ChildBComponent, // another child route component that the router renders
+      },
+    ],
+  },
+  { path: 'nav', component: NavegacionComponent },
+  { path: 'list', component: ListadoComponent },
+  { path: 'list/:id', component: DetalleComponent },  // Route with parameter
+  { path: '',   redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
