@@ -16,7 +16,11 @@ import {FormsModule} from "@angular/forms";
 export class MainFormComponent implements OnInit {
   public model: Hero;
   public showedModel: Hero;
-  public powers: string[] =  ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
+  public powers: string[] =  [
+    'Really Smart',
+    'Super Flexible',
+    'Super Hot',
+    'Weather Changer'];
   heroes: Hero[] = [];
 
   constructor() {
@@ -31,7 +35,6 @@ export class MainFormComponent implements OnInit {
     console.log(this.model);
     this.heroes.push(new Hero(0,this.model.name, this.model.power, this.model.alterEgo));
     this.showedModel = new Hero(0,this.model.name, this.model.power, this.model.alterEgo)
-    this.model = new Hero();
-
+    this.model = new Hero(0,"",this.powers[0],"");
   }
 }
