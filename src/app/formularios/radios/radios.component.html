@@ -1,0 +1,7 @@
+
+<div *ngFor="let elemento of opciones" class="form-check">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="{{elemento.id}}" value="elemento.value" [checked]="elemento.checked">
+  <label class="form-check-label" for="{{elemento.id}}">
+    {{elemento.name}}
+  </label>
+</div>

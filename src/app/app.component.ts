@@ -9,7 +9,7 @@ import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/l
 import {UsoServiceComponent} from "./uso-service/uso-service.component";
 import {PrincipalEventosComponent} from "./principal-eventos/principal-eventos.component";
 import {SignalsComponent} from "./signals/signals.component";
-import {MainFormComponent} from "./main-form/main-form.component";
+import {MainFormComponent} from "./formularios/main-form/main-form.component";
 
 @Component({
   selector: 'app-root',

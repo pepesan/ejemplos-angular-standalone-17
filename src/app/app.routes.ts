@@ -10,7 +10,7 @@ import {PrincipalEventosComponent} from "./principal-eventos/principal-eventos.c
 import {UsoServiceComponent} from "./uso-service/uso-service.component";
 import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/listado-partidos.component";
 import {SignalsComponent} from "./signals/signals.component";
-import {MainFormComponent} from "./main-form/main-form.component";
+import {MainFormComponent} from "./formularios/main-form/main-form.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
 import {SubRutasComponent} from "./pages/sub-rutas/sub-rutas.component";
 import {ChildAComponent} from "./pages/child-a/child-a.component";
@@ -19,6 +19,7 @@ import {NavegacionComponent} from "./pages/navegacion/navegacion.component";
 import {ListadoComponent} from "./pages/listado/listado.component";
 import {DetalleComponent} from "./pages/detalle/detalle.component";
 import {ReactivosComponent} from "./pages/reactivos/reactivos.component";
+import {RadiosComponent} from "./formularios/radios/radios.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
+  { path: 'form-radios', component: RadiosComponent },
   { path: 'reactivos', component: ReactivosComponent },
   { path: 'subrutas', component: SubRutasComponent,
     children: [
