@@ -14,7 +14,7 @@
   </div>
   <label for="lastName">Last Name:</label>
   <input id="lastName" class="form-control" type="text" formControlName="lastName">
-  <input id="form-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="!profileForm.valid"/>
+  <input id="form-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="profileForm.invalid"/>
 </form>
 {{profileForm.valid }}
 <!--<h1>Ejemplo TypedFormGroup Básico</h1>-->

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import { Validators } from '@angular/forms';
-import {NgIf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 @Component({
   selector: 'app-form-builder-basico',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './form-builder-basico.component.html',
   styleUrls: ['./form-builder-basico.component.css']
 })
@@ -19,7 +19,10 @@ export class FormBuilderBasicoComponent implements OnInit {
     this.profileForm= this.fb.group({
       firstName: [
         '',
-        [Validators.required,Validators.minLength(4)]
+        [
+          Validators.required,
+          Validators.minLength(4)
+        ]
       ],
       lastName: [''],
       address: this.fb.group({

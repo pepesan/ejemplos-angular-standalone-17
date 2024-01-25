@@ -17,8 +17,8 @@ export class FormValidatePasswordsComponent {
 
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
+      password: ['',[Validators.required]],
       repeatedPassword: ['',Validators.required, ConfirmedValidator('password')],
-      password: ['',[Validators.required]]
     });
 
   }

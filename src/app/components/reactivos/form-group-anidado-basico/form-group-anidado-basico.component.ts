@@ -16,7 +16,11 @@ export class FormGroupAnidadoBasicoComponent implements OnInit {
 
   constructor() {
     this.profileForm = new UntypedFormGroup({
-      firstName: new UntypedFormControl('',[Validators.required,Validators.minLength(4)]),
+      firstName: new UntypedFormControl(
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4)]),
       lastName: new UntypedFormControl(''),
       address: new UntypedFormGroup({
         street: new UntypedFormControl(''),
@@ -41,7 +45,9 @@ export class FormGroupAnidadoBasicoComponent implements OnInit {
 
   onSubmit() {
     console.warn(this.profileForm.value);
-    console.warn(this.profileForm.value?.firstname);
+    console.warn(this.profileForm.value?.firstName);
+    console.warn(this.profileForm.value?.address);
+    console.warn(this.profileForm.value?.address?.street);
     console.log(this.profileForm);
   }
 

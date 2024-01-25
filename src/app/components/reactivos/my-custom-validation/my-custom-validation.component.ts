@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import {ForbiddenNameValidator} from "../../../directives/forbidden-name.directive";
+import {ForbiddenNameValidator} from "../../../validators/ForbidenValidator";
 
 @Component({
   selector: 'app-my-custom-validation',
@@ -14,10 +14,12 @@ export class MyCustomValidationComponent implements OnInit {
   public profileForm: UntypedFormGroup;
   constructor() {
     this.profileForm = new UntypedFormGroup({
-      name: new UntypedFormControl('', [
-        Validators.required,
-        ForbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
-      ]),
+      name: new UntypedFormControl(
+        '',
+        [
+          Validators.required,
+          ForbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
+        ]),
     });
   }
 

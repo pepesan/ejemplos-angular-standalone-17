@@ -22,7 +22,12 @@ export class FormGroupBasicoComponent implements OnInit {
 
   constructor() {
     this.profileForm = new UntypedFormGroup({
-      firstName: new UntypedFormControl('',[Validators.required,Validators.minLength(4)]),
+      firstName: new UntypedFormControl(
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4)
+        ]),
       lastName: new UntypedFormControl(''),
     });
     // this.typedProfileForm = new FormGroup({
