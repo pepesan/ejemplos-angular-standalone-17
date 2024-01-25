@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RadiosComponent } from './radios.component';
+import {FormsModule} from "@angular/forms";
 
 describe('RadiosComponent', () => {
   let component: RadiosComponent;
@@ -8,7 +9,7 @@ describe('RadiosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RadiosComponent ]
+      imports: [ RadiosComponent, FormsModule ]
     })
     .compileComponents();
   });

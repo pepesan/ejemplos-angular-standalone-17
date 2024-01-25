@@ -31,7 +31,8 @@ export class MainFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  onSubmit(event: SubmitEvent) {
+    event.preventDefault();
     console.log(this.model);
     this.heroes.push(new Hero(0,this.model.name, this.model.power, this.model.alterEgo));
     this.showedModel = new Hero(0,this.model.name, this.model.power, this.model.alterEgo)

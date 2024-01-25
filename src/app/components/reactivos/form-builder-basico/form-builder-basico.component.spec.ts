@@ -11,7 +11,6 @@ describe('FormBuilderBasicoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormBuilderBasicoComponent ],
       imports: [
       CommonModule,
       ReactiveFormsModule

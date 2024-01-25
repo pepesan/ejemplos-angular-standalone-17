@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { SubRutasComponent } from './sub-rutas.component';
+import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
 
 describe('SubRutasComponent', () => {
   let component: SubRutasComponent;
@@ -8,10 +9,10 @@ describe('SubRutasComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SubRutasComponent]
+      imports: [RouterTestingModule, SubRutasComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SubRutasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

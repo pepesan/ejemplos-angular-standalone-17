@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormValidatePasswordsComponent } from './form-validate-passwords.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 describe('FormValidatePasswordsComponent', () => {
   let component: FormValidatePasswordsComponent;
@@ -8,7 +9,7 @@ describe('FormValidatePasswordsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FormValidatePasswordsComponent]
+      imports: [FormValidatePasswordsComponent, ReactiveFormsModule]
     });
     fixture = TestBed.createComponent(FormValidatePasswordsComponent);
     component = fixture.componentInstance;

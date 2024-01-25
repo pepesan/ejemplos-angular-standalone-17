@@ -1,5 +1,5 @@
 <h1>Formulario de Edición</h1>
-<form (ngSubmit)="onSubmit();heroForm.reset()" #heroForm="ngForm">
+<form (ngSubmit)="onSubmit($event);heroForm.reset()" #heroForm="ngForm">
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text"
@@ -33,11 +33,11 @@
             #power="ngModel">
       <option *ngFor="let pow of powers" [value]="pow" [selected]="pow== model.power">{{pow}}</option>
     </select>
-    <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+    <div [hidden]="power.valid || power.untouched" class="alert alert-danger">
       Power is required
     </div>
   </div>
-  <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+  <button type="submit" class="btn btn-success" [disabled]="heroForm.form.invalid">Submit</button>
   <!--button type="button" class="btn btn-default"
           (click)="newHero(); heroForm.reset()">New Hero</button-->
 </form>

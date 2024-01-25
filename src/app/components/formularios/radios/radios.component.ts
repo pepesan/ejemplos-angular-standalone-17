@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-radios',
   standalone: true,
   imports: [
-    NgIf,
-    FormsModule,
-    NgForOf
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './radios.component.html',
   styleUrls: ['./radios.component.sass']

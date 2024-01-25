@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormGroupBasicoComponent } from './form-group-basico.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 describe('FormGroupBasicoComponent', () => {
   let component: FormGroupBasicoComponent;
@@ -8,7 +9,7 @@ describe('FormGroupBasicoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormGroupBasicoComponent ]
+      imports: [ FormGroupBasicoComponent, ReactiveFormsModule ]
     })
     .compileComponents();
   });

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MyCustomValidationComponent } from './my-custom-validation.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 describe('MyCustomValidationComponent', () => {
   let component: MyCustomValidationComponent;
@@ -8,7 +9,7 @@ describe('MyCustomValidationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MyCustomValidationComponent ]
+      imports: [ MyCustomValidationComponent, ReactiveFormsModule ]
     })
     .compileComponents();
   });
