@@ -8,8 +8,8 @@ import {
   PercentPipe,
   UpperCasePipe
 } from "@angular/common";
-import {MiaDirective} from "../directives/mia.directive";
-import {MiPipe} from "../pipes/mi-pipe.pipe";
+import {MiaDirective} from "../../directives/mia.directive";
+import {MiPipe} from "../../pipes/mi-pipe.pipe";
 
 @Component({
   selector: 'app-uso-pipes',

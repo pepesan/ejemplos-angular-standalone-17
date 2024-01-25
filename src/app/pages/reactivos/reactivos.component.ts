@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import {FormBasicoComponent} from "../../reactivos/form-basico/form-basico.component";
-import {FormBuilderBasicoComponent} from "../../reactivos/form-builder-basico/form-builder-basico.component";
+import {FormBasicoComponent} from "../../components/reactivos/form-basico/form-basico.component";
+import {FormBuilderBasicoComponent} from "../../components/reactivos/form-builder-basico/form-builder-basico.component";
 import {
   FormGroupAnidadoBasicoComponent
-} from "../../reactivos/form-group-anidado-basico/form-group-anidado-basico.component";
-import {FormGroupBasicoComponent} from "../../reactivos/form-group-basico/form-group-basico.component";
+} from "../../components/reactivos/form-group-anidado-basico/form-group-anidado-basico.component";
+import {FormGroupBasicoComponent} from "../../components/reactivos/form-group-basico/form-group-basico.component";
 import {
   FormValidatePasswordsComponent
-} from "../../reactivos/form-validate-passwords/form-validate-passwords.component";
-import {MyCustomValidationComponent} from "../../reactivos/my-custom-validation/my-custom-validation.component";
+} from "../../components/reactivos/form-validate-passwords/form-validate-passwords.component";
+import {MyCustomValidationComponent} from "../../components/reactivos/my-custom-validation/my-custom-validation.component";
 
 @Component({
   selector: 'app-reactivos',

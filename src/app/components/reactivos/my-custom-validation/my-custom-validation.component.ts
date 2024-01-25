@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
-import {ForbiddenNameValidator} from "../../directives/forbidden-name.directive";
+import {ForbiddenNameValidator} from "../../../directives/forbidden-name.directive";
 
 @Component({
   selector: 'app-my-custom-validation',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Partido} from "../uso-service/partido";
+import {Partido} from "../components/uso-service/partido";
 import {catchError} from "rxjs/operators";
 
 @Injectable({

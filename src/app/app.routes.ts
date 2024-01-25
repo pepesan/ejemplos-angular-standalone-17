@@ -2,15 +2,15 @@ import { Routes } from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {PropsPageComponent} from "./pages/props-page/props-page.component";
-import {CondicionalesComponent} from "./directivas-builtin/condicionales.component";
-import {ControlFlowComponent} from "./control-flow/control-flow.component";
-import {TodosComponent} from "./todos/todos.component";
-import {UsoPipesComponent} from "./uso-pipes/uso-pipes.component";
-import {PrincipalEventosComponent} from "./principal-eventos/principal-eventos.component";
-import {UsoServiceComponent} from "./uso-service/uso-service.component";
-import {ListadoPartidosComponent} from "./partidos/components/listado-partidos/listado-partidos.component";
-import {SignalsComponent} from "./signals/signals.component";
-import {MainFormComponent} from "./formularios/main-form/main-form.component";
+import {CondicionalesComponent} from "./components/directivas-builtin/condicionales.component";
+import {ControlFlowComponent} from "./components/control-flow/control-flow.component";
+import {TodosComponent} from "./components/todos/todos.component";
+import {UsoPipesComponent} from "./components/uso-pipes/uso-pipes.component";
+import {PrincipalEventosComponent} from "./components/principal-eventos/principal-eventos.component";
+import {UsoServiceComponent} from "./components/uso-service/uso-service.component";
+import {ListadoPartidosComponent} from "./components/partidos/components/listado-partidos/listado-partidos.component";
+import {SignalsComponent} from "./components/signals/signals.component";
+import {MainFormComponent} from "./components/formularios/main-form/main-form.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
 import {SubRutasComponent} from "./pages/sub-rutas/sub-rutas.component";
 import {ChildAComponent} from "./pages/child-a/child-a.component";
@@ -19,7 +19,7 @@ import {NavegacionComponent} from "./pages/navegacion/navegacion.component";
 import {ListadoComponent} from "./pages/listado/listado.component";
 import {DetalleComponent} from "./pages/detalle/detalle.component";
 import {ReactivosComponent} from "./pages/reactivos/reactivos.component";
-import {RadiosComponent} from "./formularios/radios/radios.component";
+import {RadiosComponent} from "./components/formularios/radios/radios.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,

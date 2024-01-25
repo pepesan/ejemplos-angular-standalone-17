@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TodoService} from "../services/todo.service";
+import {TodoService} from "../../services/todo.service";
 import {AsyncPipe, NgForOf} from "@angular/common";
 import {Partido} from "./partido";
 

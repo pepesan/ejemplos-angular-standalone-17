@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from "@angular/common";
-import {ConfirmedValidator} from "../../validators/ConfirmedValidator";
+import {ConfirmedValidator} from "../../../validators/ConfirmedValidator";
 
 
 

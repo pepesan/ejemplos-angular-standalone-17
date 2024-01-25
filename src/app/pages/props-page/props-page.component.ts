@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {PropiedadesComponent} from "../../propiedades/propiedades.component";
-import {Dato} from "../../propiedades/dato";
+import {PropiedadesComponent} from "../../components/propiedades/propiedades.component";
+import {Dato} from "../../components/propiedades/dato";
 
 @Component({
   selector: 'app-props-page',
