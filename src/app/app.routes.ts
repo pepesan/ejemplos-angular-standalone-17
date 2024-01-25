@@ -20,6 +20,7 @@ import {ListadoComponent} from "./pages/listado/listado.component";
 import {DetalleComponent} from "./pages/detalle/detalle.component";
 import {ReactivosComponent} from "./pages/reactivos/reactivos.component";
 import {RadiosComponent} from "./components/formularios/radios/radios.component";
+import {LazyModuleModule} from "./modules/lazy-module/lazy-module.module";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -53,6 +54,9 @@ export const routes: Routes = [
   { path: 'nav', component: NavegacionComponent },
   { path: 'list', component: ListadoComponent },
   { path: 'list/:id', component: DetalleComponent },  // Route with parameter
+  {
+    path: 'lazy',
+    loadChildren: () => import('./modules/lazy-module/lazy-module.module').then(m => m.LazyModuleModule) },
   { path: '',   redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
