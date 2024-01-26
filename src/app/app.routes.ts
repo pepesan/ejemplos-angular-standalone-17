@@ -22,6 +22,7 @@ import {ReactivosComponent} from "./pages/reactivos/reactivos.component";
 import {RadiosComponent} from "./components/formularios/radios/radios.component";
 import {AcordeonComponent} from "./pages/acordeon/acordeon.component";
 import {AlertasComponent} from "./pages/alertas/alertas.component";
+import {FormBootstrapComponent} from "./pages/form-bootstrap/form-bootstrap.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -57,6 +58,7 @@ export const routes: Routes = [
   { path: 'list/:id', component: DetalleComponent },  // Route with parameter
   { path: 'acordeon', component: AcordeonComponent },
   { path: 'alertas', component: AlertasComponent },
+  { path: 'form-bootstrap', component: FormBootstrapComponent },
   {
     path: 'lazy',
     loadChildren: () => import('./modules/lazy-module/lazy-module.module').then(m => m.LazyModuleModule) },
