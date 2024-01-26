@@ -20,7 +20,8 @@ import {ListadoComponent} from "./pages/listado/listado.component";
 import {DetalleComponent} from "./pages/detalle/detalle.component";
 import {ReactivosComponent} from "./pages/reactivos/reactivos.component";
 import {RadiosComponent} from "./components/formularios/radios/radios.component";
-import {LazyModuleModule} from "./modules/lazy-module/lazy-module.module";
+import {AcordeonComponent} from "./pages/acordeon/acordeon.component";
+import {AlertasComponent} from "./pages/alertas/alertas.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -54,6 +55,8 @@ export const routes: Routes = [
   { path: 'nav', component: NavegacionComponent },
   { path: 'list', component: ListadoComponent },
   { path: 'list/:id', component: DetalleComponent },  // Route with parameter
+  { path: 'acordeon', component: AcordeonComponent },
+  { path: 'alertas', component: AlertasComponent },
   {
     path: 'lazy',
     loadChildren: () => import('./modules/lazy-module/lazy-module.module').then(m => m.LazyModuleModule) },

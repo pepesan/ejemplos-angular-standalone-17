@@ -10,10 +10,7 @@ import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet} from
 })
 export class NavegacionComponent {
 
-  constructor(
-    public router: Router){
-
-  }
+  constructor(public router: Router){}
 
   salta() {
     this.router.navigate(['/home']);

@@ -1,0 +1,8 @@
+
+<ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</ngb-alert>
+@for (alert of alerts; track alert) {
+    <ngb-alert [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
+}
+<button type="button" class="btn btn-primary" (click)="reset()">Reset</button>

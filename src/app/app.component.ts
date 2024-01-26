@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from '@angular/router';
 import {TodosComponent} from "./components/todos/todos.component";
 import {CondicionalesComponent} from "./components/directivas-builtin/condicionales.component";
 import {ControlFlowComponent} from "./components/control-flow/control-flow.component";
@@ -16,7 +16,6 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     TodosComponent,
     CondicionalesComponent,
     ControlFlowComponent,
@@ -27,8 +26,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     PrincipalEventosComponent,
     SignalsComponent,
     MainFormComponent,
-    RouterLink,
-    RouterLinkActive,
+    RouterModule,
     NgbModule
   ],
   templateUrl: './app.component.html',

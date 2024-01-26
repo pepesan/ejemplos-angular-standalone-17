@@ -18,7 +18,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
-        <button class="btn btn-primary" aria-current="page" routerLink="/home" routerLinkActive="active" >Home</button>
+        <button class="btn btn-danger" routerLink="/home" routerLinkActive="active" >Home</button>
         <button class="btn btn-primary" routerLink="/about" routerLinkActive="active" >About</button>
 
       <div ngbDropdown class="d-inline-block">
@@ -65,6 +65,17 @@
         </div>
       </div>
       <button class="btn btn-primary" aria-current="page" routerLink="/lazy" routerLinkActive="active" >Lazy</button>
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="Ng_Bootstrap" ngbDropdownToggle>
+          Ng Bootstrap
+        </button>
+        <div ngbDropdownMenu aria-labelledby="Ng_Bootstrap">
+          <button ngbDropdownItem routerLink="/acordeon" routerLinkActive="active" >Acordeon</button>
+          <button ngbDropdownItem routerLink="/alertas" routerLinkActive="active" >Alertas</button>
+
+
+        </div>
+      </div>
     </div>
   </div>
 </nav>
