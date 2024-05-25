@@ -24,6 +24,7 @@ import {AcordeonComponent} from "./pages/acordeon/acordeon.component";
 import {AlertasComponent} from "./pages/alertas/alertas.component";
 import {FormBootstrapComponent} from "./pages/form-bootstrap/form-bootstrap.component";
 import {SignalEffectComponent} from "./components/signal-effect/signal-effect.component";
+import {SignalInputComponent} from "./components/signal-input/signal-input.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -37,6 +38,7 @@ export const routes: Routes = [
   { path: 'pipes', component: UsoPipesComponent },
   { path: 'signals', component: SignalsComponent },
   { path: 'signals-effect', component: SignalEffectComponent },
+  { path: 'signals-input', component: SignalInputComponent },
   { path: 'service', component: UsoServiceComponent },
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
