@@ -23,6 +23,7 @@ import {RadiosComponent} from "./components/formularios/radios/radios.component"
 import {AcordeonComponent} from "./pages/acordeon/acordeon.component";
 import {AlertasComponent} from "./pages/alertas/alertas.component";
 import {FormBootstrapComponent} from "./pages/form-bootstrap/form-bootstrap.component";
+import {SignalEffectComponent} from "./components/signal-effect/signal-effect.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'control-flow', component: ControlFlowComponent },
   { path: 'pipes', component: UsoPipesComponent },
   { path: 'signals', component: SignalsComponent },
+  { path: 'signals-effect', component: SignalEffectComponent },
   { path: 'service', component: UsoServiceComponent },
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },

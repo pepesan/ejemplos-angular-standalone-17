@@ -31,7 +31,16 @@
           <button ngbDropdownItem routerLink="/todos" routerLinkActive="active" >Todos</button>
           <button ngbDropdownItem routerLink="/control-flow" routerLinkActive="active" >Control Flow</button>
           <button ngbDropdownItem routerLink="/pipes" routerLinkActive="active" >Pipes</button>
+
+        </div>
+      </div>
+      <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary" id="dropdownSignal1" ngbDropdownToggle>
+          Signals
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownSignal1">
           <button ngbDropdownItem routerLink="/signals" routerLinkActive="active" >Signals</button>
+          <button ngbDropdownItem routerLink="/signals-effect" routerLinkActive="active" >Effect</button>
         </div>
       </div>
       <div ngbDropdown class="d-inline-block">
