@@ -8,7 +8,7 @@ import {Component, model, ModelSignal} from '@angular/core';
   styleUrl: './signal-model.component.css'
 })
 export class SignalModelComponent {
-  // This is a model input.
+  // This is a model input + output
   // [(checked)]="variable" en la llamada al componente
   checked: ModelSignal<boolean> = model(false);
 
