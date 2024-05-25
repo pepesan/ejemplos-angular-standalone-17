@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsoServiceComponent} from './uso-service.component';
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 
 describe('UsoService', () => {
@@ -10,8 +10,9 @@ describe('UsoService', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsoServiceComponent, HttpClientModule],
-    })
+    imports: [UsoServiceComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(UsoServiceComponent);

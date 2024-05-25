@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Partido} from "../components/uso-service/partido";
 import {catchError} from "rxjs/operators";
@@ -8,7 +8,7 @@ import {catchError} from "rxjs/operators";
   providedIn: 'root'
 })
 export class TodoService {
-  url = 'https://cursosdedesarrollo.com/pactometro/resultados.json';
+  url = 'https://pactometro.cursosdedesarrollo.com/resultados.json';
   constructor(private _httpClient: HttpClient) {console.log('TodoService inicializado...');}
   getData() {
     return this._httpClient.get<Observable<Partido[]>>(this.url)

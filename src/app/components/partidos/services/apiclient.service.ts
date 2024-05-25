@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Partido} from "../models/partido";
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -11,7 +11,7 @@ export class ApiClientService {
 
   private listado: Partido[] = [];
   // private url : string = 'https://cursosdedesarrollo.com/pactometro/resultados.json';
-  private url : string = 'https://cursosdedesarrollo.com/pactometro/resultados.json';
+  private url : string = 'https://pactometro.cursosdedesarrollo.com/resultados.json';
 
   constructor(private _httpClient: HttpClient) {
     console.log("cargado el cliente HTTP");

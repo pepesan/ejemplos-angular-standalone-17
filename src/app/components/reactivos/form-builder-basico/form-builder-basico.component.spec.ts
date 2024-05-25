@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilderBasicoComponent } from './form-builder-basico.component';
 import {CommonModule} from "@angular/common";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 
 describe('FormBuilderBasicoComponent', () => {
   let component: FormBuilderBasicoComponent;

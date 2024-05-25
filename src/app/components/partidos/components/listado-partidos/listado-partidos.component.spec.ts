@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListadoPartidosComponent} from './listado-partidos.component';
-import {HttpClientModule} from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 
 describe('ListadoPartidosComponent', () => {
@@ -10,8 +10,9 @@ describe('ListadoPartidosComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListadoPartidosComponent, HttpClientModule]
-    })
+    imports: [ListadoPartidosComponent],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(ListadoPartidosComponent);
