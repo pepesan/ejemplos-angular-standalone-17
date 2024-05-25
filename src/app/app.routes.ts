@@ -25,6 +25,8 @@ import {AlertasComponent} from "./pages/alertas/alertas.component";
 import {FormBootstrapComponent} from "./pages/form-bootstrap/form-bootstrap.component";
 import {SignalEffectComponent} from "./components/signal-effect/signal-effect.component";
 import {SignalInputComponent} from "./components/signal-input/signal-input.component";
+import {UseSignalInputComponent} from "./components/use-signal-input/use-signal-input.component";
+import {UseSignalModelComponent} from "./components/use-signal-model/use-signal-model.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -39,6 +41,7 @@ export const routes: Routes = [
   { path: 'signals', component: SignalsComponent },
   { path: 'signals-effect', component: SignalEffectComponent },
   { path: 'signals-input', component: SignalInputComponent },
+  { path: 'signals-model', component: UseSignalModelComponent },
   { path: 'service', component: UsoServiceComponent },
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
