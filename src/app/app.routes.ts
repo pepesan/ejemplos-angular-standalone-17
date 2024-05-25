@@ -27,6 +27,7 @@ import {SignalEffectComponent} from "./components/signal-effect/signal-effect.co
 import {SignalInputComponent} from "./components/signal-input/signal-input.component";
 import {UseSignalInputComponent} from "./components/use-signal-input/use-signal-input.component";
 import {UseSignalModelComponent} from "./components/use-signal-model/use-signal-model.component";
+import {SignalQueriesComponent} from "./components/signal-queries/signal-queries.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -42,6 +43,7 @@ export const routes: Routes = [
   { path: 'signals-effect', component: SignalEffectComponent },
   { path: 'signals-input', component: SignalInputComponent },
   { path: 'signals-model', component: UseSignalModelComponent },
+  { path: 'signals-queries', component: SignalQueriesComponent },
   { path: 'service', component: UsoServiceComponent },
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
