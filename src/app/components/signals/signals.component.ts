@@ -30,7 +30,13 @@ export class SignalsComponent implements OnInit{
     // this.cadenasSignal.mutate((value: string[]): void => {
     //   value.push("hola")
     // })
-    // TODO: Revisar la modificación de señales para arrays
+    // Modificación de señales para arrays
+    this.cadenasSignal.set(["uno", "dos"])
+    // Modificación manteniendo contenido anterior
+    this.cadenasSignal.update((listadoActual: string[]) => {
+      listadoActual.push("tres");
+      return listadoActual;
+    })
   }
   cambia(){
     this.countSignal.set(this.countSignal() + 1)
