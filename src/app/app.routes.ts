@@ -28,6 +28,7 @@ import {SignalInputComponent} from "./components/signal-input/signal-input.compo
 import {UseSignalInputComponent} from "./components/use-signal-input/use-signal-input.component";
 import {UseSignalModelComponent} from "./components/use-signal-model/use-signal-model.component";
 import {SignalQueriesComponent} from "./components/signal-queries/signal-queries.component";
+import {TodoListadoComponent} from "./components/todo-listado/todo-listado.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent,
     title: 'About', },
   { path: 'props', component: PropsPageComponent },
+  { path: 'props-listado-detalle', component: TodoListadoComponent },
   { path: 'todos', component: TodosComponent },
   { path: 'directivas', component: CondicionalesComponent },
   { path: 'control-flow', component: ControlFlowComponent },

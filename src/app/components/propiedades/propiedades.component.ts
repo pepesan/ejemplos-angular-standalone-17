@@ -16,4 +16,4 @@ export class PropiedadesComponent {
   @Input() parametro?: string;
   @Input() parametro2?: number;
   @Input() dato?: Dato;
- }
+}

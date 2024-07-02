@@ -1,0 +1,13 @@
+<div>
+  <h2>Listado de Todo Detalles</h2>
+  <div *ngIf="listado.length>0">
+    <ul>
+      <app-todo-detalle
+        *ngFor="let item of listado"
+        [dato]="item"
+      >
+      </app-todo-detalle>
+    </ul>
+  </div>
+
+</div>

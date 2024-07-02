@@ -16,11 +16,13 @@
   </div>
   <h3>Bucles</h3>
   <div>
+    <ul>
     @for (item of todos; track item.id) {
-      {{ item.text }}
+      <li>{{ item.text }}</li>
     }@empty {
       <li> There are no items.</li>
     }
+    </ul>
   </div>
   <div>
     <h2>Switch</h2>

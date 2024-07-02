@@ -16,6 +16,6 @@ export class ControlFlowComponent {
     { id: 2, text: "Revisar el coche"},
     new Todo(3, "Llevar al niño a Karate")
   ];
-  public condicion: string = "";
+  public condicion: string = "C";
 }
 
