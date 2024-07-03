@@ -15,23 +15,27 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("OnInit");
   }
 
   clicked(event: MouseEvent) {
     event.preventDefault();
     console.log(event);
     console.log(event.target);
-    let htmlButtonElement = event.target as HTMLButtonElement;
-    htmlButtonElement = <HTMLButtonElement>event.target;
+    let htmlButtonElement: HTMLButtonElement = event.target as HTMLButtonElement;
+    //htmlButtonElement = <HTMLButtonElement>event.target;
     console.log(htmlButtonElement.id);
-    let htmlElement = event.target as HTMLElement;
-    let element = event.target as Element;
+    let htmlElement: HTMLElement = event.target as HTMLElement;
+    console.log(htmlElement.id);
+    let element: Element = event.target as Element;
+    console.log(element.id);
     console.log("pulsado");
   }
 
   onInput(miInput: HTMLInputElement) {
     console.log(miInput);
     console.log(miInput.id);
+    console.log(miInput.value);
   }
 
   onEnter(value: string) {
@@ -51,6 +55,7 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log("OnDestroy");
   }
 
 
