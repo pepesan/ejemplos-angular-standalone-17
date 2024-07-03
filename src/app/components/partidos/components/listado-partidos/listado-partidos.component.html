@@ -52,3 +52,12 @@
          height="90px"/>
   </li>
 </ul>
+
+<h3>Listado de partidos con Señales</h3>
+<ul>
+  <!-- Utiliza la señal directamente -->
+  <li *ngFor="let resultado of partidosSignal()">
+    {{ resultado.nombre }}: {{ resultado.dipu }}
+    <img src="https://pactometro.cursosdedesarrollo.com/img/{{ resultado.imagen }}" width="90px" height="90px" />
+  </li>
+</ul>

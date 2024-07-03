@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal, WritableSignal} from '@angular/core';
 import {ApiClientService} from "../../services/apiclient.service";
 import {Partido} from "../../models/partido";
 import {Observable, Subscription} from "rxjs";
@@ -24,6 +24,8 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
   public listadoVisiblePromesa: Partido[] | undefined = [];
   public listadoVisiblePromesaProcesada: Partido[] = [];
   public listadoVisibleSubscribeProcesado: Partido[] = [];
+  // Uso con señales
+  public partidosSignal: WritableSignal<Partido[]> = signal<Partido[]>([]);
 
   constructor(private apiClientService: ApiClientService) {
     // Directamente consultamos al servicio para que devuelva una promesa con los datos del JSON
@@ -50,6 +52,10 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
 
         console.log(this.listadoVisible);
       });
+    // Uso con señales
+    this.apiClientService.getData().subscribe(data =>{
+      this.partidosSignal.set(data);
+    })
   }
 
   ngOnInit(): void {
