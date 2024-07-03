@@ -17,82 +17,76 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <button class="btn btn-danger me-2" routerLink="/home" routerLinkActive="active">Home</button>
+        <button class="btn btn-primary me-2" routerLink="/about" routerLinkActive="active">About</button>
 
-        <button class="btn btn-danger" routerLink="/home" routerLinkActive="active" >Home</button>
-        <button class="btn btn-primary" routerLink="/about" routerLinkActive="active" >About</button>
+        <div ngbDropdown class="d-inline-block me-2">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Componentes</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem routerLink="/props" routerLinkActive="active">Propiedades</button>
+            <button ngbDropdownItem routerLink="/directivas" routerLinkActive="active">Directivas Builtin</button>
+            <button ngbDropdownItem routerLink="/todos" routerLinkActive="active">Todos</button>
+            <button ngbDropdownItem routerLink="/props-listado-detalle" routerLinkActive="active">Todos Listado Detalle</button>
+            <button ngbDropdownItem routerLink="/control-flow" routerLinkActive="active">Control Flow</button>
+            <button ngbDropdownItem routerLink="/pipes" routerLinkActive="active">Pipes</button>
+          </div>
+        </div>
 
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-          Componentes
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem routerLink="/props" routerLinkActive="active" >Propiedades</button>
-          <button ngbDropdownItem routerLink="/directivas" routerLinkActive="active">Directivas Builtin</button>
-          <button ngbDropdownItem routerLink="/todos" routerLinkActive="active" >Todos</button>
-          <button ngbDropdownItem routerLink="/props-listado-detalle" routerLinkActive="active" >Todos Listado Detalle</button>
-          <button ngbDropdownItem routerLink="/control-flow" routerLinkActive="active" >Control Flow</button>
-          <button ngbDropdownItem routerLink="/pipes" routerLinkActive="active" >Pipes</button>
+        <div ngbDropdown class="d-inline-block me-2">
+          <button class="btn btn-outline-primary" id="dropdownSignal1" ngbDropdownToggle>Signals</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownSignal1">
+            <button ngbDropdownItem routerLink="/signals" routerLinkActive="active">Signals</button>
+            <button ngbDropdownItem routerLink="/signals-effect" routerLinkActive="active">Effect</button>
+            <button ngbDropdownItem routerLink="/signals-input" routerLinkActive="active">Input</button>
+            <button ngbDropdownItem routerLink="/signals-model" routerLinkActive="active">Model</button>
+            <button ngbDropdownItem routerLink="/signals-queries" routerLinkActive="active">Queries</button>
+          </div>
+        </div>
 
+        <div ngbDropdown class="d-inline-block me-2">
+          <button class="btn btn-outline-primary" id="Servicios" ngbDropdownToggle>Servicios</button>
+          <div ngbDropdownMenu aria-labelledby="Servicios">
+            <button ngbDropdownItem routerLink="/service" routerLinkActive="active">Services</button>
+            <button ngbDropdownItem routerLink="/partidos" routerLinkActive="active">Partidos</button>
+          </div>
         </div>
-      </div>
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-primary" id="dropdownSignal1" ngbDropdownToggle>
-          Signals
-        </button>
-        <div ngbDropdownMenu aria-labelledby="dropdownSignal1">
-          <button ngbDropdownItem routerLink="/signals" routerLinkActive="active" >Signals</button>
-          <button ngbDropdownItem routerLink="/signals-effect" routerLinkActive="active" >Effect</button>
-          <button ngbDropdownItem routerLink="/signals-input" routerLinkActive="active" >Input</button>
-          <button ngbDropdownItem routerLink="/signals-model" routerLinkActive="active" >Model</button>
-          <button ngbDropdownItem routerLink="/signals-queries" routerLinkActive="active" >Queries</button>
-        </div>
-      </div>
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-primary" id="Servicios" ngbDropdownToggle>
-          Servicios
-        </button>
-        <div ngbDropdownMenu aria-labelledby="Servicios">
-          <button ngbDropdownItem routerLink="/service" routerLinkActive="active" >Services</button>
-          <button ngbDropdownItem routerLink="/partidos" routerLinkActive="active" >Partidos</button>
-        </div>
-      </div>
-      <button class="btn btn-primary" routerLink="/events" routerLinkActive="active" >Eventos</button>
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-primary" id="Formularios" ngbDropdownToggle>
-          Formularios
-        </button>
-        <div ngbDropdownMenu aria-labelledby="Formularios">
-          <button ngbDropdownItem routerLink="/form" routerLinkActive="active" >Form Básico</button>
-          <button ngbDropdownItem routerLink="/form-radios" routerLinkActive="active">Form con Radios</button>
-          <button ngbDropdownItem routerLink="/reactivos" routerLinkActive="active" >Reactivos</button>
-        </div>
-      </div>
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-primary" id="Rutas" ngbDropdownToggle>
-          Rutas
-        </button>
-        <div ngbDropdownMenu aria-labelledby="Rutas">
-          <button ngbDropdownItem routerLink="/subrutas" routerLinkActive="active" >SubRutas</button>
-          <button ngbDropdownItem routerLink="/nav" routerLinkActive="active" >Navegación</button>
-          <button ngbDropdownItem routerLink="/list" routerLinkActive="active" >Listado</button>
-        </div>
-      </div>
-      <button class="btn btn-primary" aria-current="page" routerLink="/lazy" routerLinkActive="active" >Lazy</button>
-      <div ngbDropdown class="d-inline-block">
-        <button type="button" class="btn btn-outline-primary" id="Ng_Bootstrap" ngbDropdownToggle>
-          Ng Bootstrap
-        </button>
-        <div ngbDropdownMenu aria-labelledby="Ng_Bootstrap">
-          <button ngbDropdownItem routerLink="/acordeon" routerLinkActive="active" >Acordeon</button>
-          <button ngbDropdownItem routerLink="/alertas" routerLinkActive="active" >Alertas</button>
-          <button ngbDropdownItem routerLink="/form-bootstrap" routerLinkActive="active" >Form</button>
 
+        <button class="btn btn-primary me-2" routerLink="/events" routerLinkActive="active">Eventos</button>
 
+        <div ngbDropdown class="d-inline-block me-2">
+          <button class="btn btn-outline-primary" id="Formularios" ngbDropdownToggle>Formularios</button>
+          <div ngbDropdownMenu aria-labelledby="Formularios">
+            <button ngbDropdownItem routerLink="/form" routerLinkActive="active">Form Básico</button>
+            <button ngbDropdownItem routerLink="/form-radios" routerLinkActive="active">Form con Radios</button>
+            <button ngbDropdownItem routerLink="/reactivos" routerLinkActive="active">Reactivos</button>
+          </div>
+        </div>
+
+        <div ngbDropdown class="d-inline-block me-2">
+          <button class="btn btn-outline-primary" id="Rutas" ngbDropdownToggle>Rutas</button>
+          <div ngbDropdownMenu aria-labelledby="Rutas">
+            <button ngbDropdownItem routerLink="/subrutas" routerLinkActive="active">SubRutas</button>
+            <button ngbDropdownItem routerLink="/nav" routerLinkActive="active">Navegación</button>
+            <button ngbDropdownItem routerLink="/list" routerLinkActive="active">Listado</button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary me-2" routerLink="/lazy" routerLinkActive="active">Lazy</button>
+
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="Ng_Bootstrap" ngbDropdownToggle>Ng Bootstrap</button>
+          <div ngbDropdownMenu aria-labelledby="Ng_Bootstrap">
+            <button ngbDropdownItem routerLink="/acordeon" routerLinkActive="active">Acordeon</button>
+            <button ngbDropdownItem routerLink="/alertas" routerLinkActive="active">Alertas</button>
+            <button ngbDropdownItem routerLink="/form-bootstrap" routerLinkActive="active">Form</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </nav>
+
 <h1>Angular Router App</h1>
 <main class="main">
   <h1>Ejemplos de Angular</h1>
