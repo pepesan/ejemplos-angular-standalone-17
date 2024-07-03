@@ -8,15 +8,23 @@
            [ngModelOptions]="{standalone: true}"/>
   </form>
   <ul>
-    <li *ngFor="let todo of todos">
-      {{todo.text}} <button
-      (click)="deleteTodo(todo.text)"
-    >Borrar</button>
+    <li *ngFor="let todo of todos" id="todo-{{todo.id}}">
+      {{todo.text}}
+      <button
+        (click)="deleteTodo(todo.text)">
+        Borrar
+      </button>
     </li>
     @for (todo of todos; track todo.id) {
-      <li id="todo-{{todo.id}}">{{ todo.text }} <button
-        (click)="deleteTodo(todo.text)"
-      >Borrar</button></li>
+      <li id="todo-{{todo.id}}">
+        {{ todo.text }}
+        <button
+          (click)="deleteTodo(todo.text)">
+          Borrar
+        </button>
+      </li>
+    }@empty {
+      <li> There are no items.</li>
     }
   </ul>
 </div>

@@ -18,7 +18,7 @@ export class TodosComponent {
   todos: Todo[];
 
   constructor() {
-    this.todo = new Todo(0 , "Nahuel");
+    this.todo = new Todo(0 , "Llevar a la perra al veterinario");
     this.todos=[
       { id: 1, text:"Hacer la compra"},
       { id: 2, text: "Revisar el coche"},
@@ -39,6 +39,7 @@ export class TodosComponent {
       const todo = this.todos[i];
       if(todo.text==texto){
         this.todos.splice(i,1);
+        break;
       }
     }
   }
