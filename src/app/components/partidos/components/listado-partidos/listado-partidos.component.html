@@ -61,3 +61,14 @@
     <img src="https://pactometro.cursosdedesarrollo.com/img/{{ resultado.imagen }}" width="90px" height="90px" />
   </li>
 </ul>
+<h3>Listado de partidos con Señales y Control Flow</h3>
+<ul>
+  @for (item of partidosSignal(); track item.nombre) {
+    <li>
+      {{ item.nombre }}: {{ item.dipu }}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" />
+    </li>
+  }@empty {
+    <li> There are no results.</li>
+  }
+</ul>
