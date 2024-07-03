@@ -26,7 +26,8 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
   public listadoVisibleSubscribeProcesado: Partido[] = [];
   // Uso con señales
   public partidosSignal: WritableSignal<Partido[]> = signal<Partido[]>([]);
-
+  // Uso de señales para datos "Procesados"
+  public listadoVisibleSignals: WritableSignal<Partido[]> = signal<Partido[]>([]);
   constructor(private apiClientService: ApiClientService) {
     // Directamente consultamos al servicio para que devuelva una promesa con los datos del JSON
     this.listado = this.apiClientService.getData().toPromise();
@@ -59,6 +60,28 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
       data =>{
         // cargar en la señal el dato descargado
         this.partidosSignal.set(data);
+      }
+    );
+
+    // Uso con señales pero con "procesado"
+    this.apiClientService.getData().subscribe(
+      // Define una función que se ejecutará cuando se disponga del dato
+      // data es el dato recibido
+      data =>{
+        // cargar en la señal el dato descargado
+        //this.partidosSignal.set(data);
+        data.forEach( (value : Partido) => {
+          // Aquí iría el procesado de la información
+          // ejemplo de procesado
+          value.nombre += "!";
+          // Iríamos actualizando los datos según vayan viviendo
+          // Actualizamos la vista con cada dato procesado
+          // Actualiando la variable signal metiendo el dato nuevo
+          this.listadoVisibleSignals.update((listadoActual: Partido[]) => {
+            listadoActual.push(value);
+            return listadoActual;
+          });
+        });
       }
     );
   }

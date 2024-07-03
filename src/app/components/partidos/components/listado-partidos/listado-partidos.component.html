@@ -72,3 +72,15 @@
     <li> There are no results.</li>
   }
 </ul>
+
+<h3>Listado de partidos con Señales, Control Flow y "Procesado"</h3>
+<ul>
+  @for (item of listadoVisibleSignals(); track item.nombre) {
+    <li>
+      {{ item.nombre }}: {{ item.dipu }}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" />
+    </li>
+  }@empty {
+    <li> There are no results.</li>
+  }
+</ul>
