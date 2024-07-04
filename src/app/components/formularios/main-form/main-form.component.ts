@@ -51,7 +51,7 @@ export class MainFormComponent implements OnInit {
     event.preventDefault();
     console.log(this.model);
     this.heroes.push(new Hero(0,this.model.name, this.model.power, this.model.alterEgo));
-    this.showedModel = new Hero(0,this.model.name, this.model.power, this.model.alterEgo)
-    this.model = new Hero(0,"",this.powers[0],"");
+    this.showedModel = new Hero(0,this.model.name, this.model.power, this.model.alterEgo);
+    this.model = new Hero(0,"",0,"");
   }
 }

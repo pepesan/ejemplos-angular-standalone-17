@@ -106,8 +106,13 @@
 
 <div class="container">
   <ul>
-    <li *ngFor="let heroe of heroes" >
-      Nombre: {{heroe.name}}, AlterEgo: {{heroe.alterEgo}}, Poder: {{heroe.power}}
-    </li>
+    <!--li *ngFor="let heroe of heroes" >
+      Nombre: {{heroe.name}}, AlterEgo: {{heroe.alterEgo}}, Poder: {{powers[heroe.power].text}}
+    </li-->
+    @for (heroe of heroes; track heroe.id) {
+      <li>Nombre: {{heroe.name}}, AlterEgo: {{heroe.alterEgo}}, Poder: {{powers[heroe.power].text}}</li>
+    }@empty {
+      <li> There are no heroes.</li>
+    }
   </ul>
 </div>
