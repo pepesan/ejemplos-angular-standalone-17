@@ -1,23 +1,27 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {NgForOf} from "@angular/common";
+import {ListadoService} from "../../services/listado.service";
 @Component({
   selector: 'app-listado',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './listado.component.html',
   styleUrl: './listado.component.css'
 })
 export class ListadoComponent {
-  items = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' }
-  ];
 
-  constructor(private router: Router) {}
+  items: any[]
+  constructor(
+    private router: Router,
+    private listadoService: ListadoService
+  ) {
+    this.items = this.listadoService.items
+  }
 
   viewItemDetails(item: any) {
     this.router.navigate(['/list', item.id]);  // Navigate with item ID

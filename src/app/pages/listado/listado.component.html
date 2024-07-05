@@ -5,3 +5,10 @@
     </li>
   </ul>
 </div>
+<div>
+  <ul>
+    <li *ngFor="let item of items">
+      <button class="btn btn-success me-2" routerLink="/list/{{item.id}}" routerLinkActive="active">Show {{item.name}}</button>
+    </li>
+  </ul>
+</div>

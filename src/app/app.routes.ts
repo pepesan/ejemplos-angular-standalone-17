@@ -75,6 +75,7 @@ export const routes: Routes = [
   {
     path: 'lazy',
     loadChildren: () => import('./modules/lazy-module/lazy-module.module').then(m => m.LazyModuleModule) },
+  { path: '404', component: PageNotFoundComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];
