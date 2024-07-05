@@ -14,26 +14,35 @@ import {FormsModule} from "@angular/forms";
 })
 export class RadiosComponent implements OnInit {
   public opciones: any[] = [];
-
+  public gender: string;
   constructor() {
+    this.gender = "other";
     this.opciones.push({
-      name: "Opción 1",
-      id: "opcion-1",
-      value: "option1",
+      name: "Masculino",
+      id: "male",
+      value: "male",
       disabled: false,
       checked: true
     });
     this.opciones.push({
-      name: "Opción 2",
-      id: "opcion-2",
-      value: "option2",
+      name: "Femenino",
+      id: "female",
+      value: "female",
       disabled: false,
       checked: false
     });
     this.opciones.push({
-      name: "Opción 3",
-      id: "opcion-3",
-      value: "option3",
+      name: "No binario",
+      id: "no-binary",
+      value: "no-binary",
+      disabled: false,
+      checked: false
+
+    });
+    this.opciones.push({
+      name: "Other",
+      id: "other",
+      value: "other",
       disabled: false,
       checked: false
 

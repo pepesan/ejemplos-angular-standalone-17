@@ -2,7 +2,7 @@
 <form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <label for="firstName">First Name:</label>
   <input id="firstName" class="form-control" type="text" formControlName="firstName">
-  <div *ngIf="profileForm.controls['firstName']?.invalid && profileForm.controls['firstName'].status=='INVALID'"
+  <!--div *ngIf="profileForm.controls['firstName'].status=='INVALID'"
        class="alert alert-danger">
     <div *ngIf="profileForm.controls['firstName'].errors?.['required'] == true">
       Name is required.
@@ -11,12 +11,38 @@
       Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
       the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
     </div>
-  </div>
+  </div-->
+  @if (
+    profileForm.controls['firstName'].status=='INVALID'
+    && profileForm.controls['firstName']?.touched == true
+    ) {
+    <div class="alert alert-danger">
+      @if(profileForm.controls['firstName'].errors?.['required'] == true){
+        <div>Name is required.</div>
+      }
+      @if(profileForm.controls['firstName'].errors?.['minlength']){
+        <div>
+          Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
+          the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+        </div>
+      }
+    </div>
+  }
   <label for="lastName">Last Name:</label>
   <input id="lastName" class="form-control" type="text" formControlName="lastName">
-  <input id="form-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="profileForm.invalid"/>
+  <input
+    id="form-submit"
+    class="btn btn-success"
+    type="submit"
+    value="Enviar"
+    [disabled]="profileForm.status=='INVALID'"/>
 </form>
+<h3>Form valid</h3>
 {{profileForm.valid }}
+{{profileForm.status }}
+<h3>firstname field valid</h3>
+{{profileForm.controls['firstName']?.valid }}
+{{profileForm.controls['firstName']?.status }}
 <!--<h1>Ejemplo TypedFormGroup Básico</h1>-->
 <!--<form class="form-group" [formGroup]="typedProfileForm" (ngSubmit)="onSubmitTyped()">-->
 <!--  <label for="typedfirstName">First Name:</label>-->

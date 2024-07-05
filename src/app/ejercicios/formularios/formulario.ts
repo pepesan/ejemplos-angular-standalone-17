@@ -6,8 +6,8 @@ export class Formulario {
     public repeatPassword: string= "",
     public email: string= "",
     public gender: string= "",
-    public orientation: string= "",
-    public relationType: string= "",
+    public orientation: number= 3,
+    public relationType: number= 3,
     public conditions: boolean = false,
 
     public alterEgo?: string
