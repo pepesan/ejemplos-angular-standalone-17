@@ -2,7 +2,7 @@
 <form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <label for="firstName">First Name:</label>
   <input id="firstName" class="form-control" type="text" formControlName="firstName">
-  <div *ngIf="profileForm.controls['firstName']?.invalid && profileForm.controls['firstName'].status=='INVALID'"
+  <!--div *ngIf="profileForm.controls['firstName']?.invalid && profileForm.controls['firstName'].status=='INVALID'"
        class="alert alert-danger">
     <div *ngIf="profileForm.controls['firstName'].errors?.['required'] == true">
       Name is required.
@@ -11,7 +11,23 @@
       Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
       the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
     </div>
-  </div>
+  </div-->
+  @if (
+    profileForm.controls['firstName'].status=='INVALID'
+    && profileForm.controls['firstName'].touched
+    ) {
+    <div class="alert alert-danger">
+      @if(profileForm.controls['firstName'].errors?.['required']){
+        <div>Name is required.</div>
+      }
+      @if(profileForm.controls['firstName'].errors?.['minlength']){
+        <div>
+          Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
+          the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+        </div>
+      }
+    </div>
+  }
   {{profileForm.get('firstName')?.errors?.['minlength']}}
   <label for="lastName">Last Name:</label>
   <input id="lastName" class="form-control" type="text" formControlName="lastName">

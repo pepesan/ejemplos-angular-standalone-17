@@ -11,6 +11,7 @@ export function ConfirmedValidator(controlName: string): ValidatorFn {
     console.log("Repeatedpassword Value: "+control.value);
     console.log("Password Value: "+matchingControl.value);
     // si los valores no coinciden, devolvemos un objeto de error con la propiedad "confirmedValidator" y los valores "control.value" y "matchingControl.value"
-    return control.value !== matchingControl.value ? of({confirmedValidator: {value: control.value, confirmed: matchingControl.value}}) : of(null);
+    return control.value !== matchingControl.value
+      ? of({confirmedValidator: {value: control.value, confirmed: matchingControl.value}}) : of(null);
   };
 }
