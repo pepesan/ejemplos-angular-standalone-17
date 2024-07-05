@@ -14,10 +14,10 @@
   </div-->
   @if (
     profileForm.controls['firstName'].status=='INVALID'
-    && profileForm.controls['firstName']?.touched == true
+    && profileForm.controls['firstName'].touched
     ) {
     <div class="alert alert-danger">
-      @if(profileForm.controls['firstName'].errors?.['required'] == true){
+      @if(profileForm.controls['firstName'].errors?.['required']){
         <div>Name is required.</div>
       }
       @if(profileForm.controls['firstName'].errors?.['minlength']){
@@ -41,8 +41,7 @@
 {{profileForm.valid }}
 {{profileForm.status }}
 <h3>firstname field valid</h3>
-{{profileForm.controls['firstName']?.valid }}
-{{profileForm.controls['firstName']?.status }}
+{{profileForm.controls['firstName'].status }}
 <!--<h1>Ejemplo TypedFormGroup Básico</h1>-->
 <!--<form class="form-group" [formGroup]="typedProfileForm" (ngSubmit)="onSubmitTyped()">-->
 <!--  <label for="typedfirstName">First Name:</label>-->
