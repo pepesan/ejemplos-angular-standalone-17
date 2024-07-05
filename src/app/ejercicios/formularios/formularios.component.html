@@ -1,0 +1,106 @@
+<h1>Formulario de Alta</h1>
+<form
+  (ngSubmit)="onSubmit($event);SignUpForm.reset()"
+  #SignUpForm="ngForm">
+  <div class="form-group">
+    <label for="username">Username *</label>
+    <input type="text"
+           class="form-control"
+           id="username"
+           required
+           minlength="4"
+           [(ngModel)]="model.username"
+           name="username"
+           #username="ngModel"/>
+    <div [hidden]="username.valid || username.untouched"
+         class="alert alert-danger">
+      @if (username.errors?.['required']) {
+        <div>
+          Username is required.
+        </div>
+      }
+      @if (username.errors?.['minlength']) {
+        <div>
+          Username must be at least 4 characters long.
+        </div>
+      }
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password *</label>
+    <input type="password"
+           class="form-control"
+           id="password"
+           required
+           minlength="4"
+           [(ngModel)]="model.password"
+           name="password"
+           #password="ngModel"/>
+    <div [hidden]="password.valid || password.untouched"
+         class="alert alert-danger">
+      @if (password.errors?.['required']) {
+        <div>
+          Password is required.
+        </div>
+      }
+      @if (password.errors?.['minlength']) {
+        <div>
+          Password must be at least 4 characters long.
+        </div>
+      }
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="repeatPassword">Repeat Password *</label>
+    <input type="password"
+           class="form-control"
+           id="repeatPassword"
+           required
+           minlength="4"
+           [(ngModel)]="model.repeatPassword"
+           name="repeatPassword"
+           #repeatPassword="ngModel"/>
+    <div [hidden]="repeatPassword.valid || repeatPassword.untouched"
+         class="alert alert-danger">
+      @if (repeatPassword.errors?.['required']) {
+        <div>
+          Repeat Password is required.
+        </div>
+      }
+      @if (repeatPassword.errors?.['minlength']) {
+        <div>
+          Repeat Password must be at least 4 characters long.
+        </div>
+      }
+    </div>
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input type="email"
+             class="form-control"
+             id="email"
+             required
+             pattern="[^ @]*@[^ @]*"
+             [(ngModel)]="model.email"
+             name="email"
+             #email="ngModel"/>
+      <div [hidden]="email.valid || email.untouched"
+           class="alert alert-danger">
+        @if (email.errors?.['required']) {
+          <div>
+            Email is required.
+          </div>
+        }
+        @if (email.errors?.['pattern']) {
+          <div>
+            Email must be well formated.
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-success"
+    [disabled]="SignUpForm.form.invalid">Submit</button>
+</form>
