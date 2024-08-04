@@ -14,9 +14,10 @@ RUN npm install
 COPY . .
 
 # Compila la aplicación Angular
-RUN npm run build --prod
+RUN npm run build --omit=dev
 
-RUN ls -la /app/dist/proyecto/browser
+# Para localizar la aplicación para navegador
+# RUN ls -la /app/dist/proyecto/browser
 
 # Etapa 2: Servir la aplicación Angular con Nginx
 FROM nginx:stable-bookworm
