@@ -5,14 +5,13 @@ import {Observable, Subscription} from "rxjs";
 import {AsyncPipe, NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 
 @Component({
-  selector: 'app-listado-partidos',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    NgForOf
-  ],
-  templateUrl: './listado-partidos.component.html',
-  styleUrls: ['./listado-partidos.component.sass']
+    selector: 'app-listado-partidos',
+    imports: [
+        AsyncPipe,
+        NgForOf
+    ],
+    templateUrl: './listado-partidos.component.html',
+    styleUrls: ['./listado-partidos.component.sass']
 })
 export class ListadoPartidosComponent implements OnInit, OnDestroy {
 

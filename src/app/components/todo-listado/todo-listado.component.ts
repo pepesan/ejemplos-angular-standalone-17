@@ -4,15 +4,14 @@ import {TodoDetalleComponent} from "../todo-detalle/todo-detalle.component";
 import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-todo-listado',
-  standalone: true,
-  imports: [
-    TodoDetalleComponent,
-    NgForOf,
-    NgIf
-  ],
-  templateUrl: './todo-listado.component.html',
-  styleUrl: './todo-listado.component.css'
+    selector: 'app-todo-listado',
+    imports: [
+        TodoDetalleComponent,
+        NgForOf,
+        NgIf
+    ],
+    templateUrl: './todo-listado.component.html',
+    styleUrl: './todo-listado.component.css'
 })
 export class TodoListadoComponent {
 

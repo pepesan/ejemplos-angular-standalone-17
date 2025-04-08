@@ -6,11 +6,10 @@ import {ConfirmedValidator} from "../../../validators/ConfirmedValidator";
 
 
 @Component({
-  selector: 'app-form-validate-passwords',
-  standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
-  templateUrl: './form-validate-passwords.component.html',
-  styleUrls: ['./form-validate-passwords.component.css']
+    selector: 'app-form-validate-passwords',
+    imports: [ReactiveFormsModule],
+    templateUrl: './form-validate-passwords.component.html',
+    styleUrls: ['./form-validate-passwords.component.css']
 })
 export class FormValidatePasswordsComponent {
   myForm: FormGroup;

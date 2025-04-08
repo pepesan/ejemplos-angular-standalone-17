@@ -4,11 +4,10 @@ import {NgIf} from "@angular/common";
 import {ForbiddenNameValidator} from "../../../validators/ForbidenValidator";
 
 @Component({
-  selector: 'app-my-custom-validation',
-  standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
-  templateUrl: './my-custom-validation.component.html',
-  styleUrls: ['./my-custom-validation.component.css']
+    selector: 'app-my-custom-validation',
+    imports: [ReactiveFormsModule, NgIf],
+    templateUrl: './my-custom-validation.component.html',
+    styleUrls: ['./my-custom-validation.component.css']
 })
 export class MyCustomValidationComponent implements OnInit {
   public profileForm: UntypedFormGroup;

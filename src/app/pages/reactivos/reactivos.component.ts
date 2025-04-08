@@ -11,18 +11,17 @@ import {
 import {MyCustomValidationComponent} from "../../components/reactivos/my-custom-validation/my-custom-validation.component";
 
 @Component({
-  selector: 'app-reactivos',
-  standalone: true,
-  imports: [
-    FormBasicoComponent,
-    FormBuilderBasicoComponent,
-    FormGroupAnidadoBasicoComponent,
-    FormGroupBasicoComponent,
-    FormValidatePasswordsComponent,
-    MyCustomValidationComponent
-  ],
-  templateUrl: './reactivos.component.html',
-  styleUrl: './reactivos.component.css'
+    selector: 'app-reactivos',
+    imports: [
+        FormBasicoComponent,
+        FormBuilderBasicoComponent,
+        FormGroupAnidadoBasicoComponent,
+        FormGroupBasicoComponent,
+        FormValidatePasswordsComponent,
+        MyCustomValidationComponent
+    ],
+    templateUrl: './reactivos.component.html',
+    styleUrl: './reactivos.component.css'
 })
 export class ReactivosComponent {
 

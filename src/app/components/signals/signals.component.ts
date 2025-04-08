@@ -2,13 +2,12 @@ import {Component, computed, OnInit, Signal, signal, WritableSignal} from '@angu
 import {NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'app-signals',
-  standalone: true,
-  imports: [
-    NgForOf
-  ],
-  templateUrl: './signals.component.html',
-  styleUrls: ['./signals.component.sass']
+    selector: 'app-signals',
+    imports: [
+        NgForOf
+    ],
+    templateUrl: './signals.component.html',
+    styleUrls: ['./signals.component.sass']
 })
 export class SignalsComponent implements OnInit{
   // definición de una variable string con signals

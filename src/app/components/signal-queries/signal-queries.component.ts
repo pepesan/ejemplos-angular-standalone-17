@@ -2,13 +2,12 @@ import {Component, ElementRef, Signal, viewChild, viewChildren} from '@angular/c
 import {TodosComponent} from "../todos/todos.component";
 
 @Component({
-  selector: 'app-signal-queries',
-  standalone: true,
-  imports: [
-    TodosComponent
-  ],
-  templateUrl: './signal-queries.component.html',
-  styleUrl: './signal-queries.component.css'
+    selector: 'app-signal-queries',
+    imports: [
+        TodosComponent
+    ],
+    templateUrl: './signal-queries.component.html',
+    styleUrl: './signal-queries.component.css'
 })
 export class SignalQueriesComponent {
   divEl: Signal<ElementRef|undefined> = viewChild<ElementRef>('el');

@@ -1,11 +1,10 @@
 import {Component, model, ModelSignal} from '@angular/core';
 
 @Component({
-  selector: 'app-signal-model',
-  standalone: true,
-  imports: [],
-  templateUrl: './signal-model.component.html',
-  styleUrl: './signal-model.component.css'
+    selector: 'app-signal-model',
+    imports: [],
+    templateUrl: './signal-model.component.html',
+    styleUrl: './signal-model.component.css'
 })
 export class SignalModelComponent {
   // This is a model input + output

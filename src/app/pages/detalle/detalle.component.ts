@@ -2,14 +2,13 @@ import {Component, numberAttribute, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {ListadoService} from "../../services/listado.service";
 @Component({
-  selector: 'app-detalle',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterLinkActive
-  ],
-  templateUrl: './detalle.component.html',
-  styleUrl: './detalle.component.css'
+    selector: 'app-detalle',
+    imports: [
+        RouterLink,
+        RouterLinkActive
+    ],
+    templateUrl: './detalle.component.html',
+    styleUrl: './detalle.component.css'
 })
 export class DetalleComponent implements OnInit{
 

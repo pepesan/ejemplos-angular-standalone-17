@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import {Todo} from "../todos/todo";
 
 @Component({
-  selector: 'app-control-flow',
-  standalone: true,
-  imports: [],
-  templateUrl: './control-flow.component.html',
-  styleUrl: './control-flow.component.css'
+    selector: 'app-control-flow',
+    imports: [],
+    templateUrl: './control-flow.component.html',
+    styleUrl: './control-flow.component.css'
 })
 export class ControlFlowComponent {
   public a: number = 3;

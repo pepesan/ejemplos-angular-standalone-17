@@ -5,14 +5,13 @@ import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 
 @Component({
-  selector: 'app-formularios',
-  standalone: true,
-  imports: [
-    FormsModule,
-    CommonModule
-  ],
-  templateUrl: './formularios.component.html',
-  styleUrl: './formularios.component.css'
+    selector: 'app-formularios',
+    imports: [
+        FormsModule,
+        CommonModule
+    ],
+    templateUrl: './formularios.component.html',
+    styleUrl: './formularios.component.css'
 })
 export class FormulariosComponent {
 

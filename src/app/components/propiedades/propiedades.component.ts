@@ -3,13 +3,12 @@ import {Dato} from "./dato";
 import {JsonPipe} from "@angular/common";
 
 @Component({
-  selector: 'app-propiedades',
-  standalone: true,
-  imports: [
-    JsonPipe
-  ],
-  templateUrl: './propiedades.component.html',
-  styleUrl: './propiedades.component.sass'
+    selector: 'app-propiedades',
+    imports: [
+        JsonPipe
+    ],
+    templateUrl: './propiedades.component.html',
+    styleUrl: './propiedades.component.sass'
 })
 export class PropiedadesComponent {
 

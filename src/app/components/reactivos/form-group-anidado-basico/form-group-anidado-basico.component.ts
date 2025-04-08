@@ -3,11 +3,10 @@ import {FormGroup, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Va
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: 'app-form-group-anidado-basico',
-  standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
-  templateUrl: './form-group-anidado-basico.component.html',
-  styleUrls: ['./form-group-anidado-basico.component.css']
+    selector: 'app-form-group-anidado-basico',
+    imports: [ReactiveFormsModule],
+    templateUrl: './form-group-anidado-basico.component.html',
+    styleUrls: ['./form-group-anidado-basico.component.css']
 })
 export class FormGroupAnidadoBasicoComponent implements OnInit {
 

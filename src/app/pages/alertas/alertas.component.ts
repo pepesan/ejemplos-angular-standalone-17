@@ -42,11 +42,10 @@ const ALERTS: Alert[] = [
 ];
 
 @Component({
-  selector: 'app-alertas',
-  standalone: true,
-  imports: [NgbAlertModule],
-  templateUrl: './alertas.component.html',
-  styleUrl: './alertas.component.css'
+    selector: 'app-alertas',
+    imports: [NgbAlertModule],
+    templateUrl: './alertas.component.html',
+    styleUrl: './alertas.component.css'
 })
 
 

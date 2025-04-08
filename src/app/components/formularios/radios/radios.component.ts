@@ -3,14 +3,13 @@ import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-radios',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  templateUrl: './radios.component.html',
-  styleUrls: ['./radios.component.sass']
+    selector: 'app-radios',
+    imports: [
+        CommonModule,
+        FormsModule
+    ],
+    templateUrl: './radios.component.html',
+    styleUrls: ['./radios.component.sass']
 })
 export class RadiosComponent implements OnInit {
   public opciones: any[] = [];

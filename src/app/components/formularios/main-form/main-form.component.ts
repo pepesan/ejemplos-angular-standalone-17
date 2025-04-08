@@ -4,14 +4,13 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-main-form',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-  ],
-  templateUrl: './main-form.component.html',
-  styleUrls: ['./main-form.component.sass']
+    selector: 'app-main-form',
+    imports: [
+        CommonModule,
+        FormsModule,
+    ],
+    templateUrl: './main-form.component.html',
+    styleUrls: ['./main-form.component.sass']
 })
 export class MainFormComponent implements OnInit {
   public model: Hero;

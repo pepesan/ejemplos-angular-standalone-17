@@ -9,11 +9,10 @@ import {
 } from '@angular/forms';
 import {NgIf} from "@angular/common";
 @Component({
-  selector: 'app-form-group-basico',
-  standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
-  templateUrl: './form-group-basico.component.html',
-  styleUrls: ['./form-group-basico.component.css']
+    selector: 'app-form-group-basico',
+    imports: [ReactiveFormsModule],
+    templateUrl: './form-group-basico.component.html',
+    styleUrls: ['./form-group-basico.component.css']
 })
 export class FormGroupBasicoComponent implements OnInit {
   public profileForm: UntypedFormGroup;

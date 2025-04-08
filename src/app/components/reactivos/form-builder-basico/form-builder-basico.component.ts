@@ -3,11 +3,10 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormBuilder, Untyped
 import { Validators } from '@angular/forms';
 import {CommonModule} from "@angular/common";
 @Component({
-  selector: 'app-form-builder-basico',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './form-builder-basico.component.html',
-  styleUrls: ['./form-builder-basico.component.css']
+    selector: 'app-form-builder-basico',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './form-builder-basico.component.html',
+    styleUrls: ['./form-builder-basico.component.css']
 })
 export class FormBuilderBasicoComponent implements OnInit {
 

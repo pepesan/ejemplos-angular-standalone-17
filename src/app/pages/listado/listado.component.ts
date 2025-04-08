@@ -3,15 +3,14 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {NgForOf} from "@angular/common";
 import {ListadoService} from "../../services/listado.service";
 @Component({
-  selector: 'app-listado',
-  standalone: true,
-  imports: [
-    NgForOf,
-    RouterLink,
-    RouterLinkActive
-  ],
-  templateUrl: './listado.component.html',
-  styleUrl: './listado.component.css'
+    selector: 'app-listado',
+    imports: [
+        NgForOf,
+        RouterLink,
+        RouterLinkActive
+    ],
+    templateUrl: './listado.component.html',
+    styleUrl: './listado.component.css'
 })
 export class ListadoComponent {
 

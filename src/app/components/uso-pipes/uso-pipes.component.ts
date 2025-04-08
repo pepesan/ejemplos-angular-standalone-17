@@ -12,15 +12,14 @@ import {MiaDirective} from "../../directives/mia.directive";
 import {MiPipe} from "../../pipes/mi-pipe.pipe";
 
 @Component({
-  selector: 'app-uso-pipes',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MiaDirective,
-    MiPipe
-  ],
-  templateUrl: './uso-pipes.component.html',
-  styleUrl: './uso-pipes.component.css'
+    selector: 'app-uso-pipes',
+    imports: [
+        CommonModule,
+        MiaDirective,
+        MiPipe
+    ],
+    templateUrl: './uso-pipes.component.html',
+    styleUrl: './uso-pipes.component.css'
 })
 export class UsoPipesComponent {
   public cadena: string = "Cadena";

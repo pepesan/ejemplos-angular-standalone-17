@@ -4,15 +4,14 @@ import {AsyncPipe, NgForOf} from "@angular/common";
 import {Partido} from "./partido";
 
 @Component({
-  selector: 'app-uso-service',
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    NgForOf
-  ],
-  providers: [TodoService],
-  templateUrl: './uso-service.component.html',
-  styleUrl: './uso-service.component.css'
+    selector: 'app-uso-service',
+    imports: [
+        AsyncPipe,
+        NgForOf
+    ],
+    providers: [TodoService],
+    templateUrl: './uso-service.component.html',
+    styleUrl: './uso-service.component.css'
 })
 export class UsoServiceComponent {
   partidos: Promise<Partido[]>;

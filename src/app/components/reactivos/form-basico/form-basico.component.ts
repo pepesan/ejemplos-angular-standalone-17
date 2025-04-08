@@ -3,11 +3,10 @@ import {FormControl, ReactiveFormsModule, UntypedFormControl, Validators} from '
 import {JsonPipe} from "@angular/common";
 
 @Component({
-  selector: 'app-form-basico',
-  standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe],
-  templateUrl: './form-basico.component.html',
-  styleUrls: ['./form-basico.component.css']
+    selector: 'app-form-basico',
+    imports: [ReactiveFormsModule],
+    templateUrl: './form-basico.component.html',
+    styleUrls: ['./form-basico.component.css']
 })
 export class FormBasicoComponent implements OnInit {
 

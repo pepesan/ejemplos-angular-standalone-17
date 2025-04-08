@@ -13,24 +13,13 @@ import {MainFormComponent} from "./components/formularios/main-form/main-form.co
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    TodosComponent,
-    CondicionalesComponent,
-    ControlFlowComponent,
-    UsoPipesComponent,
-    PropiedadesComponent,
-    ListadoPartidosComponent,
-    UsoServiceComponent,
-    PrincipalEventosComponent,
-    SignalsComponent,
-    MainFormComponent,
-    RouterModule,
-    NgbModule
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    imports: [
+        RouterModule,
+        NgbModule
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'proyecto';

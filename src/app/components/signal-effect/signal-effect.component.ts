@@ -9,11 +9,10 @@ import {Component, effect, signal} from '@angular/core';
  */
 
 @Component({
-  selector: 'app-signal-effect',
-  standalone: true,
-  imports: [],
-  templateUrl: './signal-effect.component.html',
-  styleUrl: './signal-effect.component.css'
+    selector: 'app-signal-effect',
+    imports: [],
+    templateUrl: './signal-effect.component.html',
+    styleUrl: './signal-effect.component.css'
 })
 export class SignalEffectComponent {
   count = signal(0); // Definimos el valor inicial del contador como 0

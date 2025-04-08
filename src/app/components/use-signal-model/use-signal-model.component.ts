@@ -14,13 +14,12 @@ import {SignalModelComponent} from "../signal-model/signal-model.component";
  */
 
 @Component({
-  selector: 'app-use-signal-model',
-  standalone: true,
-  imports: [
-    SignalModelComponent
-  ],
-  templateUrl: './use-signal-model.component.html',
-  styleUrl: './use-signal-model.component.css'
+    selector: 'app-use-signal-model',
+    imports: [
+        SignalModelComponent
+    ],
+    templateUrl: './use-signal-model.component.html',
+    styleUrl: './use-signal-model.component.css'
 })
 export class UseSignalModelComponent {
   // al cambiar el modelo del componente hijo debería cambiar el valor del padre

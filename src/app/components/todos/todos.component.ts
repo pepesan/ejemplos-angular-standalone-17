@@ -4,14 +4,13 @@ import {NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-todos',
-  standalone: true,
-  imports: [
-    NgForOf,
-    FormsModule
-  ],
-  templateUrl: './todos.component.html',
-  styleUrl: './todos.component.css'
+    selector: 'app-todos',
+    imports: [
+        NgForOf,
+        FormsModule
+    ],
+    templateUrl: './todos.component.html',
+    styleUrl: './todos.component.css'
 })
 export class TodosComponent {
   todo: Todo;

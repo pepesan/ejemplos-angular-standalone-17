@@ -1,11 +1,10 @@
 import {Component, input, InputSignal} from '@angular/core';
 
 @Component({
-  selector: 'app-use-signal-input',
-  standalone: true,
-  imports: [],
-  templateUrl: './use-signal-input.component.html',
-  styleUrl: './use-signal-input.component.css'
+    selector: 'app-use-signal-input',
+    imports: [],
+    templateUrl: './use-signal-input.component.html',
+    styleUrl: './use-signal-input.component.css'
 })
 export class UseSignalInputComponent {
   // @Input

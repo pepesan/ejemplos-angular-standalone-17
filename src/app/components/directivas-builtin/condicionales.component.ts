@@ -2,18 +2,17 @@ import { Component } from '@angular/core';
 import {NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
 
 @Component({
-  selector: 'app-directivas-builtin',
-  standalone: true,
-  imports: [
-    NgIf,
-    NgSwitch,
-    NgClass,
-    NgSwitchCase,
-    NgSwitchDefault,
-    NgForOf
-  ],
-  templateUrl: './condicionales.component.html',
-  styleUrl: './condicionales.component.css'
+    selector: 'app-directivas-builtin',
+    imports: [
+        NgIf,
+        NgSwitch,
+        NgClass,
+        NgSwitchCase,
+        NgSwitchDefault,
+        NgForOf
+    ],
+    templateUrl: './condicionales.component.html',
+    styleUrl: './condicionales.component.css'
 })
 export class CondicionalesComponent {
   public booleano = true;
