@@ -16,12 +16,30 @@
   </div>
   <h3>Bucles</h3>
   <div>
+    <h3>Listado</h3>
     <ul>
     @for (item of todos; track item.id) {
       <li>{{ item.text }}</li>
     }@empty {
       <li> There are no items.</li>
     }
+    </ul>
+  </div>
+  <div>
+    <h3>Listado con variables predefinidas</h3>
+    <p>$count	Number of items in a collection iterated over
+      $index	Index of the current row
+      $first	Whether the current row is the first row
+      $last	Whether the current row is the last row
+      $even	Whether the current row index is even
+      $odd	Whether the current row index is odd</p>
+    <ul>
+      @for (item of todos; track $index) {
+
+        <li>{{ item.text }}</li>
+      }@empty {
+        <li> There are no items.</li>
+      }
     </ul>
   </div>
   <div>

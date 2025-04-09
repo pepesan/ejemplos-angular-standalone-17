@@ -16,7 +16,7 @@
       </button>
     </li>
     @for (todo of todos; track todo.id) {
-      <li id="todo-{{todo.id}}">
+      <li id="todo-for-{{todo.id}}" data-index="{{$index}}">
         {{ todo.text }}
         <button
           (click)="deleteTodo(todo.text)">
