@@ -11,4 +11,8 @@ import {NgIf} from "@angular/common";
 })
 export class EjercicioCondicionalesComponent {
   presenta: boolean = true;
+
+  cambia() {
+    this.presenta = !this.presenta;
+  }
 }

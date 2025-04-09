@@ -12,4 +12,5 @@ import {Dato} from "../../components/propiedades/dato";
 })
 export class PropsPageComponent {
   objetoDato: Dato = new Dato("holiwi")
+  objetoCualquiera: any = { prop: "Valor"}
 }
