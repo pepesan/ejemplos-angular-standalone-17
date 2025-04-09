@@ -32,6 +32,7 @@ import {TodoListadoComponent} from "./components/todo-listado/todo-listado.compo
 import {FormulariosComponent} from "./ejercicios/formularios/formularios.component";
 import {EjercicioListadoComponent} from "./ejercicios/ejercicio-listado/ejercicio-listado.component";
 import {EjercicioMisClientesComponent} from "./ejercicios/ejercicio-mis-clientes/ejercicio-mis-clientes.component";
+import {EjercicioCondicionalesComponent} from "./ejercicios/ejercicio-condicionales/ejercicio-condicionales.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -56,6 +57,7 @@ export const routes: Routes = [
   { path: 'ejercicio-componente', component: EjercicioListadoComponent },
   { path: 'ejercicio-formulario', component: FormulariosComponent },
   { path: 'ejercicio-misclientes', component: EjercicioMisClientesComponent },
+  { path: 'ejercicio-condicionales', component: EjercicioCondicionalesComponent },
 
   { path: 'form-radios', component: RadiosComponent },
   { path: 'reactivos', component: ReactivosComponent },
