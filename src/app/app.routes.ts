@@ -30,6 +30,8 @@ import {UseSignalModelComponent} from "./components/use-signal-model/use-signal-
 import {SignalQueriesComponent} from "./components/signal-queries/signal-queries.component";
 import {TodoListadoComponent} from "./components/todo-listado/todo-listado.component";
 import {FormulariosComponent} from "./ejercicios/formularios/formularios.component";
+import {EjercicioListadoComponent} from "./ejercicios/ejercicio-listado/ejercicio-listado.component";
+import {EjercicioMisClientesComponent} from "./ejercicios/ejercicio-mis-clientes/ejercicio-mis-clientes.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent,
@@ -51,7 +53,10 @@ export const routes: Routes = [
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
+  { path: 'ejercicio-componente', component: EjercicioListadoComponent },
   { path: 'ejercicio-formulario', component: FormulariosComponent },
+  { path: 'ejercicio-misclientes', component: EjercicioMisClientesComponent },
+
   { path: 'form-radios', component: RadiosComponent },
   { path: 'reactivos', component: ReactivosComponent },
   { path: 'subrutas', component: SubRutasComponent,

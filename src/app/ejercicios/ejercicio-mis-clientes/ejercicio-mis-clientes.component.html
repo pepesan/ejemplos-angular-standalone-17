@@ -1,0 +1,22 @@
+<div>
+  <h4>Añadir elemento</h4>
+  <h5>contenido del campo: {{cliente.nombre}}</h5>
+  <form (submit)="addItem()" >
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" [(ngModel)]="cliente.nombre"
+           [ngModelOptions]="{standalone: true}"/> <br/>
+    <label for="direccion">Dirección</label>
+    <input id="direccion" type="text" [(ngModel)]="cliente.direccion"
+           [ngModelOptions]="{standalone: true}"/> <br/>
+    <input type="submit" value="Enviar">
+  </form>
+  <ul>
+    @for (item of listado; track $index) {
+      <li id="item-{{$index}}">
+        {{ item.nombre }}: {{item.direccion}}
+      </li>
+    }@empty {
+      <li> There are no items.</li>
+    }
+  </ul>
+</div>

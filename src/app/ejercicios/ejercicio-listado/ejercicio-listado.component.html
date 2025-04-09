@@ -1,0 +1,17 @@
+<div>
+  <h4>Añadir elemento</h4>
+  <h5>contenido del campo: {{cadena}}</h5>
+  <form (submit)="addItem()" >
+    <input type="text" [(ngModel)]="cadena"
+           [ngModelOptions]="{standalone: true}"/>
+  </form>
+  <ul>
+    @for (item of listado; track $index) {
+      <li id="item-{{$index}}">
+        {{ item }}
+      </li>
+    }@empty {
+      <li> There are no items.</li>
+    }
+  </ul>
+</div>
