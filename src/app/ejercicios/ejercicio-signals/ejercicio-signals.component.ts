@@ -9,7 +9,9 @@ import {Component, computed, Signal, signal, WritableSignal} from '@angular/core
 export class EjercicioSignalsComponent {
 
   public numeroSenal: WritableSignal<number> = signal(3);
-  public mitadSenal: Signal<number> = computed(() => this.numeroSenal() / 2);
+  public mitadSenal: Signal<number> = computed(
+    () => this.numeroSenal() / 2
+  );
 
   constructor() {
     // cambiar un valor por otro
