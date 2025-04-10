@@ -1,0 +1,11 @@
+<div>
+  <h3>Listado de partidos</h3>
+  <ul>
+    <li *ngFor="let resultado of listado | async">
+      {{resultado.nombre}}: {{resultado.dipu}}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+           width="90px"
+           height="90px" alt="Logo partido {{resultado.nombre}}"/>
+    </li>
+  </ul>
+</div>

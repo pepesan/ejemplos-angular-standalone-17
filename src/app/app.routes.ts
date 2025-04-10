@@ -38,6 +38,7 @@ import {EjercicioInputComponent} from "./ejercicios/ejercicio-input/ejercicio-in
 import {EjercicioSignalsComponent} from "./ejercicios/ejercicio-signals/ejercicio-signals.component";
 import {EjercicioTuberiasComponent} from "./ejercicios/ejercicio-tuberias/ejercicio-tuberias.component";
 import {EjercicioServiciosComponent} from "./ejercicios/ejercicio-servicios/ejercicio-servicios.component";
+import {EjercicioResultadoComponent} from "./ejercicios/ejercicio-resultado/ejercicio-resultado.component";
 
 
 export const routes: Routes = [
@@ -69,6 +70,7 @@ export const routes: Routes = [
   { path: 'ejercicio-signals', component: EjercicioSignalsComponent },
   { path: 'ejercicio-tuberias', component: EjercicioTuberiasComponent },
   { path: 'ejercicio-servicios', component: EjercicioServiciosComponent },
+  { path: 'ejercicio-resultado', component: EjercicioResultadoComponent },
 
   { path: 'form-radios', component: RadiosComponent },
   { path: 'reactivos', component: ReactivosComponent },

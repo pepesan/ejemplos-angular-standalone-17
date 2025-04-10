@@ -15,7 +15,7 @@ export class EjercicioServiciosComponent {
 
   constructor(private miService: MiService) {
     console.log('EjercicioServiciosComponent');
-    this. cadena = this.miService.cadena;
+    this.cadena = this.miService.cadena;
     this.numero = this.miService.getNumero();
   }
 
