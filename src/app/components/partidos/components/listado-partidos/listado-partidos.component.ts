@@ -18,7 +18,7 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
   // Promesa que pasamos a la vista para cuando dispongamos del dato pintarlo por pantalla
   public listado: Promise<Partido[]> ;
   public listadopartidosObservable: Observable<Partido[]>;
-  public listadopartidosObservableSubscription: Subscription;
+  public listadopartidosObservableSubscription: Subscription | undefined;
   public listadoVisible: Partido[] = [];
   public listadoVisiblePromesa: Partido[] | undefined = [];
   public listadoVisiblePromesaProcesada: Partido[] = [];
