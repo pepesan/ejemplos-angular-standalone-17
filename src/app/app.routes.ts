@@ -8,6 +8,7 @@ import {TodosComponent} from "./components/todos/todos.component";
 import {UsoPipesComponent} from "./components/uso-pipes/uso-pipes.component";
 import {PrincipalEventosComponent} from "./components/principal-eventos/principal-eventos.component";
 import {UsoServiceComponent} from "./components/uso-service/uso-service.component";
+import {UsoServicioBasicoComponent} from "./components/uso-servicio-basico/uso-servicio-basico.component";
 import {ListadoPartidosComponent} from "./components/partidos/components/listado-partidos/listado-partidos.component";
 import {SignalsComponent} from "./components/signals/signals.component";
 import {MainFormComponent} from "./components/formularios/main-form/main-form.component";
@@ -54,6 +55,7 @@ export const routes: Routes = [
   { path: 'signals-model', component: UseSignalModelComponent },
   { path: 'signals-queries', component: SignalQueriesComponent },
   { path: 'service', component: UsoServiceComponent },
+  { path: 'servicio-basico', component: UsoServicioBasicoComponent },
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
