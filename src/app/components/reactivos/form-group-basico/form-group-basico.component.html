@@ -13,8 +13,8 @@
     </div>
   </div-->
   @if (
-    profileForm.controls['firstName'].status=='INVALID'
-    && profileForm.controls['firstName'].touched
+    profileForm.controls['firstName'].status=='INVALID' &&
+    profileForm.controls['firstName'].touched
     ) {
     <div class="alert alert-danger">
       @if(profileForm.controls['firstName'].errors?.['required']){
@@ -28,6 +28,13 @@
       }
     </div>
   }
+  <h2>Valores del campo firstName</h2>
+  <h2>Valid: {{profileForm.controls['firstName'].valid}}</h2>
+  <h2>Invalid: {{profileForm.controls['firstName'].invalid}}</h2>
+  <h2>Touched: {{profileForm.controls['firstName'].touched}}</h2>
+  <h2>Untouched: {{profileForm.controls['firstName'].untouched}}</h2>
+  <h2>Pristine: {{profileForm.controls['firstName'].pristine}}</h2>
+  <h2>Dirty: {{profileForm.controls['firstName'].dirty}}</h2>
   <label for="lastName">Last Name:</label>
   <input id="lastName" class="form-control" type="text" formControlName="lastName">
   <input

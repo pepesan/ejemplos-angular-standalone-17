@@ -6,7 +6,7 @@ export class Formulario {
     public repeatPassword: string= "",
     public email: string= "",
     public gender: string= "",
-    public orientation: number= 3,
+    public orientation: string= "hetero",
     public relationType: number= 3,
     public conditions: boolean = false,
 

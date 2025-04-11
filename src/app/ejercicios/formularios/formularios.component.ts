@@ -17,6 +17,7 @@ export class FormulariosComponent {
 
   model: Formulario;
   public genders: any[] = [];
+  public orientations: any[] = [];
   constructor() {
     this.model = new Formulario();
     this.genders.push({
@@ -45,7 +46,23 @@ export class FormulariosComponent {
       checked: false
 
     });
+    this.orientations.push({
+      name: "Hetero",
+      id: "hetero",
+      checked: true
+    });
+    this.orientations.push({
+      name: "Homo",
+      id: "homo",
+      checked: false
+    });
+    this.orientations.push({
+      name: "Bi",
+      id: "bi",
+      checked: false
+    });
   }
+
 
   onSubmit(event: SubmitEvent) {
     event.preventDefault();

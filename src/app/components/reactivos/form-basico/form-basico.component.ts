@@ -4,7 +4,7 @@ import {JsonPipe} from "@angular/common";
 
 @Component({
     selector: 'app-form-basico',
-    imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, JsonPipe],
     templateUrl: './form-basico.component.html',
     styleUrls: ['./form-basico.component.css']
 })
@@ -13,7 +13,7 @@ export class FormBasicoComponent implements OnInit {
   public name: UntypedFormControl;
   public nameString: FormControl<string | null>;
   constructor() {
-    this.name = new UntypedFormControl('');
+    this.name = new UntypedFormControl('Valor inicial');
     this.nameString = new FormControl('', [Validators.required]);
   }
 
