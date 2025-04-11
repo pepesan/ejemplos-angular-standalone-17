@@ -58,4 +58,7 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
   }
 
 
+  onKeyup(value: string) {
+    console.log(value);
+  }
 }

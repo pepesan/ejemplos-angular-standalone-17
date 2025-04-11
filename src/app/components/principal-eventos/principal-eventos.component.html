@@ -1,6 +1,8 @@
 <p>principal-eventos works!</p>
 <button id="boton" (click)="clicked($event)">Púlsame</button>
 <div>
+  <label for="keyup">Keyup</label>
+  <input id="keyup" #keyup (keyup)="onKeyup(keyup.value)"/>
   <!-- envío variable de vista # con sólo el value-->
   <h2>Keyup.Enter</h2>
   <input #box (keyup.enter)="onEnter(box.value)"/>
