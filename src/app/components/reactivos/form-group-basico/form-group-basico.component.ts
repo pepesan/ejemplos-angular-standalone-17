@@ -7,10 +7,10 @@ import {
   Validators,
   ReactiveFormsModule
 } from '@angular/forms';
-import {JsonPipe, NgIf} from "@angular/common";
+
 @Component({
     selector: 'app-form-group-basico',
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule],
     templateUrl: './form-group-basico.component.html',
     styleUrls: ['./form-group-basico.component.css']
 })

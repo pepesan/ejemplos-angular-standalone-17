@@ -8,8 +8,6 @@ export class Formulario {
     public gender: string= "",
     public orientation: string= "hetero",
     public relationType: number= 3,
-    public conditions: boolean = false,
-
-    public alterEgo?: string
+    public conditions: boolean = false
   ) {  }
 }

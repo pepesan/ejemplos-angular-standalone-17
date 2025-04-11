@@ -23,18 +23,21 @@ export class FormulariosComponent {
     this.genders.push({
       name: "Masculino",
       id: "male",
+      icon: "fa-male",
       disabled: false,
       checked: true
     });
     this.genders.push({
       name: "Femenino",
       id: "female",
+      icon: "fa-female",
       disabled: false,
       checked: false
     });
     this.genders.push({
       name: "No binario",
       id: "no-binary",
+      icon: "fa-genderless",
       disabled: false,
       checked: false
 
@@ -42,6 +45,7 @@ export class FormulariosComponent {
     this.genders.push({
       name: "Otro",
       id: "other",
+      icon: "fa-user",
       disabled: false,
       checked: false
 

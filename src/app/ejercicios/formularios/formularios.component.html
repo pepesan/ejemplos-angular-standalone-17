@@ -99,7 +99,10 @@
     </div>
   </div>
   <div *ngFor="let elemento of genders" class="form-check">
-    <input class="form-check-input" type="radio" name="exampleRadios" id="{{elemento.id}}" value="elemento.id" [checked]="elemento.checked" [(ngModel)]="model.gender">
+    <input class="form-check-input" type="radio" name="exampleRadios" id="{{elemento.id}}" [value]="elemento.id"
+           [checked]="elemento.checked" [(ngModel)]="model.gender">
+    <!-- Ícono al lado del radio button -->
+    <i class="fas" [ngClass]="elemento.icon" aria-hidden="true"></i>
     <label class="form-check-label" for="{{elemento.id}}">
       {{elemento.name}}
     </label>
