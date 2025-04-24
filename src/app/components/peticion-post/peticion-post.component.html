@@ -1,0 +1,28 @@
+<div>
+  <form (ngSubmit)="submitPost()">
+    <label>
+      Título:
+      <input [(ngModel)]="postData.title" name="title" required />
+    </label>
+    <br />
+    <label>
+      Cuerpo:
+      <textarea [(ngModel)]="postData.body" name="body" required></textarea>
+    </label>
+    <br />
+    <label>
+      ID Usuario:
+      <input [(ngModel)]="postData.userId" name="userId" type="number" required />
+    </label>
+    <br />
+    <button type="submit">Enviar Post</button>
+  </form>
+
+  <div *ngIf="response">
+    <h3>Respuesta del servidor:</h3>
+    <pre>{{ response | json }}</pre>
+  </div>
+  <div *ngIf="error" style="color: red;">
+    <strong>{{ error }}</strong>
+  </div>
+</div>

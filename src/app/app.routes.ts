@@ -40,6 +40,7 @@ import {EjercicioTuberiasComponent} from "./ejercicios/ejercicio-tuberias/ejerci
 import {EjercicioServiciosComponent} from "./ejercicios/ejercicio-servicios/ejercicio-servicios.component";
 import {EjercicioResultadoComponent} from "./ejercicios/ejercicio-resultado/ejercicio-resultado.component";
 import {EjercicioEventosComponent} from "./ejercicios/ejercicio-eventos/ejercicio-eventos.component";
+import {PeticionPostComponent} from "./components/peticion-post/peticion-post.component";
 
 
 export const routes: Routes = [
@@ -61,6 +62,7 @@ export const routes: Routes = [
   { path: 'service', component: UsoServiceComponent },
   { path: 'servicio-basico', component: UsoServicioBasicoComponent },
   { path: 'partidos', component:  ListadoPartidosComponent},
+  { path: 'peticion-post', component:  PeticionPostComponent},
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
   { path: 'ejercicio-componente', component: EjercicioListadoComponent },
