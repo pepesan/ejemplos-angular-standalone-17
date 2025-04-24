@@ -8,7 +8,7 @@
 <div>
   <!-- Formulario con un campo de texto "nombre" y un botón de envío -->
   <!-- Se utiliza [(ngModel)] para enlazar el valor del input a la propiedad "nombre" -->
-  <form (submit)="onSubmit()">
+  <form (submit)="onSubmit($event)">
     <label for="nombre">Nombre:</label>
     <!-- en este caso no metemos un [ngModelOptions]="{standalone: true}" porque tiene un name -->
     <input

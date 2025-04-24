@@ -35,7 +35,8 @@ export class EjercicioEventosComponent {
   }
 
   // Captura el evento submit del formulario y muestra el valor del campo "nombre" en consola
-  onSubmit(): void {
+  onSubmit(event: SubmitEvent): void {
+    event.preventDefault();
     console.log('Valor del campo "nombre":', this.nombre);
   }
 
