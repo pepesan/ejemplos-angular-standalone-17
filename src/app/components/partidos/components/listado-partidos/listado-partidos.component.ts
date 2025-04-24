@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, signal, WritableSignal} from '@angular/cor
 import {ApiClientService} from "../../services/apiclient.service";
 import {Partido} from "../../models/partido";
 import {Observable, Subscription} from "rxjs";
-import {AsyncPipe, NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
+import {AsyncPipe, NgForOf} from "@angular/common";
 
 @Component({
     selector: 'app-listado-partidos',
