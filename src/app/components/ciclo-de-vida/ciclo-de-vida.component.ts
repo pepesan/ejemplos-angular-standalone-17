@@ -1,5 +1,7 @@
-import { Component, OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked,
-  AfterViewInit, AfterViewChecked, OnDestroy, SimpleChanges } from '@angular/core';
+import {
+  Component, OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked,
+  AfterViewInit, AfterViewChecked, OnDestroy, SimpleChanges, computed, Signal, signal, WritableSignal
+} from '@angular/core';
 
 @Component({
   selector: 'app-ciclo-vida',
@@ -11,6 +13,14 @@ export class CicloDeVidaComponent implements OnInit, OnChanges, DoCheck,
   AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
 
   dato: string = 'Hola mundo';
+
+  // definición de una variable number de un contador con signals
+  countSignal: WritableSignal<number> = signal(0);
+  // Computed permite subscribirse al cambio de otro signal y aplicar una función que cambie el valor de la variable computada
+  // cada vez que cambie count cambiará doubleCount, aplicando una función para el cálculo
+  doubleCount: Signal<number> = computed(() => this.countSignal() * 2);
+
+
 
   constructor() {
     console.log('Constructor: se ha creado el componente');
@@ -50,5 +60,9 @@ export class CicloDeVidaComponent implements OnInit, OnChanges, DoCheck,
   cambia(){
     this.dato = 'Hola mundo cambiado';
     console.log('Cambiando dato');
+  }
+
+  cambiaSegnal() {
+    this.countSignal.set(2);
   }
 }
