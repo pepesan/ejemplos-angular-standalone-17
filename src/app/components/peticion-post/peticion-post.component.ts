@@ -27,13 +27,17 @@ export class PeticionPostComponent {
 
   response: PostDataResponse | null = null;
   error: string | null = null;
+
   constructor(private postService: PeticionPostService) {
   }
 
-  async submitPost() {
+  submitPost() {
     this.error = null;
     try {
-      this.response = await firstValueFrom(this.postService.sendPost(this.postData));
+      this.postService.sendPost(this.postData).subscribe(data => {
+        this.response = data;
+        console.log('Respuesta del servidor:', data);
+      });
     } catch (err: any) {
       this.error = err.message || 'Error desconocido al enviar el post';
     }
