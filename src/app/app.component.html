@@ -54,8 +54,13 @@
 
           </div>
         </div>
-
-        <button class="btn btn-primary me-2" routerLink="/events" routerLinkActive="active">Eventos</button>
+        <div ngbDropdown class="d-inline-block me-2">
+          <button class="btn btn-outline-primary" id="Eventos" ngbDropdownToggle>Eventos</button>
+          <div ngbDropdownMenu aria-labelledby="Eventos">
+            <button ngbDropdownItem routerLink="/ciclo" routerLinkActive="active">Ciclo de Vida</button>
+            <button ngbDropdownItem routerLink="/events" routerLinkActive="active">Eventos</button>
+          </div>
+        </div>
 
         <div ngbDropdown class="d-inline-block me-2">
           <button class="btn btn-outline-primary" id="Formularios" ngbDropdownToggle>Formularios</button>
