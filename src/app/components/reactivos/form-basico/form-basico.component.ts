@@ -3,7 +3,7 @@ import {FormControl, ReactiveFormsModule, UntypedFormControl, Validators} from '
 
 @Component({
     selector: 'app-form-basico',
-  imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './form-basico.component.html',
     styleUrls: ['./form-basico.component.css']
 })

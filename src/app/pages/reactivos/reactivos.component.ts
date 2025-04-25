@@ -14,9 +14,9 @@ import {MyCustomValidationComponent} from "../../components/reactivos/my-custom-
     selector: 'app-reactivos',
     imports: [
         FormBasicoComponent,
-        FormBuilderBasicoComponent,
-        FormGroupAnidadoBasicoComponent,
         FormGroupBasicoComponent,
+        FormGroupAnidadoBasicoComponent,
+        FormBuilderBasicoComponent,
         FormValidatePasswordsComponent,
         MyCustomValidationComponent
     ],

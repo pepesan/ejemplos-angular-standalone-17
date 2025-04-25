@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
+import {FormBuilder, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import {CommonModule} from "@angular/common";
 @Component({
@@ -79,7 +79,7 @@ export class FormBuilderBasicoComponent implements OnInit {
     //console.log(this.profileForm.get('firstName'));
     console.log(this.profileForm.controls['firstName']?.errors);
     if(this.profileForm.controls['firstName'].errors!= null){
-      console.log(this.profileForm.controls['firstName'].errors['required']);
+      console.log(this.profileForm.controls['firstName']?.errors['required']);
     }
   }
 }
