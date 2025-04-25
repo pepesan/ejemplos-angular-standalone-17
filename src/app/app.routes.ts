@@ -42,6 +42,7 @@ import {EjercicioResultadoComponent} from "./ejercicios/ejercicio-resultado/ejer
 import {EjercicioEventosComponent} from "./ejercicios/ejercicio-eventos/ejercicio-eventos.component";
 import {PeticionPostComponent} from "./components/peticion-post/peticion-post.component";
 import {CicloDeVidaComponent} from "./components/ciclo-de-vida/ciclo-de-vida.component";
+import {FormulariosReactivosComponent} from "./ejercicios/formularios-reactivos/formularios-reactivos.component";
 
 
 export const routes: Routes = [
@@ -67,8 +68,9 @@ export const routes: Routes = [
   { path: 'ciclo', component: CicloDeVidaComponent },
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },
+  { path: 'form-radios', component: RadiosComponent },
+  { path: 'reactivos', component: ReactivosComponent },
   { path: 'ejercicio-componente', component: EjercicioListadoComponent },
-  { path: 'ejercicio-formulario', component: FormulariosComponent },
   { path: 'ejercicio-misclientes', component: EjercicioMisClientesComponent },
   { path: 'ejercicio-condicionales', component: EjercicioCondicionalesComponent },
   { path: 'ejercicio-input', component: EjercicioInputComponent },
@@ -77,8 +79,8 @@ export const routes: Routes = [
   { path: 'ejercicio-servicios', component: EjercicioServiciosComponent },
   { path: 'ejercicio-resultado', component: EjercicioResultadoComponent },
   { path: 'ejercicio-eventos', component: EjercicioEventosComponent },
-  { path: 'form-radios', component: RadiosComponent },
-  { path: 'reactivos', component: ReactivosComponent },
+  { path: 'ejercicio-formulario', component: FormulariosComponent },
+  { path: 'ejercicio-formulario-reactivo', component: FormulariosReactivosComponent },
   { path: 'subrutas', component: SubRutasComponent,
     children: [
       {
