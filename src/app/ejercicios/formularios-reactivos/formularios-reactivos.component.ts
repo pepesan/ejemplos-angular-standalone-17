@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-formularios-reactivos',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './formularios-reactivos.component.html',
   styleUrl: './formularios-reactivos.component.css'
 })
