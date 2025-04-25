@@ -37,7 +37,7 @@ export class FormulariosReactivosComponent {
       username: ['', [Validators.required, Validators.minLength(4)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       repeatPassword: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
+      email: ['', [Validators.required, Validators.email]],
       gender: ['male', Validators.required],
       orientation: ['hetero', Validators.required],
       relationType: [3, Validators.required],

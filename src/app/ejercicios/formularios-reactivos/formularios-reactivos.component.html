@@ -1,7 +1,7 @@
 <div>
-  <h1>Formulario de Alta</h1>
+  <h1>Formulario de Alta Reactiva</h1>
 
-  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formulario" (submit)="onSubmit()">
 
     <!-- Username -->
     <div class="form-group">
@@ -51,7 +51,7 @@
       @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
         <div class="alert alert-danger">
           @if (formulario.get('email')?.errors?.['required']) { Email obligatorio. }
-          @if (formulario.get('email')?.errors?.['pattern']) { Formato de email inválido. }
+          @if (formulario.get('email')?.errors?.['email']) { Formato de email inválido. }
         </div>
       }
     </div>
@@ -91,7 +91,7 @@
     <div class="form-check">
       <input type="checkbox" class="form-check-input" formControlName="conditions" id="conditions">
       <label class="form-check-label" for="conditions">Acepto las condiciones *</label>
-      @if (formulario.get('conditions')?.invalid && formulario.get('conditions')?.touched) {
+      @if (formulario.get('conditions')?.invalid ) {
         <div class="alert alert-danger">
           Debes aceptar las condiciones.
         </div>
