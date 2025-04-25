@@ -49,6 +49,11 @@
         </div>
       }
     </div>
+    <!-- Mensaje adicional para no coincidencia -->
+    <div class="alert alert-danger"
+         *ngIf="repeatPassword.valid && model.password !== model.repeatPassword">
+      Las contraseñas no coinciden.
+    </div>
   </div>
   <div class="form-group">
     <label for="repeatPassword">Repeat Password *</label>
@@ -115,7 +120,6 @@
             [(ngModel)]="model.orientation"
             name="orientation"
             #orientation="ngModel">
-      <!--option *ngFor="let pow of powers" [value]="pow.id" [selected]="pow.id== model.power">{{pow.text}}</option-->
       @for (orientation of orientations; track orientation.id) {
         <option
           [selected]="orientation.id== model.orientation"
@@ -129,8 +133,41 @@
       Orientation is required
     </div>
   </div>
+  <div class="form-group">
+    <label for="relationType">Tipo de Relación Buscada *</label>
+    <select class="form-control"
+            id="relationType"
+            required
+            [(ngModel)]="model.relationType"
+            name="relationType"
+            #relationType="ngModel">
+      <option *ngFor="let relation of relationTypes"
+              [value]="relation.id">
+        {{ relation.name }}
+      </option>
+    </select>
+    <div [hidden]="relationType.valid || relationType.untouched"
+         class="alert alert-danger">
+      Tipo de relación es obligatorio.
+    </div>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox"
+           class="form-check-input"
+           id="conditions"
+           required
+           [(ngModel)]="model.conditions"
+           name="conditions"
+           #conditions="ngModel">
+    <label class="form-check-label" for="conditions">Acepto las condiciones de uso *</label>
+  </div>
+
+  <div [hidden]="conditions.valid || conditions.untouched"
+       class="alert alert-danger">
+    Debes aceptar las condiciones de uso para continuar.
+  </div>
   <button
     type="submit"
     class="btn btn-success"
-    [disabled]="SignUpForm.form.invalid">Submit</button>
+    [disabled]="SignUpForm.form.invalid || !model.conditions">Submit</button>
 </form>

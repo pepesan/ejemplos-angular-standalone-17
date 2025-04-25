@@ -18,6 +18,8 @@ export class FormulariosComponent {
   model: Formulario;
   public genders: any[] = [];
   public orientations: any[] = [];
+  public relationTypes: any[] = [];
+
   constructor() {
     this.model = new Formulario();
     this.genders.push({
@@ -65,6 +67,11 @@ export class FormulariosComponent {
       id: "bi",
       checked: false
     });
+    this.relationTypes.push(
+      { id: 1, name: "Amistad" },
+      { id: 2, name: "Relación seria" },
+      { id: 3, name: "Relación casual" }
+    );
   }
 
 
