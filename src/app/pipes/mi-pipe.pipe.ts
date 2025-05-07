@@ -10,7 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 */
 @Pipe({
   name: 'miPipe',
-  standalone: true
+  // standalone: true
 })
 export class MiPipe implements PipeTransform {
 

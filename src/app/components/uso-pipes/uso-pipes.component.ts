@@ -15,6 +15,14 @@ import {MiPipe} from "../../pipes/mi-pipe.pipe";
     selector: 'app-uso-pipes',
     imports: [
         CommonModule,
+      /*
+        CurrencyPipe,
+        DatePipe,
+        JsonPipe,
+        LowerCasePipe,
+        PercentPipe,
+        UpperCasePipe,
+       */
         MiaDirective,
         MiPipe
     ],
