@@ -6,6 +6,13 @@
   }
   </div>
   <div>
+    @if (a > b) {
+      <p>{{a}} is greater than {{b}}</p>
+    } @else {
+      <p>{{a}} is equal or lower to {{b}}</p>
+    }
+  </div>
+  <div>
   @if (a > b) {
     <p>{{a}} is greater than {{b}}</p>
   } @else if (b > a) {

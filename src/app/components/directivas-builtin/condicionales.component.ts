@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
-import {NgClass, NgForOf, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from "@angular/common";
+import {CommonModule,
+  NgIf,
+  NgSwitch,
+  NgClass,
+  NgSwitchCase,
+  NgSwitchDefault,
+  NgForOf} from "@angular/common";
 
 @Component({
     selector: 'app-directivas-builtin',
     imports: [
+        //CommonModule,
         NgIf,
         NgSwitch,
         NgClass,

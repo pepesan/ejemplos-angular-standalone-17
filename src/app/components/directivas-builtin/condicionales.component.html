@@ -1,4 +1,7 @@
 <div>
+  <div [ngClass]="isSpecial ? 'special' : ''">
+    This div is special
+  </div>
   <h2>Condicionales</h2>
   <p *ngIf="booleano">
     El booleano es true
@@ -17,7 +20,5 @@
     <!-- . . . -->
     <p *ngSwitchDefault>default</p>
   </div>
-  <div [ngClass]="isSpecial ? 'special' : ''">
-    This div is special
-  </div>
+
 </div>
