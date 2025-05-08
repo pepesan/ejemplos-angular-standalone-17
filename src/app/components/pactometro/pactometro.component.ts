@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {PactometroService} from "../../services/pactometro.service";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import { NgForOf, NgIf} from "@angular/common";
 import {Partido} from "../uso-service/partido";
 import {Observable, Subscription} from "rxjs";
 
