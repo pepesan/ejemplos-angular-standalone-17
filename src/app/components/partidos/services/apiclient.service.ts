@@ -13,6 +13,7 @@ export class ApiClientService {
   // private url : string = 'https://cursosdedesarrollo.com/pactometro/resultados.json';
   private url : string = 'https://pactometro.cursosdedesarrollo.com/resultados.json';
 
+  // inyección de dependencias del cliente HTTP
   constructor(private _httpClient: HttpClient) {
     console.log("cargado el cliente HTTP");
   }

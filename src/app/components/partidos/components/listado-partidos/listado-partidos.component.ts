@@ -17,6 +17,7 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
 
   // Promesa que pasamos a la vista para cuando dispongamos del dato pintarlo por pantalla
   public listado: Promise<Partido[]> ;
+  // Observable que pasamos a la vista para cuando dispongamos del dato pintarlo por pantalla
   public listadopartidosObservable: Observable<Partido[]>;
   public listadopartidosObservableSubscription: Subscription | undefined;
   public listadoVisible: Partido[] = [];
@@ -27,6 +28,8 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
   public partidosSignal: WritableSignal<Partido[]> = signal<Partido[]>([]);
   // Uso de señales para datos "Procesados"
   public listadoVisibleSignals: WritableSignal<Partido[]> = signal<Partido[]>([]);
+
+  // inyección de dependencias del servicio ApiClientService
   constructor(private apiClientService: ApiClientService) {
     // Directamente consultamos al servicio para que devuelva una promesa con los datos del JSON
     this.listado = this.apiClientService.getData().toPromise();
@@ -56,7 +59,7 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
     this.apiClientService.getData().subscribe(
       // Define una función que se ejecutará cuando se disponga del dato
       // data es el dato recibido
-      data =>{
+      (data: Partido[]) =>{
         // cargar en la señal el dato descargado
         this.partidosSignal.set(data);
       }
@@ -66,7 +69,7 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
     this.apiClientService.getData().subscribe(
       // Define una función que se ejecutará cuando se disponga del dato
       // data es el dato recibido
-      data =>{
+      (data: Partido[]) =>{
         // cargar en la señal el dato descargado
         //this.partidosSignal.set(data);
         data.forEach( (value : Partido) => {
