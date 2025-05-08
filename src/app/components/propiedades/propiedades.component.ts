@@ -12,8 +12,8 @@ import {JsonPipe} from "@angular/common";
 })
 export class PropiedadesComponent {
 
-  @Input() parametro?: string;
-  @Input() parametro2?: number;
-  @Input() dato?: Dato;
-  @Input() objeto?: any;
+  @Input() parametro?: string = "Por defecto";
+  @Input() parametro2?: number = 0;
+  @Input() dato?: Dato = new Dato("Por defecto");
+  @Input() objeto?: any = { prop: "Valor por defecto" };
 }
