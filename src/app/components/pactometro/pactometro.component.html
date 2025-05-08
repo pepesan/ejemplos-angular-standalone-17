@@ -1,0 +1,18 @@
+<div>
+  <div *ngIf="error" class="error-message">
+    <p>Error al cargar los resultados. Por favor, inténtalo de nuevo más tarde.</p>
+  </div>
+
+  <div *ngIf="!error && resultados" class="resultados">
+    <!-- Ejemplo de visualización de datos -->
+    <h3>Listado de partidos Asíncrono (Promesa)</h3>
+    <ul>
+      <li *ngFor="let resultado of resultados">
+        {{resultado.nombre}}: {{resultado.dipu}}
+        <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+             width="90px"
+             height="90px" alt="Logo partido {{resultado.nombre}}"/>
+      </li>
+    </ul>
+  </div>
+</div>

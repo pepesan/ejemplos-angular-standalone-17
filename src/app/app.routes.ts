@@ -7,9 +7,12 @@ import {ControlFlowComponent} from "./components/control-flow/control-flow.compo
 import {TodosComponent} from "./components/todos/todos.component";
 import {UsoPipesComponent} from "./components/uso-pipes/uso-pipes.component";
 import {PrincipalEventosComponent} from "./components/principal-eventos/principal-eventos.component";
+import {CicloDeVidaComponent} from "./components/ciclo-de-vida/ciclo-de-vida.component";
 import {UsoServiceComponent} from "./components/uso-service/uso-service.component";
 import {UsoServicioBasicoComponent} from "./components/uso-servicio-basico/uso-servicio-basico.component";
 import {ListadoPartidosComponent} from "./components/partidos/components/listado-partidos/listado-partidos.component";
+import {PeticionPostComponent} from "./components/peticion-post/peticion-post.component";
+import {PactometroComponent} from "./components/pactometro/pactometro.component";
 import {SignalsComponent} from "./components/signals/signals.component";
 import {MainFormComponent} from "./components/formularios/main-form/main-form.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
@@ -40,8 +43,6 @@ import {EjercicioTuberiasComponent} from "./ejercicios/ejercicio-tuberias/ejerci
 import {EjercicioServiciosComponent} from "./ejercicios/ejercicio-servicios/ejercicio-servicios.component";
 import {EjercicioResultadoComponent} from "./ejercicios/ejercicio-resultado/ejercicio-resultado.component";
 import {EjercicioEventosComponent} from "./ejercicios/ejercicio-eventos/ejercicio-eventos.component";
-import {PeticionPostComponent} from "./components/peticion-post/peticion-post.component";
-import {CicloDeVidaComponent} from "./components/ciclo-de-vida/ciclo-de-vida.component";
 import {FormulariosReactivosComponent} from "./ejercicios/formularios-reactivos/formularios-reactivos.component";
 
 
@@ -65,6 +66,7 @@ export const routes: Routes = [
   { path: 'servicio-basico', component: UsoServicioBasicoComponent },
   { path: 'partidos', component:  ListadoPartidosComponent},
   { path: 'peticion-post', component:  PeticionPostComponent},
+  { path: 'pactometro', component:  PactometroComponent},
   { path: 'ciclo', component: CicloDeVidaComponent },
   { path: 'events', component: PrincipalEventosComponent },
   { path: 'form', component: MainFormComponent },

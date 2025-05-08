@@ -31,34 +31,34 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
     console.log("pulsado");
   }
 
-  onInput(miInput: HTMLInputElement) {
-    console.log(miInput);
-    console.log(miInput.id);
-    console.log(miInput.value);
-  }
+
 
   onEnter(value: string) {
     this.value = value;
     console.log(this.value);
   }
 
+  onKeyup(value: string) {
+    console.log(value);
+  }
+
+
+  onInput(miInput: HTMLInputElement) {
+    console.log(miInput);
+    console.log(miInput.id);
+    console.log(miInput.value);
+  }
   // onEnterKeyBoard(event: Event) {
   //   let kbEvent = event as KeyboardEvent;
   //   // this.value = event.value;
   //   console.log(this.value);
   // }
 
-  onEnterKeyBoard2(elemento: HTMLInputElement) {
-    // this.value = event.value;
-    console.log(this.value);
-  }
 
   ngOnDestroy(): void {
     console.log("OnDestroy");
   }
 
 
-  onKeyup(value: string) {
-    console.log(value);
-  }
+
 }
