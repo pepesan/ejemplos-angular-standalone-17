@@ -15,6 +15,7 @@ export class RadiosComponent implements OnInit {
   public opciones: any[] = [];
   public gender: string;
   constructor() {
+    // seleccionamos un valor por defecto
     this.gender = "other";
     this.opciones.push({
       name: "Masculino",
