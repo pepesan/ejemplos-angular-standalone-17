@@ -1,5 +1,5 @@
 <h1>Formulario de Edición</h1>
-<form (ngSubmit)="onSubmit($event);heroForm.reset()" #heroForm="ngForm">
+<form (submit)="onSubmit($event);heroForm.reset()" #heroForm="ngForm">
   <div class="form-group">
     <label for="name">Name *</label>
     <input type="text"
@@ -58,11 +58,11 @@
         <option> There are no pows.</option>
       }
     </select>
-    <div [hidden]="power.valid || power.untouched" class="alert alert-danger">
+    <div [hidden]="power.value != '0'" class="alert alert-danger">
       Power is required
     </div>
   </div>
-  <button type="submit" class="btn btn-success" [disabled]="heroForm.form.invalid">Submit</button>
+  <button type="submit" class="btn btn-success" [disabled]="heroForm.form.invalid || power.value == '0'">Submit</button>
   <!--button type="button" class="btn btn-default"
           (click)="newHero(); heroForm.reset()">New Hero</button-->
 </form>
@@ -82,17 +82,6 @@
   </div>
 </div>
 <div class="form-group">
-  <h4>Validaciones de formulario</h4>
-  <ul>
-    <li>Valid: {{heroForm.form.valid}}</li>
-    <li>Invalid: {{heroForm.form.invalid}}</li>
-    <li>Touched: {{heroForm.form.touched}}</li>
-    <li>Untouched: {{heroForm.form.untouched}}</li>
-    <li>Pristine: {{heroForm.form.pristine}}</li>
-    <li>Dirty: {{heroForm.form.dirty}}</li>
-  </ul>
-</div>
-<div class="form-group">
   <h4>Validaciones del campo name</h4>
   <ul>
     <li>Valid: {{name.valid}}</li>
@@ -103,6 +92,18 @@
     <li>Dirty: {{name.dirty}}</li>
   </ul>
 </div>
+<div class="form-group">
+  <h4>Validaciones de formulario</h4>
+  <ul>
+    <li>Valid: {{heroForm.form.valid}}</li>
+    <li>Invalid: {{heroForm.form.invalid}}</li>
+    <li>Touched: {{heroForm.form.touched}}</li>
+    <li>Untouched: {{heroForm.form.untouched}}</li>
+    <li>Pristine: {{heroForm.form.pristine}}</li>
+    <li>Dirty: {{heroForm.form.dirty}}</li>
+  </ul>
+</div>
+
 
 <div class="container">
   <ul>

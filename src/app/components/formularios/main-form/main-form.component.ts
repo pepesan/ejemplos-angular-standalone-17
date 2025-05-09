@@ -18,18 +18,22 @@ export class MainFormComponent implements OnInit {
   public powers: any[] =  [
     {
       id: 0,
-      text: 'Really Smart'
+      text: 'None'
     },
     {
       id: 1,
-      text: 'Super Flexible'
+      text: 'Really Smart'
     },
     {
       id: 2,
-      text: 'Super Hot'
+      text: 'Super Flexible'
     },
     {
       id: 3,
+      text: 'Super Hot'
+    },
+    {
+      id: 4,
       text: 'Weather Changer'
     }];
   heroes: Hero[] = [];
@@ -38,7 +42,7 @@ export class MainFormComponent implements OnInit {
     this.model = new Hero(
       0,
       "",
-      0, // por defecto es Really Smart
+      0, // por defecto es None
       "");
     this.showedModel = new Hero();
   }
