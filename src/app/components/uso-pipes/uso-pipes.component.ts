@@ -30,7 +30,7 @@ import {MiPipe} from "../../pipes/mi-pipe.pipe";
     ],
     templateUrl: './uso-pipes.component.html',
     styleUrl: './uso-pipes.component.css',
-    // configuración del Locale
+    // configuración del Locale (para config de la aplicación completa mira main.ts y app.config.ts)
     providers: [
       { provide: LOCALE_ID, useValue: 'es-ES' }
     ],

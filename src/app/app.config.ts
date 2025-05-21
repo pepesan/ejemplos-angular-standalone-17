@@ -7,7 +7,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    // configuración del Locale
+    // configuración del Locale global
     { provide: LOCALE_ID, useValue: 'es-ES' }
   ]
 
