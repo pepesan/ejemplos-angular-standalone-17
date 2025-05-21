@@ -1,4 +1,4 @@
-import {Component, computed, OnInit, Signal, signal, WritableSignal} from '@angular/core';
+import {Component, computed, linkedSignal, OnInit, Signal, signal, WritableSignal} from '@angular/core';
 import {JsonPipe, NgForOf} from "@angular/common";
 import {Dato} from "../propiedades/dato";
 
@@ -24,16 +24,32 @@ export class SignalsComponent implements OnInit{
   countSignal: WritableSignal<number> = signal(0);
   // Computed permite subscribirse al cambio de otro signal y aplicar una función que cambie el valor de la variable computada
   // cada vez que cambie count cambiará doubleCount, aplicando una función para el cálculo
-  doubleCount: Signal<number> = computed(() => this.countSignal() * 2);
+  doubleCount: Signal<number> = computed(() =>
+    // {
+    //   return
+    this.countSignal() * 2
+    // ; }
+  );
 
   // Signals are getter functions - calling them reads their value.
+
+  // Señal base
+  count = signal(0);
+
+  // linkedSignal: toma el valor de `count()` como inicial y permite .set()
+  linkedCount = linkedSignal(() => this.count());
 
   ngOnInit(): void {
     // cambiar un valor por otro
     this.countSignal.set(2)
     // Increment the count by 1.
     // Cambiar el valor usando un a función dependiendo del valor actual del signal
-    this.countSignal.update((value: number) => value + 1);
+    this.countSignal.update((value: number) =>
+      // {
+      //   return
+      value + 1
+      //  ;}
+    );
     // Mutate cambia el valor interno sin reescribir su contenido (fallo en v17)
     // this.cadenasSignal.mutate((value: string[]): void => {
     //   value.push("hola")
@@ -55,4 +71,11 @@ export class SignalsComponent implements OnInit{
   }
 
 
+  cambiaLinked() {
+    this.linkedCount.set(2);
+  }
+
+  cambiaCount() {
+    this.count.update((value: number) => value +1 );
+  }
 }
