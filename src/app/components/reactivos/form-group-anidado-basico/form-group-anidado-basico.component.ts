@@ -24,7 +24,7 @@ export class FormGroupAnidadoBasicoComponent implements OnInit {
       address: new UntypedFormGroup({
         street: new UntypedFormControl(''),
         city: new UntypedFormControl(''),
-        state: new UntypedFormControl(''),
+        state: new UntypedFormControl('', [Validators.required]),
         zip: new UntypedFormControl('')
       })
     });
@@ -47,6 +47,7 @@ export class FormGroupAnidadoBasicoComponent implements OnInit {
     console.warn(this.profileForm.value?.firstName);
     console.warn(this.profileForm.value?.address);
     console.warn(this.profileForm.value?.address?.street);
+    console.warn(this.profileForm.controls['address']);
     console.log(this.profileForm);
   }
 

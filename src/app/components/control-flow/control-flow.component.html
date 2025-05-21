@@ -34,16 +34,22 @@
   </div>
   <div>
     <h3>Listado con variables predefinidas</h3>
-    <p>$count	Number of items in a collection iterated over
-      $index	Index of the current row
-      $first	Whether the current row is the first row
-      $last	Whether the current row is the last row
-      $even	Whether the current row index is even
+    <p>$count	Number of items in a collection iterated over <br/>
+      $index	Index of the current row <br/>
+      $first	Whether the current row is the first row <br/>
+      $last	Whether the current row is the last row <br/>
+      $even	Whether the current row index is even <br/>
       $odd	Whether the current row index is odd</p>
     <ul>
       @for (item of todos; track $index) {
 
-        <li>{{ item.text }}</li>
+        <li>{{$index}}:{{ item.text }}
+          <span>Count: {{$count}}</span> <br/>
+          <span>First: {{$first}}</span> <br/>
+          <span>Last: {{$last}}</span> <br/>
+          <span>Even: {{$even}}</span> <br/>
+          <span>Odd: {{$odd}}</span> <br/>
+        </li>
       }@empty {
         <li> There are no items.</li>
       }

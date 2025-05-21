@@ -14,6 +14,8 @@ export class FormBasicoComponent implements OnInit {
   constructor() {
     this.name = new UntypedFormControl('Valor inicial');
     this.nameString = new FormControl('', [Validators.required]);
+    console.log(this.name);
+    console.log(this.nameString);
   }
 
   ngOnInit(): void {

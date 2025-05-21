@@ -7,7 +7,7 @@
       Name is required.
     </div>
     <div *ngIf="profileForm.controls['name'].errors?.['forbiddenName']">
-      El nombre no pude ser bob
+      El nombre no pude ser bob porque has puesto {{profileForm.controls['name'].errors?.['forbiddenName'].value}}
     </div>
   </div>
 </form>

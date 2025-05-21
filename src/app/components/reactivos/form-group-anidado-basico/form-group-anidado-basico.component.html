@@ -2,6 +2,22 @@
 <form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <label for="firstName">First Name:</label>
   <input id="firstName" class="form-control" type="text" formControlName="firstName">
+  @if (
+    profileForm.controls['firstName'].status=='INVALID' &&
+    profileForm.controls['firstName'].touched
+    ) {
+    <div class="alert alert-danger">
+      @if(profileForm.controls['firstName'].errors?.['required']){
+        <div>Name is required.</div>
+      }
+      @if(profileForm.controls['firstName'].errors?.['minlength']){
+        <div>
+          Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
+          the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+        </div>
+      }
+    </div>
+  }
   <label for="lastName">Last Name:</label>
   <input id="lastName" class="form-control" type="text" formControlName="lastName">
   <div formGroupName="address">
