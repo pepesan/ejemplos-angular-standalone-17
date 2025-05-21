@@ -6,8 +6,10 @@
   <h3>json: {{objetoJSON | json}}</h3>
   <h3>Percent: {{ porcentaje | percent }}</h3>
   <h3>Percent:'2.1-2' {{ porcentaje | percent: '2.1-2' }}</h3>
+  <h3>porcentajeDecimales:'2.2-3' {{ porcentajeDecimales | percent: '2.2-3' }}</h3>
   <h3>currency: {{porcentaje |  currency}}</h3>
   <h3>currency:'EUR' {{porcentaje |  currency: 'EUR'}}</h3>
+  <h3>Precio: {{ precio | currency:'EUR':'symbol':'1.2-2':'es-ES' }}</h3>
   <h3>date {{fecha |  date}}</h3>
   <h3>date: short {{fecha |  date: 'short'}}</h3>
   <h3>date: 'd/M/yy, h:mm a' {{fecha |  date: 'd/M/yy, h:mm a'}}</h3>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
 import {
   CommonModule,
   CurrencyPipe,
@@ -6,6 +7,7 @@ import {
   JsonPipe,
   LowerCasePipe,
   PercentPipe,
+  registerLocaleData,
   UpperCasePipe
 } from "@angular/common";
 import {MiaDirective} from "../../directives/mia.directive";
@@ -27,8 +29,14 @@ import {MiPipe} from "../../pipes/mi-pipe.pipe";
         MiPipe
     ],
     templateUrl: './uso-pipes.component.html',
-    styleUrl: './uso-pipes.component.css'
+    styleUrl: './uso-pipes.component.css',
+    // configuración del Locale
+    providers: [
+      { provide: LOCALE_ID, useValue: 'es-ES' }
+    ],
 })
+
+
 export class UsoPipesComponent {
   public cadena: string = "Cadena";
   objetoJSON = {
@@ -37,7 +45,13 @@ export class UsoPipesComponent {
     apellido: "Perez"
   }
   porcentaje =  0.12;
+  porcentajeDecimales =  0.057987987987;
   numero: number = 2;
   fecha: Date = new Date();
   // fecha: Date = new Date(2023, 6, 15, 12, 30, 15);
+  precio = 1234.5;
+  constructor() {
+    // Registra el locale 'es-ES' en el componente
+    registerLocaleData(localeEs, 'es-ES');
+  }
 }
