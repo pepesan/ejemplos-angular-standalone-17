@@ -16,4 +16,11 @@ export class PropiedadesComponent {
   @Input() parametro2?: number = 0;
   @Input() dato?: Dato = new Dato("Por defecto");
   @Input() objeto?: any = { prop: "Valor por defecto" };
+  // propiedad obligatoria
+  @Input({ required: true }) parametroObligatorio: number;
+
+  constructor() {
+    this.parametroObligatorio = 0;
+  }
+
 }
