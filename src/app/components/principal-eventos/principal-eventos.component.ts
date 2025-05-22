@@ -18,9 +18,12 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
   }
 
   clicked(event: MouseEvent) {
+    // eliminar el comportamiento por defecto del evento
     event.preventDefault();
     console.log(event);
     console.log(event.target);
+    // capturamos el elemento HTML que ha disparado el evento
+    // as realizamos un casteo del objeto event.target a HTMLButtonElement
     let htmlButtonElement: HTMLButtonElement = event.target as HTMLButtonElement;
     //htmlButtonElement = <HTMLButtonElement>event.target;
     console.log(htmlButtonElement.id);
@@ -29,6 +32,12 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
     let element: Element = event.target as Element;
     console.log(element.id);
     console.log("pulsado");
+  }
+
+  onClick($event: MouseEvent) {
+    // casting del evento a HTMLImageElement
+    let htmlImageElement: HTMLImageElement = $event.target as HTMLImageElement;
+    htmlImageElement.id = "MiImagen";
   }
 
 
