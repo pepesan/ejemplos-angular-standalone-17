@@ -42,14 +42,20 @@ export class ListadoPartidosComponent implements OnInit, OnDestroy {
     this.listadoVisible = [];
     // me subscribo al observable y guardo la subscripción
     this.listadopartidosObservableSubscription =
-      this.listadopartidosObservable.subscribe((data: Partido[]): void => {
+      this.listadopartidosObservable.subscribe(
+        // datos que nos devolverá el observable
+        (data: Partido[]): void =>
+        // función que se ejecutará cuando se disponga del dato
+        // realizará el procesado de los datos
+        {
         console.log(data);
         console.log(data.length);
         // pasar los datos una vez recibidos al listado visible
         // poco a poco
-        data.forEach( (value : Partido) =>
-          this.listadoVisible.push(value)
-        );
+        data.forEach( (value : Partido) =>{
+            value.nombre += "!";
+            this.listadoVisible.push(value)
+        });
         // del tirón
         this.listadoVisible = data;
 
