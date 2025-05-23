@@ -35,9 +35,12 @@ export class EjercicioEventosComponent {
   }
 
   // Captura el evento submit del formulario y muestra el valor del campo "nombre" en consola
-  onSubmit(event: SubmitEvent): void {
+  onSubmit(event: SubmitEvent, valor: string): void {
     event.preventDefault();
+    // se puede coger desde el ngmodel el valor del campo
     console.log('Valor del campo "nombre":', this.nombre);
+    // o desde el parametro del evento
+    console.log('Valor del campo "nombre":', valor);
   }
 
   // Función que se ejecuta al salir del campo "nombre"; si tiene al menos 5 caracteres, informa que valida
