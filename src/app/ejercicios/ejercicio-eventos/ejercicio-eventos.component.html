@@ -17,7 +17,7 @@
       type="text"
       [(ngModel)]="nombre"
 
-      (blur)="onBlurNombre()"
+      (blur)="onBlurNombre($event)"
       required>
     <button type="submit">Enviar</button>
   </form>

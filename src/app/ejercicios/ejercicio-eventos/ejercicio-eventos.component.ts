@@ -41,9 +41,16 @@ export class EjercicioEventosComponent {
   }
 
   // Función que se ejecuta al salir del campo "nombre"; si tiene al menos 5 caracteres, informa que valida
-  onBlurNombre(): void {
+  onBlurNombre($event: Event): void {
+    // $event es el evento de salida del campo
+    // Se puede usar el operador "as" para convertir $event.target a un tipo específico de elemento html
+    let elemento = $event.target as HTMLInputElement;
+    console.log("valor del campo: " + elemento.value);
+    // Se puede pillar del ngModel el valor del campo
     if (this.nombre.trim().length >= 5) {
       console.log('El campo valida');
+    }else {
+      console.log('El campo no valida');
     }
   }
 
