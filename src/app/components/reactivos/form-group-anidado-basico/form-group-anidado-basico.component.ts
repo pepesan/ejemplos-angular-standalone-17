@@ -4,7 +4,7 @@ import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-form-group-anidado-basico',
-    imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
     templateUrl: './form-group-anidado-basico.component.html',
     styleUrls: ['./form-group-anidado-basico.component.css']
 })
