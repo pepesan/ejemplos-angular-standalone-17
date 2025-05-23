@@ -14,9 +14,11 @@ import {FormsModule} from "@angular/forms";
 export class RadiosComponent implements OnInit {
   public opciones: any[] = [];
   public gender: string;
+  public caja: string;
   constructor() {
     // seleccionamos un valor por defecto
     this.gender = "other";
+    this.caja = "pulsado";
     this.opciones.push({
       name: "Masculino",
       id: "male",

@@ -1,16 +1,32 @@
-<div *ngFor="let elemento of opciones" class="form-check">
+<div>
+  <div *ngFor="let elemento of opciones" class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="exampleRadios"
+      id="{{elemento.id}}"
+      [(ngModel)]="gender"
+      [value]="elemento.value"
+      [checked]="elemento.checked"
+      required
+    >
+    <label class="form-check-label" for="{{elemento.id}}">
+      {{elemento.name}}
+    </label>
+  </div>
   <input
-    class="form-check-input"
-    type="radio"
-    name="exampleRadios"
-    id="{{elemento.id}}"
-    [(ngModel)]="gender"
-    [value]="elemento.value"
-    [checked]="elemento.checked"
-    required
-  >
-  <label class="form-check-label" for="{{elemento.id}}">
-    {{elemento.name}}
+    id="caja"
+    type="checkbox"
+    name="check"
+    [(ngModel)]="caja"
+    #cajaInput
+  />
+  <label class="form-check-label" for="caja">
+    Condiciones de uso
   </label>
+  <div *ngIf="!cajaInput.checked">
+    <p>Condiciones de uso no aceptadas</p>
+  </div>
 </div>
+
 
