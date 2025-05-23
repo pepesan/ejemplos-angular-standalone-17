@@ -38,6 +38,14 @@
     <input id="city" class="form-control" type="text" formControlName="city">
     <label for="state">State:</label>
     <input id="state" class="form-control" type="text" formControlName="state">
+    <div
+      *ngIf="profileForm.get('address.state')!.invalid && profileForm.get('address.state')!.touched"
+      class="alert alert-danger"
+    >
+      <div *ngIf="profileForm.get('address.state')!.errors?.['required']">
+        El campo <strong>state</strong> es obligatorio.
+      </div>
+    </div>
     <label for="zip">ZIP:</label>
     <input id="zip" class="form-control" type="text" formControlName="zip">
   </div>

@@ -27,7 +27,7 @@ export class FormBuilderBasicoComponent implements OnInit {
       address: this.fb.group({
         street: [''],
         city: [''],
-        state: [''],
+        state: ['', [Validators.required]],
         zip: ['']
       }),
     });
