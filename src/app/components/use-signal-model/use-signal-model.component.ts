@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
 import {SignalModelComponent} from "../signal-model/signal-model.component";
 
 /*
@@ -19,6 +19,7 @@ import {SignalModelComponent} from "../signal-model/signal-model.component";
         SignalModelComponent
     ],
     templateUrl: './use-signal-model.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './use-signal-model.component.css'
 })
 export class UseSignalModelComponent {

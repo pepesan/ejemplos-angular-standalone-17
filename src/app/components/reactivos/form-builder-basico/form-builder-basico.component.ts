@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import { Validators } from '@angular/forms';
-import {CommonModule} from "@angular/common";
+
 @Component({
     selector: 'app-form-builder-basico',
-    imports: [ReactiveFormsModule, CommonModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './form-builder-basico.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./form-builder-basico.component.css']
 })
 export class FormBuilderBasicoComponent implements OnInit {

@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Todo} from "./todo";
-import {NgForOf} from "@angular/common";
+
 import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-todos',
     imports: [
-        NgForOf,
-        FormsModule
-    ],
+    FormsModule
+],
     templateUrl: './todos.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './todos.component.css'
 })
 export class TodosComponent {

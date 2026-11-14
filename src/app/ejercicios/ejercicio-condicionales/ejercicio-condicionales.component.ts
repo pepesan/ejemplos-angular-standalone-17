@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
-import {NgIf} from "@angular/common";
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
 
 @Component({
   selector: 'app-ejercicio-condicionales',
-  imports: [
-    NgIf
-  ],
+  imports: [],
   templateUrl: './ejercicio-condicionales.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-condicionales.component.css'
 })
 export class EjercicioCondicionalesComponent {

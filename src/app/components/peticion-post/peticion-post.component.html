@@ -18,11 +18,15 @@
     <button type="submit">Enviar Post</button>
   </form>
 
-  <div *ngIf="response">
-    <h3>Respuesta del servidor:</h3>
-    <pre>{{ response | json }}</pre>
-  </div>
-  <div *ngIf="error" style="color: red;">
-    <strong>{{ error }}</strong>
-  </div>
+  @if (response) {
+    <div>
+      <h3>Respuesta del servidor:</h3>
+      <pre>{{ response | json }}</pre>
+    </div>
+  }
+  @if (error) {
+    <div style="color: red;">
+      <strong>{{ error }}</strong>
+    </div>
+  }
 </div>

@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Todo} from "../todo-class/todo";
 import {TodoDetalleComponent} from "../todo-detalle/todo-detalle.component";
-import {NgForOf, NgIf} from "@angular/common";
+
 
 @Component({
     selector: 'app-todo-listado',
     imports: [
-        TodoDetalleComponent,
-        NgForOf,
-        NgIf
-    ],
+    TodoDetalleComponent
+],
     templateUrl: './todo-listado.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './todo-listado.component.css'
 })
 export class TodoListadoComponent {

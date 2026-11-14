@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {PropiedadesComponent} from "../../components/propiedades/propiedades.component";
 import {Dato} from "../../components/propiedades/dato";
 
@@ -8,6 +8,7 @@ import {Dato} from "../../components/propiedades/dato";
         PropiedadesComponent
     ],
     templateUrl: './props-page.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './props-page.component.css'
 })
 export class PropsPageComponent {

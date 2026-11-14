@@ -1,15 +1,6 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component, LOCALE_ID, ChangeDetectionStrategy } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
-import {
-  CommonModule,
-  CurrencyPipe,
-  DatePipe,
-  JsonPipe,
-  LowerCasePipe,
-  PercentPipe,
-  registerLocaleData,
-  UpperCasePipe
-} from "@angular/common";
+import { CommonModule, CurrencyPipe, DatePipe, JsonPipe, LowerCasePipe, PercentPipe, registerLocaleData, UpperCasePipe } from "@angular/common";
 import {MiaDirective} from "../../directives/mia.directive";
 import {MiPipe} from "../../pipes/mi-pipe.pipe";
 
@@ -31,6 +22,7 @@ import {MiPipe} from "../../pipes/mi-pipe.pipe";
     templateUrl: './uso-pipes.component.html',
     styleUrl: './uso-pipes.component.css',
     // configuración del Locale (para config de la aplicación completa mira main.ts y app.config.ts)
+    changeDetection: ChangeDetectionStrategy.Eager,
     providers: [
       { provide: LOCALE_ID, useValue: 'es-ES' }
     ],

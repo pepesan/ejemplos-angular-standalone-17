@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListadoPartidosComponent} from './listado-partidos.component';
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
 
 
 describe('ListadoPartidosComponent', () => {
@@ -11,7 +11,7 @@ describe('ListadoPartidosComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     imports: [ListadoPartidosComponent],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
+    providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())]
 })
       .compileComponents();
 

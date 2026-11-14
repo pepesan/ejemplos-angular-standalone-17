@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {MiService} from "./mi.service";
 
 @Component({
   selector: 'app-ejercicio-servicios',
   imports: [],
   templateUrl: './ejercicio-servicios.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-servicios.component.css'
 })
 export class EjercicioServiciosComponent {

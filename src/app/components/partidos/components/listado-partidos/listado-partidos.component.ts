@@ -1,16 +1,16 @@
-import {Component, OnDestroy, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 import {ApiClientService} from "../../services/apiclient.service";
 import {Partido} from "../../models/partido";
 import {Observable, Subscription} from "rxjs";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 
 @Component({
     selector: 'app-listado-partidos',
     imports: [
-        AsyncPipe,
-        NgForOf
-    ],
+    AsyncPipe
+],
     templateUrl: './listado-partidos.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./listado-partidos.component.sass']
 })
 export class ListadoPartidosComponent implements OnInit, OnDestroy {

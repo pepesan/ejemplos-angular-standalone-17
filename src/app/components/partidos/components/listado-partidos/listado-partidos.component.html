@@ -1,73 +1,89 @@
 <h3>Listado de partidos Asíncrono (Promesa)</h3>
 <ul>
-  <li *ngFor="let resultado of listado | async">
-    {{resultado.nombre}}: {{resultado.dipu}}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-         width="90px"
-         height="90px" alt="Logo partido {{resultado.nombre}}"/>
-  </li>
+  @for (resultado of listado | async; track resultado) {
+    <li>
+      {{resultado.nombre}}: {{resultado.dipu}}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+        width="90px"
+        height="90px" alt="Logo partido {{resultado.nombre}}"/>
+    </li>
+  }
 </ul>
 <h3>Listado de partidos Asíncrono (Observable)</h3>
 <ul>
-  <li *ngFor="let resultado of listadopartidosObservable | async">
-    {{resultado.nombre}}: {{resultado.dipu}}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-         width="90px"
-         height="90px" alt="Logo partido {{resultado.nombre}}"/>
-  </li>
+  @for (resultado of listadopartidosObservable | async; track resultado) {
+    <li>
+      {{resultado.nombre}}: {{resultado.dipu}}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+        width="90px"
+        height="90px" alt="Logo partido {{resultado.nombre}}"/>
+    </li>
+  }
 </ul>
 <h3>Listado de partidos sin async</h3>
 <ul>
-  <li *ngFor="let resultado of listadoVisible">
-    {{resultado.nombre}}: {{resultado.dipu}}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-         width="90px"
-         height="90px" alt="logotipo {{resultado.nombre}}"/>
-  </li>
+  @for (resultado of listadoVisible; track resultado) {
+    <li>
+      {{resultado.nombre}}: {{resultado.dipu}}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+        width="90px"
+        height="90px" alt="logotipo {{resultado.nombre}}"/>
+    </li>
+  }
 </ul>
 <h3>Listado de partidos con Promesa Procesada síncronamente</h3>
 <ul>
-  <li *ngFor="let resultado of listadoVisiblePromesa">
-    {{resultado.nombre}}: {{resultado.dipu}}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-         width="90px"
-         height="90px"/>
-  </li>
+  @for (resultado of listadoVisiblePromesa; track resultado) {
+    <li>
+      {{resultado.nombre}}: {{resultado.dipu}}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+        width="90px"
+        height="90px"/>
+    </li>
+  }
 </ul>
 <h3>Listado de partidos con Promesa Procesada en Servicio síncronamente</h3>
 <ul>
-  <li *ngFor="let resultado of listadoVisiblePromesaProcesada">
-    {{resultado.nombre}}: {{resultado.dipu}}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-         width="90px"
-         height="90px"/>
-  </li>
+  @for (resultado of listadoVisiblePromesaProcesada; track resultado) {
+    <li>
+      {{resultado.nombre}}: {{resultado.dipu}}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+        width="90px"
+        height="90px"/>
+    </li>
+  }
 </ul>
 <h3>Listado de partidos con Subscribe Procesada en Servicio síncronamente</h3>
 <ul>
-  <li *ngFor="let resultado of listadoVisibleSubscribeProcesado">
-    {{resultado.nombre}}: {{resultado.dipu}}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-         width="90px"
-         height="90px"/>
-  </li>
+  @for (resultado of listadoVisibleSubscribeProcesado; track resultado) {
+    <li>
+      {{resultado.nombre}}: {{resultado.dipu}}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+        width="90px"
+        height="90px"/>
+    </li>
+  }
 </ul>
 
 <h3>Listado de partidos con Señales</h3>
 <ul>
   <!-- Utiliza la señal directamente -->
-  <li *ngFor="let resultado of partidosSignal()">
-    {{ resultado.nombre }}: {{ resultado.dipu }}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{ resultado.imagen }}" width="90px" height="90px" />
-  </li>
+  @for (resultado of partidosSignal(); track resultado) {
+    <li>
+      {{ resultado.nombre }}: {{ resultado.dipu }}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{ resultado.imagen }}" width="90px" height="90px" />
+    </li>
+  }
 </ul>
 <h3>Listado de partidos con Señales Procesadas</h3>
 <ul>
   <!-- Utiliza la señal directamente -->
-  <li *ngFor="let resultado of listadoVisibleSignals()">
-    {{ resultado.nombre }}: {{ resultado.dipu }}
-    <img src="https://pactometro.cursosdedesarrollo.com/img/{{ resultado.imagen }}" width="90px" height="90px" />
-  </li>
+  @for (resultado of listadoVisibleSignals(); track resultado) {
+    <li>
+      {{ resultado.nombre }}: {{ resultado.dipu }}
+      <img src="https://pactometro.cursosdedesarrollo.com/img/{{ resultado.imagen }}" width="90px" height="90px" />
+    </li>
+  }
 </ul>
 <h3>Listado de partidos con Señales y Control Flow</h3>
 <ul>
@@ -76,7 +92,7 @@
       {{ item.nombre }}: {{ item.dipu }}
       <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" />
     </li>
-  }@empty {
+    }@empty {
     <li> There are no results.</li>
   }
 </ul>
@@ -88,7 +104,7 @@
       {{ item.nombre }}: {{ item.dipu }}
       <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" />
     </li>
-  }@empty {
+    }@empty {
     <li> There are no results.</li>
   }
 </ul>

@@ -1,9 +1,10 @@
-import {Component, input, InputSignal} from '@angular/core';
+import {Component, input, InputSignal, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
     selector: 'app-use-signal-input',
     imports: [],
     templateUrl: './use-signal-input.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './use-signal-input.component.css'
 })
 export class UseSignalInputComponent {

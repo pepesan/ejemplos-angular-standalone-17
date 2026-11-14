@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
+
 import {ForbiddenNameValidator} from "../../../validators/ForbidenValidator";
 
 @Component({
     selector: 'app-my-custom-validation',
-    imports: [ReactiveFormsModule, NgIf],
+    imports: [ReactiveFormsModule],
     templateUrl: './my-custom-validation.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./my-custom-validation.component.css']
 })
 export class MyCustomValidationComponent implements OnInit {

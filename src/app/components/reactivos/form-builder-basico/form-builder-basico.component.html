@@ -3,53 +3,56 @@
   <label for="firstName">First Name:</label>
   <input id="firstName" class="form-control" type="text" formControlName="firstName">
   <!--div *ngIf="profileForm.controls['firstName']?.invalid && profileForm.controls['firstName'].status=='INVALID'"
-       class="alert alert-danger">
-    <div *ngIf="profileForm.controls['firstName'].errors?.['required'] == true">
-      Name is required.
-    </div>
-    <div *ngIf="profileForm.controls['firstName'].errors?.['minlength']">
-      Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
-      the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
-    </div>
-  </div-->
-  @if (
-    profileForm.controls['firstName'].status=='INVALID'
-    && profileForm.controls['firstName'].touched
-    ) {
-    <div class="alert alert-danger">
-      @if(profileForm.controls['firstName'].errors?.['required']){
-        <div>Name is required.</div>
-      }
-      @if(profileForm.controls['firstName'].errors?.['minlength']){
+  class="alert alert-danger">
+  <div *ngIf="profileForm.controls['firstName'].errors?.['required'] == true">
+    Name is required.
+  </div>
+  <div *ngIf="profileForm.controls['firstName'].errors?.['minlength']">
+    Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
+    the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+  </div>
+</div-->
+@if (
+  profileForm.controls['firstName'].status=='INVALID'
+  && profileForm.controls['firstName'].touched
+  ) {
+  <div class="alert alert-danger">
+    @if(profileForm.controls['firstName'].errors?.['required']){
+      <div>Name is required.</div>
+    }
+    @if(profileForm.controls['firstName'].errors?.['minlength']){
+      <div>
+        Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
+        the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+      </div>
+    }
+  </div>
+}
+{{profileForm.get('firstName')?.errors?.['minlength']}}
+<label for="lastName">Last Name:</label>
+<input id="lastName" class="form-control" type="text" formControlName="lastName">
+<div formGroupName="address">
+  <label for="street">Street:</label>
+  <input id="street" class="form-control" type="text" formControlName="street">
+  <label for="city">City:</label>
+  <input id="city" class="form-control" type="text" formControlName="city">
+  <label for="state">State:</label>
+  <input id="state" class="form-control" type="text" formControlName="state">
+  @if (profileForm.get('address.state')!.invalid && profileForm.get('address.state')!.touched) {
+    <div
+      class="alert alert-danger"
+      >
+      @if (profileForm.get('address.state')!.errors?.['required']) {
         <div>
-          Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
-          the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+          El campo <strong>state</strong> es obligatorio.
         </div>
       }
     </div>
   }
-  {{profileForm.get('firstName')?.errors?.['minlength']}}
-  <label for="lastName">Last Name:</label>
-  <input id="lastName" class="form-control" type="text" formControlName="lastName">
-  <div formGroupName="address">
-    <label for="street">Street:</label>
-    <input id="street" class="form-control" type="text" formControlName="street">
-    <label for="city">City:</label>
-    <input id="city" class="form-control" type="text" formControlName="city">
-    <label for="state">State:</label>
-    <input id="state" class="form-control" type="text" formControlName="state">
-    <div
-      *ngIf="profileForm.get('address.state')!.invalid && profileForm.get('address.state')!.touched"
-      class="alert alert-danger"
-    >
-      <div *ngIf="profileForm.get('address.state')!.errors?.['required']">
-        El campo <strong>state</strong> es obligatorio.
-      </div>
-    </div>
-    <label for="zip">ZIP:</label>
-    <input id="zip" class="form-control" type="text" formControlName="zip">
-  </div>
-  <input id="form-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="!profileForm.valid"/>
+  <label for="zip">ZIP:</label>
+  <input id="zip" class="form-control" type="text" formControlName="zip">
+</div>
+<input id="form-submit" class="btn btn-success" type="submit" value="Enviar" [disabled]="!profileForm.valid"/>
 </form>
 <button class="btn btn-success" (click)="muestra()" type="button">Muestra</button>
 <button class="btn btn-success" (click)="cambia()" type="button">Cambia</button>

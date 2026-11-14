@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from '@angular/router';
 import {TodosComponent} from "./components/todos/todos.component";
 import {CondicionalesComponent} from "./components/directivas-builtin/condicionales.component";
@@ -19,6 +19,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         NgbModule
     ],
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.css'
 })
 export class AppComponent {

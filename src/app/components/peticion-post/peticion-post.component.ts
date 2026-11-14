@@ -1,8 +1,8 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
 import {PostData} from "../../classes/post-data";
 import {PeticionPostService} from "../../services/peticion-post.service";
 import {FormsModule} from "@angular/forms";
-import {JsonPipe, NgIf} from "@angular/common";
+import { JsonPipe } from "@angular/common";
 import {PostDataResponse} from "../../classes/post-data-response";
 import {Subscription} from "rxjs";
 
@@ -11,10 +11,10 @@ import {Subscription} from "rxjs";
   selector: 'app-peticion-post',
   imports: [
     FormsModule,
-    JsonPipe,
-    NgIf
-  ],
+    JsonPipe
+],
   templateUrl: './peticion-post.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './peticion-post.component.css'
 })
 export class PeticionPostComponent implements OnDestroy{

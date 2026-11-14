@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {BasicoService} from "../../services/basico.service";
 
 @Component({
   selector: 'app-uso-servicio-basico',
   imports: [],
   templateUrl: './uso-servicio-basico.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './uso-servicio-basico.component.css'
 })
 export class UsoServicioBasicoComponent {

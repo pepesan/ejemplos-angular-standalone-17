@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {NgbAlertModule} from "@ng-bootstrap/ng-bootstrap";
 
 interface Alert {
@@ -45,6 +45,7 @@ const ALERTS: Alert[] = [
     selector: 'app-alertas',
     imports: [NgbAlertModule],
     templateUrl: './alertas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './alertas.component.css'
 })
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
   UntypedFormGroup,
   UntypedFormControl,
@@ -12,6 +12,7 @@ import {
     selector: 'app-form-group-basico',
   imports: [ReactiveFormsModule],
     templateUrl: './form-group-basico.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./form-group-basico.component.css']
 })
 export class FormGroupBasicoComponent implements OnInit {

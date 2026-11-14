@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {FormGroup, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {NgIf} from "@angular/common";
+
 
 @Component({
     selector: 'app-form-group-anidado-basico',
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule],
     templateUrl: './form-group-anidado-basico.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./form-group-anidado-basico.component.css']
 })
 export class FormGroupAnidadoBasicoComponent implements OnInit {

@@ -1,16 +1,16 @@
-import { Component, signal, WritableSignal, OnInit, OnDestroy } from '@angular/core';
+import { Component, signal, WritableSignal, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import {Resultado} from "./resultado";
 import {ResultadoService} from "./resultado.service";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-ejercicio-resultado',
   imports: [
-    AsyncPipe,
-    NgForOf
-  ],
+    AsyncPipe
+],
   templateUrl: './ejercicio-resultado.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-resultado.component.css'
 })
 export class EjercicioResultadoComponent implements OnDestroy {

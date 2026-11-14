@@ -3,23 +3,37 @@
     This div is special
   </div>
   <h2>Condicionales</h2>
-  <p *ngIf="booleano">
-    El booleano es true
-  </p>
-  <p *ngIf="!booleano">
-    El booleano es false
-  </p>
+  @if (booleano) {
+    <p>
+      El booleano es true
+    </p>
+  }
+  @if (!booleano) {
+    <p>
+      El booleano es false
+    </p>
+  }
   <h3>Bucle *ngFor</h3>
   <ul>
-    <li *ngFor="let item of datos; index as i">
-      {{i}}: {{item.text}}
-    </li>
+    @for (item of datos; track item; let i = $index) {
+      <li>
+        {{i}}: {{item.text}}
+      </li>
+    }
   </ul>
-  <div [ngSwitch]="currentItem">
-    <p *ngSwitchCase="'stout'">Stout</p>
-    <p *ngSwitchCase="'stin'">Stin</p>
-    <!-- . . . -->
-    <p *ngSwitchDefault>default</p>
+  <div>
+    @switch (currentItem) {
+      @case ('stout') {
+        <p>Stout</p>
+      }
+      @case ('stin') {
+        <p>Stin</p>
+      }
+      <!-- . . . -->
+      @default {
+        <p>default</p>
+      }
+    }
   </div>
 
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {CurrencyPipe, DatePipe, LowerCasePipe, PercentPipe, UpperCasePipe} from "@angular/common";
 
 @Component({
@@ -11,6 +11,7 @@ import {CurrencyPipe, DatePipe, LowerCasePipe, PercentPipe, UpperCasePipe} from 
     DatePipe
   ],
   templateUrl: './ejercicio-tuberias.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-tuberias.component.css'
 })
 export class EjercicioTuberiasComponent {
