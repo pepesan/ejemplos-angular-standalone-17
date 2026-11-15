@@ -1,4 +1,4 @@
-import {Component, effect, signal} from '@angular/core';
+import {Component, effect, signal, ChangeDetectionStrategy} from '@angular/core';
 
 /*
  Usos del effect:
@@ -12,6 +12,7 @@ import {Component, effect, signal} from '@angular/core';
     selector: 'app-signal-effect',
     imports: [],
     templateUrl: './signal-effect.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './signal-effect.component.css'
 })
 export class SignalEffectComponent {

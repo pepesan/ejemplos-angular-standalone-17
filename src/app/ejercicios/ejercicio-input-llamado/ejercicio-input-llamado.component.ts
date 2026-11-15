@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
 import {Dato} from "./dato";
 import {JsonPipe} from "@angular/common";
 
@@ -8,6 +8,7 @@ import {JsonPipe} from "@angular/common";
     JsonPipe
   ],
   templateUrl: './ejercicio-input-llamado.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-input-llamado.component.css'
 })
 export class EjercicioInputLlamadoComponent {

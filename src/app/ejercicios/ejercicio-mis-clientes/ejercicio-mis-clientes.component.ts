@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Cliente} from "./cliente";
 import {FormsModule} from "@angular/forms";
 
@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
     FormsModule
   ],
   templateUrl: './ejercicio-mis-clientes.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-mis-clientes.component.css'
 })
 export class EjercicioMisClientesComponent {

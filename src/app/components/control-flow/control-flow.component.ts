@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Todo} from "../todos/todo";
 
 @Component({
     selector: 'app-control-flow',
     imports: [],
     templateUrl: './control-flow.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './control-flow.component.css'
 })
 export class ControlFlowComponent {

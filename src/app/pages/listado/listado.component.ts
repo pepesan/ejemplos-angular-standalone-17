@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
-import {NgForOf} from "@angular/common";
+
 import {ListadoService} from "../../services/listado.service";
 @Component({
     selector: 'app-listado',
     imports: [
-        NgForOf,
-        RouterLink,
-        RouterLinkActive
-    ],
+    RouterLink,
+    RouterLinkActive
+],
     templateUrl: './listado.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './listado.component.css'
 })
 export class ListadoComponent {

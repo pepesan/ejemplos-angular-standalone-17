@@ -1,14 +1,14 @@
-import {Component, computed, linkedSignal, OnInit, Signal, signal, WritableSignal} from '@angular/core';
-import {JsonPipe, NgForOf} from "@angular/common";
+import {Component, computed, linkedSignal, OnInit, Signal, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
+import { JsonPipe } from "@angular/common";
 import {Dato} from "../propiedades/dato";
 
 @Component({
     selector: 'app-signals',
   imports: [
-    NgForOf,
     JsonPipe
-  ],
+],
     templateUrl: './signals.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./signals.component.sass']
 })
 export class SignalsComponent implements OnInit{

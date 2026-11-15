@@ -11,15 +11,17 @@
   <input (click)="cambiaLinked()" type="button" value="Cambia Valor de Linked"/> <br/>
   <h3>Listado de Cadenas</h3>
   <ul>
-    <li *ngFor="let item of cadenasSignal()">
+    @for (item of cadenasSignal(); track item) {
+      <li>
         {{item}}
-    </li>
+      </li>
+    }
   </ul>
   <ul>
     @for (item of cadenasSignal(); track $index) {
 
       <li>{{item}}</li>
-    }@empty {
+      }@empty {
       <li> There are no items.</li>
     }
   </ul>

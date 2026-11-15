@@ -1,14 +1,18 @@
 <div>
   <ul>
-    <li *ngFor="let item of items" (click)="viewItemDetails(item)">
-      {{ item.name }}
-    </li>
+    @for (item of items; track item) {
+      <li (click)="viewItemDetails(item)">
+        {{ item.name }}
+      </li>
+    }
   </ul>
 </div>
 <div>
   <ul>
-    <li *ngFor="let item of items">
-      <button class="btn btn-success me-2" routerLink="/list/{{item.id}}" routerLinkActive="active">Show {{item.name}}</button>
-    </li>
+    @for (item of items; track item) {
+      <li>
+        <button class="btn btn-success me-2" routerLink="/list/{{item.id}}" routerLinkActive="active">Show {{item.name}}</button>
+      </li>
+    }
   </ul>
 </div>

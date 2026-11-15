@@ -1,8 +1,10 @@
 <div>
   <button (click)="cambia()">Cambia</button>
-  <p *ngIf="presenta">
-    Presenta contenido
-  </p>
+  @if (presenta) {
+    <p>
+      Presenta contenido
+    </p>
+  }
   @if (presenta){
     <p>
       Presenta contenido con &#64;if

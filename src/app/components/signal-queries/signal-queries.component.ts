@@ -1,4 +1,4 @@
-import {Component, ElementRef, Signal, viewChild, viewChildren} from '@angular/core';
+import {Component, ElementRef, Signal, viewChild, viewChildren, ChangeDetectionStrategy} from '@angular/core';
 import {TodosComponent} from "../todos/todos.component";
 
 @Component({
@@ -7,6 +7,7 @@ import {TodosComponent} from "../todos/todos.component";
         TodosComponent
     ],
     templateUrl: './signal-queries.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './signal-queries.component.css'
 })
 export class SignalQueriesComponent {

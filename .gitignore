@@ -42,3 +42,10 @@ testem.log
 Thumbs.db
 
 pnpm-lock.yaml
+
+# Local assistant instructions
+/CLAUDE.md
+/AGENTS.md
+playwright-report/
+test-results/
+storybook-static/

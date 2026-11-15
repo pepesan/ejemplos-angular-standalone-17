@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {FormControl, ReactiveFormsModule, UntypedFormControl, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-form-basico',
     imports: [ReactiveFormsModule],
     templateUrl: './form-basico.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./form-basico.component.css']
 })
 export class FormBasicoComponent implements OnInit {

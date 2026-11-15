@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {EjercicioInputLlamadoComponent} from "../ejercicio-input-llamado/ejercicio-input-llamado.component";
 import {Dato} from "../ejercicio-input-llamado/dato";
 
@@ -8,6 +8,7 @@ import {Dato} from "../ejercicio-input-llamado/dato";
     EjercicioInputLlamadoComponent
   ],
   templateUrl: './ejercicio-input.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-input.component.css'
 })
 export class EjercicioInputComponent {

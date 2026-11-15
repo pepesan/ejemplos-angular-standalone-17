@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {CommonModule} from "@angular/common";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
 import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-radios',
     imports: [
-        CommonModule,
-        FormsModule
-    ],
+    FormsModule
+],
     templateUrl: './radios.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./radios.component.sass']
 })
 export class RadiosComponent implements OnInit {

@@ -1,24 +1,13 @@
-import { Component } from '@angular/core';
-import {CommonModule,
-  NgIf,
-  NgSwitch,
-  NgClass,
-  NgSwitchCase,
-  NgSwitchDefault,
-  NgForOf} from "@angular/common";
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule, NgClass } from "@angular/common";
 
 @Component({
     selector: 'app-directivas-builtin',
     imports: [
-        //CommonModule,
-        NgIf,
-        NgSwitch,
-        NgClass,
-        NgSwitchCase,
-        NgSwitchDefault,
-        NgForOf
-    ],
+    NgClass
+],
     templateUrl: './condicionales.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './condicionales.component.css'
 })
 export class CondicionalesComponent {

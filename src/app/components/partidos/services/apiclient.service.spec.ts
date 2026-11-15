@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import {ApiClientService} from "./apiclient.service";
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { HttpClient, provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
 
 describe('ApiclientService', () => {
   let service: ApiClientService;
@@ -11,7 +11,7 @@ describe('ApiclientService', () => {
     imports: [],
     providers: [
         HttpClient,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withXhr(), withInterceptorsFromDi())
     ]
 });
     service = TestBed.inject(ApiClientService);

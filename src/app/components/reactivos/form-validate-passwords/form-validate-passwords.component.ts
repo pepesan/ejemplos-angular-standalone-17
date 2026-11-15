@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ConfirmedValidator} from "../../../validators/ConfirmedValidator";
 
@@ -8,6 +8,7 @@ import {ConfirmedValidator} from "../../../validators/ConfirmedValidator";
     selector: 'app-form-validate-passwords',
     imports: [ReactiveFormsModule],
     templateUrl: './form-validate-passwords.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./form-validate-passwords.component.css']
 })
 export class FormValidatePasswordsComponent {

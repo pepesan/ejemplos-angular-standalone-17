@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {PactometroService} from "../../services/pactometro.service";
-import { NgForOf, NgIf} from "@angular/common";
+
 import {Partido} from "../uso-service/partido";
 import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-pactometro',
-  imports: [
-    NgForOf,
-    NgIf
-  ],
+  imports: [],
   templateUrl: './pactometro.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './pactometro.component.css'
 })
 export class PactometroComponent {

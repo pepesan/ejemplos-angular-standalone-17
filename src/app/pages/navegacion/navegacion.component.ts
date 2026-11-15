@@ -1,10 +1,11 @@
-import {Component, signal} from '@angular/core';
+import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 
 @Component({
     selector: 'app-navegacion',
     imports: [],
     templateUrl: './navegacion.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './navegacion.component.css'
 })
 export class NavegacionComponent {

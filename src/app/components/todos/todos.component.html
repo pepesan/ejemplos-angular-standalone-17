@@ -5,16 +5,18 @@
   <h4>Añadir tarea</h4>
   <form (submit)="addTodo()" >
     <input type="text" [(ngModel)]="todo.text"
-           [ngModelOptions]="{standalone: true}"/>
+      [ngModelOptions]="{standalone: true}"/>
   </form>
   <ul>
-    <li *ngFor="let todo of todos" id="todo-{{todo.id}}">
-      {{todo.text}}
-      <button
-        (click)="deleteTodo(todo.text)">
-        Borrar
-      </button>
-    </li>
+    @for (todo of todos; track todo) {
+      <li id="todo-{{todo.id}}">
+        {{todo.text}}
+        <button
+          (click)="deleteTodo(todo.text)">
+          Borrar
+        </button>
+      </li>
+    }
     @for (todo of todos; track todo.id) {
       <li id="todo-for-{{todo.id}}">
         {{ todo.text }}
@@ -23,7 +25,7 @@
           Borrar
         </button>
       </li>
-    }@empty {
+      }@empty {
       <li> There are no items.</li>
     }
   </ul>

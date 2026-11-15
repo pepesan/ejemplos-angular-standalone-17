@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgClass} from "@angular/common";
 
@@ -6,6 +6,7 @@ import {NgClass} from "@angular/common";
   selector: 'app-formularios-reactivos',
   imports: [ReactiveFormsModule, NgClass],
   templateUrl: './formularios-reactivos.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './formularios-reactivos.component.css'
 })
 export class FormulariosReactivosComponent {

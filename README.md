@@ -1,6 +1,6 @@
 # Proyecto
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) and currently uses Angular 22.
 
 ## Development server
 
@@ -14,13 +14,27 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Unit tests with Vitest
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Existing Angular `.spec.ts` files stay in place and run through Angular's Vitest test builder:
 
-## Running end-to-end tests
+- `npm test` or `npm run test:unit`: run once.
+- `npm run test:unit:watch`: watch mode.
+- `npm run test:unit:coverage`: generate coverage with V8; open `coverage/proyecto/index.html` for the HTML report. Summary and per-file metrics are also printed to the terminal.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Browser tests
+
+- `npm run test:e2e:install`: install Playwright's Chromium browser once.
+- `npm run test:e2e`: run direct Playwright E2E tests; Playwright starts and stops Angular.
+- `npm run test:bdd`: start Angular and run the Cucumber.js Gherkin scenarios using Playwright.
+
+## Storybook
+
+- `npm run storybook`: start component workbench at `http://localhost:6006`.
+- `npm run build-storybook`: build the static Storybook site.
+- `npm run test:stories`: run Storybook stories through the Vitest addon.
+
+Run all automated suites with `npm run test:all`.
 
 ## Further help
 

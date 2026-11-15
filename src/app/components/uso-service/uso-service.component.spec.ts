@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsoServiceComponent} from './uso-service.component';
-import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
 
 
 describe('UsoService', () => {
@@ -11,7 +11,7 @@ describe('UsoService', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     imports: [UsoServiceComponent],
-    providers: [provideHttpClient(withInterceptorsFromDi())]
+    providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())]
 })
       .compileComponents();
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Formulario} from "./formulario";
 
 import {FormsModule} from "@angular/forms";
@@ -11,6 +11,7 @@ import {CommonModule} from "@angular/common";
         CommonModule
     ],
     templateUrl: './formularios.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './formularios.component.css'
 })
 export class FormulariosComponent {

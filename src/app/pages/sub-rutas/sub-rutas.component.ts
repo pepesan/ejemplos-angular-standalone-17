@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
@@ -8,6 +8,7 @@ import {RouterLink, RouterOutlet} from "@angular/router";
         RouterOutlet
     ],
     templateUrl: './sub-rutas.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './sub-rutas.component.css'
 })
 export class SubRutasComponent {

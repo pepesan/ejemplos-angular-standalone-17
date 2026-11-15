@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Todo} from "./todo";
-import {NgForOf} from "@angular/common";
+
 import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-todos',
     imports: [
-        NgForOf,
-        FormsModule
-    ],
+    FormsModule
+],
     templateUrl: './todos.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './todos.component.css'
 })
 export class TodosComponent {
@@ -28,10 +28,10 @@ export class TodosComponent {
     console.log("componente cargado");
   }
 
-  addTodo(){
-    let mitodo=new Todo(this.todos.length, this.todo.text);
-    this.todos.push(mitodo);
-    this.todo=new Todo();
+  addTodo() {
+    const nextId = this.todos.reduce((highestId, todo) => Math.max(highestId, todo.id), 0) + 1;
+    this.todos.push(new Todo(nextId, this.todo.text));
+    this.todo = new Todo();
   }
   deleteTodo(texto: string){
     for(let i=0; i<this.todos.length; i++){

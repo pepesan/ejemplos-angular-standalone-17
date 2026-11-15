@@ -1,4 +1,4 @@
-import {Component, numberAttribute, OnInit} from '@angular/core';
+import {Component, numberAttribute, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {ListadoService} from "../../services/listado.service";
 @Component({
@@ -8,6 +8,7 @@ import {ListadoService} from "../../services/listado.service";
         RouterLinkActive
     ],
     templateUrl: './detalle.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './detalle.component.css'
 })
 export class DetalleComponent implements OnInit{

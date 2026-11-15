@@ -1,12 +1,14 @@
 import {
   Component, OnInit, OnChanges, DoCheck, AfterContentInit, AfterContentChecked,
-  AfterViewInit, AfterViewChecked, OnDestroy, SimpleChanges, computed, Signal, signal, WritableSignal
+  AfterViewInit, AfterViewChecked, OnDestroy, SimpleChanges, computed, Signal, signal, WritableSignal,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'app-ciclo-vida',
   imports: [],
   templateUrl: './ciclo-de-vida.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ciclo-de-vida.component.css',
 })
 export class CicloDeVidaComponent implements OnInit, OnChanges, DoCheck,

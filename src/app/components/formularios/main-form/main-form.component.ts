@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {Hero} from "./hero";
-import {CommonModule} from "@angular/common";
+
 import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-main-form',
     imports: [
-        CommonModule,
-        FormsModule,
-    ],
+    FormsModule
+],
     templateUrl: './main-form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./main-form.component.sass']
 })
 export class MainFormComponent implements OnInit {

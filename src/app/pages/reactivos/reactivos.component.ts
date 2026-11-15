@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {FormBasicoComponent} from "../../components/reactivos/form-basico/form-basico.component";
 import {FormBuilderBasicoComponent} from "../../components/reactivos/form-builder-basico/form-builder-basico.component";
 import {
@@ -21,6 +21,7 @@ import {MyCustomValidationComponent} from "../../components/reactivos/my-custom-
         MyCustomValidationComponent
     ],
     templateUrl: './reactivos.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './reactivos.component.css'
 })
 export class ReactivosComponent {
