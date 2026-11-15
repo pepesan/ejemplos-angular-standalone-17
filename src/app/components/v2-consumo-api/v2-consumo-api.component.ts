@@ -4,7 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of, startWith, Subject, switchMap } from 'rxjs';
 import { Partido } from '../partidos/models/partido';
 
-const URL_RESULTADOS = 'https://pactometro.cursosdedesarrollo.com/resultados.json';
+const URL_RESULTADOS = '/api/resultados';
 
 type EstadoRecursos =
   | { status: 'loading'; items: Partido[] }
@@ -22,9 +22,11 @@ export class V2ConsumoApiComponent {
   private readonly recargar = new Subject<void>();
   private readonly respuesta = this.recargar.pipe(
     startWith(undefined),
+    // Cada reintento crea una petición nueva y cancela la anterior si aún sigue activa.
     switchMap(() => this.http.get<Partido[]>(URL_RESULTADOS).pipe(
       map((items): EstadoRecursos => ({ status: 'success', items })),
       startWith({ status: 'loading', items: [] } as EstadoRecursos),
+      // El error se convierte en estado dentro del flujo de cada petición; así se puede volver a intentar.
       catchError(() => of({ status: 'error', items: [], message: 'No se pudieron cargar los resultados.' } as EstadoRecursos)),
     )),
   );

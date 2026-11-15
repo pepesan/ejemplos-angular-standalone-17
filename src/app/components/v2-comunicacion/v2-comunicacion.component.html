@@ -1,0 +1,26 @@
+<section class="container py-3" aria-labelledby="comunicacion-heading">
+  <h1 id="comunicacion-heading">Comunicación entre componentes (V2)</h1>
+  <p>Compara los decoradores <code>@Input</code>/<code>@Output</code> con <code>input()</code>/<code>output()</code>. Ambos botones notifican al componente padre.</p>
+
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <app-boton-evento-clasico texto="Emitir con EventEmitter" (seleccion)="registrarEvento($event)" />
+    <app-boton-evento-signal texto="Emitir con output()" (seleccion)="registrarEvento($event)" />
+    @if (mostrarBotonExtra()) {
+      <app-boton-evento-signal texto="Botón consultado por ViewChildren" (seleccion)="registrarEvento($event)" />
+    }
+  </div>
+  <p role="status">{{ ultimoEvento() }}</p>
+  <p>Instancias Signal consultadas por <code>@ViewChildren</code>: {{ cantidadBotonesSignal() }}.</p>
+  <button class="btn btn-outline-secondary mb-4" type="button" (click)="alternarBotonExtra()">Mostrar u ocultar el botón extra</button>
+
+  <div class="input-group mb-4">
+    <label class="input-group-text" for="comunicacion-nombre">Campo para ViewChild</label>
+    <input #campoNombre id="comunicacion-nombre" class="form-control" value="Prueba de foco">
+    <button class="btn btn-outline-secondary" type="button" (click)="enfocarCampo()">Enfocar con @ViewChild</button>
+  </div>
+
+  <app-panel-proyectado>
+    <span panelTitle>Proyección de contenido</span>
+    <p class="mb-0">El padre aporta este título y este contenido; el panel los inserta mediante <code>&lt;ng-content&gt;</code>.</p>
+  </app-panel-proyectado>
+</section>

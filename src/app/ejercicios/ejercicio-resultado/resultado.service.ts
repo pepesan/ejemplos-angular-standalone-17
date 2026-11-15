@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {Observable} from 'rxjs'
 import {Resultado} from "./resultado";
 
 @Injectable({
@@ -16,9 +15,9 @@ export class ResultadoService {
   }
   getData() {
     return this._httpClient
-      // realiza una petición get a la url y devuelve un Observable<Dato>
-      .get<Observable<Resultado[]>>(this.url)
-      // Si algo ha salido mal llama a la función handlerError
+      // El genérico representa el JSON recibido; HttpClient devuelve Observable<Resultado[]>.
+      .get<Resultado[]>(this.url)
+      // En error, el manejador devuelve el fallback definido para este ejemplo.
       .pipe(catchError(this.handleError('get', [])));
   }
 

@@ -10,16 +10,14 @@ import {BasicoService} from "../../services/basico.service";
 })
 export class UsoServicioBasicoComponent {
 
-  // propiedad para usarla en la plantilla
   public propiedadVisible: string;
-  // propiedad cargada desde método de servicio
   public propiedadCargada: string;
 
   constructor(private miServicio: BasicoService) {
     console.log('UsoServicioBasicoComponent');
-    // pasamos el dato del servicio al componente
+    // Comparación didáctica: el dato se lee de una propiedad del servicio.
     this.propiedadVisible = this.miServicio.propiedad;
-    // pasamos desde el método del servicio a la propiedad
+    // En este caso, el servicio calcula o devuelve el dato mediante un método.
     this.propiedadCargada = this.miServicio.getData();
   }
 

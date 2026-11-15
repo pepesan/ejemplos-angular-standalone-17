@@ -12,51 +12,34 @@ import {Dato} from "../propiedades/dato";
     styleUrls: ['./signals.component.sass']
 })
 export class SignalsComponent implements OnInit{
-  // defino una señal del tipo number
+  // Signals también pueden contener objetos: su tipo se conserva en lectura y escritura.
   senalNumero: WritableSignal<number> = signal(0);
-  // defino una señal del tipo string
   senalCadena: WritableSignal<string> = signal("Valor");
-  // definimos un signal que es un string[]
   cadenasSignal: WritableSignal<string[]> = signal([]);
-  // defino una señal del tipo custom
   senalDato: WritableSignal<Dato> = signal(new Dato());
-  // definición de una variable number de un contador con signals
   countSignal: WritableSignal<number> = signal(0);
-  // Computed permite subscribirse al cambio de otro signal y aplicar una función que cambie el valor de la variable computada
-  // cada vez que cambie count cambiará doubleCount, aplicando una función para el cálculo
+  // `computed` deriva un valor de otras señales; no hace falta sincronizarlo con un efecto.
   doubleCount: Signal<number> = computed(() =>
-    // {
-    //   return
     this.countSignal() * 2
-    // ; }
   );
 
-  // Signals are getter functions - calling them reads their value.
-
-  // Señal base
+  // `linkedSignal` parte del valor de `count`, pero permite editarse de forma independiente.
   count = signal(0);
-
-  // linkedSignal: toma el valor de `count()` como inicial y permite .set()
   linkedCount = linkedSignal(() => this.count());
 
   ngOnInit(): void {
-    // cambiar un valor por otro
     this.countSignal.set(2)
-    // Increment the count by 1.
-    // Cambiar el valor usando un a función dependiendo del valor actual del signal
+    // `update` recibe el valor actual y devuelve el siguiente.
     this.countSignal.update((value: number) =>
-      // {
-      //   return
       value + 1
-      //  ;}
     );
-    // Mutate cambia el valor interno sin reescribir su contenido (fallo en v17)
+    // `mutate()` ya no forma parte de la API; para arrays, usa `update()` y devuelve una referencia nueva.
     // this.cadenasSignal.mutate((value: string[]): void => {
     //   value.push("hola")
     // })
-    // Modificación de señales para arrays
     this.cadenasSignal.set(["uno", "dos"])
-    // Modificación manteniendo contenido anterior
+    // Este ejemplo muta y devuelve la misma referencia; Signals puede no notificar ese cambio.
+    // En código nuevo, crea una referencia nueva (por ejemplo, con [...listadoActual, 'tres']).
     this.cadenasSignal.update((listadoActual: string[]) => {
       listadoActual.push("tres");
       return listadoActual;
@@ -64,7 +47,7 @@ export class SignalsComponent implements OnInit{
   }
   cambia(){
     this.countSignal.set(this.countSignal() + 1)
-    /// Fallo en v17
+    // La actualización inmutable también sirve para colecciones.
     // this.cadenasSignal.mutate((value: string[]): void =>{
     //   value.push("Adios")
     // })

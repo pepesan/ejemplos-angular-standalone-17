@@ -1,0 +1,11 @@
+<section class="container py-3" aria-labelledby="editor-heading">
+  <h1 id="editor-heading">Ejemplo de CanDeactivate</h1>
+  <p>La guarda pregunta antes de salir si el borrador tiene cambios pendientes.</p>
+  <label class="form-label" for="editor-borrador">Borrador</label>
+  <textarea id="editor-borrador" class="form-control mb-3" rows="4" [ngModel]="borrador" (ngModelChange)="actualizarBorrador($event)"></textarea>
+  <div class="d-flex gap-2">
+    <button class="btn btn-primary" type="button" (click)="guardar()">Marcar como guardado</button>
+    <a class="btn btn-outline-secondary" routerLink="/v2/rutas">Volver a Routing</a>
+  </div>
+  <p class="mt-3" role="status">{{ guardado ? 'Borrador guardado.' : 'Hay cambios pendientes.' }}</p>
+</section>

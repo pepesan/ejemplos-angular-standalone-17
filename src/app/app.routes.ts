@@ -1,3 +1,4 @@
+import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 import {HomeComponent} from "./pages/home/home.component";
 import {AboutComponent} from "./pages/about/about.component";
@@ -44,6 +45,7 @@ import {EjercicioServiciosComponent} from "./ejercicios/ejercicio-servicios/ejer
 import {EjercicioResultadoComponent} from "./ejercicios/ejercicio-resultado/ejercicio-resultado.component";
 import {EjercicioEventosComponent} from "./ejercicios/ejercicio-eventos/ejercicio-eventos.component";
 import {FormulariosReactivosComponent} from "./ejercicios/formularios-reactivos/formularios-reactivos.component";
+import { LastVisitedRouteService } from './services/last-visited-route.service';
 
 
 export const routes: Routes = [
@@ -105,6 +107,12 @@ export const routes: Routes = [
     path: 'lazy',
     loadChildren: () => import('./modules/lazy-module/lazy-module.module').then(m => m.LazyModuleModule) },
   {
+    path: 'v2/fundamentos',
+    loadComponent: () => import('./components/v2-fundamentos/v2-fundamentos.component')
+      .then((module) => module.V2FundamentosComponent),
+    title: 'Fundamentos de Angular',
+  },
+  {
     path: 'v2/formulario-tipado',
     loadComponent: () => import('./components/formulario-tipado/formulario-tipado.component')
       .then((module) => module.FormularioTipadoComponent),
@@ -115,6 +123,18 @@ export const routes: Routes = [
     loadComponent: () => import('./components/v2-consumo-api/v2-consumo-api.component')
       .then((module) => module.V2ConsumoApiComponent),
     title: 'Consumo de API',
+  },
+  {
+    path: 'v2/comunicacion',
+    loadComponent: () => import('./components/v2-comunicacion/v2-comunicacion.component')
+      .then((module) => module.V2ComunicacionComponent),
+    title: 'Comunicación entre componentes',
+  },
+  {
+    path: 'v2/autenticacion',
+    loadComponent: () => import('./components/v2-auth/v2-auth.component')
+      .then((module) => module.V2AuthComponent),
+    title: 'HTTP, interceptores y JWT',
   },
   {
     path: 'v2/estado',
@@ -145,6 +165,12 @@ export const routes: Routes = [
     title: 'Búsqueda reactiva',
   },
   {
+    path: 'v2/estado-compartido',
+    loadComponent: () => import('./components/v2-estado-compartido/v2-estado-compartido.component')
+      .then((module) => module.V2EstadoCompartidoComponent),
+    title: 'Estado compartido entre componentes',
+  },
+  {
     path: 'v2/i18n',
     loadComponent: () => import('./components/v2-i18n/v2-i18n.component')
       .then((module) => module.V2I18nComponent),
@@ -157,6 +183,6 @@ export const routes: Routes = [
     title: 'Seguridad en plantillas',
   },
   { path: '404', component: PageNotFoundComponent },
-  { path: '',   redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
+  { path: '', redirectTo: () => inject(LastVisitedRouteService).getInitialRoute(), pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];

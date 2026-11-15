@@ -15,7 +15,7 @@
     @for (item of partidosSignal(); track item.nombre) {
       <li>
         {{ item.nombre }}: {{ item.dipu }}
-        <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" />
+        <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" alt="Logo partido {{ item.nombre }}" />
       </li>
       }@empty {
       <li> There are no results.</li>

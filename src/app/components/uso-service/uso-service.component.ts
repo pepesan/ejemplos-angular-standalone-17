@@ -16,6 +16,7 @@ import {Partido} from "./partido";
 export class UsoServiceComponent {
   partidos: Promise<Partido[]>;
   constructor(private _todoService:TodoService) {
+    // Ejemplo de conversión heredada; `toPromise()` está obsoleto y se conserva para comparar APIs.
     this.partidos = this._todoService.getData().toPromise();
   }
 }

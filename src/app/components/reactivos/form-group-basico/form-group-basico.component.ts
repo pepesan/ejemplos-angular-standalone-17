@@ -17,6 +17,7 @@ import {
 })
 export class FormGroupBasicoComponent implements OnInit {
   public profileForm: UntypedFormGroup;
+  // Variante comentada para comparar la declaración explícita con el formulario activo sin tipos.
   //public typedProfileForm: UntypedFormGroup;
 
 

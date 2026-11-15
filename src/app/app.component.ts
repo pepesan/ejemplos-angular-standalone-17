@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeService } from './services/theme/theme.service';
+import { ApiErrorService } from './services/api-error.service';
+import { LastVisitedRouteService } from './services/last-visited-route.service';
 
 interface NavLink {
   path: string;
@@ -14,53 +16,89 @@ interface NavGroup {
   items: NavLink[];
 }
 
-const V1_LINKS: NavLink[] = [
-  { path: '/props', label: 'Propiedades y binding' },
-  { path: '/directivas', label: 'Directivas' },
-  { path: '/pipes', label: 'Pipes' },
-  { path: '/ciclo', label: 'Ciclo de vida' },
-  { path: '/events', label: 'Eventos' },
-  { path: '/service', label: 'Servicios y observables' },
-  { path: '/partidos', label: 'HTTP · partidos' },
-  { path: '/form', label: 'Formularios básicos' },
-  { path: '/form-radios', label: 'Formularios con radios' },
-  { path: '/reactivos', label: 'Formularios reactivos' },
-  { path: '/nav', label: 'Navegación' },
-  { path: '/subrutas', label: 'Rutas hijas' },
-  { path: '/lazy', label: 'Módulo con carga diferida' },
-];
-
-const V1_EXERCISES: NavLink[] = [
-  { path: '/ejercicio-componente', label: 'Componentes' },
-  { path: '/ejercicio-misclientes', label: 'Listado de clientes' },
-  { path: '/ejercicio-condicionales', label: 'Condicionales' },
-  { path: '/ejercicio-input', label: 'Inputs' },
-  { path: '/ejercicio-tuberias', label: 'Pipes' },
-  { path: '/ejercicio-servicios', label: 'Servicios' },
-  { path: '/ejercicio-resultado', label: 'HTTP' },
-  { path: '/ejercicio-eventos', label: 'Eventos' },
-  { path: '/ejercicio-formulario', label: 'Formularios' },
-  { path: '/ejercicio-formulario-reactivo', label: 'Formularios reactivos' },
-];
-
-const V2_LINKS: NavLink[] = [
-  { path: '/v2/signal-forms', label: 'Signal Forms' },
-  { path: '/v2/formulario-tipado', label: 'Formulario reactivo tipado' },
-  { path: '/v2/consumo-api', label: 'Consumo de API' },
-  { path: '/v2/estado', label: 'Rendimiento y estado' },
-  { path: '/v2/accesibilidad', label: 'Accesibilidad y calidad' },
-  { path: '/v2/rutas', label: 'Routing moderno' },
-  { path: '/v2/busqueda-reactiva', label: 'Búsqueda reactiva' },
-  { path: '/v2/i18n', label: 'Internacionalización' },
-  { path: '/v2/seguridad', label: 'Seguridad en plantillas' },
-  { path: '/control-flow', label: 'Control flow integrado' },
-  { path: '/signals', label: 'Signals' },
-  { path: '/signals-input', label: 'Inputs con Signals' },
-  { path: '/signals-model', label: 'Model y two-way binding' },
-  { path: '/signals-queries', label: 'Queries con Signals' },
-  { path: '/signals-effect', label: 'Effects' },
-  { path: '/todos', label: 'Lista de tareas' },
-  { path: '/ejercicio-signals', label: 'Ejercicio de Signals' },
+const TEMARIO_UNITS: NavGroup[] = [
+  {
+    id: 'temario-1',
+    label: '1. Fundamentos de TypeScript y Angular',
+    items: [
+      { path: '/v2/fundamentos', label: 'V2 · Arquitectura Angular y CLI' },
+    ],
+  },
+  {
+    id: 'temario-2',
+    label: '2. Componentes, plantillas y Data Binding',
+    items: [
+      { path: '/props', label: 'V1 · Componentes, interpolación y property binding' },
+      { path: '/events', label: 'V1 · Eventos y $event' },
+      { path: '/ejercicio-eventos', label: 'V1 · Ejercicio de eventos' },
+      { path: '/directivas', label: 'V1 · Directivas estructurales y de atributo' },
+      { path: '/control-flow', label: 'V2 · Control flow integrado' },
+      { path: '/v2/seguridad', label: 'V2 · Seguridad en plantillas' },
+      { path: '/ejercicio-condicionales', label: 'V1 · Ejercicio de condicionales' },
+      { path: '/ciclo', label: 'V1 · Ciclo de vida de componentes' },
+      { path: '/pipes', label: 'V1 · Pipes y plantillas' },
+      { path: '/ejercicio-tuberias', label: 'V1 · Ejercicio de pipes' },
+      { path: '/v2/i18n', label: 'V2 · Internacionalización de plantillas' },
+    ],
+  },
+  {
+    id: 'temario-3',
+    label: '3. Comunicación entre componentes y Signals',
+    items: [
+      { path: '/v2/comunicacion', label: 'V2 · Ejemplo de @Input/@Output, input()/output() y proyección' },
+      { path: '/ejercicio-input', label: 'V1 · Ejercicio de comunicación con @Input' },
+      { path: '/signals', label: 'V1 · Introducción a Signals' },
+      { path: '/v2/estado', label: 'V2 · signal(), computed() y estado derivado' },
+      { path: '/signals-input', label: 'V2 · input() basado en Signals' },
+      { path: '/signals-model', label: 'V2 · Model y two-way binding' },
+      { path: '/signals-queries', label: 'V2 · Queries con Signals' },
+      { path: '/signals-effect', label: 'V2 · effect() para efectos externos' },
+      { path: '/todos', label: 'V2 · Lista de tareas con Signals' },
+      { path: '/ejercicio-signals', label: 'V2 · Ejercicio práctico de Signals' },
+      { path: '/service', label: 'V1 · Observables' },
+      { path: '/partidos', label: 'V1 · Comparativa de Promesas, Observables y Signals' },
+      { path: '/v2/busqueda-reactiva', label: 'V2 · Signals y Observables con RxJS' },
+      { path: '/v2/estado-compartido', label: 'V2 · Comunicación mediante estado compartido con Signals' },
+    ],
+  },
+  {
+    id: 'temario-4',
+    label: '4. Servicios y comunicación HTTP',
+    items: [
+      { path: '/servicio-basico', label: 'V1 · Servicios e inyección de dependencias' },
+      { path: '/ejercicio-servicios', label: 'V1 · Ejercicio de servicios' },
+      { path: '/v2/consumo-api', label: 'V2 · HttpClient y estados de carga/error' },
+      { path: '/ejercicio-resultado', label: 'V1 · Ejercicio de consulta HTTP' },
+      { path: '/v2/autenticacion', label: 'V2 · Interceptor JWT y errores globales' },
+    ],
+  },
+  {
+    id: 'temario-5',
+    label: '5. Formularios reactivos',
+    items: [
+      { path: '/form-bootstrap', label: 'V1 · Controles de formulario y estilos Bootstrap' },
+      { path: '/form', label: 'V1 · Formulario de plantilla con ngModel' },
+      { path: '/form-radios', label: 'V1 · Radios y checkbox con ngModel' },
+      { path: '/ejercicio-componente', label: 'V1 · Ejercicio de lista con two-way binding' },
+      { path: '/ejercicio-misclientes', label: 'V1 · Ejercicio de formulario y listado con ngModel' },
+      { path: '/ejercicio-formulario', label: 'V1 · Ejercicio de formulario de plantilla' },
+      { path: '/reactivos', label: 'V1 · FormControl, FormGroup y validadores' },
+      { path: '/ejercicio-formulario-reactivo', label: 'V1 · Ejercicio de formularios reactivos' },
+      { path: '/v2/formulario-tipado', label: 'V2 · Formulario reactivo tipado' },
+      { path: '/v2/signal-forms', label: 'V2 · Formularios basados en Signals' },
+      { path: '/v2/accesibilidad', label: 'V2 · Accesibilidad y calidad en formularios' },
+    ],
+  },
+  {
+    id: 'temario-6',
+    label: '6. Routing, Guards y Lazy Loading',
+    items: [
+      { path: '/nav', label: 'V1 · Navegación entre componentes' },
+      { path: '/subrutas', label: 'V1 · Rutas anidadas' },
+      { path: '/lazy', label: 'V1 · Lazy loading de módulos' },
+      { path: '/v2/rutas', label: 'V2 · Guards funcionales, resolvers y lazy loading standalone' },
+    ],
+  },
 ];
 
 @Component({
@@ -74,27 +112,44 @@ export class AppComponent {
   title = 'proyecto';
 
   readonly themeService = inject(ThemeService);
+  readonly apiErrorService = inject(ApiErrorService);
+  private readonly router = inject(Router);
+  private readonly lastVisitedRoute = inject(LastVisitedRouteService);
   readonly menuOpen = signal(false);
 
-  readonly v1Group: NavGroup = {
-    id: 'v1',
-    label: 'V1 · Clásicos',
-    items: V1_LINKS,
-  };
+  readonly temarioUnits = TEMARIO_UNITS;
+  readonly activeTemarioUnitId = signal(TEMARIO_UNITS[0].id);
+  readonly activeTemarioUnit = computed(() =>
+    TEMARIO_UNITS.find((unit) => unit.id === this.activeTemarioUnitId()) ?? TEMARIO_UNITS[0],
+  );
 
-  readonly v1Exercises: NavGroup = {
-    id: 'v1-exercises',
-    label: 'Ejercicios V1',
-    items: V1_EXERCISES,
-  };
+  constructor() {
+    this.selectTemarioUnitForRoute(this.router.url);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.lastVisitedRoute.rememberRoute(event.urlAfterRedirects);
+        this.selectTemarioUnitForRoute(event.urlAfterRedirects);
+      }
+    });
+  }
 
-  readonly v2Group: NavGroup = {
-    id: 'v2',
-    label: 'V2 · Angular moderno',
-    items: V2_LINKS,
-  };
+  private selectTemarioUnitForRoute(url: string): void {
+    const currentPath = url.split(/[?#]/, 1)[0];
+    const matchingUnit = TEMARIO_UNITS.find((unit) =>
+      unit.items.some(({ path }) => {
+        const itemPath = path.split(/[?#]/, 1)[0];
+        return currentPath === itemPath || currentPath.startsWith(`${itemPath}/`);
+      }),
+    );
 
-  readonly groups: NavGroup[] = [this.v1Group, this.v1Exercises, this.v2Group];
+    if (matchingUnit) {
+      this.activeTemarioUnitId.set(matchingUnit.id);
+    }
+  }
+
+  selectTemarioUnit(unit: NavGroup): void {
+    this.activeTemarioUnitId.set(unit.id);
+  }
 
   toggleMenu(): void {
     this.menuOpen.update((open) => !open);

@@ -1,39 +1,43 @@
 <header class="app-header">
   <div class="container-fluid d-flex align-items-center justify-content-between">
     <a class="app-brand" routerLink="/home" aria-label="Inicio">
-      <span class="app-brand__logo" aria-hidden="true">A</span>
+      <img class="app-brand__logo" src="assets/cursos-de-desarrollo-logo.svg" alt="Cursos de Desarrollo">
       <span>Angular · Aprende haciendo</span>
     </a>
 
     <nav class="app-nav app-nav--desktop" aria-label="Navegación principal">
       <a class="app-nav__link" routerLink="/home" routerLinkActive="active">Inicio</a>
 
-      <div ngbDropdown display="dynamic" placement="bottom-start">
-        <button class="app-nav__link" id="v1Dropdown" ngbDropdownToggle type="button">
-          V1 · Clásicos
+      <div ngbDropdown display="dynamic" placement="bottom" [autoClose]="'outside'" #temarioDropdown="ngbDropdown" (mouseenter)="temarioDropdown.open()">
+        <button class="app-nav__link" id="temarioDropdown" ngbDropdownToggle type="button">
+          Temario
         </button>
-        <div class="dropdown-menu app-dropdown-menu" ngbDropdownMenu aria-labelledby="v1Dropdown">
-          <h2 class="dropdown-header">Fundamentos y patrones clásicos</h2>
-          @for (link of v1Group.items; track link.path) {
-            <button ngbDropdownItem [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</button>
-          }
-          <div class="dropdown-divider"></div>
-          <h2 class="dropdown-header">Ejercicios</h2>
-          @for (link of v1Exercises.items; track link.path) {
-            <button ngbDropdownItem [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</button>
-          }
-        </div>
-      </div>
-
-      <div ngbDropdown display="dynamic" placement="bottom-start">
-        <button class="app-nav__link" id="v2Dropdown" ngbDropdownToggle type="button">
-          V2 · Angular moderno
-        </button>
-        <div class="dropdown-menu app-dropdown-menu" ngbDropdownMenu aria-labelledby="v2Dropdown">
-          <h2 class="dropdown-header">APIs modernas disponibles</h2>
-          @for (link of v2Group.items; track link.path) {
-            <button ngbDropdownItem [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</button>
-          }
+        <div class="dropdown-menu app-dropdown-menu app-temario-menu" ngbDropdownMenu aria-labelledby="temarioDropdown">
+          <p class="app-temario-menu__note">TypeScript se imparte en el proyecto complementario.</p>
+          <div class="app-temario-menu__grid">
+            <nav class="app-temario-menu__units" aria-label="Unidades del temario">
+              @for (unit of temarioUnits; track unit.id) {
+                <button
+                  class="app-temario-menu__unit-button"
+                  ngbDropdownItem
+                  [class.is-active]="activeTemarioUnit().id === unit.id"
+                  type="button"
+                  [attr.aria-expanded]="activeTemarioUnit().id === unit.id"
+                  aria-controls="temario-unit-examples"
+                  (mouseenter)="selectTemarioUnit(unit)"
+                  (focus)="selectTemarioUnit(unit)"
+                  (click)="selectTemarioUnit(unit)">
+                  {{ unit.label }}
+                </button>
+              }
+            </nav>
+            <section class="app-temario-menu__examples" id="temario-unit-examples" aria-live="polite">
+              <h2>{{ activeTemarioUnit().label }}</h2>
+              @for (link of activeTemarioUnit().items; track $index) {
+                <button ngbDropdownItem [routerLink]="link.path" routerLinkActive="active" (click)="temarioDropdown.close()">{{ link.label }}</button>
+              }
+            </section>
+          </div>
         </div>
       </div>
 
@@ -106,18 +110,25 @@
 
     <div class="app-offcanvas__body">
       <a class="app-offcanvas__link" routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Inicio</a>
-      <a class="app-offcanvas__link" routerLink="/about" routerLinkActive="active" (click)="closeMenu()">Acerca de</a>
 
-      @for (group of groups; track group.id) {
-        <div class="app-offcanvas__section">
-          <h3 class="app-offcanvas__heading">{{ group.label }}</h3>
-          @for (link of group.items; track link.path) {
-            <a class="app-offcanvas__link" [routerLink]="link.path" routerLinkActive="active" (click)="closeMenu()">
-              {{ link.label }}
-            </a>
-          }
-        </div>
-      }
+      <div class="app-offcanvas__section">
+        <h3 class="app-offcanvas__heading">Temario</h3>
+        <p class="app-offcanvas__note">TypeScript se trabaja en el proyecto complementario. Los ejemplos V1 y V2 aparecen juntos en el tema correspondiente.</p>
+        @for (unit of temarioUnits; track unit.id) {
+          <details class="app-offcanvas__unit">
+            <summary class="app-offcanvas__subheading">{{ unit.label }}</summary>
+            <div class="app-offcanvas__unit-links">
+              @for (link of unit.items; track $index) {
+                <a class="app-offcanvas__link" [routerLink]="link.path" routerLinkActive="active" (click)="closeMenu()">
+                  {{ link.label }}
+                </a>
+              }
+            </div>
+          </details>
+        }
+      </div>
+
+      <a class="app-offcanvas__link" routerLink="/about" routerLinkActive="active" (click)="closeMenu()">Acerca de</a>
     </div>
 
     <div class="app-offcanvas__theme">
@@ -147,6 +158,12 @@
 </div>
 
 <main class="app-main container">
+  @if (apiErrorService.lastError(); as errorMessage) {
+    <div class="alert alert-danger d-flex justify-content-between align-items-start gap-3" role="alert">
+      <span>{{ errorMessage }}</span>
+      <button class="btn-close" type="button" aria-label="Cerrar aviso" (click)="apiErrorService.clear()"></button>
+    </div>
+  }
   <router-outlet />
 </main>
 

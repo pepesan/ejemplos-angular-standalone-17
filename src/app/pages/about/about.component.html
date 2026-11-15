@@ -1,1 +1,83 @@
-<p>about works!</p>
+<article class="about-page" aria-labelledby="about-title">
+  <header class="about-hero">
+    <p class="about-eyebrow">Angular · Aprende haciendo</p>
+    <h1 id="about-title">Un curso para aprender Angular con ejemplos reales</h1>
+    <p class="about-lead">
+      Este proyecto reúne explicaciones y ejercicios breves para recorrer Angular paso a paso,
+      desde los componentes hasta las rutas, los formularios y la comunicación HTTP.
+    </p>
+    <a class="btn btn-primary" routerLink="/v2/fundamentos">Empieza por los fundamentos</a>
+  </header>
+
+  <section class="about-facts" aria-label="Datos del curso">
+    <div class="about-fact">
+      <strong>30 horas</strong>
+      <span>teórico-prácticas</span>
+    </div>
+    <div class="about-fact">
+      <strong>6 unidades</strong>
+      <span>ordenadas por tema</span>
+    </div>
+    <div class="about-fact">
+      <strong>V1 + V2</strong>
+      <span>ejemplos clásicos y actuales</span>
+    </div>
+  </section>
+
+  <section class="about-section" aria-labelledby="about-route-title">
+    <div class="about-section__heading">
+      <p class="about-eyebrow">Cómo está organizado</p>
+      <h2 id="about-route-title">Sigue el temario y practica en cada paso</h2>
+      <p>Abre «Temario» en el menú y elige una unidad. Los ejemplos V1 y V2 aparecen juntos cuando tratan el mismo tema; los ejercicios están colocados después de los conceptos que necesitas para resolverlos.</p>
+    </div>
+
+    <div class="about-topic-grid">
+      <a class="about-topic" routerLink="/v2/fundamentos">
+        <span class="about-topic__number">01</span>
+        <span><strong>Fundamentos de Angular</strong><small>Arquitectura, CLI y estructura de un proyecto</small></span>
+      </a>
+      <a class="about-topic" routerLink="/props">
+        <span class="about-topic__number">02</span>
+        <span><strong>Componentes y plantillas</strong><small>Binding, eventos, directivas y ciclo de vida</small></span>
+      </a>
+      <a class="about-topic" routerLink="/v2/comunicacion">
+        <span class="about-topic__number">03</span>
+        <span><strong>Comunicación y Signals</strong><small>Entradas, salidas, estado y consultas</small></span>
+      </a>
+      <a class="about-topic" routerLink="/v2/consumo-api">
+        <span class="about-topic__number">04</span>
+        <span><strong>Servicios y HTTP</strong><small>Datos, estados de carga, errores e interceptores</small></span>
+      </a>
+      <a class="about-topic" routerLink="/reactivos">
+        <span class="about-topic__number">05</span>
+        <span><strong>Formularios reactivos</strong><small>Controles, validaciones y presentación de errores</small></span>
+      </a>
+      <a class="about-topic" routerLink="/v2/rutas">
+        <span class="about-topic__number">06</span>
+        <span><strong>Routing, Guards y Lazy Loading</strong><small>Navegación, protección y carga diferida</small></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="about-editions" aria-label="Ediciones de los ejemplos">
+    <div class="about-edition about-edition--classic">
+      <span class="about-edition__tag">V1 · Clásicos</span>
+      <h2>Para entender de dónde venimos</h2>
+      <p>Conserva patrones clásicos y ejemplos históricos que ayudan a comparar distintas formas de resolver una tarea. V1 es una etiqueta didáctica, no una versión oficial de Angular.</p>
+    </div>
+    <div class="about-edition about-edition--modern">
+      <span class="about-edition__tag">V2 · Angular moderno</span>
+      <h2>Para elegir herramientas actuales</h2>
+      <p>Prioriza componentes standalone, Signals, formularios tipados, routing funcional y prácticas de accesibilidad. Los ejemplos se ajustan a las APIs disponibles en la versión de Angular de este repositorio.</p>
+    </div>
+  </section>
+
+  <aside class="about-api" aria-labelledby="about-api-title">
+    <div>
+      <p class="about-eyebrow">Prácticas de backend</p>
+      <h2 id="about-api-title">La API de demostración funciona en local</h2>
+      <p>Las lecciones de HTTP y autenticación usan un servidor didáctico incluido en el proyecto: datos de ejemplo, búsqueda, rutas protegidas y un interceptor JWT, sin depender de servicios externos.</p>
+    </div>
+    <a class="btn btn-outline-primary" routerLink="/v2/autenticacion">Ver el ejemplo de autenticación</a>
+  </aside>
+</article>

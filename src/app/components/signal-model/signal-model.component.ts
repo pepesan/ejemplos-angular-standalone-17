@@ -8,13 +8,12 @@ import {Component, model, ModelSignal, ChangeDetectionStrategy} from '@angular/c
     styleUrl: './signal-model.component.css'
 })
 export class SignalModelComponent {
-  // This is a model input + output
-  // [(checked)]="variable" en la llamada al componente
+  // `model()` permite que el hijo proponga cambios al padre mediante [(checked)].
   checked: ModelSignal<boolean> = model(false);
 
 
   toggle() {
-    // While standard inputs are read-only, you can write directly to model inputs.
+    // A diferencia de `input()`, el hijo puede escribir en un `ModelSignal`.
     this.checked.set(!this.checked());
   }
 }

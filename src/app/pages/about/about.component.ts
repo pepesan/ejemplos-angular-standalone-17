@@ -1,11 +1,11 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
     selector: 'app-about',
-    imports: [],
+    imports: [RouterModule],
     templateUrl: './about.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './about.component.css'
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AboutComponent {
 

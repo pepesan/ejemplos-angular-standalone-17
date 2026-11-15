@@ -1,0 +1,19 @@
+<section class="container py-3" aria-labelledby="fundamentos-heading">
+  <h1 id="fundamentos-heading">Fundamentos de Angular</h1>
+  <p>Esta unidad presenta la arquitectura de Angular y el flujo de trabajo del proyecto. ECMAScript y TypeScript se estudian en el proyecto complementario de TypeScript.</p>
+
+  <h2 class="h4 mt-4">Arquitectura de la aplicación</h2>
+  <ul>
+    <li>Los componentes organizan la interfaz y sus plantillas.</li>
+    <li>Los servicios encapsulan datos y comportamiento compartido; Angular los proporciona mediante inyección de dependencias.</li>
+    <li>Las rutas conectan URLs con componentes y pueden cargarse de forma diferida.</li>
+    <li>Las directivas y pipes modifican cómo se presenta o transforma la información en una plantilla.</li>
+  </ul>
+
+  <h2 class="h4 mt-4">Angular CLI en este proyecto</h2>
+  <p>El repositorio incluye Angular CLI como dependencia local. Instala las dependencias una vez y ejecuta la aplicación y su API didáctica en terminales separados:</p>
+  <pre><code>npm install
+npm start
+npm run backend</code></pre>
+  <p>Para crear otro proyecto standalone desde cero, Angular CLI ofrece <code>npx ng new nombre-del-proyecto --standalone</code>. En este repositorio, <code>npm start</code> usa la configuración de proxy para conectar con el backend local.</p>
+</section>
