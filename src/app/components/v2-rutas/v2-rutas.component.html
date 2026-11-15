@@ -1,0 +1,11 @@
+<section class="container py-3" aria-labelledby="rutas-heading">
+  <h1 id="rutas-heading">Routing moderno (V2)</h1>
+  <p>Esta feature se carga de forma diferida con rutas standalone. Sus enlaces muestran parámetros, una guarda funcional y el estado de navegación denegada.</p>
+  @if (denegado) { <p role="alert">La ruta privada requiere el parámetro acceso=permitido.</p> }
+  <ul>
+    <li><a routerLink="recurso/42">Abrir detalle del recurso 42</a></li>
+    <li><a routerLink="privado">Probar acceso protegido</a></li>
+    <li><a routerLink="privado" [queryParams]="{ acceso: 'permitido' }">Entrar con permiso de ejemplo</a></li>
+    <li><a routerLink="ruta-inexistente">Probar error de ruta</a></li>
+  </ul>
+</section>

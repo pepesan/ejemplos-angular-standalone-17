@@ -1,0 +1,14 @@
+<section class="container py-3" aria-labelledby="busqueda-heading">
+  <h1 id="busqueda-heading">Búsqueda reactiva: Signals y RxJS</h1>
+  <p>Signal mantiene el término local; <code>toObservable</code>, <code>debounceTime</code> y <code>switchMap</code> gestionan el flujo HTTP y cancelan la petición anterior.</p>
+  <label class="form-label" for="curso-query">Buscar cursos</label>
+  <input id="curso-query" class="form-control" type="search" (input)="actualizarTermino($event)" aria-describedby="busqueda-resultados">
+  <div id="busqueda-resultados" aria-live="polite">
+    @if (estado().status === 'loading') { <p role="status">Buscando cursos…</p> }
+    @else if (estado().status === 'error') { <p role="alert">No se pudo completar la búsqueda.</p> }
+    @else if (estado().status === 'success' && estado().cursos.length === 0) { <p>No hay cursos con ese término.</p> }
+    @else if (estado().status === 'success') {
+      <ul>@for (curso of estado().cursos; track curso.id) { <li>{{ curso.nombre }}</li> }</ul>
+    }
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<section class="container py-3" aria-labelledby="signal-form-heading">
+  <h1 id="signal-form-heading">Signal Forms (Angular 22)</h1>
+  <p>Signal Forms es estable desde Angular 22. Compara este modelo Signal y validación por esquema con el formulario reactivo tipado.</p>
+  <form (submit)="guardar($event)" novalidate>
+    <div class="mb-3">
+      <label class="form-label" for="signal-nombre">Nombre</label>
+      <input class="form-control" id="signal-nombre" [formField]="formulario.nombre" aria-describedby="signal-nombre-error">
+      @if (formulario.nombre().touched() && formulario.nombre().invalid()) {
+        <p id="signal-nombre-error" role="alert">{{ formulario.nombre().errors()[0].message }}</p>
+      }
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="signal-correo">Correo electrónico</label>
+      <input class="form-control" id="signal-correo" type="email" [formField]="formulario.correo" aria-describedby="signal-correo-error">
+      @if (formulario.correo().touched() && formulario.correo().invalid()) {
+        <p id="signal-correo-error" role="alert">{{ formulario.correo().errors()[0].message }}</p>
+      }
+    </div>
+    <button class="btn btn-primary" type="submit">Guardar contacto</button>
+  </form>
+  @if (confirmacion()) { <p role="status">{{ confirmacion() }}</p> }
+</section>

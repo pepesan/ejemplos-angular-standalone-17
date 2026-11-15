@@ -1,0 +1,8 @@
+<section class="container py-3" aria-labelledby="seguridad-heading">
+  <h1 id="seguridad-heading">Seguridad en plantillas (V2)</h1>
+  <p>Angular escapa la interpolación por defecto y sanitiza contextos HTML. No conviertas contenido no confiable en <code>SafeHtml</code> con <code>bypassSecurityTrustHtml</code>.</p>
+  <h2>Entrada tratada como texto</h2>
+  <pre>{{ contenido() }}</pre>
+  <h2>Vista previa sanitizada</h2>
+  <div class="border p-2" [innerHTML]="htmlSeguro()"></div>
+</section>
