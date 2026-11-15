@@ -3,7 +3,7 @@ import { provideHttpClientTesting, HttpTestingController } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 import { V2ConsumoApiComponent } from './v2-consumo-api.component';
 
-const URL_RESULTADOS = 'https://pactometro.cursosdedesarrollo.com/resultados.json';
+const URL_RESULTADOS = '/api/resultados';
 
 describe('V2ConsumoApiComponent', () => {
   let http: HttpTestingController;
@@ -21,7 +21,7 @@ describe('V2ConsumoApiComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Partido de ejemplo');
     expect(fixture.nativeElement.textContent).toContain('3 escaños');
-    expect(fixture.nativeElement.querySelector('img')?.getAttribute('src')).toBe('https://pactometro.cursosdedesarrollo.com/img/partido.png');
+    expect(fixture.nativeElement.querySelector('img')?.getAttribute('src')).toBe('partido.png');
   });
 
   it('distingue una respuesta vacía', () => {

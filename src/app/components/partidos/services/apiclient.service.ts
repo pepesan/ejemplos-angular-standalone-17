@@ -13,20 +13,22 @@ export class ApiClientService {
   // private url : string = 'https://cursosdedesarrollo.com/pactometro/resultados.json';
   private url : string = 'https://pactometro.cursosdedesarrollo.com/resultados.json';
 
-  // inyección de dependencias del cliente HTTP
+  // El cliente HTTP se inyecta para que Angular gestione su configuración y ciclo de vida.
   constructor(private _httpClient: HttpClient) {
     console.log("cargado el cliente HTTP");
   }
   getData() {
     return this._httpClient
-        // realiza una petición get a la url y devuelve un Observable<Dato>
-        .get<Observable<Partido[]>>(this.url)
-        // Si algo ha salido mal llama a la función handlerError
+        // El genérico describe el cuerpo JSON; HttpClient envuelve la respuesta en Observable.
+        .get<Partido[]>(this.url)
+        // Ante un error, el manejador de abajo devuelve una lista vacía como fallback didáctico.
         .pipe(catchError(this.handleError('get', [])));
   }
+  // Métodos de comparación heredados: convierten Observables con `toPromise()`, API obsoleta.
+  // Para convertir una emisión finita en código nuevo, usa `firstValueFrom`.
   async getDataAsync(): Promise<Partido[]>
   {
-    let promesa = await this._httpClient.get<Observable<Partido[]>>(this.url)
+    let promesa = await this._httpClient.get<Partido[]>(this.url)
         .pipe(catchError(this.handleError('get', []))).toPromise();
     return promesa;
   }
@@ -35,7 +37,7 @@ export class ApiClientService {
   {
     let mipromesa = new Promise<Partido[]>(
       (resolve,reject) => {
-        let promesa = this._httpClient.get<Observable<Partido[]>>(this.url)
+        let promesa = this._httpClient.get<Partido[]>(this.url)
         .pipe(catchError(this.handleError('get', []))).toPromise();
 
 
@@ -65,10 +67,10 @@ export class ApiClientService {
   {
     return new Promise<Partido[]>(
       resolve => {
-        let observable: Observable<Partido[]> = this._httpClient.get<Observable<Partido[]>>(this.url)
+        let observable: Observable<Partido[]> = this._httpClient.get<Partido[]>(this.url)
           .pipe(catchError(this.handleError('get', [])));
         observable.subscribe((data: Partido[]) => {
-          // realizar cualquier tipo de procesado de datos necesario
+          // Aquí se puede transformar la respuesta antes de resolver la Promesa.
           resolve(data);
         });
       }
@@ -77,11 +79,11 @@ export class ApiClientService {
 
   private handleError (operation = 'operation', result?: any) {
     return (error: any): any[] => {
-      // TODO: send the error to remote logging infrastructure
+      // TODO: enviar el error a la infraestructura de registro cuando exista.
       console.error(error); // log to console instead
-      // TODO: better job of transforming error for user consumption
+      // TODO: traducir el error técnico a un mensaje útil para la persona usuaria.
       console.log(`${operation} failed: ${error.message}`);
-      // Let the app keep running by returning an empty result.
+      // Este fallback evita que falle el flujo, pero puede ocultar la diferencia entre error y lista vacía.
       return result;
     };
   }

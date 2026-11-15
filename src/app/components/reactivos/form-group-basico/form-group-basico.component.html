@@ -2,6 +2,7 @@
 <form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <label for="firstName">First Name:</label>
   <input id="firstName" class="form-control" type="text" formControlName="firstName">
+  <!-- Validación anterior con *ngIf, conservada para compararla con el @if activo debajo. -->
   <!--div *ngIf="profileForm.controls['firstName'].status=='INVALID'"
        class="alert alert-danger">
     <div *ngIf="profileForm.controls['firstName'].errors?.['required'] == true">
@@ -49,6 +50,7 @@
 <h2>Status: {{profileForm.status }}</h2>
 <h3>firstname field valid</h3>
 {{profileForm.controls['firstName'].status }}
+<!-- Plantilla alternativa inactiva conservada junto al ejemplo de FormGroup sin tipado. -->
 <!--<h1>Ejemplo TypedFormGroup Básico</h1>-->
 <!--<form class="form-group" [formGroup]="typedProfileForm" (ngSubmit)="onSubmitTyped()">-->
 <!--  <label for="typedfirstName">First Name:</label>-->

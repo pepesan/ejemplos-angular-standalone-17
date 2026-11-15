@@ -37,7 +37,7 @@ export class FormBuilderBasicoComponent implements OnInit {
     // lo marcamos como prístino
     this.profileForm.markAsPristine();
 
-    // // Typed
+    // Alternativa comentada con FormBuilder tipado; el formulario activo usa UntypedFormBuilder.
     // this.typedProfileForm= this.tfb.group({
     //   firstName: [
     //     '',

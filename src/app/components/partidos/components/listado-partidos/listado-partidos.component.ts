@@ -15,76 +15,60 @@ import { AsyncPipe } from "@angular/common";
 })
 export class ListadoPartidosComponent implements OnInit, OnDestroy {
 
-  // Promesa que pasamos a la vista para cuando dispongamos del dato pintarlo por pantalla
+  // Comparación didáctica: esta conversión usa `toPromise()`, API obsoleta; en código nuevo se prefiere firstValueFrom/lastValueFrom.
   public listado: Promise<Partido[]> ;
-  // Observable que pasamos a la vista para cuando dispongamos del dato pintarlo por pantalla
+  // El Observable representa el flujo asíncrono; la vista puede consumirlo con AsyncPipe.
   public listadopartidosObservable: Observable<Partido[]>;
   public listadopartidosObservableSubscription: Subscription | undefined;
   public listadoVisible: Partido[] = [];
   public listadoVisiblePromesa: Partido[] | undefined = [];
   public listadoVisiblePromesaProcesada: Partido[] = [];
   public listadoVisibleSubscribeProcesado: Partido[] = [];
-  // Uso con señales
+  // Signal para conservar localmente el último conjunto recibido del servicio.
   public partidosSignal: WritableSignal<Partido[]> = signal<Partido[]>([]);
-  // Uso de señales para datos "Procesados"
+  // Variante didáctica que va acumulando elementos procesados en una signal.
   public listadoVisibleSignals: WritableSignal<Partido[]> = signal<Partido[]>([]);
 
   // inyección de dependencias del servicio ApiClientService
   constructor(private apiClientService: ApiClientService) {
-    // Directamente consultamos al servicio para que devuelva una promesa con los datos del JSON
+    // Conversión heredada para comparar Promesas con Observables; no usar `toPromise()` en código nuevo.
     this.listado = this.apiClientService.getData().toPromise();
 
     // Devuelve un Observable
     // this.listado = this.apiClientService.getDataAsync();
     this.listadopartidosObservable = this.apiClientService.getData();
 
-    // Coloco los datos iniciales al listado visible
-    this.listadoVisible = [];
-    // me subscribo al observable y guardo la subscripción
+    // La suscripción explícita permite mostrar el procesamiento incremental y practicar su limpieza en ngOnDestroy.
     this.listadopartidosObservableSubscription =
       this.listadopartidosObservable.subscribe(
-        // datos que nos devolverá el observable
         (data: Partido[]): void =>
-        // función que se ejecutará cuando se disponga del dato
-        // realizará el procesado de los datos
         {
         console.log(data);
         console.log(data.length);
-        // pasar los datos una vez recibidos al listado visible
-        // poco a poco
+        // Ejemplo incremental: se añade una marca a cada nombre y se acumulan los elementos.
         data.forEach( (value : Partido) =>{
             value.nombre += "!";
             this.listadoVisible.push(value)
         });
-        // del tirón
+        // Asignación completa para comparar con el procesamiento incremental anterior.
         this.listadoVisible = data;
 
         console.log(this.listadoVisible);
       });
-    // Uso con señales
+    // La suscripción adapta el flujo RxJS al estado local de la signal.
     this.apiClientService.getData().subscribe(
-      // Define una función que se ejecutará cuando se disponga del dato
-      // data es el dato recibido
       (data: Partido[]) =>{
-        // cargar en la señal el dato descargado
         this.partidosSignal.set(data);
       }
     );
 
-    // Uso con señales pero con "procesado"
+    // Variante de comparación: procesa cada elemento antes de añadirlo al estado de la signal.
     this.apiClientService.getData().subscribe(
-      // Define una función que se ejecutará cuando se disponga del dato
-      // data es el dato recibido
       (data: Partido[]) =>{
-        // cargar en la señal el dato descargado
         //this.partidosSignal.set(data);
         data.forEach( (value : Partido) => {
-          // Aquí iría el procesado de la información
-          // ejemplo de procesado
+          // Transformación de ejemplo para hacer visible el procesamiento.
           value.nombre += "!";
-          // Iríamos actualizando los datos según vayan viviendo
-          // Actualizamos la vista con cada dato procesado
-          // Actualiando la variable signal metiendo el dato nuevo
           this.listadoVisibleSignals.update((listadoActual: Partido[]) => {
             listadoActual.push(value);
             return listadoActual;

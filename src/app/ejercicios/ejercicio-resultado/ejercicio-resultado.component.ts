@@ -17,22 +17,20 @@ export class EjercicioResultadoComponent implements OnDestroy {
 
   public listado: Promise<Resultado[]> ;
 
-  // Uso con señales
+  // Comparación didáctica: la conversión de abajo es legado; usa firstValueFrom/lastValueFrom en código nuevo.
+  // La signal conserva el último resultado recibido del Observable.
   public partidosSignal: WritableSignal<Resultado[]> = signal<Resultado[]>([]);
   private resultadosObservable: Observable<Resultado[]>;
   private resultadosObservableSubscription: Subscription;
 
   constructor(private resultadoService: ResultadoService) {
-    // Directamente consultamos al servicio para que devuelva una promesa con los datos del JSON
+    // Ejemplo legado para comparar Promesa y Observable; `toPromise()` está obsoleto.
     this.listado = this.resultadoService.getData().toPromise();
 
-    // Uso con señales
+    // La suscripción actualiza el estado local; se libera en ngOnDestroy.
     this.resultadosObservable = this.resultadoService.getData();
     this.resultadosObservableSubscription = this.resultadosObservable.subscribe(
-      // Define una función que se ejecutará cuando se disponga del dato
-      // data es el dato recibido
       data =>{
-        // cargar en la señal el dato descargado
         this.partidosSignal.set(data);
       }
     );

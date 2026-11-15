@@ -1,0 +1,19 @@
+<section class="container py-3" aria-labelledby="estado-compartido-title">
+  <h1 id="estado-compartido-title">Comunicación mediante estado compartido</h1>
+  <p>Estos dos componentes son hermanos: ninguno recibe datos del otro mediante <code>@Input</code> ni le envía eventos con <code>@Output</code>. Ambos inyectan el mismo servicio raíz, que conserva el estado en un Signal.</p>
+
+  <div class="row g-3 my-3">
+    <div class="col-12 col-lg-6">
+      <app-contador-controles />
+    </div>
+    <div class="col-12 col-lg-6">
+      <app-contador-resumen />
+    </div>
+  </div>
+
+  <aside class="alert alert-info" aria-label="Cómo funciona este ejemplo">
+    <strong>Flujo:</strong> Componente A → servicio singleton → Componente B. El componente A actualiza el Signal; Angular actualiza el resumen y el valor calculado sin que el padre tenga que reenviar datos.
+  </aside>
+
+  <p class="text-body-secondary">Este patrón integrado de Angular cubre estado compartido sencillo. Para aplicaciones con estado global más complejo, NgRx ofrece SignalStore como solución especializada.</p>
+</section>

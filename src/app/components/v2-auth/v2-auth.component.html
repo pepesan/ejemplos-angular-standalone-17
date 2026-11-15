@@ -1,0 +1,43 @@
+<section class="container py-3" aria-labelledby="auth-heading">
+  <h1 id="auth-heading">HTTP, interceptores y JWT (V2)</h1>
+  <p>El backend local emite un JWT de demostración. El interceptor lo añade como Bearer a las peticiones protegidas y otro interceptor comunica errores HTTP globalmente.</p>
+
+  @if (!auth.isAuthenticated()) {
+    <form class="card card-body mb-3" (ngSubmit)="login()">
+      <div class="mb-3">
+        <label class="form-label" for="demo-username">Usuario de demostración</label>
+        <input class="form-control" id="demo-username" name="username" [(ngModel)]="username" autocomplete="username" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="demo-password">Contraseña</label>
+        <input class="form-control" id="demo-password" name="password" type="password" [(ngModel)]="password" autocomplete="current-password" required>
+      </div>
+      <p class="form-text">Credenciales locales: <code>alumno</code> / <code>angular</code>.</p>
+      <button class="btn btn-primary align-self-start" type="submit">Iniciar sesión y consultar perfil</button>
+    </form>
+  } @else {
+    <div class="card card-body mb-3">
+      <h2 class="h5">Respuesta del endpoint protegido</h2>
+      @if (profile(); as currentProfile) {
+        <dl>
+          <dt>Nombre</dt><dd>{{ currentProfile.name }}</dd>
+          <dt>Rol</dt><dd>{{ currentProfile.role }}</dd>
+          <dt>Expiración del token</dt><dd>{{ expiresInSeconds() }} segundos</dd>
+        </dl>
+      }
+      <button class="btn btn-outline-secondary align-self-start" type="button" (click)="logout()">Cerrar sesión</button>
+    </div>
+    <details class="mb-3">
+      <summary>Ver el JWT emitido por el backend local</summary>
+      <pre class="text-break mt-2">{{ auth.accessToken() }}</pre>
+    </details>
+  }
+
+  @if (loginError(); as message) { <p role="alert">{{ message }}</p> }
+
+  <div class="d-flex flex-wrap gap-2">
+    <button class="btn btn-outline-danger" type="button" (click)="triggerGlobalError()">Probar error HTTP global</button>
+    <a class="btn btn-outline-primary" routerLink="/v2/rutas/solo-miembros">Probar ruta protegida con CanMatch</a>
+  </div>
+  <p class="form-text mt-3">Ejemplo local: el token solo vive en memoria y no representa una implementación lista para producción.</p>
+</section>

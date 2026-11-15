@@ -16,10 +16,9 @@ export class CicloDeVidaComponent implements OnInit, OnChanges, DoCheck,
 
   dato: string = 'Hola mundo';
 
-  // definición de una variable number de un contador con signals
+  // La señal contiene el estado modificable del contador.
   countSignal: WritableSignal<number> = signal(0);
-  // Computed permite subscribirse al cambio de otro signal y aplicar una función que cambie el valor de la variable computada
-  // cada vez que cambie count cambiará doubleCount, aplicando una función para el cálculo
+  // `computed` deriva el doble de forma reactiva; no hace falta sincronizarlo manualmente.
   doubleCount: Signal<number> = computed(() => this.countSignal() * 2);
 
 

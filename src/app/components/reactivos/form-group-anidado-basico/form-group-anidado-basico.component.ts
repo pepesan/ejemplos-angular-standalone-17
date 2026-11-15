@@ -12,6 +12,7 @@ import {FormGroup, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Va
 export class FormGroupAnidadoBasicoComponent implements OnInit {
 
   public profileForm: UntypedFormGroup;
+  // Implementación alternativa conservada como referencia; el ejemplo activo usa `UntypedFormGroup`.
   //public typedProfileForm: FormGroup;
 
   constructor() {

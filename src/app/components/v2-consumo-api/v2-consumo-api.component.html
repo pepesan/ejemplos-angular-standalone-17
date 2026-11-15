@@ -1,6 +1,6 @@
 <section class="container py-3" aria-labelledby="api-heading">
   <h1 id="api-heading">Consumo de API (V2)</h1>
-  <p>Consulta los resultados del Pactómetro de cursosdedesarrollo.com. RxJS representa el flujo HTTP asíncrono y <code>toSignal</code> lo expone a la plantilla; <code>computed</code> deriva el contador.</p>
+  <p>Consulta los resultados del backend didáctico local. RxJS representa el flujo HTTP asíncrono, <code>toSignal</code> lo expone a la plantilla y <code>computed</code> deriva la cantidad de resultados.</p>
   @if (estado().status === 'loading') {
     <p role="status">Cargando resultados…</p>
   } @else if (estado().status === 'error') {
@@ -13,8 +13,9 @@
     <ul>
       @for (partido of recursos(); track partido.nombre) {
         <li>
-          <img [src]="'https://pactometro.cursosdedesarrollo.com/img/' + partido.imagen"
-            [alt]="'Logo de ' + partido.nombre" width="48" height="48" loading="lazy">
+          @if (partido.imagen) {
+            <img [src]="partido.imagen" [alt]="'Logo de ' + partido.nombre" width="48" height="48" loading="lazy">
+          }
           {{ partido.nombre }}: {{ partido.dipu }} escaños
         </li>
       }

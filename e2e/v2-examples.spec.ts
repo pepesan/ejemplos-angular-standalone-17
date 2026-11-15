@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('consume una respuesta HTTP controlada y muestra el estado vacío', async ({ page }) => {
-  await page.route('https://pactometro.cursosdedesarrollo.com/resultados.json', (route) => route.fulfill({ json: [] }));
+test('consume una respuesta HTTP local controlada y muestra el estado vacío', async ({ page }) => {
+  await page.route('**/api/resultados', (route) => route.fulfill({ json: [] }));
   await page.goto('/v2/consumo-api');
   await expect(page.getByRole('heading', { name: 'Consumo de API (V2)' })).toBeVisible();
   await expect(page.getByText('No hay resultados disponibles.')).toBeVisible();
 });
 
-test('presenta los datos del Pactómetro recibidos desde cursosdedesarrollo.com', async ({ page }) => {
-  await page.route('https://pactometro.cursosdedesarrollo.com/resultados.json', (route) => route.fulfill({ json: [
+test('presenta los resultados recibidos desde el backend local', async ({ page }) => {
+  await page.route('**/api/resultados', (route) => route.fulfill({ json: [
     { nombre: 'Partido de ejemplo', dipu: 3, imagen: 'partido.png' },
   ] }));
   await page.goto('/v2/consumo-api');
@@ -18,7 +18,7 @@ test('presenta los datos del Pactómetro recibidos desde cursosdedesarrollo.com'
 test('navega al detalle con parámetro y muestra el error para ruta inexistente', async ({ page }) => {
   await page.goto('/v2/rutas');
   await page.getByRole('link', { name: 'Abrir detalle del recurso 42' }).click();
-  await expect(page.getByText('Identificador: 42')).toBeVisible();
+  await expect(page.getByText('Recurso 42 (id: 42, desde backend local)')).toBeVisible();
   await page.goto('/v2/rutas/ruta-inexistente');
   await expect(page.getByRole('heading', { name: 'Ruta no encontrada' })).toBeVisible();
 });
