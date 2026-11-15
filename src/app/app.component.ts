@@ -44,12 +44,12 @@ const V1_EXERCISES: NavLink[] = [
 ];
 
 const V2_LINKS: NavLink[] = [
+  { path: '/v2/signal-forms', label: 'Signal Forms' },
   { path: '/v2/formulario-tipado', label: 'Formulario reactivo tipado' },
   { path: '/v2/consumo-api', label: 'Consumo de API' },
   { path: '/v2/estado', label: 'Rendimiento y estado' },
   { path: '/v2/accesibilidad', label: 'Accesibilidad y calidad' },
   { path: '/v2/rutas', label: 'Routing moderno' },
-  { path: '/v2/signal-forms', label: 'Signal Forms' },
   { path: '/v2/busqueda-reactiva', label: 'Búsqueda reactiva' },
   { path: '/v2/i18n', label: 'Internacionalización' },
   { path: '/v2/seguridad', label: 'Seguridad en plantillas' },
