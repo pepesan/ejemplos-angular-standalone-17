@@ -21,6 +21,21 @@ Abre `/v2/formulario-tipado` desde el menú «V2 · Angular moderno». Este ejem
 
 El mismo flujo se cubre con tests unitarios Vitest, una story interactiva de Storybook, escenarios Cucumber/Playwright y una prueba E2E de Playwright. Ejecuta todas las suites con `npm run test:all`.
 
+## V2: ejemplos modernos
+
+- `/v2/consumo-api`: `HttpClient` consulta `https://pactometro.cursosdedesarrollo.com/resultados.json`, muestra estados de carga/vacío/error y usa `toSignal` para integrar RxJS con Signals. Las pruebas simulan el endpoint y sus respuestas, sin depender de la red.
+- `/v2/rutas`: feature standalone de carga diferida, parámetro de ruta, guarda funcional y pantalla para rutas inexistentes.
+- `/v2/estado`: Signals para el estado local, `computed` para filtrar, `OnPush` y `track` por identidad estable; no necesita `effect` para derivar valores.
+- `/v2/accesibilidad`: etiqueta, ayuda, validación asociada y anuncio accesible del error, con story de Storybook para el estado límite.
+- `/v2/signal-forms`: Signal Forms, estable en Angular 22, con esquema de validación y modelo basado en Signals.
+- `/v2/busqueda-reactiva`: `toObservable`, debounce y `switchMap` para flujos asíncronos con cancelación de peticiones obsoletas.
+- `/v2/i18n`: textos y formatos de fecha/moneda para dos locales, con actualización reactiva.
+- `/v2/seguridad`: comparación entre interpolación literal y sanitización HTML; evita confiar contenido con `bypassSecurityTrustHtml`.
+
+La validación HTTP del Pactómetro ahora permite reintentar tras un error. El test de accesibilidad usa un harness de Angular CDK para interactuar por un contrato estable. El ejemplo de estado incluye un bloque `@defer` y su prueba comprueba que el contenido aparece al renderizar la sección diferida.
+
+Cada ejemplo tiene pruebas de comportamiento. Las rutas nuevas también tienen recorridos Playwright; puedes ejecutarlos con `npm run test:e2e`.
+
 ## Unit tests with Vitest
 
 Existing Angular `.spec.ts` files stay in place and run through Angular's Vitest test builder:

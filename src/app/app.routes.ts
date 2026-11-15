@@ -110,6 +110,52 @@ export const routes: Routes = [
       .then((module) => module.FormularioTipadoComponent),
     title: 'Formulario reactivo tipado',
   },
+  {
+    path: 'v2/consumo-api',
+    loadComponent: () => import('./components/v2-consumo-api/v2-consumo-api.component')
+      .then((module) => module.V2ConsumoApiComponent),
+    title: 'Consumo de API',
+  },
+  {
+    path: 'v2/estado',
+    loadComponent: () => import('./components/v2-estado/v2-estado.component')
+      .then((module) => module.V2EstadoComponent),
+    title: 'Rendimiento y estado',
+  },
+  {
+    path: 'v2/accesibilidad',
+    loadComponent: () => import('./components/v2-accesibilidad/v2-accesibilidad.component')
+      .then((module) => module.V2AccesibilidadComponent),
+    title: 'Accesibilidad y calidad',
+  },
+  {
+    path: 'v2/rutas',
+    loadChildren: () => import('./components/v2-rutas/rutas-v2.routes').then((module) => module.V2_RUTAS),
+  },
+  {
+    path: 'v2/signal-forms',
+    loadComponent: () => import('./components/v2-signal-forms/v2-signal-forms.component')
+      .then((module) => module.V2SignalFormsComponent),
+    title: 'Signal Forms',
+  },
+  {
+    path: 'v2/busqueda-reactiva',
+    loadComponent: () => import('./components/v2-busqueda/v2-busqueda.component')
+      .then((module) => module.V2BusquedaComponent),
+    title: 'Búsqueda reactiva',
+  },
+  {
+    path: 'v2/i18n',
+    loadComponent: () => import('./components/v2-i18n/v2-i18n.component')
+      .then((module) => module.V2I18nComponent),
+    title: 'Internacionalización',
+  },
+  {
+    path: 'v2/seguridad',
+    loadComponent: () => import('./components/v2-seguridad/v2-seguridad.component')
+      .then((module) => module.V2SeguridadComponent),
+    title: 'Seguridad en plantillas',
+  },
   { path: '404', component: PageNotFoundComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
