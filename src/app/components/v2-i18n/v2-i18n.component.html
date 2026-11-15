@@ -1,0 +1,13 @@
+<section class="container py-3" lang="{{ idioma() }}" aria-labelledby="i18n-heading">
+  <h1 id="i18n-heading">{{ idiomaNombre() }}</h1>
+  <label class="form-label" for="locale">Idioma y formato regional</label>
+  <select class="form-select" id="locale" (change)="cambiarIdioma($event)">
+    <option value="es-ES">Español (España)</option>
+    <option value="en-GB">English (United Kingdom)</option>
+  </select>
+  <dl class="mt-3">
+    <dt>{{ idioma() === 'es-ES' ? 'Fecha' : 'Date' }}</dt><dd>{{ fechaFormateada() }}</dd>
+    <dt>{{ idioma() === 'es-ES' ? 'Precio' : 'Price' }}</dt><dd>{{ precioFormateado() }}</dd>
+  </dl>
+  <p>Este ejemplo cambia tanto los textos como el locale de presentación. Para aplicaciones grandes, Angular i18n también permite generar builds por locale.</p>
+</section>
