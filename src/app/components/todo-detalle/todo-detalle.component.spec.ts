@@ -14,6 +14,7 @@ describe('TodoDetalleComponent', () => {
     
     fixture = TestBed.createComponent(TodoDetalleComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('dato', { id: 1, name: 'Preparar la merienda' });
     fixture.detectChanges();
   });
 
