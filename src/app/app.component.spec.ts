@@ -20,10 +20,13 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('proyecto');
   });
 
-  it('should render title', () => {
+  it('renders the versioned learning navigation', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h2')?.textContent).toContain('proyecto');
+
+    expect(compiled.querySelector('.navbar-brand')?.textContent).toContain('Angular');
+    expect(compiled.textContent).toContain('V1 · Clásicos');
+    expect(compiled.textContent).toContain('V2 · Angular moderno');
   });
 });

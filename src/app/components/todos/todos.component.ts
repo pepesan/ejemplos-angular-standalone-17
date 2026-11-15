@@ -28,10 +28,10 @@ export class TodosComponent {
     console.log("componente cargado");
   }
 
-  addTodo(){
-    let mitodo=new Todo(this.todos.length, this.todo.text);
-    this.todos.push(mitodo);
-    this.todo=new Todo();
+  addTodo() {
+    const nextId = this.todos.reduce((highestId, todo) => Math.max(highestId, todo.id), 0) + 1;
+    this.todos.push(new Todo(nextId, this.todo.text));
+    this.todo = new Todo();
   }
   deleteTodo(texto: string){
     for(let i=0; i<this.todos.length; i++){
