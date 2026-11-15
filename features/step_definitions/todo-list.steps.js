@@ -16,6 +16,29 @@ When('añado la tarea {string}', async function (task) {
   await input.press('Enter');
 });
 
+When('envío el formulario vacío', async function () {
+  await this.page.getByRole('button', { name: 'Inscribirme', exact: true }).click();
+});
+
+When('completo el formulario con nombre {string} y correo {string}', async function (name, email) {
+  await this.page.getByLabel('Nombre').fill(name);
+  await this.page.getByLabel('Correo electrónico').fill(email);
+  await this.page.getByLabel('Acepto la política de privacidad').check();
+  await this.page.getByRole('button', { name: 'Inscribirme', exact: true }).click();
+});
+
+Then('veo el mensaje de error {string}', async function (message) {
+  const error = this.page.getByRole('alert').filter({ hasText: message }).first();
+  await error.waitFor({ state: 'visible' });
+  assert.equal(await error.isVisible(), true);
+});
+
+Then('veo la confirmación para {string}', async function (name) {
+  const confirmation = this.page.getByRole('status').filter({ hasText: name });
+  await confirmation.waitFor({ state: 'visible' });
+  assert.equal(await confirmation.isVisible(), true);
+});
+
 Then('veo el encabezado {string}', async function (heading) {
   const headingLocator = this.page.getByRole('heading', { name: heading, exact: true });
   await headingLocator.waitFor({ state: 'visible' });

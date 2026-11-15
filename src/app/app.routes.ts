@@ -104,6 +104,12 @@ export const routes: Routes = [
   {
     path: 'lazy',
     loadChildren: () => import('./modules/lazy-module/lazy-module.module').then(m => m.LazyModuleModule) },
+  {
+    path: 'v2/formulario-tipado',
+    loadComponent: () => import('./components/formulario-tipado/formulario-tipado.component')
+      .then((module) => module.FormularioTipadoComponent),
+    title: 'Formulario reactivo tipado',
+  },
   { path: '404', component: PageNotFoundComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' }, // redirect to `home`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
