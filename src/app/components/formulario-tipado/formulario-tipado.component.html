@@ -1,0 +1,54 @@
+<section aria-labelledby="registro-heading">
+  <h1 id="registro-heading">Formulario de inscripción (V2)</h1>
+  <p>Ejemplo de formulario reactivo tipado, validación y errores accesibles.</p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input id="nombre" class="form-control" type="text" formControlName="nombre" autocomplete="name"
+        [attr.aria-invalid]="form.controls.nombre.touched && form.controls.nombre.invalid"
+        [attr.aria-describedby]="form.controls.nombre.touched && form.controls.nombre.invalid ? 'nombre-error' : null" />
+      @if (form.controls.nombre.touched && form.controls.nombre.invalid) {
+        <p id="nombre-error" class="text-danger" role="alert">
+          @if (form.controls.nombre.hasError('required')) {
+            Escribe tu nombre.
+          } @else {
+            El nombre debe tener al menos 3 caracteres.
+          }
+        </p>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo electrónico</label>
+      <input id="correo" class="form-control" type="email" formControlName="correo" autocomplete="email"
+        [attr.aria-invalid]="form.controls.correo.touched && form.controls.correo.invalid"
+        [attr.aria-describedby]="form.controls.correo.touched && form.controls.correo.invalid ? 'correo-error' : null" />
+      @if (form.controls.correo.touched && form.controls.correo.invalid) {
+        <p id="correo-error" class="text-danger" role="alert">
+          @if (form.controls.correo.hasError('required')) {
+            Escribe tu correo electrónico.
+          } @else {
+            Introduce un correo electrónico válido.
+          }
+        </p>
+      }
+    </div>
+
+    <div class="form-check mb-3">
+      <input id="aceptar-politica" class="form-check-input" type="checkbox" formControlName="aceptarPolitica"
+        [attr.aria-invalid]="form.controls.aceptarPolitica.touched && form.controls.aceptarPolitica.invalid"
+        [attr.aria-describedby]="form.controls.aceptarPolitica.touched && form.controls.aceptarPolitica.invalid ? 'politica-error' : null" />
+      <label for="aceptar-politica" class="form-check-label">Acepto la política de privacidad</label>
+      @if (form.controls.aceptarPolitica.touched && form.controls.aceptarPolitica.invalid) {
+        <p id="politica-error" class="text-danger" role="alert">Debes aceptar la política de privacidad.</p>
+      }
+    </div>
+
+    <button class="btn btn-primary" type="submit">Inscribirme</button>
+  </form>
+
+  @if (nombreConfirmado(); as nombre) {
+    <p class="alert alert-success mt-3" role="status">Inscripción recibida para {{ nombre }}.</p>
+  }
+</section>

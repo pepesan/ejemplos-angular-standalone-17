@@ -14,6 +14,13 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+
+## V2: formulario reactivo tipado
+
+Abre `/v2/formulario-tipado` desde el menú «V2 · Angular moderno». Este ejemplo usa controles reactivos no anulables y tipados, validación, `OnPush`, un estado de confirmación con Signals y mensajes de error accesibles. La ruta carga el componente standalone de forma diferida.
+
+El mismo flujo se cubre con tests unitarios Vitest, una story interactiva de Storybook, escenarios Cucumber/Playwright y una prueba E2E de Playwright. Ejecuta todas las suites con `npm run test:all`.
+
 ## Unit tests with Vitest
 
 Existing Angular `.spec.ts` files stay in place and run through Angular's Vitest test builder:
