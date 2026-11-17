@@ -1,68 +1,83 @@
-# Proyecto
+# Angular · Aprende haciendo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) and currently uses Angular 22.
+Proyecto didáctico con ejemplos pequeños de Angular 22 (standalone, Signals, control flow, formularios reactivos, routing, HTTP, Storybook y pruebas). Cada ejemplo tiene una ruta propia, pruebas y una breve explicación.
 
-The course outline is in [TEMARIO.md](TEMARIO.md). The navigation's «Temario · 1–6» menu follows the same six units; TypeScript fundamentals are covered in the companion project.
+El temario completo está en [TEMARIO.md](TEMARIO.md). TypeScript se imparte en el proyecto complementario.
 
-## Development server
+## Cómo está organizada la navegación
 
-For the Angular app, run `npm start` and open `http://localhost:4200/`. Start the local API in a second terminal with `npm run backend`; the development proxy forwards `/api/*` to it.
+La cabecera tiene **Inicio**, **Temario** y **Acerca de**. El menú **Temario** agrupa los ejemplos por unidad:
 
-## Code scaffolding
+1. **Fundamentos de TypeScript y Angular**: arquitectura Angular y CLI.
+2. **Componentes, plantillas y Data Binding**: lista de tareas, props, directivas, control flow, seguridad en plantillas, condicionales, ciclo de vida, pipes, eventos e internacionalización.
+3. **Comunicación entre componentes y Signals**: `@Input`/`@Output`, `input()`/`output()`, `signal`/`computed`, `model`, queries, `effect` y estado compartido.
+4. **Servicios y comunicación HTTP**: servicios, `HttpClient`, interceptores y JWT.
+5. **Formularios reactivos**: formularios de plantilla, reactivos tipados, Signal Forms y accesibilidad.
+6. **Routing, Guards y Lazy Loading**: navegación, rutas anidadas, lazy loading y guards funcionales.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Dentro de cada unidad, los ejemplos llevan dos etiquetas:
 
-## Build
+- **V1 · …**: enfoque clásico o legado, que se conserva para comparar con la alternativa moderna.
+- **V2 · …**: APIs modernas recomendadas para código nuevo.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+El menú cambia según el ancho de pantalla: en escritorio, el desplegable **Temario** muestra las unidades a la izquierda y sus ejemplos a la derecha; en móvil, el botón de menú abre un panel con las unidades plegables.
 
-## V2: formulario reactivo tipado
+### Estructura del código
 
-Abre `/v2/formulario-tipado` desde el menú «V2 · Angular moderno». Este ejemplo usa controles reactivos no anulables y tipados, validación, `OnPush`, un estado de confirmación con Signals y mensajes de error accesibles. La ruta carga el componente standalone de forma diferida.
+- `src/app/navigation/temario-menu.ts`: datos del temario (unidades y ejemplos) y sus tipos. Para añadir o reordenar un ejemplo, se edita este fichero.
+- `src/app/navigation/site-header/`: cabecera completa (marca, navegación, cambio de tema y botón de menú móvil).
+- `src/app/navigation/temario-dropdown/`: desplegable del temario de escritorio.
+- `src/app/navigation/temario-mobile-menu/`: acordeón del temario en el menú móvil.
 
-El mismo flujo se cubre con tests unitarios Vitest, una story interactiva de Storybook, escenarios Cucumber/Playwright y una prueba E2E de Playwright. Ejecuta todas las suites con `npm run test:all`.
+## Servidor de desarrollo
 
-## V2: ejemplos modernos
+Para la aplicación, ejecuta `npm start` y abre `http://localhost:4200/`. El backend didáctico se arranca en otra terminal con `npm run backend`; el proxy de desarrollo reenvía `/api/*` a ese backend. Sus endpoints están descritos en [backend/README.md](backend/README.md).
 
-- `/v2/consumo-api`: `HttpClient` consulta `/api/resultados` al backend local, muestra estados de carga/vacío/error y usa `toSignal` para integrar RxJS con Signals.
+Las credenciales `alumno` / `angular` y la clave JWT predeterminada son solo para desarrollo local.
+
+## Ejemplos V2 destacados
+
+- `/todos`: lista de tareas con Signals (unidad 2).
+- `/control-flow` y `/v2/seguridad`: control flow integrado y comparación entre interpolación literal y sanitización HTML (no usar `bypassSecurityTrustHtml` para contenido no confiable).
+- `/v2/i18n`: textos y formatos de fecha y moneda para dos locales, con actualización reactiva.
+- `/v2/formulario-tipado`: formulario reactivo no anulable y tipado, validación, `OnPush`, confirmación con Signals y mensajes de error accesibles. La ruta carga el componente standalone de forma diferida.
+- `/v2/consumo-api`: `HttpClient` contra `/api/resultados`, estados de carga, vacío y error, e integración RxJS-Signals con `toSignal`.
 - `/v2/comunicacion`: compara `@Input`/`@Output` con `input()`/`output()`, `ViewChild`, `ViewChildren` y proyección con `ng-content`.
-- `/v2/autenticacion`: login didáctico, emisión JWT en el backend, interceptor Bearer, endpoint protegido e informe global de errores HTTP.
-- `/v2/rutas`: feature standalone de carga diferida, parámetro resuelto desde el backend, `CanActivate`, `CanMatch`, `CanDeactivate` y pantalla para rutas inexistentes.
-- `/v2/estado`: Signals para el estado local, `computed` para filtrar, `OnPush` y `track` por identidad estable; no necesita `effect` para derivar valores.
-- `/v2/accesibilidad`: etiqueta, ayuda, validación asociada y anuncio accesible del error, con story de Storybook para el estado límite.
-- `/v2/signal-forms`: Signal Forms, estable en Angular 22, con esquema de validación y modelo basado en Signals.
-- `/v2/busqueda-reactiva`: `toObservable`, debounce y `switchMap` para flujos asíncronos con cancelación de peticiones obsoletas.
-- `/v2/i18n`: textos y formatos de fecha/moneda para dos locales, con actualización reactiva.
-- `/v2/seguridad`: comparación entre interpolación literal y sanitización HTML; evita confiar contenido con `bypassSecurityTrustHtml`.
-
-El backend didáctico y sus endpoints están descritos en [backend/README.md](backend/README.md). Las credenciales `alumno` / `angular` y la clave JWT predeterminada son solo para desarrollo local.
-
-La validación HTTP del Pactómetro ahora permite reintentar tras un error. El test de accesibilidad usa un harness de Angular CDK para interactuar por un contrato estable. El ejemplo de estado incluye un bloque `@defer` y su prueba comprueba que el contenido aparece al renderizar la sección diferida.
-
-Cada ejemplo tiene pruebas de comportamiento. Las rutas nuevas también tienen recorridos Playwright; puedes ejecutarlos con `npm run test:e2e`.
-
-## Unit tests with Vitest
-
-Existing Angular `.spec.ts` files stay in place and run through Angular's Vitest test builder:
-
-- `npm test` or `npm run test:unit`: run once.
-- `npm run test:unit:watch`: watch mode.
-- `npm run test:unit:coverage`: generate coverage with V8; open `coverage/proyecto/index.html` for the HTML report. Summary and per-file metrics are also printed to the terminal.
-
-## Browser tests
-
-- `npm run test:e2e:install`: install Playwright's Chromium browser once.
-- `npm run test:e2e`: run direct Playwright E2E tests; Playwright starts and stops Angular.
-- `npm run test:bdd`: start Angular and run the Cucumber.js Gherkin scenarios using Playwright.
+- `/v2/autenticacion`: login didáctico, emisión de JWT en el backend, interceptor Bearer, endpoint protegido e informe global de errores HTTP.
+- `/v2/rutas`: feature standalone con carga diferida, parámetros resueltos desde el backend, `CanActivate`, `CanMatch`, `CanDeactivate` y pantalla de ruta inexistente.
+- `/v2/estado`: Signals para el estado local, `computed` para filtrar, `OnPush`, `track` por identidad estable y un bloque `@defer`; no usa `effect` para derivar valores.
+- `/v2/accesibilidad`: etiqueta, ayuda, validación asociada y anuncio accesible del error.
+- `/v2/signal-forms`: Signal Forms, con esquema de validación y modelo basado en Signals.
+- `/v2/busqueda-reactiva`: `toObservable`, debounce y `switchMap` para cancelar peticiones obsoletas.
 
 ## Storybook
 
-- `npm run storybook`: start component workbench at `http://localhost:6006`.
-- `npm run build-storybook`: build the static Storybook site.
-- `npm run test:stories`: run Storybook stories through the Vitest addon.
+Cada componente de `src/app` tiene una story (82 en total), agrupada en el menú lateral por carpeta: `Componentes/<carpeta>/<Clase>`. La página **Guía/Bienvenida** resume las unidades del temario y los comandos del proyecto.
 
-Run all automated suites with `npm run test:all`.
+- `npm run storybook`: servidor de desarrollo en `http://localhost:6006`.
+- `npm run build-storybook`: genera el sitio estático en `storybook-static/`.
+- `npm run test:stories`: ejecuta las stories con el addon de Vitest.
 
-## Further help
+Las stories comparten providers globales (router y `HttpClient`) definidos en `.storybook/preview.ts`. La mayoría muestra solo el estado inicial; las de formularios incluyen además un caso de validación, y las de la navegación muestran variantes como el menú móvil abierto o una unidad distinta.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Scaffolding y build
+
+- `ng generate component nombre`: genera un componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- `ng build`: compila la aplicación en `dist/`.
+
+## Pruebas
+
+Ejecuta todas las suites con `npm run test:all`. Cada una se puede lanzar por separado:
+
+| Suite | Comando | Qué cubre |
+| --- | --- | --- |
+| Unitarias Angular | `npm test` o `npm run test:unit` | Specs `.spec.ts` con el builder de tests de Angular |
+| Unitarias en watch | `npm run test:unit:watch` | Mismas pruebas, reejecutadas al guardar |
+| Cobertura | `npm run test:unit:coverage` | Informe V8 en `coverage/proyecto/index.html` |
+| Stories | `npm run test:stories` | Renderizado de cada story con Vitest y Storybook |
+| E2E | `npm run test:e2e` | Recorridos con Playwright; levanta y para Angular solo |
+| BDD | `npm run test:bdd` | Escenarios Gherkin en español con Cucumber.js y Playwright |
+
+Para E2E por primera vez, instala Chromium con `npm run test:e2e:install`.
+
+Los escenarios E2E y BDD navegan igual que un usuario: abren **Temario**, eligen la unidad y después el ejemplo.
