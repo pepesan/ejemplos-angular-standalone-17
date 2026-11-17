@@ -1,92 +1,9 @@
-<header class="app-header">
-  <div class="container-fluid d-flex align-items-center justify-content-between">
-    <a class="app-brand" routerLink="/home" aria-label="Inicio">
-      <img class="app-brand__logo" src="assets/cursos-de-desarrollo-logo.svg" alt="Cursos de Desarrollo">
-      <span>Angular · Aprende haciendo</span>
-    </a>
-
-    <nav class="app-nav app-nav--desktop" aria-label="Navegación principal">
-      <a class="app-nav__link" routerLink="/home" routerLinkActive="active">Inicio</a>
-
-      <div ngbDropdown display="dynamic" placement="bottom" [autoClose]="'outside'" #temarioDropdown="ngbDropdown" (mouseenter)="temarioDropdown.open()">
-        <button class="app-nav__link" id="temarioDropdown" ngbDropdownToggle type="button">
-          Temario
-        </button>
-        <div class="dropdown-menu app-dropdown-menu app-temario-menu" ngbDropdownMenu aria-labelledby="temarioDropdown">
-          <p class="app-temario-menu__note">TypeScript se imparte en el proyecto complementario.</p>
-          <div class="app-temario-menu__grid">
-            <nav class="app-temario-menu__units" aria-label="Unidades del temario">
-              @for (unit of temarioUnits; track unit.id) {
-                <button
-                  class="app-temario-menu__unit-button"
-                  ngbDropdownItem
-                  [class.is-active]="activeTemarioUnit().id === unit.id"
-                  type="button"
-                  [attr.aria-expanded]="activeTemarioUnit().id === unit.id"
-                  aria-controls="temario-unit-examples"
-                  (mouseenter)="selectTemarioUnit(unit)"
-                  (focus)="selectTemarioUnit(unit)"
-                  (click)="selectTemarioUnit(unit)">
-                  {{ unit.label }}
-                </button>
-              }
-            </nav>
-            <section class="app-temario-menu__examples" id="temario-unit-examples" aria-live="polite">
-              <h2>{{ activeTemarioUnit().label }}</h2>
-              @for (link of activeTemarioUnit().items; track $index) {
-                <button ngbDropdownItem [routerLink]="link.path" routerLinkActive="active" (click)="temarioDropdown.close()">{{ link.label }}</button>
-              }
-            </section>
-          </div>
-        </div>
-      </div>
-
-      <a class="app-nav__link" routerLink="/about" routerLinkActive="active">Acerca de</a>
-    </nav>
-
-    <div class="d-flex align-items-center gap-2">
-      <button
-        class="btn btn-outline-secondary app-theme-toggle"
-        type="button"
-        (click)="toggleTheme()"
-        [attr.aria-label]="'Cambiar a modo ' + (themeService.resolvedTheme() === 'dark' ? 'claro' : 'oscuro')"
-        title="Cambiar tema">
-        @if (themeService.resolvedTheme() === 'dark') {
-          <svg class="app-theme-toggle__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        } @else {
-          <svg class="app-theme-toggle__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        }
-      </button>
-
-      <button
-        class="btn btn-outline-secondary app-menu-toggle"
-        type="button"
-        (click)="toggleMenu()"
-        [attr.aria-expanded]="menuOpen()"
-        aria-controls="mobileNavigation"
-        aria-label="Abrir o cerrar el menú"
-        title="Menú">
-        <svg class="app-theme-toggle__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-  </div>
-</header>
+<app-site-header
+  [units]="temarioUnits"
+  [activeUnit]="activeTemarioUnit()"
+  [menuOpen]="menuOpen()"
+  (unitSelect)="selectTemarioUnit($event)"
+  (menuToggle)="toggleMenu()" />
 
 <div
   class="app-offcanvas"
@@ -111,22 +28,7 @@
     <div class="app-offcanvas__body">
       <a class="app-offcanvas__link" routerLink="/home" routerLinkActive="active" (click)="closeMenu()">Inicio</a>
 
-      <div class="app-offcanvas__section">
-        <h3 class="app-offcanvas__heading">Temario</h3>
-        <p class="app-offcanvas__note">TypeScript se trabaja en el proyecto complementario. Los ejemplos V1 y V2 aparecen juntos en el tema correspondiente.</p>
-        @for (unit of temarioUnits; track unit.id) {
-          <details class="app-offcanvas__unit">
-            <summary class="app-offcanvas__subheading">{{ unit.label }}</summary>
-            <div class="app-offcanvas__unit-links">
-              @for (link of unit.items; track $index) {
-                <a class="app-offcanvas__link" [routerLink]="link.path" routerLinkActive="active" (click)="closeMenu()">
-                  {{ link.label }}
-                </a>
-              }
-            </div>
-          </details>
-        }
-      </div>
+      <app-temario-mobile-menu [units]="temarioUnits" (linkSelect)="closeMenu()" />
 
       <a class="app-offcanvas__link" routerLink="/about" routerLinkActive="active" (click)="closeMenu()">Acerca de</a>
     </div>

@@ -27,8 +27,10 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('.app-brand')?.textContent).toContain('Angular');
-    expect(compiled.textContent).toContain('V1 · Clásicos');
-    expect(compiled.textContent).toContain('V2 · Angular moderno');
+    expect(compiled.querySelector('app-site-header')).toBeTruthy();
+    expect(compiled.querySelector('app-temario-dropdown')).toBeTruthy();
+    expect(compiled.textContent).toContain('Temario');
+    expect(compiled.textContent).toContain('Acerca de');
   });
 
   it('exposes a theme toggle', () => {

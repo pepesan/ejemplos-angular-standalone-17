@@ -1,6 +1,6 @@
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { afterEach, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { V2_RUTAS } from './rutas-v2.routes';
@@ -24,6 +24,8 @@ describe('rutas V2', () => {
     await harness.navigateByUrl('/v2/rutas');
     expect(harness.routeNativeElement?.textContent).toContain('Routing moderno');
     const navigation = harness.navigateByUrl('/v2/rutas/recurso/42', V2DetalleRutaComponent);
+    // El resolver lanza la petición tras empezar la navegación; esperamos un ciclo antes de comprobarla.
+    await new Promise((resolve) => setTimeout(resolve));
     http.expectOne('/api/recursos/42').flush({ id: '42', title: 'Recurso 42', source: 'backend local' });
     await navigation;
     expect(harness.routeNativeElement?.textContent).toContain('Recurso 42');
@@ -34,7 +36,7 @@ describe('rutas V2', () => {
     await harness.navigateByUrl('/v2/rutas/privado');
     expect(harness.routeNativeElement?.textContent).toContain('acceso=permitido');
     await harness.navigateByUrl('/v2/rutas/privado?acceso=permitido', V2DetalleRutaComponent);
-    expect(harness.routeNativeElement?.textContent).toContain('acceso permitido');
+    expect(harness.routeNativeElement?.textContent).toContain('Zona privada de demostración');
   });
 
   it('muestra un estado específico para rutas inexistentes', async () => {

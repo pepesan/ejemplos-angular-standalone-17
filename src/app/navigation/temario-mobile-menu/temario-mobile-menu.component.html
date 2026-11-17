@@ -1,0 +1,16 @@
+<div class="app-offcanvas__section">
+  <h3 class="app-offcanvas__heading">Temario</h3>
+  <p class="app-offcanvas__note">TypeScript se trabaja en el proyecto complementario. Los ejemplos V1 y V2 aparecen juntos en el tema correspondiente.</p>
+  @for (unit of units(); track unit.id) {
+    <details class="app-offcanvas__unit">
+      <summary class="app-offcanvas__subheading">{{ unit.label }}</summary>
+      <div class="app-offcanvas__unit-links">
+        @for (link of unit.items; track $index) {
+          <a class="app-offcanvas__link" [routerLink]="link.path" routerLinkActive="active" (click)="linkSelect.emit()">
+            {{ link.label }}
+          </a>
+        }
+      </div>
+    </details>
+  }
+</div>
