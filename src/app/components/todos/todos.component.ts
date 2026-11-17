@@ -24,6 +24,7 @@ export class TodosComponent {
       new Todo(3, "Llevar al niño a Karate")
     ];
   }
+
   ngOnInit(): void {
     console.log("componente cargado");
   }
