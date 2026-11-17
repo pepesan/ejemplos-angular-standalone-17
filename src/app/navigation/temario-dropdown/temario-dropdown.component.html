@@ -1,0 +1,32 @@
+<div ngbDropdown display="dynamic" placement="bottom" [autoClose]="'outside'" #temarioDropdown="ngbDropdown" (mouseenter)="temarioDropdown.open()">
+  <button class="app-nav__link" id="temarioDropdown" ngbDropdownToggle type="button">
+    Temario
+  </button>
+  <div class="dropdown-menu app-dropdown-menu app-temario-menu" ngbDropdownMenu aria-labelledby="temarioDropdown">
+    <p class="app-temario-menu__note">TypeScript se imparte en el proyecto complementario.</p>
+    <div class="app-temario-menu__grid">
+      <nav class="app-temario-menu__units" aria-label="Unidades del temario">
+        @for (unit of units(); track unit.id) {
+          <button
+            class="app-temario-menu__unit-button"
+            ngbDropdownItem
+            [class.is-active]="activeUnit().id === unit.id"
+            type="button"
+            [attr.aria-expanded]="activeUnit().id === unit.id"
+            aria-controls="temario-unit-examples"
+            (mouseenter)="unitSelect.emit(unit)"
+            (focus)="unitSelect.emit(unit)"
+            (click)="unitSelect.emit(unit)">
+            {{ unit.label }}
+          </button>
+        }
+      </nav>
+      <section class="app-temario-menu__examples" id="temario-unit-examples" aria-live="polite">
+        <h2>{{ activeUnit().label }}</h2>
+        @for (link of activeUnit().items; track $index) {
+          <button ngbDropdownItem [routerLink]="link.path" routerLinkActive="active" (click)="temarioDropdown.close()">{{ link.label }}</button>
+        }
+      </section>
+    </div>
+  </div>
+</div>
