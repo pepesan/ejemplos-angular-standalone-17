@@ -5,9 +5,11 @@ Given('que abro la aplicación', async function () {
   await this.page.goto(this.baseUrl);
 });
 
-When('navego a {string} desde el menú {string}', async function (pageName, menuName) {
-  await this.page.getByRole('button', { name: menuName, exact: true }).click();
-  await this.page.getByRole('button', { name: pageName, exact: true }).click();
+// El menú «Temario» se abre al pasar el ratón; luego se elige la unidad y el ejemplo.
+When('abro {string} desde la unidad {string}', async function (exampleName, unitName) {
+  await this.page.getByRole('button', { name: 'Temario', exact: true }).hover();
+  await this.page.getByRole('button', { name: unitName, exact: true }).click();
+  await this.page.getByRole('button', { name: exampleName, exact: true }).click();
 });
 
 When('añado la tarea {string}', async function (task) {
