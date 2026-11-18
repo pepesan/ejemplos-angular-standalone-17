@@ -1,5 +1,6 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, EventEmitter, inject, Input, Output, QueryList, ViewChild, ViewChildren, input, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AvisoApiComponent } from '../aviso-api/aviso-api.component';
 
 @Component({
   selector: 'app-boton-evento-clasico',
@@ -18,6 +19,8 @@ export class BotonEventoClasicoComponent {
   template: '<button class="btn btn-primary" type="button" (click)="seleccion.emit(texto())">{{ texto() }}</button>',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+// DISPONIBILIDAD: `input()` y `output()` son estables desde Angular 19 (según angular.dev).
+// Sustituyen a `@Input()` y `@Output()` + `EventEmitter` del componente clásico anterior.
 export class BotonEventoSignalComponent {
   readonly texto = input.required<string>();
   readonly seleccion = output<string>();
@@ -34,7 +37,7 @@ export class PanelProyectadoComponent {}
 @Component({
   selector: 'app-v2-comunicacion',
   standalone: true,
-  imports: [BotonEventoClasicoComponent, BotonEventoSignalComponent, PanelProyectadoComponent],
+  imports: [AvisoApiComponent, BotonEventoClasicoComponent, BotonEventoSignalComponent, PanelProyectadoComponent],
   templateUrl: './v2-comunicacion.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

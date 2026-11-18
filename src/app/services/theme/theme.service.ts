@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { effect, inject, Injectable, signal, untracked } from '@angular/core';
 
+// DISPONIBILIDAD: `untracked()` es estable desde Angular 17 (developer preview en la v16), según los tipos de `@angular/core`.
 type Theme = 'light' | 'dark' | 'system';
 
 const STORAGE_KEY = 'angular-examples-theme';

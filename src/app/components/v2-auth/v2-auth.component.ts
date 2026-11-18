@@ -5,10 +5,15 @@ import { RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { AuthService, DemoProfile } from '../../services/auth.service';
 
+import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 @Component({
   selector: 'app-v2-auth',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [
+    FormsModule,
+    RouterLink,
+    AvisoApiComponent
+  ],
   templateUrl: './v2-auth.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

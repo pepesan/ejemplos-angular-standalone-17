@@ -1,10 +1,14 @@
 import {Component, effect, signal, ChangeDetectionStrategy} from '@angular/core';
 
+import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
+// DISPONIBILIDAD: `effect()` es estable desde Angular 20 (según angular.dev). `linkedSignal()` también.
 // Usa `effect` para sincronizar una señal con un sistema externo; para valores derivados, prefiere `computed`.
 
 @Component({
     selector: 'app-signal-effect',
-    imports: [],
+    imports: [
+    AvisoApiComponent
+  ],
     templateUrl: './signal-effect.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './signal-effect.component.css'

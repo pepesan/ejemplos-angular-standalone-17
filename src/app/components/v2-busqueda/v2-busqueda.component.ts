@@ -3,10 +3,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, debounceTime, distinctUntilChanged, map, Observable, of, startWith, switchMap } from 'rxjs';
 
+import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 interface Curso { id: number; nombre: string; }
 type EstadoBusqueda = { status: 'idle' | 'loading' | 'success' | 'error'; cursos: Curso[] };
 
 @Component({
+  imports: [AvisoApiComponent],
   selector: 'app-v2-busqueda', standalone: true,
   templateUrl: './v2-busqueda.component.html', changeDetection: ChangeDetectionStrategy.OnPush,
 })

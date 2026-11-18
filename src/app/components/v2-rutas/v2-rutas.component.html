@@ -1,5 +1,8 @@
 <section class="container py-3" aria-labelledby="rutas-heading">
   <h1 id="rutas-heading">Routing moderno (V2)</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: <code>provideRouter()</code> estable desde Angular 15.">
+    Era developer preview en la v14. Las guardas y resolvers funcionales (<code>CanActivateFn</code>, <code>CanMatchFn</code>, <code>CanDeactivateFn</code>, <code>ResolveFn</code>) ya son API pública en la v14.3 (verificado en los tipos de <code>&#64;angular/router</code>).
+  </app-aviso-api>
   <p>Esta feature se carga de forma diferida con rutas standalone. Los ejemplos cubren parámetros, CanActivate, CanMatch, CanDeactivate, resolvers y errores de navegación.</p>
   @if (denegado) { <p role="alert">La ruta privada requiere el parámetro acceso=permitido.</p> }
   <ul>

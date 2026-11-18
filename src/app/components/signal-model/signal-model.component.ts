@@ -8,6 +8,7 @@ import {Component, model, ModelSignal, ChangeDetectionStrategy} from '@angular/c
     styleUrl: './signal-model.component.css'
 })
 export class SignalModelComponent {
+  // DISPONIBILIDAD: `model()` es estable desde Angular 19 (según angular.dev).
   // `model()` permite que el hijo proponga cambios al padre mediante [(checked)].
   checked: ModelSignal<boolean> = model(false);
 

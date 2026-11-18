@@ -1,10 +1,16 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { email, form, FormField, required } from '@angular/forms/signals';
 
+import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
+// DISPONIBILIDAD: Signal Forms (`form()` de `@angular/forms/signals`) es estable desde Angular 22
+// (según angular.dev). Para código con versiones anteriores, usa formularios reactivos.
 interface Contacto { nombre: string; correo: string; }
 
 @Component({
-  selector: 'app-v2-signal-forms', standalone: true, imports: [FormField],
+  selector: 'app-v2-signal-forms', standalone: true, imports: [
+    FormField,
+    AvisoApiComponent
+  ],
   templateUrl: './v2-signal-forms.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
