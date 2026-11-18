@@ -29,6 +29,20 @@ El menú cambia según el ancho de pantalla: en escritorio, el desplegable **Tem
 - `src/app/navigation/temario-dropdown/`: desplegable del temario de escritorio.
 - `src/app/navigation/temario-mobile-menu/`: acordeón del temario en el menú móvil.
 
+### Ficheros de cada ejemplo (`npm run fuentes`)
+
+Encima de cada ejemplo, la aplicación muestra qué ficheros lo implementan, con una píldora de color según su tipo (Page, Componente, Pipe, Directiva, Servicio, Guarda, Modelo, Validador, Módulo, Rutas).
+
+- Cada ruta declara su fichero principal con `data: { fuente: 'src/app/...' }` en `app.routes.ts` (o en el fichero de rutas de la sección).
+- La lista completa de ficheros de cada ejemplo está en `src/app/navigation/fuente-ejemplo/fuentes-ejemplo.generated.ts`, un fichero **generado**: no se edita a mano.
+- `npm run fuentes` lo regenera con `scripts/generar-fuentes-ejemplo.mjs`, que sigue los `import` de cada ejemplo dentro de `src/app` (sin specs ni stories) y deduce el tipo de cada fichero por su decorador.
+
+**Cuándo ejecutarlo:** al añadir un ejemplo (con su `data.fuente` en la ruta), al mover o renombrar ficheros, y cuando un ejemplo empiece a usar otro componente, pipe, directiva o servicio. Después, commitea el fichero generado junto al cambio.
+
+**Por qué:** el fichero generado es una copia del grafo de imports. Si no se regenera, el aviso muestra rutas que ya no existen o se deja fuera elementos nuevos, y el alumno acaba buscando código en un sitio equivocado. Generarlo con el script evita mantener esas listas a mano en cada ejemplo.
+
+Solo se detectan los elementos importados en TypeScript; los cargados por otra vía no aparecerían.
+
 ## Servidor de desarrollo
 
 Para la aplicación, ejecuta `npm start` y abre `http://localhost:4200/`. El backend didáctico se arranca en otra terminal con `npm run backend`; el proxy de desarrollo reenvía `/api/*` a ese backend. Sus endpoints están descritos en [backend/README.md](backend/README.md).
