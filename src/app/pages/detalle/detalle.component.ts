@@ -1,3 +1,4 @@
+// DISPONIBILIDAD: `numberAttribute` (transformador de inputs) es API pública desde Angular 16, según los tipos de `@angular/core`.
 import {Component, numberAttribute, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {ListadoService} from "../../services/listado.service";

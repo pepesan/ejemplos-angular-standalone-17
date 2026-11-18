@@ -1,5 +1,11 @@
 <section class="container py-3" aria-labelledby="fundamentos-heading">
   <h1 id="fundamentos-heading">Fundamentos de Angular</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: componentes standalone estables desde Angular 15.">
+    La opción <code>standalone</code> era developer preview en la v14 (verificado en los tipos de <code>&#64;angular/core</code>).
+  </app-aviso-api>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: <code>ChangeDetectionStrategy.Eager</code> en Angular 21.2 y posteriores.">
+    No existe en la 21.0. Sustituye a <code>Default</code>, que queda obsoleto, y la documentación de los tipos de Angular 22 indica que <code>OnPush</code> está activado por defecto. Por eso los componentes de estos ejemplos usan <code>Eager</code> cuando no usan <code>OnPush</code>.
+  </app-aviso-api>
   <p>Esta unidad presenta la arquitectura de Angular y el flujo de trabajo del proyecto. ECMAScript y TypeScript se estudian en el proyecto complementario de TypeScript.</p>
 
   <h2 class="h4 mt-4">Arquitectura de la aplicación</h2>

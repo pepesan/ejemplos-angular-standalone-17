@@ -1,5 +1,8 @@
 <section class="container py-3" aria-labelledby="busqueda-heading">
   <h1 id="busqueda-heading">Búsqueda reactiva: Signals y RxJS</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: estable desde Angular 20.">
+    <code>toSignal()</code> y <code>toObservable()</code> (de <code>&#64;angular/core/rxjs-interop</code>) eran developer preview hasta la v19 (verificado en los tipos de <code>&#64;angular/core</code>).
+  </app-aviso-api>
   <p>Signal mantiene el término local; <code>toObservable</code>, <code>debounceTime</code> y <code>switchMap</code> gestionan el flujo HTTP y cancelan la petición anterior.</p>
   <label class="form-label" for="curso-query">Buscar cursos</label>
   <input id="curso-query" class="form-control" type="search" (input)="actualizarTermino($event)" aria-describedby="busqueda-resultados">

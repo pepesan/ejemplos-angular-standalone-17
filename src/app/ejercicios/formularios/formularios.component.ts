@@ -3,13 +3,15 @@ import {Formulario} from "./formulario";
 
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
 @Component({
     selector: 'app-formularios',
     imports: [
-        FormsModule,
-        CommonModule
-    ],
+    FormsModule,
+    CommonModule,
+    EnunciadoComponent
+  ],
     templateUrl: './formularios.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './formularios.component.css'

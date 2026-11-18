@@ -1,5 +1,19 @@
-<div>
-  <h2>Numero: {{numeroSenal()}}</h2>
-  <h2>Mitad: {{mitadSenal()}}</h2>
+<app-enunciado titulo="Ejercicio práctico de Signals">
+  <p>Practica con signals escribibles y derivadas.</p>
+  <ul>
+    <li>Crea una signal <code>numeroSenal</code> con el valor inicial 3.</li>
+    <li>En el constructor, cambia su valor a 7 con <code>set()</code>.</li>
+    <li>Crea una signal derivada con <code>computed()</code> que devuelva la mitad del número.</li>
+    <li>Muestra en la plantilla «Numero» y «Mitad» (recuerda leer las signals con paréntesis).</li>
+  </ul>
+  <div solucion>
+    <app-aviso-api tipo="moderno" titulo="Disponibilidad: estable desde Angular 17.">
+      <code>signal()</code> y <code>computed()</code> eran developer preview en la v16.
+    </app-aviso-api>
+    <div>
+      <h2>Numero: {{numeroSenal()}}</h2>
+      <h2>Mitad: {{mitadSenal()}}</h2>
 
-</div>
+    </div>
+  </div>
+</app-enunciado>

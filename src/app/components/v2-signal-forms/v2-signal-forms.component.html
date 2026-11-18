@@ -1,6 +1,9 @@
 <section class="container py-3" aria-labelledby="signal-form-heading">
   <h1 id="signal-form-heading">Signal Forms (Angular 22)</h1>
-  <p>Signal Forms es estable desde Angular 22. Compara este modelo Signal y validación por esquema con el formulario reactivo tipado.</p>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: estable desde Angular 22.">
+    Signal Forms (<code>form()</code>) es la alternativa basada en signals a los formularios reactivos (según angular.dev). En versiones anteriores, usa formularios reactivos.
+  </app-aviso-api>
+  <p>Compara este modelo Signal y validación por esquema con el formulario reactivo tipado.</p>
   <form (submit)="guardar($event)" novalidate>
     <div class="mb-3">
       <label class="form-label" for="signal-nombre">Nombre</label>

@@ -1,6 +1,12 @@
 <section class="container py-3" aria-labelledby="estado-compartido-title">
   <h1 id="estado-compartido-title">Comunicación mediante estado compartido</h1>
-  <p>Estos dos componentes son hermanos: ninguno recibe datos del otro mediante <code>@Input</code> ni le envía eventos con <code>@Output</code>. Ambos inyectan el mismo servicio raíz, que conserva el estado en un Signal.</p>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: el servicio usa &#64;Service(), disponible desde Angular 22.0.">
+    Es un singleton: todos los componentes comparten la misma instancia. En versiones anteriores, usa
+    <code>&#64;Injectable(&#123; providedIn: 'root' &#125;)</code>; los Signals (<code>signal()</code>, <code>computed()</code>)
+    son estables desde Angular 17.
+  </app-aviso-api>
+
+  <p>Estos dos componentes son hermanos: ninguno recibe datos del otro mediante <code>&#64;Input</code> ni le envía eventos con <code>&#64;Output</code>. Ambos piden con <code>inject()</code> el mismo servicio, que conserva el estado en un Signal.</p>
 
   <div class="row g-3 my-3">
     <div class="col-12 col-lg-6">
@@ -14,6 +20,15 @@
   <aside class="alert alert-info" aria-label="Cómo funciona este ejemplo">
     <strong>Flujo:</strong> Componente A → servicio singleton → Componente B. El componente A actualiza el Signal; Angular actualiza el resumen y el valor calculado sin que el padre tenga que reenviar datos.
   </aside>
+
+  <h2 class="h5">Por qué funciona (y cuándo dejaría de funcionar)</h2>
+  <ul>
+    <li>Funciona porque el servicio es <strong>singleton</strong>: hay una sola instancia en toda la aplicación, la del inyector raíz.</li>
+    <li>El estado es privado y se expone de solo lectura (<code>asReadonly()</code>). Los componentes solo cambian el valor llamando a los métodos del servicio.</li>
+    <li>El valor «doble» es un <code>computed()</code>: se recalcula solo cuando cambia el valor, sin <code>effect()</code>.</li>
+    <li>Dejaría de compartir si un componente declarase el servicio en <code>providers</code>: tendría su propia copia. Compáralo en
+      <a routerLink="/v2/servicio-injectable">&#64;Injectable: constructor frente a inject()</a>.</li>
+  </ul>
 
   <p class="text-body-secondary">Este patrón integrado de Angular cubre estado compartido sencillo. Para aplicaciones con estado global más complejo, NgRx ofrece SignalStore como solución especializada.</p>
 </section>

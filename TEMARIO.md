@@ -19,7 +19,6 @@ Duración total: **30 horas teórico-prácticas**.
 - Creación y estructura de componentes.
 - Plantillas y estilos.
 - Interpolación y property binding.
-- Event binding y uso de `$event`.
 - Two-way data binding.
 - Directivas estructurales y de atributo.
 - Ciclo de vida de los componentes.
@@ -40,6 +39,8 @@ Duración total: **30 horas teórico-prácticas**.
 
 - Creación y utilización de servicios.
 - Inyección de dependencias.
+- Servicios `@Service()` e `@Injectable()`: inyección con `inject()` y con constructor.
+- Ámbito de los servicios: singleton y servicios acotados a un componente.
 - Cliente HTTP.
 - Consulta y presentación de datos.
 - Gestión de estados de carga y errores.
@@ -48,8 +49,9 @@ Duración total: **30 horas teórico-prácticas**.
 - Manejo global de errores.
 - Ejercicio práctico.
 
-## 5. Formularios reactivos
+## 5. Eventos y Formularios
 
+- Event binding y uso de `$event`.
 - Creación del modelo del formulario.
 - `FormControl` y `FormGroup`.
 - Asociación del formulario al componente.

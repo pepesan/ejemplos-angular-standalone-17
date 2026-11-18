@@ -1,13 +1,23 @@
-<div>
-  <button (click)="cambia()">Cambia</button>
-  @if (presenta) {
-    <p>
-      Presenta contenido
-    </p>
-  }
-  @if (presenta){
-    <p>
-      Presenta contenido con &#64;if
-    </p>
-  }
-</div>
+<app-enunciado titulo="Ejercicio de condicionales">
+  <p>Crea un componente con un botón «Cambia» y una propiedad booleana <code>presenta</code> que empiece en <code>true</code>.</p>
+  <ul>
+    <li>Al pulsar el botón, la propiedad debe invertir su valor.</li>
+    <li>Muestra dos párrafos protegidos con <code>&#64;if (presenta)</code>: «Presenta contenido» y «Presenta contenido con &#64;if».</li>
+    <li>Ambos párrafos deben aparecer y desaparecer a la vez al pulsar el botón.</li>
+  </ul>
+  <div solucion>
+    <div>
+      <button (click)="cambia()">Cambia</button>
+      @if (presenta) {
+        <p>
+          Presenta contenido
+        </p>
+      }
+      @if (presenta){
+        <p>
+          Presenta contenido con &#64;if
+        </p>
+      }
+    </div>
+  </div>
+</app-enunciado>

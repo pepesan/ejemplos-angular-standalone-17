@@ -1,7 +1,19 @@
-<div>
-  <h2>Mayúsculas : {{titulo | uppercase}}</h2>
-  <h2>Minúsculas : {{titulo | lowercase}}</h2>
-  <h2>Porcentaje : {{numero | percent}}</h2>
-  <h2>Precio : {{numero | currency: 'EUR'}}</h2>
-  <h2>Fecha: 'd/M/yy' {{fecha |  date: 'd/M/yy'}}</h2>
-</div>
+<app-enunciado titulo="Ejercicio de pipes">
+  <p>Da formato a datos de un componente con pipes de Angular.</p>
+  <p>El componente tiene un título («Ejercicio»), un número (0,25) y la fecha actual. Muestra:</p>
+  <ul>
+    <li>el título en mayúsculas y en minúsculas (<code>uppercase</code>, <code>lowercase</code>);</li>
+    <li>el número como porcentaje (<code>percent</code>);</li>
+    <li>el número como precio en euros (<code>currency: 'EUR'</code>);</li>
+    <li>la fecha con el formato <code>d/M/yy</code> (<code>date</code>).</li>
+  </ul>
+  <div solucion>
+    <div>
+      <h2>Mayúsculas : {{titulo | uppercase}}</h2>
+      <h2>Minúsculas : {{titulo | lowercase}}</h2>
+      <h2>Porcentaje : {{numero | percent}}</h2>
+      <h2>Precio : {{numero | currency: 'EUR'}}</h2>
+      <h2>Fecha: 'd/M/yy' {{fecha |  date: 'd/M/yy'}}</h2>
+    </div>
+  </div>
+</app-enunciado>

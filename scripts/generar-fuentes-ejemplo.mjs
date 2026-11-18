@@ -8,7 +8,7 @@ import { dirname, join, normalize } from 'node:path';
 
 const RAIZ = 'src/app';
 const SALIDA = 'src/app/navigation/fuente-ejemplo/fuentes-ejemplo.generated.ts';
-const EXCLUIDOS = /\.(spec|stories)\.ts$|(^|\/)app\.routes\.ts$|\.generated\.ts$/;
+const EXCLUIDOS = /\.(spec|stories)\.ts$|(^|\/)(enunciado\/enunciado|aviso-api\/aviso-api)\.component\.ts$|(^|\/)app\.routes\.ts$|\.generated\.ts$/;
 
 function ficherosTs(dir) {
   return readdirSync(dir).flatMap((n) => {

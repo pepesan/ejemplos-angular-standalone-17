@@ -1,24 +1,35 @@
-<div>
-  <h3>Listado de partidos</h3>
+<app-enunciado titulo="Ejercicio de consulta HTTP">
+  <p>Consulta un JSON remoto con resultados de partidos y muéstralo de dos maneras.</p>
   <ul>
-    @for (resultado of listado | async; track resultado) {
-      <li>
-        {{resultado.nombre}}: {{resultado.dipu}}
-        <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-          width="90px"
-          height="90px" alt="Logo partido {{resultado.nombre}}"/>
-      </li>
-    }
+    <li>Crea un servicio <code>ResultadoService</code> con <code>HttpClient</code> que haga un <code>get</code> a <code>resultados.json</code> y devuelva un <code>Observable</code> de resultados (<code>nombre</code>, <code>dipu</code>, <code>imagen</code>). Si falla, debe devolver una lista vacía y registrar el error en consola.</li>
+    <li>Primer listado: convierte el Observable en <code>Promise</code> y píntalo con el pipe <code>async</code>. Es el enfoque legado: en código nuevo se usa <code>firstValueFrom</code>.</li>
+    <li>Segundo listado: suscríbete al Observable, guarda el último valor en una signal y pinta la lista con <code>&#64;for</code> y <code>&#64;empty</code>. Cancela la suscripción en <code>ngOnDestroy</code>.</li>
+    <li>Cada elemento muestra nombre, diputados y la imagen del partido con un texto alternativo.</li>
   </ul>
-  <h3>Listado de partidos con Señales y Control Flow</h3>
-  <ul>
-    @for (item of partidosSignal(); track item.nombre) {
-      <li>
-        {{ item.nombre }}: {{ item.dipu }}
-        <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" alt="Logo partido {{ item.nombre }}" />
-      </li>
-      }@empty {
-      <li> There are no results.</li>
-    }
-  </ul>
-</div>
+  <div solucion>
+    <div>
+      <h3>Listado de partidos</h3>
+      <ul>
+        @for (resultado of listado | async; track resultado) {
+          <li>
+            {{resultado.nombre}}: {{resultado.dipu}}
+            <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
+              width="90px"
+              height="90px" alt="Logo partido {{resultado.nombre}}"/>
+          </li>
+        }
+      </ul>
+      <h3>Listado de partidos con Señales y Control Flow</h3>
+      <ul>
+        @for (item of partidosSignal(); track item.nombre) {
+          <li>
+            {{ item.nombre }}: {{ item.dipu }}
+            <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" alt="Logo partido {{ item.nombre }}" />
+          </li>
+          }@empty {
+          <li> There are no results.</li>
+        }
+      </ul>
+    </div>
+  </div>
+</app-enunciado>
