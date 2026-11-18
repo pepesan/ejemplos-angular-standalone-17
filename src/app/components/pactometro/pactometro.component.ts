@@ -1,8 +1,7 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
-import {PactometroService} from "../../services/pactometro.service";
+import {PactometroService, ResultadosPactometro} from "../../services/pactometro.service";
 
 import {Partido} from "../partidos/models/partido";
-import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-pactometro',
@@ -15,15 +14,13 @@ export class PactometroComponent {
   // La aplicación es zoneless (sin provideZoneChangeDetection): una propiedad asignada dentro de
   // subscribe() no avisa a Angular de que debe repintar, así que el estado va en signals.
   resultados = signal<Partido[]>([]);
-  resultadosObservable: Observable<Partido[]>;
-  error = signal(false);
-  private resultadosSubscribe: Subscription;
+  origen = signal<ResultadosPactometro['origen']>('remoto');
 
   constructor(private pactometroService: PactometroService) {
-    this.resultadosObservable = this.pactometroService.getResultados();
-    this.resultadosSubscribe = this.resultadosObservable.subscribe({
-      next: data => this.resultados.set(data),
-      error: () => this.error.set(true)
+    // El servicio ya resuelve los fallos (devuelve datos de respaldo), así que aquí solo se pinta.
+    this.pactometroService.getResultados().subscribe(({ partidos, origen }) => {
+      this.resultados.set(partidos);
+      this.origen.set(origen);
     });
   }
 }
