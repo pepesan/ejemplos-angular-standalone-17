@@ -1,0 +1,23 @@
+<div>
+  @if (origen() === 'respaldo') {
+    <div class="alert alert-warning" role="alert">
+      No se pudieron cargar los resultados del servidor; se muestran datos de respaldo.
+    </div>
+  }
+  <h3>Partidos ordenados con porcentaje de escaños (datos modificados en el servicio)</h3>
+  <table class="table table-sm w-auto">
+    <thead>
+      <tr><th>#</th><th>Partido</th><th>Escaños</th><th>Porcentaje</th></tr>
+    </thead>
+    <tbody>
+      @for (partido of partidos(); track partido.nombre; let i = $index) {
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ partido.nombre }}</td>
+          <td>{{ partido.dipu }}</td>
+          <td>{{ partido.porcentaje }} %</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

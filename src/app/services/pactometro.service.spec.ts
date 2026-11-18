@@ -34,4 +34,25 @@ describe('PactometroService', () => {
     expect(error).toBeUndefined();
     expect(resultado).toEqual({ partidos: PARTIDOS_RESPALDO, origen: 'respaldo' });
   });
+
+  it('getResultadosProcesados ordena, descarta partidos sin escaños y calcula el porcentaje', () => {
+    let resultado: any;
+    service.getResultadosProcesados().subscribe((r) => (resultado = r));
+    http.expectOne(url).flush([
+      { nombre: 'B', dipu: 1, imagen: '' },
+      { nombre: 'A', dipu: 3, imagen: '' },
+      { nombre: 'Cero', dipu: 0, imagen: '' },
+    ]);
+    expect(resultado.origen).toBe('remoto');
+    expect(resultado.partidos.map((p: any) => [p.nombre, p.porcentaje])).toEqual([['A', 75], ['B', 25]]);
+  });
+
+  it('getResultadosProcesados también procesa los datos de respaldo si la petición falla', () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    let resultado: any;
+    service.getResultadosProcesados().subscribe((r) => (resultado = r));
+    http.expectOne(url).flush('fallo', { status: 500, statusText: 'Server Error' });
+    expect(resultado.origen).toBe('respaldo');
+    expect(resultado.partidos[0].porcentaje).toBeGreaterThan(0);
+  });
 });

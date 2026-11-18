@@ -14,6 +14,7 @@ import {UsoServicioBasicoComponent} from "./components/uso-servicio-basico/uso-s
 import {ListadoPartidosComponent} from "./components/partidos/components/listado-partidos/listado-partidos.component";
 import {PeticionPostComponent} from "./components/peticion-post/peticion-post.component";
 import {PactometroComponent} from "./components/pactometro/pactometro.component";
+import {PactometroProcesadoComponent} from "./components/pactometro-procesado/pactometro-procesado.component";
 import {SignalsComponent} from "./components/signals/signals.component";
 import {MainFormComponent} from "./components/formularios/main-form/main-form.component";
 import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.component";
@@ -69,6 +70,7 @@ export const routes: Routes = [
   { path: 'partidos', component: ListadoPartidosComponent, data: { fuente: 'src/app/components/partidos/components/listado-partidos/listado-partidos.component.ts' }},
   { path: 'peticion-post', component: PeticionPostComponent, data: { fuente: 'src/app/components/peticion-post/peticion-post.component.ts' }},
   { path: 'pactometro', component: PactometroComponent, data: { fuente: 'src/app/components/pactometro/pactometro.component.ts' }},
+  { path: 'pactometro-procesado', component: PactometroProcesadoComponent, data: { fuente: 'src/app/components/pactometro-procesado/pactometro-procesado.component.ts' }},
   { path: 'ciclo', component: CicloDeVidaComponent, data: { fuente: 'src/app/components/ciclo-de-vida/ciclo-de-vida.component.ts' } },
   { path: 'events', component: PrincipalEventosComponent, data: { fuente: 'src/app/components/principal-eventos/principal-eventos.component.ts' } },
   { path: 'form', component: MainFormComponent, data: { fuente: 'src/app/components/formularios/main-form/main-form.component.ts' } },

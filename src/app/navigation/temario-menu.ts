@@ -65,6 +65,7 @@ export const TEMARIO_UNITS: NavGroup[] = [
       { path: '/v2/estado-compartido', label: 'V2 · Comunicación mediante estado compartido con Signals' },
       { path: '/ejercicio-servicios', label: 'V1 · Ejercicio de servicios' },
       { path: '/pactometro', label: 'V1 · Consumo de API con HttpClient (pactometro)' },
+      { path: '/pactometro-procesado', label: 'V1 · Datos de la API modificados en el servicio (pactometro)' },
       { path: '/v2/consumo-api', label: 'V2 · HttpClient y estados de carga/error' },
       { path: '/ejercicio-resultado', label: 'V1 · Ejercicio de consulta HTTP' },
       { path: '/v2/autenticacion', label: 'V2 · Interceptor JWT y errores globales (interceptores funcionales desde v15)' },

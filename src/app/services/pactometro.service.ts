@@ -11,6 +11,11 @@ export interface ResultadosPactometro {
   origen: 'remoto' | 'respaldo';
 }
 
+/** Partido ya procesado por el servicio: añade el porcentaje de escaños sobre el total. */
+export interface PartidoProcesado extends Partido {
+  porcentaje: number;
+}
+
 /**
  * Datos locales que el servicio devuelve cuando la petición falla, para que el componente
  * siempre tenga algo que mostrar. Son una muestra, no los resultados reales.
@@ -40,6 +45,24 @@ export class PactometroService {
       catchError(error => {
         console.error('Error fetching resultados', error);
         return of<ResultadosPactometro>({ partidos: PARTIDOS_RESPALDO, origen: 'respaldo' });
+      })
+    );
+  }
+
+  /**
+   * Carga los datos con la misma petición (y el mismo respaldo ante fallos) y los MODIFICA antes de
+   * entregarlos al componente: descarta partidos sin escaños, los ordena de mayor a menor y calcula
+   * `porcentaje` sobre el total de escaños. El componente recibe los datos ya listos para pintar.
+   */
+  getResultadosProcesados(): Observable<{ partidos: PartidoProcesado[]; origen: ResultadosPactometro['origen'] }> {
+    return this.getResultados().pipe(
+      map(({ partidos, origen }) => {
+        const validos = partidos.filter((p) => p.dipu > 0);
+        const total = validos.reduce((suma, p) => suma + p.dipu, 0);
+        const procesados = validos
+          .map((p) => ({ ...p, porcentaje: total ? Math.round((p.dipu / total) * 1000) / 10 : 0 }))
+          .sort((a, b) => b.dipu - a.dipu);
+        return { partidos: procesados, origen };
       })
     );
   }
