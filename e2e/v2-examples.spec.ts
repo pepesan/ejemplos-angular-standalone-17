@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 test('consume una respuesta HTTP local controlada y muestra el estado vacío', async ({ page }) => {
   await page.route('**/api/resultados', (route) => route.fulfill({ json: [] }));

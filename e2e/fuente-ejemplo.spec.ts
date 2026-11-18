@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 // Contrato de usuario: cada ejemplo avisa de los ficheros que lo implementan, con una píldora por tipo.
 test('/pipes lista componente, directiva y pipe antes del ejemplo', async ({ page }) => {
