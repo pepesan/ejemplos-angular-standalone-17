@@ -46,6 +46,20 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/pactometro-avisos/pactometro-avisos.component.ts': [
+    {
+      ruta: 'src/app/components/pactometro-avisos/pactometro-avisos.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/pactometro.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/partidos/models/partido.ts',
+      tipo: 'modelo'
+    }
+  ],
   'src/app/components/pactometro-procesado/pactometro-procesado.component.ts': [
     {
       ruta: 'src/app/components/pactometro-procesado/pactometro-procesado.component.ts',

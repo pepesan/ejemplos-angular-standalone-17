@@ -15,7 +15,10 @@ describe('PactometroService', () => {
     http = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => http.verify());
+  afterEach(() => {
+    http.verify({ ignoreCancelled: true });
+    vi.useRealTimers();
+  });
 
   it('devuelve los partidos del servidor con origen remoto', () => {
     const datos = [{ nombre: 'PP', dipu: 1, imagen: 'pp.png' }];
@@ -54,5 +57,41 @@ describe('PactometroService', () => {
     http.expectOne(url).flush('fallo', { status: 500, statusText: 'Server Error' });
     expect(resultado.origen).toBe('respaldo');
     expect(resultado.partidos[0].porcentaje).toBeGreaterThan(0);
+  });
+
+  describe('getResultadosConReintentos', () => {
+    it('reintenta dos veces y, si sigue fallando, emite fallo con datos de respaldo', async () => {
+      vi.useFakeTimers();
+      const eventos: any[] = [];
+      service.getResultadosConReintentos({ esperaMs: 10 }).subscribe((e) => eventos.push(e));
+      for (let i = 0; i < 3; i++) {
+        http.expectOne(url).flush('fallo', { status: 500, statusText: 'Server Error' });
+        await vi.advanceTimersByTimeAsync(10);
+      }
+      expect(eventos.map((e) => e.tipo)).toEqual(['reintento', 'reintento', 'fallo']);
+      expect(eventos[0]).toMatchObject({ intento: 1, maximo: 2 });
+      expect(eventos[2].partidos).toEqual(PARTIDOS_RESPALDO);
+    });
+
+    it('emite éxito si un reintento funciona', async () => {
+      vi.useFakeTimers();
+      const eventos: any[] = [];
+      service.getResultadosConReintentos({ esperaMs: 10 }).subscribe((e) => eventos.push(e));
+      http.expectOne(url).flush('fallo', { status: 500, statusText: 'Server Error' });
+      await vi.advanceTimersByTimeAsync(10);
+      http.expectOne(url).flush([{ nombre: 'PP', dipu: 1, imagen: '' }]);
+      expect(eventos.map((e) => e.tipo)).toEqual(['reintento', 'exito']);
+    });
+
+    it('cuenta como fallo una petición que supera el timeout', async () => {
+      vi.useFakeTimers();
+      const eventos: any[] = [];
+      service.getResultadosConReintentos({ timeoutMs: 100, esperaMs: 10, reintentos: 1 }).subscribe((e) => eventos.push(e));
+      await vi.advanceTimersByTimeAsync(100);
+      expect(eventos[0].tipo).toBe('reintento');
+      expect(eventos[0].motivo).toContain('tiempo de espera');
+      await vi.advanceTimersByTimeAsync(10 + 100);
+      expect(eventos.map((e) => e.tipo)).toEqual(['reintento', 'fallo']);
+    });
   });
 });
