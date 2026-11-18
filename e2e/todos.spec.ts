@@ -14,7 +14,7 @@ test('removes a task from the list', async ({ page }) => {
 test('navigates through V2 and validates a typed registration form', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Temario', exact: true }).hover();
-  await page.getByRole('button', { name: '5. Formularios reactivos', exact: true }).click();
+  await page.getByRole('button', { name: '5. Eventos y Formularios', exact: true }).click();
   await page.getByRole('button', { name: 'V2 · Formulario reactivo tipado', exact: true }).click();
 
   await expect(page).toHaveURL(/\/v2\/formulario-tipado$/);

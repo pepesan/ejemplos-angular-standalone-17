@@ -34,8 +34,6 @@ export const TEMARIO_UNITS: NavGroup[] = [
       { path: '/ciclo', label: 'V1 · Ciclo de vida de componentes' },
       { path: '/pipes', label: 'V1 · Pipes y plantillas' },
       { path: '/ejercicio-tuberias', label: 'V1 · Ejercicio de pipes' },
-      { path: '/events', label: 'V1 · Eventos y $event' },
-      { path: '/ejercicio-eventos', label: 'V1 · Ejercicio de eventos' },
       { path: '/v2/i18n', label: 'V2 · Internacionalización de plantillas' },
     ],
   },
@@ -55,7 +53,6 @@ export const TEMARIO_UNITS: NavGroup[] = [
       { path: '/service', label: 'V1 · Observables' },
       { path: '/partidos', label: 'V1 · Comparativa de Promesas, Observables y Signals' },
       { path: '/v2/busqueda-reactiva', label: 'V2 · Signals y Observables con RxJS' },
-      { path: '/v2/estado-compartido', label: 'V2 · Comunicación mediante estado compartido con Signals' },
     ],
   },
   {
@@ -63,6 +60,7 @@ export const TEMARIO_UNITS: NavGroup[] = [
     label: '4. Servicios y comunicación HTTP',
     items: [
       { path: '/servicio-basico', label: 'V1 · Servicios e inyección de dependencias' },
+      { path: '/v2/estado-compartido', label: 'V2 · Comunicación mediante estado compartido con Signals' },
       { path: '/ejercicio-servicios', label: 'V1 · Ejercicio de servicios' },
       { path: '/v2/consumo-api', label: 'V2 · HttpClient y estados de carga/error' },
       { path: '/ejercicio-resultado', label: 'V1 · Ejercicio de consulta HTTP' },
@@ -71,8 +69,10 @@ export const TEMARIO_UNITS: NavGroup[] = [
   },
   {
     id: 'temario-5',
-    label: '5. Formularios reactivos',
+    label: '5. Eventos y Formularios',
     items: [
+      { path: '/events', label: 'V1 · Eventos y $event' },
+      { path: '/ejercicio-eventos', label: 'V1 · Ejercicio de eventos' },
       { path: '/form-bootstrap', label: 'V1 · Controles de formulario y estilos Bootstrap' },
       { path: '/form', label: 'V1 · Formulario de plantilla con ngModel' },
       { path: '/form-radios', label: 'V1 · Radios y checkbox con ngModel' },
