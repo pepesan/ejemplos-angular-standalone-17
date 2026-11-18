@@ -69,6 +69,7 @@ export const routes: Routes = [
   { path: 'partidos', component: ListadoPartidosComponent, data: { fuente: 'src/app/components/partidos/components/listado-partidos/listado-partidos.component.ts' }},
   { path: 'peticion-post', component: PeticionPostComponent, data: { fuente: 'src/app/components/peticion-post/peticion-post.component.ts' }},
   { path: 'pactometro', component: PactometroComponent, data: { fuente: 'src/app/components/pactometro/pactometro.component.ts' }},
+  { path: 'envio-post', loadComponent: () => import('./components/envio-post/envio-post.component').then(m => m.EnvioPostComponent), data: { fuente: 'src/app/components/envio-post/envio-post.component.ts' }},
   { path: 'pactometro-avisos', loadComponent: () => import('./components/pactometro-avisos/pactometro-avisos.component').then(m => m.PactometroAvisosComponent), data: { fuente: 'src/app/components/pactometro-avisos/pactometro-avisos.component.ts' }},
   { path: 'pactometro-procesado', loadComponent: () => import('./components/pactometro-procesado/pactometro-procesado.component').then(m => m.PactometroProcesadoComponent), data: { fuente: 'src/app/components/pactometro-procesado/pactometro-procesado.component.ts' }},
   { path: 'ciclo', component: CicloDeVidaComponent, data: { fuente: 'src/app/components/ciclo-de-vida/ciclo-de-vida.component.ts' } },

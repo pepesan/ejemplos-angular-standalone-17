@@ -24,6 +24,24 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/envio-post/envio-post.component.ts': [
+    {
+      ruta: 'src/app/components/envio-post/envio-post.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/envio-post.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/classes/post-data.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/classes/post-data-response.ts',
+      tipo: 'modelo'
+    }
+  ],
   'src/app/components/formulario-tipado/formulario-tipado.component.ts': [
     {
       ruta: 'src/app/components/formulario-tipado/formulario-tipado.component.ts',
