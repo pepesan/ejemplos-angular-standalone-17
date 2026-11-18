@@ -9,6 +9,11 @@ h1 { font-size: 1.5rem; } h2 { font-size: 1.15rem; margin: 1.25rem 0 .5rem; }
 .nota { padding: .6rem .8rem; border-left: .25rem solid var(--ac); }
 .practicas { padding: .6rem .8rem; margin: 1rem 0; } .practicas summary { cursor: pointer; font-weight: 600; min-height: 2.75rem; display: flex; align-items: center; }
 .tarjeta { padding: 1rem; margin: 1rem 0; }
+.titulo-lista { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; justify-content: space-between; margin-top: 1.25rem; } .titulo-lista h2 { margin: 0; }
+/* Diálogo modal nativo (<dialog>; la clase no puede llamarse "modal": chocaría con la de Bootstrap): casi a pantalla completa en móvil y centrado en escritorio. */
+.dlg { width: calc(100% - 1rem); max-width: 32rem; max-height: calc(100dvh - 1rem); overflow: auto; padding: 0; border: 1px solid var(--bd); border-radius: .75rem; background: var(--app-surface, #fff); color: inherit; }
+.dlg::backdrop { background: rgb(0 0 0 / .55); }
+.dlg-form { padding: 1rem; } .dlg-cabecera { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: .5rem; } .dlg-cabecera h2 { margin: 0; }
 .campo { display: flex; flex-direction: column; gap: .25rem; margin-bottom: .75rem; }
 label { font-weight: 600; }
 input, select { font: inherit; min-height: 2.75rem; padding: .4rem .6rem; border: 1px solid var(--app-muted, #6c757d); border-radius: .4rem; background: var(--app-surface, #fff); color: inherit; width: 100%; box-sizing: border-box; }
@@ -50,4 +55,5 @@ td[data-label]::before { content: attr(data-label); font-weight: 600; color: var
   .celda-acciones .boton { margin-right: .35rem; }
   .paginador { grid-template-columns: 1fr auto auto; align-items: center; }
   .tarjeta { max-width: 36rem; }
+  .dlg-form { padding: 1.5rem; }
 }

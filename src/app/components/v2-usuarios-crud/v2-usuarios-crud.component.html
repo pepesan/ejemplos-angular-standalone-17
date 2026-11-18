@@ -59,48 +59,57 @@
     </div>
 
     @if (esAdmin()) {
-      <form class="tarjeta" [formGroup]="formulario" (ngSubmit)="guardar()" novalidate aria-labelledby="form-titulo">
-        <h2 id="form-titulo">{{ editandoId() === null ? 'Nuevo usuario' : 'Editar usuario #' + editandoId() }}</h2>
-        <div class="campo">
-          <label for="u-nombre">Nombre</label>
-          <input id="u-nombre" #campoNombre formControlName="nombre" autocomplete="off"
-                 [attr.aria-invalid]="(formulario.controls.nombre.touched && formulario.controls.nombre.invalid) || erroresServidor().nombre ? 'true' : null"
-                 aria-describedby="e-nombre">
-          <p id="e-nombre" class="error-campo">
-            @if (formulario.controls.nombre.touched && formulario.controls.nombre.invalid) { El nombre es obligatorio (2 a 80 caracteres). }
-            @else if (erroresServidor().nombre; as e) { {{ e }} }
-          </p>
-        </div>
-        <div class="campo">
-          <label for="u-email">Email</label>
-          <input id="u-email" type="email" inputmode="email" formControlName="email" autocomplete="off" autocapitalize="none"
-                 [attr.aria-invalid]="(formulario.controls.email.touched && formulario.controls.email.invalid) || erroresServidor().email ? 'true' : null"
-                 aria-describedby="e-email">
-          <p id="e-email" class="error-campo">
-            @if (formulario.controls.email.touched && formulario.controls.email.invalid) { Introduce un email válido. }
-            @else if (erroresServidor().email; as e) { {{ e }} }
-          </p>
-        </div>
-        <div class="campo">
-          <label for="u-rol">Rol</label>
-          <select id="u-rol" formControlName="rol">
-            @for (rol of roles; track rol) { <option [value]="rol">{{ rol }}</option> }
-          </select>
-        </div>
-        <div class="acciones">
-          <button class="boton primario" type="submit" [disabled]="guardando()">
-            {{ guardando() ? 'Guardando…' : editandoId() === null ? 'Crear usuario' : 'Guardar cambios' }}
-          </button>
-          @if (editandoId() !== null) {
+      <dialog #dialogo class="dlg" aria-labelledby="form-titulo" (close)="restablecer()" (click)="clicFondo($event)">
+        <form class="dlg-form" [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
+          <header class="dlg-cabecera">
+            <h2 id="form-titulo">{{ editandoId() === null ? 'Nuevo usuario' : 'Editar usuario #' + editandoId() }}</h2>
+            <button class="boton" type="button" (click)="cancelarEdicion()" aria-label="Cerrar">×</button>
+          </header>
+          <div class="campo">
+            <label for="u-nombre">Nombre</label>
+            <input id="u-nombre" formControlName="nombre" autocomplete="off" autofocus
+                   [attr.aria-invalid]="(formulario.controls.nombre.touched && formulario.controls.nombre.invalid) || erroresServidor().nombre ? 'true' : null"
+                   aria-describedby="e-nombre">
+            <p id="e-nombre" class="error-campo">
+              @if (formulario.controls.nombre.touched && formulario.controls.nombre.invalid) { El nombre es obligatorio (2 a 80 caracteres). }
+              @else if (erroresServidor().nombre; as e) { {{ e }} }
+            </p>
+          </div>
+          <div class="campo">
+            <label for="u-email">Email</label>
+            <input id="u-email" type="email" inputmode="email" formControlName="email" autocomplete="off" autocapitalize="none"
+                   [attr.aria-invalid]="(formulario.controls.email.touched && formulario.controls.email.invalid) || erroresServidor().email ? 'true' : null"
+                   aria-describedby="e-email">
+            <p id="e-email" class="error-campo">
+              @if (formulario.controls.email.touched && formulario.controls.email.invalid) { Introduce un email válido. }
+              @else if (erroresServidor().email; as e) { {{ e }} }
+            </p>
+          </div>
+          <div class="campo">
+            <label for="u-rol">Rol</label>
+            <select id="u-rol" formControlName="rol">
+              @for (rol of roles; track rol) { <option [value]="rol">{{ rol }}</option> }
+            </select>
+          </div>
+          @if (errorGeneral(); as mensaje) { <p class="error" role="alert">{{ mensaje }}</p> }
+          <div class="acciones">
+            <button class="boton primario" type="submit" [disabled]="guardando()">
+              {{ guardando() ? 'Guardando…' : editandoId() === null ? 'Crear usuario' : 'Guardar cambios' }}
+            </button>
             <button class="boton" type="button" (click)="cancelarEdicion()">Cancelar</button>
-          }
-        </div>
-      </form>
+          </div>
+        </form>
+      </dialog>
     } @else {
       <p class="nota" role="note">Tu rol solo permite consultar: crear, editar y borrar requiere ser <strong>admin</strong>.</p>
     }
 
-    <h2>Usuarios</h2>
+    <div class="titulo-lista">
+      <h2>Usuarios</h2>
+      @if (esAdmin()) {
+        <button class="boton primario" type="button" (click)="nuevo()">Nuevo usuario</button>
+      }
+    </div>
     <div class="herramientas">
       <div class="campo">
         <label for="filtro">Buscar por nombre o email</label>

@@ -55,10 +55,10 @@
                 },
                 {
                   // "anyComponentStyle": tamaño del CSS de CADA componente por separado.
-                  // Avisa a partir de 4 kB y falla a partir de 8 kB. (Antes 2 / 4 kB: una hoja de estilos
-                  // propia, sin framework de UI, como la del CRUD de usuarios, ocupa unos 3,5 kB.)
+                  // Avisa a partir de 6 kB y falla a partir de 8 kB. (Antes 2 / 4 kB: una hoja de estilos
+                  // propia, sin framework de UI, como la del CRUD de usuarios, ocupa unos 4,2 kB.)
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kb",
+                  "maximumWarning": "6kb",
                   "maximumError": "8kb"
                 }
               ],
