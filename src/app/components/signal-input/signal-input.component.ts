@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import {UseSignalInputComponent} from "../use-signal-input/use-signal-input.component";
 
 @Component({
@@ -11,8 +11,9 @@ import {UseSignalInputComponent} from "../use-signal-input/use-signal-input.comp
     styleUrl: './signal-input.component.css'
 })
 export class SignalInputComponent {
-  counter = 10;
+  // Estado local como signal: el hijo recibe su valor actual mediante `[value]="counter()"`.
+  counter = signal(10);
   onIncrement() {
-    this.counter++;
+    this.counter.update(v => v + 1);
   }
 }

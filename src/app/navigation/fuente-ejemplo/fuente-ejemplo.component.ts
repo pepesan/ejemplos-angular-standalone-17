@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, InjectionToken, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -17,6 +17,14 @@ const ETIQUETAS: Record<TipoElemento, string> = {
   modulo: 'Módulo',
   rutas: 'Rutas',
 };
+
+/** Con más elementos que este límite, la lista se pliega y el resto se muestra bajo demanda. */
+export const LIMITE_VISIBLES = 5;
+
+/** Mapa fichero principal → elementos. Se puede sustituir (p. ej. en Storybook) para mostrar estados concretos. */
+export const MAPA_FUENTES = new InjectionToken<Record<string, ElementoFuente[]>>('MAPA_FUENTES', {
+  factory: () => FUENTES_EJEMPLO,
+});
 
 /** Recorre la jerarquía de rutas activa y devuelve cada `data.fuente` declarado (sin duplicados). */
 export function recogerFuentes(raiz: ActivatedRouteSnapshot): string[] {
@@ -62,13 +70,18 @@ export function expandirFuentes(
           {{ elementos().length > 1 ? 'Ficheros del ejemplo' : 'Fichero del ejemplo' }}
         </p>
         <ul class="list-unstyled mb-0 d-flex flex-column gap-1">
-          @for (elemento of elementos(); track elemento.ruta) {
+          @for (elemento of visibles(); track elemento.ruta) {
             <li class="d-flex flex-wrap align-items-baseline gap-2">
               <span class="pildora" [class]="'pildora pildora--' + elemento.tipo">{{ etiqueta(elemento.tipo) }}</span>
               <code class="text-break">{{ elemento.ruta }}</code>
             </li>
           }
         </ul>
+        @if (ocultos() > 0 || expandido()) {
+          <button type="button" class="btn btn-link btn-sm p-0 mt-2" [attr.aria-expanded]="expandido()" (click)="alternar()">
+            {{ expandido() ? 'Mostrar menos' : 'Mostrar ' + ocultos() + ' más' }}
+          </button>
+        }
       </aside>
     }
   `,
@@ -99,12 +112,23 @@ export function expandirFuentes(
 })
 export class FuenteEjemploComponent {
   private readonly router = inject(Router);
+  private readonly mapa = inject(MAPA_FUENTES);
   readonly elementos = signal<ElementoFuente[]>(this.leerElementos());
+  readonly expandido = signal(false);
+  readonly visibles = computed(() => (this.expandido() ? this.elementos() : this.elementos().slice(0, LIMITE_VISIBLES)));
+  readonly ocultos = computed(() => Math.max(0, this.elementos().length - LIMITE_VISIBLES));
 
   constructor() {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd), takeUntilDestroyed(inject(DestroyRef)))
-      .subscribe(() => this.elementos.set(this.leerElementos()));
+      .subscribe(() => {
+        this.elementos.set(this.leerElementos());
+        this.expandido.set(false);
+      });
+  }
+
+  alternar(): void {
+    this.expandido.update((v) => !v);
   }
 
   etiqueta(tipo: TipoElemento): string {
@@ -112,6 +136,6 @@ export class FuenteEjemploComponent {
   }
 
   private leerElementos(): ElementoFuente[] {
-    return expandirFuentes(recogerFuentes(this.router.routerState.snapshot.root));
+    return expandirFuentes(recogerFuentes(this.router.routerState.snapshot.root), this.mapa);
   }
 }

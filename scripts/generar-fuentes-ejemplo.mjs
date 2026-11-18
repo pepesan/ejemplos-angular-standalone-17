@@ -2,6 +2,7 @@
 // Genera src/app/navigation/fuente-ejemplo/fuentes-ejemplo.generated.ts a partir del grafo de imports:
 // para cada `data: { fuente }` de las rutas, lista el fichero principal y todo lo que importa dentro de src/app
 // (componentes, pipes, directivas, servicios, modelos...), clasificado por tipo. Uso: npm run fuentes
+// Con `--check` (npm run fuentes:check) no escribe: sale con código 1 si el fichero generado está desfasado.
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, normalize } from 'node:path';
 
@@ -67,10 +68,19 @@ for (const raiz of [...raices].sort()) {
 }
 
 const cuerpo = JSON.stringify(mapa, null, 2).replace(/"(ruta|tipo)":/g, '$1:').replace(/"/g, "'");
-writeFileSync(
-  SALIDA,
+const contenido =
   `// Fichero generado por scripts/generar-fuentes-ejemplo.mjs (npm run fuentes). No editar a mano.\n` +
-    `import { ElementoFuente } from './fuente-ejemplo.tipos';\n\n` +
-    `export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = ${cuerpo};\n`,
-);
-console.log(`Generado ${SALIDA}: ${raices.size} ejemplos`);
+  `import { ElementoFuente } from './fuente-ejemplo.tipos';\n\n` +
+  `export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = ${cuerpo};\n`;
+
+if (process.argv.includes('--check')) {
+  const actual = existsSync(SALIDA) ? readFileSync(SALIDA, 'utf8') : '';
+  if (actual !== contenido) {
+    console.error(`${SALIDA} está desfasado. Ejecuta: npm run fuentes`);
+    process.exit(1);
+  }
+  console.log(`${SALIDA} actualizado (${raices.size} ejemplos)`);
+} else {
+  writeFileSync(SALIDA, contenido);
+  console.log(`Generado ${SALIDA}: ${raices.size} ejemplos`);
+}
