@@ -1,10 +1,22 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule, NgClass } from "@angular/common";
+import { NgClass, NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
+/**
+ * ENFOQUE LEGADO: `*ngIf`, `*ngFor` y `*ngSwitch` están obsoletos (deprecados) desde Angular v20.
+ * Se conservan para comparar. Alternativa recomendada: control flow integrado
+ * (`@if`, `@for`, `@switch`), ver `components/control-flow`.
+ */
 @Component({
     selector: 'app-directivas-builtin',
     imports: [
-    NgClass
+    NgClass,
+    NgIf,
+    NgFor,
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    RouterLink
 ],
     templateUrl: './condicionales.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
@@ -23,4 +35,8 @@ export class CondicionalesComponent {
     {"text": "valor 4"},
 
   ];
+
+  trackByText(_index: number, item: { text: string }): string {
+    return item.text;
+  }
 }

@@ -27,7 +27,7 @@ export const TEMARIO_UNITS: NavGroup[] = [
     items: [
       { path: '/todos', label: 'V2 · Lista de tareas con Signals' },
       { path: '/props', label: 'V1 · Componentes, interpolación y property binding' },
-      { path: '/directivas', label: 'V1 · Directivas estructurales y de atributo' },
+      { path: '/directivas', label: 'V1 · Directivas *ngIf, *ngFor, *ngSwitch (obsoleto desde v20)' },
       { path: '/control-flow', label: 'V2 · Control flow integrado' },
       { path: '/v2/seguridad', label: 'V2 · Seguridad en plantillas' },
       { path: '/ejercicio-condicionales', label: 'V1 · Ejercicio de condicionales' },

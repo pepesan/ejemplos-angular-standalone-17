@@ -1,39 +1,33 @@
 <div>
+  <aside class="legacy-aviso" role="note">
+    <strong>Enfoque legado (obsoleto desde Angular v20).</strong>
+    <code>*ngIf</code>, <code>*ngFor</code> y <code>*ngSwitch</code> están
+    deprecados desde la v20. Se conservan aquí solo para comparar; en código
+    nuevo usa el control flow integrado
+    (<code>&#64;if</code>, <code>&#64;for</code>, <code>&#64;switch</code>):
+    <a routerLink="/control-flow">ver la alternativa recomendada (V2 · Control flow integrado)</a>.
+  </aside>
+
   <div [ngClass]="isSpecial ? 'special' : ''">
     This div is special
   </div>
   <h2>Condicionales</h2>
-  @if (booleano) {
-    <p>
-      El booleano es true
-    </p>
-  }
-  @if (!booleano) {
-    <p>
-      El booleano es false
-    </p>
-  }
+  <p *ngIf="booleano">
+    El booleano es true
+  </p>
+  <p *ngIf="!booleano">
+    El booleano es false
+  </p>
   <h3>Bucle *ngFor</h3>
   <ul>
-    @for (item of datos; track item; let i = $index) {
-      <li>
-        {{i}}: {{item.text}}
-      </li>
-    }
+    <li *ngFor="let item of datos; let i = index; trackBy: trackByText">
+      {{i}}: {{item.text}}
+    </li>
   </ul>
-  <div>
-    @switch (currentItem) {
-      @case ('stout') {
-        <p>Stout</p>
-      }
-      @case ('stin') {
-        <p>Stin</p>
-      }
-      <!-- . . . -->
-      @default {
-        <p>default</p>
-      }
-    }
+  <div [ngSwitch]="currentItem">
+    <p *ngSwitchCase="'stout'">Stout</p>
+    <p *ngSwitchCase="'stin'">Stin</p>
+    <p *ngSwitchDefault>default</p>
   </div>
 
 </div>
