@@ -1,24 +1,23 @@
 <div>
-  @if (error) {
-    <div class="error-message">
-      <p>Error al cargar los resultados. Por favor, inténtalo de nuevo más tarde.</p>
+  @if (origen() === 'respaldo') {
+    <div class="error-message" role="alert">
+      <p>No se pudieron cargar los resultados del servidor; se muestran datos de respaldo.</p>
     </div>
   }
 
-  @if (!error && resultados) {
-    <div class="resultados">
-      <!-- Ejemplo de visualización de datos -->
-      <h3>Listado de partidos Asíncrono (Promesa)</h3>
-      <ul>
-        @for (resultado of resultados; track resultado) {
-          <li>
-            {{resultado.nombre}}: {{resultado.dipu}}
+  <div class="resultados">
+    <h3>Listado de partidos Asíncrono (Observable)</h3>
+    <ul>
+      @for (resultado of resultados(); track resultado.nombre) {
+        <li>
+          {{resultado.nombre}}: {{resultado.dipu}}
+          @if (resultado.imagen) {
             <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
               width="90px"
               height="90px" alt="Logo partido {{resultado.nombre}}"/>
-          </li>
-        }
-      </ul>
-    </div>
-  }
+          }
+        </li>
+      }
+    </ul>
+  </div>
 </div>

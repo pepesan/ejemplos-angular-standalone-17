@@ -1,9 +1,17 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { createServer } from 'node:http';
+import { crearRepositorioUsuarios, manejarUsuarios } from './usuarios.mjs';
 
 const port = Number(process.env.PORT ?? 3001);
 const jwtSecret = process.env.JWT_SECRET ?? 'solo-para-demostraciones-locales';
 const jwtIssuer = 'angular-course-demo';
+const usuarios = crearRepositorioUsuarios();
+
+// Cuentas de demostración del login (contraseña común: angular). `admin` puede escribir en /api/usuarios.
+const usuariosDemo = {
+  alumno: { sub: 'alumno-1', name: 'Alumno de demostración', role: 'student' },
+  admin: { sub: 'admin-1', name: 'Administrador de demostración', role: 'admin' },
+};
 
 const resultados = [
   { nombre: 'Angular', dipu: 8, imagen: '' },
@@ -90,7 +98,7 @@ const server = createServer(async (request, response) => {
   if (origin === 'http://localhost:4200' || origin === 'http://127.0.0.1:4200') {
     response.setHeader('access-control-allow-origin', origin);
     response.setHeader('access-control-allow-headers', 'content-type, authorization');
-    response.setHeader('access-control-allow-methods', 'GET, POST, OPTIONS');
+    response.setHeader('access-control-allow-methods', 'GET, POST, PUT, DELETE, OPTIONS');
     response.setHeader('vary', 'origin');
   }
   if (request.method === 'OPTIONS') {
@@ -101,6 +109,7 @@ const server = createServer(async (request, response) => {
 
   const url = new URL(request.url ?? '/', `http://${request.headers.host ?? 'localhost'}`);
   try {
+    if (await manejarUsuarios(usuarios, { request, url, send, readJson, autenticar: authenticate }, response)) return;
     if (request.method === 'GET' && url.pathname === '/api/health') {
       send(response, 200, { status: 'ok' });
       return;
@@ -120,16 +129,17 @@ const server = createServer(async (request, response) => {
     }
     if (request.method === 'POST' && url.pathname === '/api/auth/login') {
       const body = await readJson(request);
-      if (body.username !== 'alumno' || body.password !== 'angular') {
+      const demo = usuariosDemo[body.username];
+      if (!demo || body.password !== 'angular') {
         send(response, 401, { error: 'invalid_credentials', message: 'Usuario o contraseña incorrectos.' });
         return;
       }
       const now = Math.floor(Date.now() / 1000);
       const accessToken = signToken({
         iss: jwtIssuer,
-        sub: 'alumno-1',
-        name: 'Alumno de demostración',
-        role: 'student',
+        sub: demo.sub,
+        name: demo.name,
+        role: demo.role,
         iat: now,
         exp: now + 900,
       });
@@ -158,7 +168,7 @@ const server = createServer(async (request, response) => {
 
 server.listen(port, '127.0.0.1', () => {
   console.log(`Backend didáctico disponible en http://127.0.0.1:${port}`);
-  console.log('Usuario demo: alumno / angular');
+  console.log('Usuarios demo (contraseña angular): alumno (solo lectura), admin (CRUD completo)');
   if (jwtSecret === 'solo-para-demostraciones-locales') {
     console.warn('JWT_SECRET no está definido; se usa una clave pública solo para desarrollo local.');
   }

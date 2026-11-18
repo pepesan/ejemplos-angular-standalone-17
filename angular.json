@@ -35,16 +35,31 @@
           },
           "configurations": {
             "production": {
+              // PRESUPUESTOS DE TAMAÑO (solo en la compilación de producción: `ng build`).
+              // Angular compara el tamaño de lo compilado con estos límites:
+              //  - maximumWarning: se muestra un aviso (WARNING) pero el build termina bien.
+              //  - maximumError: el build FALLA (ERROR).
               "budgets": [
                 {
+                  // "initial": todo lo que el navegador descarga al abrir la aplicación
+                  // (main, polyfills y estilos, más los chunks que cargan de entrada).
+                  // Este proyecto es un conjunto de ejemplos didácticos con muchos componentes
+                  // importados directamente en app.routes.ts, por lo que el bundle inicial ronda
+                  // 1 MB. Antes los límites eran 500 kB / 1 MB y cualquier ejemplo nuevo hacía
+                  // fallar el build; se amplían a 1,25 MB / 1,5 MB para tener margen.
+                  // Para NO engordar este bundle, los ejemplos nuevos conviene cargarlos con
+                  // `loadComponent: () => import(...)` (carga diferida): quedan en chunks aparte.
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1.25mb",
+                  "maximumError": "1.5mb"
                 },
                 {
+                  // "anyComponentStyle": tamaño del CSS de CADA componente por separado.
+                  // Avisa a partir de 4 kB y falla a partir de 8 kB. (Antes 2 / 4 kB: una hoja de estilos
+                  // propia, sin framework de UI, como la del CRUD de usuarios, ocupa unos 3,5 kB.)
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "8kb"
                 }
               ],
               "outputHashing": "all"

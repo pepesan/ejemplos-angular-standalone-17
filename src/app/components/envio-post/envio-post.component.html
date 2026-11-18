@@ -1,0 +1,12 @@
+<div>
+  <p>Envía un POST con <code>{{ '{' }} title, body, userId {{ '}' }}</code> a JSONPlaceholder.</p>
+  <button type="button" class="btn btn-primary" (click)="enviar()">Enviar POST</button>
+
+  @if (respuesta(); as datos) {
+    <h3>Respuesta del servidor (201 Created)</h3>
+    <pre>{{ datos | json }}</pre>
+  }
+  @if (error(); as mensaje) {
+    <div class="alert alert-danger" role="alert">{{ mensaje }}</div>
+  }
+</div>

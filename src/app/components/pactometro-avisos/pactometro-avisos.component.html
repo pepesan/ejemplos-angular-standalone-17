@@ -1,0 +1,17 @@
+<div>
+  <div aria-live="polite">
+    @for (aviso of avisos(); track $index) {
+      <div class="alert alert-{{ aviso.tipo }}" [attr.role]="aviso.tipo === 'danger' ? 'alert' : 'status'">{{ aviso.texto }}</div>
+    }
+  </div>
+  @if (cargando()) {
+    <p>Cargando resultados…</p>
+  } @else {
+    <h3>Listado de partidos con reintentos y timeout</h3>
+    <ul>
+      @for (partido of partidos(); track partido.nombre) {
+        <li>{{ partido.nombre }}: {{ partido.dipu }}</li>
+      }
+    </ul>
+  }
+</div>
