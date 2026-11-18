@@ -29,8 +29,8 @@ import {AcordeonComponent} from "./pages/acordeon/acordeon.component";
 import {AlertasComponent} from "./pages/alertas/alertas.component";
 import {FormBootstrapComponent} from "./pages/form-bootstrap/form-bootstrap.component";
 import {SignalEffectComponent} from "./components/signal-effect/signal-effect.component";
-import {SignalInputComponent} from "./components/signal-input/signal-input.component";
-import {UseSignalInputComponent} from "./components/use-signal-input/use-signal-input.component";
+import {SignalInputPadreComponent} from "./components/signal-input-padre/signal-input-padre.component";
+import {SignalInputHijoComponent} from "./components/signal-input-hijo/signal-input-hijo.component";
 import {UseSignalModelComponent} from "./components/use-signal-model/use-signal-model.component";
 import {SignalQueriesComponent} from "./components/signal-queries/signal-queries.component";
 import {TodoListadoComponent} from "./components/todo-listado/todo-listado.component";
@@ -61,7 +61,7 @@ export const routes: Routes = [
   { path: 'pipes', component: UsoPipesComponent, data: { fuente: 'src/app/components/uso-pipes/uso-pipes.component.ts' } },
   { path: 'signals', component: SignalsComponent, data: { fuente: 'src/app/components/signals/signals.component.ts' } },
   { path: 'signals-effect', component: SignalEffectComponent, data: { fuente: 'src/app/components/signal-effect/signal-effect.component.ts' } },
-  { path: 'signals-input', component: SignalInputComponent, data: { fuente: 'src/app/components/signal-input/signal-input.component.ts' } },
+  { path: 'signals-input', component: SignalInputPadreComponent, data: { fuente: 'src/app/components/signal-input-padre/signal-input-padre.component.ts' } },
   { path: 'signals-model', component: UseSignalModelComponent, data: { fuente: 'src/app/components/use-signal-model/use-signal-model.component.ts' } },
   { path: 'signals-queries', component: SignalQueriesComponent, data: { fuente: 'src/app/components/signal-queries/signal-queries.component.ts' } },
   { path: 'service', component: UsoServiceComponent, data: { fuente: 'src/app/components/uso-service/uso-service.component.ts' } },
