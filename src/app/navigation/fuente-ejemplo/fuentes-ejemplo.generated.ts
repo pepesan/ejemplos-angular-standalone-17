@@ -58,10 +58,6 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/components/partidos/models/partido.ts',
       tipo: 'modelo'
-    },
-    {
-      ruta: 'src/app/components/uso-service/partido.ts',
-      tipo: 'modelo'
     }
   ],
   'src/app/components/partidos/components/listado-partidos/listado-partidos.component.ts': [
@@ -200,7 +196,7 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'servicio'
     },
     {
-      ruta: 'src/app/components/uso-service/partido.ts',
+      ruta: 'src/app/components/partidos/models/partido.ts',
       tipo: 'modelo'
     }
   ],

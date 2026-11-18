@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import {PactometroService} from "../../services/pactometro.service";
 
-import {Partido} from "../uso-service/partido";
+import {Partido} from "../partidos/models/partido";
 import {Observable, Subscription} from "rxjs";
 
 @Component({
