@@ -89,10 +89,15 @@ test.describe('CRUD de usuarios con JWT (backend local)', () => {
     await expect(page.getByText('Sesión:')).toBeVisible();
     await expect(page.locator('tbody tr')).toHaveCount(5);
 
+    await expect(page.getByRole('dialog')).toHaveCount(0); // cerrado: no está en el árbol de accesibilidad
+    await page.getByRole('button', { name: 'Nuevo usuario' }).click();
+    await expect(page.getByRole('dialog', { name: 'Nuevo usuario' })).toBeVisible();
+    await expect(page.getByLabel('Nombre', { exact: true })).toBeFocused();
     await page.getByLabel('Nombre', { exact: true }).fill('Usuario E2E');
     await page.getByLabel('Email', { exact: true }).fill(email);
     await page.getByRole('button', { name: 'Crear usuario' }).click();
     await expect(page.getByText('«Usuario E2E» creado.')).toBeVisible();
+    await expect(page.getByRole('dialog')).toHaveCount(0);
 
     await page.getByLabel('Buscar por nombre o email').fill(email);
     await expect(page.locator('tbody tr')).toHaveCount(1);
@@ -122,6 +127,6 @@ test.describe('CRUD de usuarios con JWT (backend local)', () => {
     await page.getByLabel('Usuario', { exact: true }).fill('alumno');
     await page.getByRole('button', { name: 'Iniciar sesión' }).click();
     await expect(page.getByText(/solo permite consultar/)).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Crear usuario' })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Nuevo usuario' })).toHaveCount(0);
   });
 });

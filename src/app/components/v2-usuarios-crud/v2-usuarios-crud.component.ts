@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject, catchError, debounceTime, distinctUntilChanged, EMPTY, switchMap, tap } from 'rxjs';
@@ -68,7 +68,7 @@ export class V2UsuariosCrudComponent {
     email: ['', [Validators.required, Validators.email]],
     rol: ['alumno' as Rol, Validators.required],
   });
-  private readonly campoNombre = viewChild<ElementRef<HTMLInputElement>>('campoNombre');
+  private readonly dialogo = viewChild<ElementRef<HTMLDialogElement>>('dialogo');
 
   constructor() {
     // switchMap cancela la petición anterior si llega otra: nunca se pinta una respuesta antigua
@@ -107,11 +107,6 @@ export class V2UsuariosCrudComponent {
 
     // El token vive en memoria: si ya había sesión (el servicio es singleton) se recupera el perfil.
     if (this.auth.isAuthenticated()) this.cargarPerfil();
-
-    // Al empezar a editar, el foco pasa al primer campo del formulario.
-    effect(() => {
-      if (this.editandoId() !== null) queueMicrotask(() => this.campoNombre()?.nativeElement.focus());
-    });
   }
 
   // ----- Sesión -----
@@ -200,18 +195,49 @@ export class V2UsuariosCrudComponent {
     this.recargar$.next();
   }
 
-  // ----- Alta y edición -----
-  editar(usuario: Usuario): void {
-    this.editandoId.set(usuario.id);
-    this.erroresServidor.set({});
-    this.aviso.set(null);
-    this.formulario.setValue({ nombre: usuario.nombre, email: usuario.email, rol: usuario.rol });
+  // ----- Alta y edición (en un diálogo modal nativo) -----
+  // <dialog> con showModal() ya trae lo que un modal accesible necesita: atrapa el foco, se cierra con Esc,
+  // bloquea el resto de la página (inert) y al cerrarse devuelve el foco al botón que lo abrió.
+  nuevo(): void {
+    this.restablecer();
+    this.abrirDialogo();
   }
 
+  editar(usuario: Usuario): void {
+    this.restablecer();
+    this.editandoId.set(usuario.id);
+    this.formulario.setValue({ nombre: usuario.nombre, email: usuario.email, rol: usuario.rol });
+    this.abrirDialogo();
+  }
+
+  /** Cierra el diálogo (botón Cancelar, ×, clic en el fondo o éxito al guardar). */
   cancelarEdicion(): void {
+    const dialogo = this.dialogo()?.nativeElement;
+    if (dialogo?.open) {
+      if (dialogo.close) dialogo.close();
+      else dialogo.removeAttribute('open'); // DOM de pruebas sin soporte de <dialog>
+    }
+    this.restablecer();
+  }
+
+  /** Clic en el fondo oscuro (el propio <dialog>, no su contenido): cierra el modal. */
+  clicFondo(evento: MouseEvent): void {
+    if (evento.target === evento.currentTarget) this.cancelarEdicion();
+  }
+
+  /** Se llama también con el evento `close` del diálogo, que se dispara al pulsar Esc. */
+  restablecer(): void {
     this.editandoId.set(null);
     this.erroresServidor.set({});
     this.formulario.reset({ nombre: '', email: '', rol: 'alumno' });
+  }
+
+  private abrirDialogo(): void {
+    this.aviso.set(null);
+    const dialogo = this.dialogo()?.nativeElement;
+    if (!dialogo || dialogo.open) return;
+    if (dialogo.showModal) dialogo.showModal();
+    else dialogo.setAttribute('open', ''); // DOM de pruebas sin soporte de <dialog>
   }
 
   guardar(): void {
