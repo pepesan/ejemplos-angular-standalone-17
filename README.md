@@ -96,3 +96,9 @@ Ejecuta todas las suites con `npm run test:all`. Cada una se puede lanzar por se
 Para E2E por primera vez, instala Chromium con `npm run test:e2e:install`.
 
 Los escenarios E2E y BDD navegan igual que un usuario: abren **Temario**, eligen la unidad y después el ejemplo.
+
+## Cobertura de las pruebas
+
+- `npm run test:unit:coverage`: cobertura de los tests unitarios (informe en `coverage/`).
+- `npm run cobertura:stories`: cobertura de código que alcanzan las stories de Storybook al ejecutarse con Vitest (informe en `coverage-stories/`).
+- `npm run cobertura:e2e`: ejecuta los tests de Playwright midiendo el JavaScript que corre en el navegador (V8) y lo traslada a los ficheros fuente de `src/app` con los source maps (resumen en `.cobertura-e2e/resumen.json`). Muestra también los ficheros `.ts` que ningún e2e llega a cargar. Para que un test cuente, debe importar `test` y `expect` de `e2e/fixtures.ts`.
