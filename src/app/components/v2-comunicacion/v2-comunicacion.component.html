@@ -1,6 +1,12 @@
 <section class="container py-3" aria-labelledby="comunicacion-heading">
   <h1 id="comunicacion-heading">Comunicación entre componentes (V2)</h1>
   <p>Compara los decoradores <code>@Input</code>/<code>@Output</code> con <code>input()</code>/<code>output()</code>. Ambos botones notifican al componente padre.</p>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: estable desde Angular 19.">
+    <code>input()</code> y <code>output()</code> sustituyen a <code>&#64;Input()</code> y <code>&#64;Output()</code> con <code>EventEmitter</code>, que es el enfoque clásico anterior (según angular.dev).
+  </app-aviso-api>
+  <app-aviso-api tipo="moderno" titulo="Otras APIs de este ejemplo.">
+    <code>takeUntilDestroyed()</code> es estable desde Angular 19, <code>afterNextRender()</code> desde Angular 20 (developer preview entre la v16 y la v19) y <code>DestroyRef</code> está disponible desde la v16.
+  </app-aviso-api>
 
   <div class="d-flex flex-wrap gap-2 mb-3">
     <app-boton-evento-clasico texto="Emitir con EventEmitter" (seleccion)="registrarEvento($event)" />

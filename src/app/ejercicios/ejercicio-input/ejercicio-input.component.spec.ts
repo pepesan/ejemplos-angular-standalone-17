@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { EjercicioInputComponent } from './ejercicio-input.component';
 
@@ -8,7 +9,8 @@ describe('EjercicioInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EjercicioInputComponent]
+      imports: [EjercicioInputComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 

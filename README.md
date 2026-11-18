@@ -9,10 +9,10 @@ El temario completo está en [TEMARIO.md](TEMARIO.md). TypeScript se imparte en 
 La cabecera tiene **Inicio**, **Temario** y **Acerca de**. El menú **Temario** agrupa los ejemplos por unidad:
 
 1. **Fundamentos de TypeScript y Angular**: arquitectura Angular y CLI.
-2. **Componentes, plantillas y Data Binding**: lista de tareas, props, directivas, control flow, seguridad en plantillas, condicionales, ciclo de vida, pipes, eventos e internacionalización.
+2. **Componentes, plantillas y Data Binding**: lista de tareas, props, directivas, control flow, seguridad en plantillas, condicionales, ciclo de vida, pipes e internacionalización.
 3. **Comunicación entre componentes y Signals**: `@Input`/`@Output`, `input()`/`output()`, `signal`/`computed`, `model`, queries, `effect` y estado compartido.
 4. **Servicios y comunicación HTTP**: servicios, `HttpClient`, interceptores y JWT.
-5. **Formularios reactivos**: formularios de plantilla, reactivos tipados, Signal Forms y accesibilidad.
+5. **Eventos y Formularios**: eventos, formularios de plantilla, reactivos tipados, Signal Forms y accesibilidad.
 6. **Routing, Guards y Lazy Loading**: navegación, rutas anidadas, lazy loading y guards funcionales.
 
 Dentro de cada unidad, los ejemplos llevan dos etiquetas:

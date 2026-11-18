@@ -181,6 +181,20 @@ export const routes: Routes = [
     title: 'Estado compartido entre componentes',
   },
   {
+    path: 'v2/servicio-injectable',
+    data: { fuente: 'src/app/components/v2-servicio-injectable/v2-servicio-injectable.component.ts' },
+    loadComponent: () => import('./components/v2-servicio-injectable/v2-servicio-injectable.component')
+      .then((module) => module.V2ServicioInjectableComponent),
+    title: '@Injectable: constructor frente a inject()',
+  },
+  {
+    path: 'v2/servicio-sin-injectable',
+    data: { fuente: 'src/app/components/v2-servicio-sin-injectable/v2-servicio-sin-injectable.component.ts' },
+    loadComponent: () => import('./components/v2-servicio-sin-injectable/v2-servicio-sin-injectable.component')
+      .then((module) => module.V2ServicioSinInjectableComponent),
+    title: 'Servicio sin @Injectable',
+  },
+  {
     path: 'v2/i18n',
     data: { fuente: 'src/app/components/v2-i18n/v2-i18n.component.ts' },
     loadComponent: () => import('./components/v2-i18n/v2-i18n.component')

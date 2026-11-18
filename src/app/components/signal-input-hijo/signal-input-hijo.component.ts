@@ -8,6 +8,8 @@ import {Component, input, InputSignal, ChangeDetectionStrategy} from '@angular/c
     styleUrl: './signal-input-hijo.component.css'
 })
 export class SignalInputHijoComponent {
+  // DISPONIBILIDAD: los signal inputs (`input()`, `InputSignal`) son estables desde Angular 19
+  // (según angular.dev). Antes se declaraban con el decorador `@Input()`.
   // `input()` crea un input de solo lectura; el valor predeterminado lo hace opcional.
   // Este componente (el que RECIBE el dato) lo maneja como signal: `value` es un
   // `InputSignal<number>` y se lee llamándolo, `value()`, tanto en la plantilla como aquí.

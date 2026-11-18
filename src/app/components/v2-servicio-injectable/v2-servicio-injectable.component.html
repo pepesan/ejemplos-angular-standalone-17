@@ -1,0 +1,96 @@
+<section class="container py-3" aria-labelledby="servicio-injectable-title">
+  <h1 id="servicio-injectable-title">&#64;Injectable: constructor frente a inject()</h1>
+  <app-aviso-api tipo="moderno" titulo="Referencia: guía oficial de servicios de angular.dev.">
+    <code>&#64;Injectable()</code> sirve en todas las versiones. Para código nuevo con <code>inject()</code>, la guía recomienda
+    <code>&#64;Service()</code> (Angular 22.0 o posterior); para inyección por constructor, <code>&#64;Injectable()</code>.
+    Ver <a href="https://angular.dev/guide/di/creating-and-using-services" target="_blank" rel="noopener">Creating and using services</a>.
+  </app-aviso-api>
+
+  <p>
+    Un único servicio <code>&#64;Injectable(&#123; providedIn: 'root' &#125;)</code> con tres componentes. El número de
+    instancia que muestra cada uno indica si comparten servicio. Pulsa los botones y observa qué valores cambian.
+  </p>
+
+  <div class="row g-3 my-3">
+    <div class="col-12 col-lg-4"><app-carga-constructor /></div>
+    <div class="col-12 col-lg-4"><app-carga-inject /></div>
+    <div class="col-12 col-lg-4"><app-carga-propia /></div>
+  </div>
+
+  <h2 class="h5">¿Cuándo es singleton y cuándo no?</h2>
+  <p>
+    A y B comparten la instancia raíz: <strong>es singleton</strong>. Da igual que A lo pida con el constructor y B con
+    <code>inject()</code>: el modo de pedirlo no cambia el ámbito. C declara el servicio en <code>providers</code> y recibe
+    una instancia nueva: <strong>no es singleton</strong>.
+  </p>
+  <div class="table-responsive">
+    <table class="table table-sm align-middle">
+      <caption class="visually-hidden">Dónde se registra el servicio y cuántas instancias hay</caption>
+      <thead>
+        <tr><th scope="col">Dónde se registra</th><th scope="col">¿Singleton?</th><th scope="col">Instancias</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><code>&#64;Injectable(&#123; providedIn: 'root' &#125;)</code> o <code>&#64;Service()</code></th>
+          <td>Sí</td>
+          <td>Una para toda la aplicación (inyector raíz), disponible sin declarar nada más.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>providers</code> de un componente</th>
+          <td>No</td>
+          <td>Una por cada instancia del componente. Se destruye con él (componente C).</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>providers</code> de una ruta</th>
+          <td>No</td>
+          <td>Una para esa ruta, sus componentes, guardas y resolvers (no se muestra en este ejemplo).</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&#64;Injectable()</code> sin <code>providedIn</code></th>
+          <td>Según dónde lo declares</td>
+          <td>No se registra solo: hay que declararlo en <code>providers</code>. Si no, Angular no encuentra el proveedor.</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>&#64;Service(&#123; autoProvided: false &#125;)</code></th>
+          <td>Según dónde lo declares</td>
+          <td>Igual que el anterior: no se registra solo y hay que añadirlo a <code>providers</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="h5">Limitaciones de cada decorador</h2>
+  <div class="table-responsive">
+    <table class="table table-sm align-middle">
+      <caption class="visually-hidden">Comparación entre &#64;Service y &#64;Injectable</caption>
+      <thead>
+        <tr><th scope="col"></th><th scope="col"><code>&#64;Service()</code></th><th scope="col"><code>&#64;Injectable()</code></th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Disponible desde</th><td>Angular 22.0</td><td>Todas las versiones</td></tr>
+        <tr><th scope="row"><code>inject()</code></th><td>Sí</td><td>Sí</td></tr>
+        <tr><th scope="row">Inyección por constructor</th><td>No</td><td>Sí</td></tr>
+        <tr><th scope="row">Singleton en la raíz sin más</th><td>Sí, por defecto</td><td>No: hay que escribir <code>providedIn: 'root'</code></td></tr>
+        <tr><th scope="row"><code>useClass</code>, <code>useValue</code>, <code>useExisting</code>, <code>useFactory</code></th><td>No: una sola opción <code>factory</code></td><td>Sí</td></tr>
+        <tr><th scope="row">Ámbitos distintos de la raíz (por ejemplo <code>'platform'</code>)</th><td>No</td><td>Sí</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small text-body-secondary">Fuente: guía oficial «Creating and using services» de angular.dev. La fila de disponibilidad se ha comprobado en los tipos publicados de <code>&#64;angular/core</code>.</p>
+
+  <h2 class="h5">Limitaciones de cada forma de pedir el servicio</h2>
+  <ul>
+    <li>
+      <strong>Constructor</strong> (<code>constructor(private contador: ...)</code>): el servicio debe ser <code>&#64;Injectable()</code>.
+      Es el estilo clásico y lo verás en mucho código existente.
+    </li>
+    <li>
+      <strong><code>inject()</code></strong>: funciona con <code>&#64;Service()</code> y con <code>&#64;Injectable()</code>. Solo se puede llamar en un
+      contexto de inyección (constructor, inicializador de campo, factoría...). Fuera de él, Angular lanza un error.
+    </li>
+  </ul>
+  <p class="mb-0">
+    Para ver el primer caso, en el ejemplo básico: <a routerLink="/servicio-basico">&#64;Service() e inject()</a>. Para estado compartido con Signals:
+    <a routerLink="/v2/estado-compartido">estado compartido</a>.
+  </p>
+</section>

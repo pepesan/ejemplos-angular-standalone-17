@@ -1,8 +1,27 @@
-<div>
-  <app-ejercicio-input-llamado/>
-  <app-ejercicio-input-llamado
-    [cadena]="miCadena"
-    [numero]="3"
-    [objeto]="dato"
-  />
-</div>
+<app-enunciado titulo="Ejercicio de comunicación con &#64;Input">
+  <p>Crea un componente hijo que reciba datos del padre mediante <code>&#64;Input()</code>.</p>
+  <ul>
+    <li>El hijo (<code>ejercicio-input-llamado</code>) declara tres inputs opcionales: <code>cadena</code> (texto), <code>numero</code> (número) y <code>objeto</code> (una clase <code>Dato</code> con un campo <code>texto</code>).</li>
+    <li>Su plantilla muestra los tres valores; el objeto, con el pipe <code>json</code>.</li>
+    <li>El padre usa el hijo dos veces: una sin pasar nada y otra pasando <code>cadena</code>, <code>numero</code> (el valor 3) y <code>objeto</code>.</li>
+  </ul>
+  <p class="mb-0 small text-secondary">Compara qué se ve cuando el input no se informa y cuando sí.</p>
+  <div solucion>
+    <app-aviso-api
+      tipo="legado"
+      titulo="Enfoque clásico: &#64;Input()."
+      alternativa="/signals-input"
+      textoAlternativa="ver la alternativa (V2 · input() basado en Signals)">
+      Este ejemplo declara sus entradas con el decorador <code>&#64;Input()</code>. Desde Angular 19 existe
+      <code>input()</code>, estable según angular.dev, que es la forma recomendada en código nuevo.
+    </app-aviso-api>
+    <div>
+      <app-ejercicio-input-llamado/>
+      <app-ejercicio-input-llamado
+        [cadena]="miCadena"
+        [numero]="3"
+        [objeto]="dato"
+      />
+    </div>
+  </div>
+</app-enunciado>

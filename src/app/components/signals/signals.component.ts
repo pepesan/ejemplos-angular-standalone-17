@@ -2,11 +2,13 @@ import {Component, computed, linkedSignal, OnInit, Signal, signal, WritableSigna
 import { JsonPipe } from "@angular/common";
 import {Dato} from "../propiedades/dato";
 
+import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 @Component({
     selector: 'app-signals',
   imports: [
-    JsonPipe
-],
+    JsonPipe,
+    AvisoApiComponent
+  ],
     templateUrl: './signals.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./signals.component.sass']

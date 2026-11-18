@@ -1,11 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {Cliente} from "./cliente";
 import {FormsModule} from "@angular/forms";
+import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
 @Component({
   selector: 'app-ejercicio-mis-clientes',
   imports: [
-    FormsModule
+    FormsModule,
+    EnunciadoComponent
   ],
   templateUrl: './ejercicio-mis-clientes.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,

@@ -322,6 +322,38 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/v2-servicio-injectable/v2-servicio-injectable.component.ts': [
+    {
+      ruta: 'src/app/components/v2-servicio-injectable/v2-servicio-injectable.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-servicio-injectable/carga-constructor.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/contador-injectable.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-servicio-injectable/carga-inject.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-servicio-injectable/carga-propia.component.ts',
+      tipo: 'componente'
+    }
+  ],
+  'src/app/components/v2-servicio-sin-injectable/v2-servicio-sin-injectable.component.ts': [
+    {
+      ruta: 'src/app/components/v2-servicio-sin-injectable/v2-servicio-sin-injectable.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/contador-plano.service.ts',
+      tipo: 'servicio'
+    }
+  ],
   'src/app/components/v2-signal-forms/v2-signal-forms.component.ts': [
     {
       ruta: 'src/app/components/v2-signal-forms/v2-signal-forms.component.ts',

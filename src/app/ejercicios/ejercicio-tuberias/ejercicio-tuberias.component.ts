@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {CurrencyPipe, DatePipe, LowerCasePipe, PercentPipe, UpperCasePipe} from "@angular/common";
+import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
 @Component({
   selector: 'app-ejercicio-tuberias',
@@ -8,7 +9,8 @@ import {CurrencyPipe, DatePipe, LowerCasePipe, PercentPipe, UpperCasePipe} from 
     LowerCasePipe,
     PercentPipe,
     CurrencyPipe,
-    DatePipe
+    DatePipe,
+    EnunciadoComponent
   ],
   templateUrl: './ejercicio-tuberias.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,

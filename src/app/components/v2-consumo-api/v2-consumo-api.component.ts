@@ -4,6 +4,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of, startWith, Subject, switchMap } from 'rxjs';
 import { Partido } from '../partidos/models/partido';
 
+import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 const URL_RESULTADOS = '/api/resultados';
 
 type EstadoRecursos =
@@ -12,6 +13,7 @@ type EstadoRecursos =
   | { status: 'error'; items: Partido[]; message: string };
 
 @Component({
+  imports: [AvisoApiComponent],
   selector: 'app-v2-consumo-api',
   standalone: true,
   templateUrl: './v2-consumo-api.component.html',
