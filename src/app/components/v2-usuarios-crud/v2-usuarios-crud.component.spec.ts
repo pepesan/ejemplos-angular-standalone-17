@@ -138,11 +138,45 @@ describe('V2UsuariosCrudComponent', () => {
     expect(el().textContent).toContain('Página 2 de 3');
   });
 
+  it('«Nuevo usuario» abre el modal con el formulario vacío y Cancelar lo cierra', async () => {
+    await conSesion();
+    const dialogo = el().querySelector('dialog')!;
+    expect(dialogo.hasAttribute('open')).toBe(false);
+    pulsar('.titulo-lista button');
+    await refrescar();
+    expect(dialogo.hasAttribute('open')).toBe(true);
+    expect(el().querySelector('#form-titulo')?.textContent).toContain('Nuevo usuario');
+    pulsar('dialog .acciones button[type="button"]');
+    await refrescar();
+    expect(dialogo.hasAttribute('open')).toBe(false);
+  });
+
+  it('el formulario de alta y edición está dentro de un <dialog> modal', async () => {
+    await conSesion();
+    expect(el().querySelector('dialog #u-nombre')).not.toBeNull();
+    pulsar('[aria-label="Editar Ana"]');
+    await refrescar();
+    expect(el().querySelector('dialog')?.hasAttribute('open')).toBe(true);
+    expect(el().querySelector<HTMLInputElement>('#u-nombre')?.value).toBe('Ana');
+  });
+
+  it('al guardar con éxito el modal se cierra', async () => {
+    await conSesion();
+    pulsar('.titulo-lista button');
+    escribir('#u-nombre', 'Eva');
+    escribir('#u-email', 'eva@example.com');
+    pulsar('dialog button[type="submit"]');
+    http.expectOne((r) => r.method === 'POST').flush({ id: 3, nombre: 'Eva', email: 'eva@example.com', rol: 'alumno' }, { status: 201, statusText: 'Created' });
+    listado().flush(pagina());
+    await refrescar();
+    expect(el().querySelector('dialog')?.hasAttribute('open')).toBe(false);
+  });
+
   it('crea un usuario con POST y recarga la página', async () => {
     await conSesion();
     escribir('#u-nombre', 'Eva');
     escribir('#u-email', 'eva@example.com');
-    pulsar('#form-titulo ~ .acciones button[type="submit"]');
+    pulsar('dialog button[type="submit"]');
     const post = http.expectOne((r) => r.method === 'POST');
     expect(post.request.body).toEqual({ nombre: 'Eva', email: 'eva@example.com', rol: 'alumno' });
     post.flush({ id: 3, nombre: 'Eva', email: 'eva@example.com', rol: 'alumno' }, { status: 201, statusText: 'Created' });
@@ -154,7 +188,7 @@ describe('V2UsuariosCrudComponent', () => {
 
   it('no envía el formulario si es inválido', async () => {
     await conSesion();
-    pulsar('#form-titulo ~ .acciones button[type="submit"]');
+    pulsar('dialog button[type="submit"]');
     await refrescar();
     http.expectNone((r) => r.method === 'POST');
     expect(el().textContent).toContain('El nombre es obligatorio');
@@ -164,7 +198,7 @@ describe('V2UsuariosCrudComponent', () => {
     await conSesion();
     escribir('#u-nombre', 'Eva');
     escribir('#u-email', 'ana@example.com');
-    pulsar('#form-titulo ~ .acciones button[type="submit"]');
+    pulsar('dialog button[type="submit"]');
     http.expectOne((r) => r.method === 'POST').flush(
       { message: 'Ya existe un usuario con ese email.', errores: { email: 'Ese email ya está en uso.' } },
       { status: 409, statusText: 'Conflict' },
@@ -178,7 +212,7 @@ describe('V2UsuariosCrudComponent', () => {
     pulsar('[aria-label="Editar Ana"]');
     await refrescar();
     escribir('#u-nombre', 'Ana María');
-    pulsar('#form-titulo ~ .acciones button[type="submit"]');
+    pulsar('dialog button[type="submit"]');
     const put = http.expectOne((r) => r.method === 'PUT');
     expect(put.request.url).toBe('/api/usuarios/1');
     put.flush({ ...ana, nombre: 'Ana María' });
