@@ -131,6 +131,13 @@ export const routes: Routes = [
     title: 'Consumo de API',
   },
   {
+    path: 'v2/usuarios-crud',
+    data: { fuente: 'src/app/components/v2-usuarios-crud/v2-usuarios-crud.component.ts' },
+    loadComponent: () => import('./components/v2-usuarios-crud/v2-usuarios-crud.component')
+      .then((module) => module.V2UsuariosCrudComponent),
+    title: 'CRUD de usuarios',
+  },
+  {
     path: 'v2/comunicacion',
     data: { fuente: 'src/app/components/v2-comunicacion/v2-comunicacion.component.ts' },
     loadComponent: () => import('./components/v2-comunicacion/v2-comunicacion.component')
