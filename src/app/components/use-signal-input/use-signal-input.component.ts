@@ -9,6 +9,11 @@ import {Component, input, InputSignal, ChangeDetectionStrategy} from '@angular/c
 })
 export class UseSignalInputComponent {
   // `input()` crea un input de solo lectura; el valor predeterminado lo hace opcional.
+  // Este componente (el que RECIBE el dato) lo maneja como signal: `value` es un
+  // `InputSignal<number>` y se lee llamándolo, `value()`, tanto en la plantilla como aquí.
+  // El padre NO pasa un signal: pasa el valor, `[value]="counter()"`, y Angular actualiza
+  // este signal cada vez que ese valor cambia. Por eso se puede usar en `computed()`/`effect()`
+  // y funciona con `OnPush`. Para escribir de vuelta al padre se usaría `model()`.
   value: InputSignal<number> = input(0);
   // Para exigir que el componente padre proporcione este input, usa `input.required<number>()`.
   // value: InputSignal<number> = input.required();
