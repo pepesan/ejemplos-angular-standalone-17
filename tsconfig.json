@@ -18,7 +18,11 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    // Tipos globales de Vitest (describe, it, expect, vi) para que el editor reconozca los .spec.ts, que abre
+    // con este fichero (no tiene `include`). `tsconfig.app.json` los vuelve a quitar con `"types": []`, así que
+    // no entran en el código de la aplicación.
+    "types": ["vitest/globals"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

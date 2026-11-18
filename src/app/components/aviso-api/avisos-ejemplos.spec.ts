@@ -52,6 +52,8 @@ describe('Ejemplos: aviso de disponibilidad de la API', () => {
 
       expect(aviso, 'falta el aviso').toBeTruthy();
       expect(aviso!.textContent).toContain(texto);
+      // El título del aviso es texto plano: si lleva etiquetas HTML se verían literalmente (p. ej. «<code>»).
+      expect(aviso!.textContent).not.toMatch(/<\/?[a-z]+>/i);
       if (tipo === 'legado') {
         expect(aviso!.querySelector('a')?.getAttribute('href')).toBe('/signals-input');
       }
