@@ -1,16 +1,16 @@
 <div>
-  @if (error) {
+  @if (error()) {
     <div class="error-message">
       <p>Error al cargar los resultados. Por favor, inténtalo de nuevo más tarde.</p>
     </div>
   }
 
-  @if (!error && resultados) {
+  @if (!error()) {
     <div class="resultados">
       <!-- Ejemplo de visualización de datos -->
       <h3>Listado de partidos Asíncrono (Promesa)</h3>
       <ul>
-        @for (resultado of resultados; track resultado) {
+        @for (resultado of resultados(); track resultado.nombre) {
           <li>
             {{resultado.nombre}}: {{resultado.dipu}}
             <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
