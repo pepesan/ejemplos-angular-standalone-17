@@ -1,17 +1,27 @@
-<div>
-  <h4>Añadir elemento</h4>
-  <h5>contenido del campo: {{cadena}}</h5>
-  <form (submit)="addItem()" >
-    <input type="text" [(ngModel)]="cadena"
-           [ngModelOptions]="{standalone: true}"/>
-  </form>
+<app-enunciado titulo="Ejercicio de lista con two-way binding">
+  <p>Construye una lista a la que se añaden elementos desde un campo de texto.</p>
   <ul>
-    @for (item of listado; track $index) {
-      <li id="item-{{$index}}">
-        {{ item }}
-      </li>
-    }@empty {
-      <li> There are no items.</li>
-    }
+    <li>Un campo de texto enlazado con <code>[(ngModel)]</code>; debajo, muestra en tiempo real su contenido.</li>
+    <li>Al enviar el formulario (con Enter) se añade el texto a la lista y el campo se vacía.</li>
+    <li>La lista empieza con «uno» y «dos» y se pinta con <code>&#64;for</code> usando <code>track</code>. Si estuviera vacía, muestra «There are no items.» con <code>&#64;empty</code>.</li>
   </ul>
-</div>
+  <div solucion>
+    <div>
+      <h4>Añadir elemento</h4>
+      <h5>contenido del campo: {{cadena}}</h5>
+      <form (submit)="addItem()" >
+        <input type="text" [(ngModel)]="cadena"
+               [ngModelOptions]="{standalone: true}"/>
+      </form>
+      <ul>
+        @for (item of listado; track $index) {
+          <li id="item-{{$index}}">
+            {{ item }}
+          </li>
+        }@empty {
+          <li> There are no items.</li>
+        }
+      </ul>
+    </div>
+  </div>
+</app-enunciado>

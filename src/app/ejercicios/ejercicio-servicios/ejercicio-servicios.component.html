@@ -1,5 +1,15 @@
-<div>
-  <h2>Mi Servicio</h2>
-  <h2>Cadena: {{cadena}}</h2>
-  <h2>Numero: {{numero}}</h2>
-</div>
+<app-enunciado titulo="Ejercicio de servicios">
+  <p>Crea un servicio e inyéctalo en un componente.</p>
+  <ul>
+    <li>El servicio <code>MiService</code> está disponible en toda la aplicación (<code>providedIn: 'root'</code>). Tiene una propiedad <code>cadena</code> con el valor «MiCadena» y un método <code>getNumero()</code> que devuelve 2.</li>
+    <li>El componente lo recibe por inyección de dependencias en el constructor y copia ambos valores en sus propiedades.</li>
+    <li>La plantilla muestra «Cadena» y «Numero» con los valores obtenidos del servicio.</li>
+  </ul>
+  <div solucion>
+    <div>
+      <h2>Mi Servicio</h2>
+      <h2>Cadena: {{cadena}}</h2>
+      <h2>Numero: {{numero}}</h2>
+    </div>
+  </div>
+</app-enunciado>

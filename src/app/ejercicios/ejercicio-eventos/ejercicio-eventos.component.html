@@ -1,26 +1,40 @@
-<div>
-  <!-- Botones con sus respectivos eventos: clic y mouseover en el botón "bueno" -->
-  <button (click)="saludoBueno()" (mouseover)="mouseOverBueno()">bueno</button>
-  <button (click)="saludoFeo()">feo</button>
-  <button (click)="saludoMalo()">malo</button>
-</div>
+<app-enunciado titulo="Ejercicio de eventos">
+  <p>Practica el event binding con dos bloques.</p>
+  <ol>
+    <li>Tres botones: «bueno», «feo» y «malo». Cada uno escribe un mensaje distinto por consola al hacer clic. El botón «bueno» además debe reaccionar al paso del ratón por encima (<code>mouseover</code>).</li>
+    <li>Un formulario con un campo «nombre» obligatorio enlazado con <code>[(ngModel)]</code> y un botón «Enviar».
+      <ul>
+        <li>Al enviar, evita la recarga de la página y muestra por consola el valor del campo de dos formas: desde el modelo y desde una referencia local de plantilla.</li>
+        <li>Al salir del campo (<code>blur</code>), muestra su valor y si tiene al menos 5 caracteres escribe «El campo valida»; si no, «El campo no valida».</li>
+      </ul>
+    </li>
+  </ol>
+  <p class="mb-0 small text-secondary">Abre la consola del navegador para ver los mensajes.</p>
+  <div solucion>
+    <div>
+      <!-- Botones con sus respectivos eventos: clic y mouseover en el botón "bueno" -->
+      <button (click)="saludoBueno()" (mouseover)="mouseOverBueno()">bueno</button>
+      <button (click)="saludoFeo()">feo</button>
+      <button (click)="saludoMalo()">malo</button>
+    </div>
 
-<div>
-  <!-- Formulario con un campo de texto "nombre" y un botón de envío -->
-  <!-- Se utiliza [(ngModel)] para enlazar el valor del input a la propiedad "nombre" -->
-  <form (submit)="onSubmit($event, campo.value)">
-    <label for="nombre">Nombre:</label>
-    <!-- en este caso no metemos un [ngModelOptions]="{standalone: true}" porque tiene un name -->
-    <input
-      #campo
-      id="nombre"
-      name="nombre"
-      type="text"
-      [(ngModel)]="nombre"
+    <div>
+      <!-- Formulario con un campo de texto "nombre" y un botón de envío -->
+      <!-- Se utiliza [(ngModel)] para enlazar el valor del input a la propiedad "nombre" -->
+      <form (submit)="onSubmit($event, campo.value)">
+        <label for="nombre">Nombre:</label>
+        <!-- en este caso no metemos un [ngModelOptions]="{standalone: true}" porque tiene un name -->
+        <input
+          #campo
+          id="nombre"
+          name="nombre"
+          type="text"
+          [(ngModel)]="nombre"
 
-      (blur)="onBlurNombre($event)"
-      required>
-    <button type="submit">Enviar</button>
-  </form>
-</div>
-
+          (blur)="onBlurNombre($event)"
+          required>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</app-enunciado>

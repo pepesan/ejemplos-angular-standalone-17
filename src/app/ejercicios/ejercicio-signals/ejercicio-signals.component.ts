@@ -1,8 +1,13 @@
 import {Component, computed, Signal, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
+import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
+import {AvisoApiComponent} from "../../components/aviso-api/aviso-api.component";
 @Component({
   selector: 'app-ejercicio-signals',
-  imports: [],
+  imports: [
+    EnunciadoComponent,
+    AvisoApiComponent
+  ],
   templateUrl: './ejercicio-signals.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-signals.component.css'

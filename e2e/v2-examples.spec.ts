@@ -64,3 +64,17 @@ test('cambia idioma y demuestra la sanitización HTML', async ({ page }) => {
   await expect(page.locator('.border img')).toHaveCount(1);
   await expect(page.locator('.border img')).not.toHaveAttribute('onerror', /.+/);
 });
+
+test('un ejercicio muestra su enunciado antes de la posible solución', async ({ page }) => {
+  await page.goto('/ejercicio-servicios');
+  const enunciado = page.getByRole('heading', { name: 'Ejercicio de servicios', level: 1 });
+  const solucion = page.getByRole('heading', { name: 'Posible solución' });
+  await expect(enunciado).toBeVisible();
+  await expect(solucion).toBeVisible();
+  await expect(page.getByText('Cadena: MiCadena')).toBeVisible();
+  const [yEnunciado, ySolucion] = await Promise.all([
+    enunciado.boundingBox().then((b) => b!.y),
+    solucion.boundingBox().then((b) => b!.y),
+  ]);
+  expect(yEnunciado).toBeLessThan(ySolucion);
+});

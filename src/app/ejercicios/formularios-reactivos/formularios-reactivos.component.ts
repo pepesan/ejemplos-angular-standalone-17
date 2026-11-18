@@ -1,10 +1,15 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgClass} from "@angular/common";
+import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
 @Component({
   selector: 'app-formularios-reactivos',
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [
+    ReactiveFormsModule,
+    NgClass,
+    EnunciadoComponent
+  ],
   templateUrl: './formularios-reactivos.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './formularios-reactivos.component.css'

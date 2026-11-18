@@ -3,12 +3,14 @@ import {Resultado} from "./resultado";
 import {ResultadoService} from "./resultado.service";
 import { AsyncPipe } from "@angular/common";
 import {Observable, Subscription} from "rxjs";
+import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
 @Component({
   selector: 'app-ejercicio-resultado',
   imports: [
-    AsyncPipe
-],
+    AsyncPipe,
+    EnunciadoComponent
+  ],
   templateUrl: './ejercicio-resultado.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './ejercicio-resultado.component.css'

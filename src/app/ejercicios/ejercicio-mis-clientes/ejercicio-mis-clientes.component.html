@@ -1,22 +1,33 @@
-<div>
-  <h4>Añadir elemento</h4>
-  <h5>contenido del campo: {{cliente.nombre}}</h5>
-  <form (submit)="addItem()" >
-    <label for="nombre">Nombre</label>
-    <input id="nombre" type="text" [(ngModel)]="cliente.nombre"
-           [ngModelOptions]="{standalone: true}"/> <br/>
-    <label for="direccion">Dirección</label>
-    <input id="direccion" type="text" [(ngModel)]="cliente.direccion"
-           [ngModelOptions]="{standalone: true}"/> <br/>
-    <input type="submit" value="Enviar">
-  </form>
+<app-enunciado titulo="Ejercicio de formulario y listado con ngModel">
+  <p>Gestiona una lista de clientes con un formulario de plantilla.</p>
   <ul>
-    @for (item of listado; track $index) {
-      <li id="item-{{$index}}">
-        {{ item.nombre }}: {{item.direccion}}
-      </li>
-    }@empty {
-      <li> There are no items.</li>
-    }
+    <li>Define una clase <code>Cliente</code> con <code>id</code>, <code>nombre</code> y <code>direccion</code>.</li>
+    <li>El formulario tiene dos campos, nombre y dirección, enlazados con <code>[(ngModel)]</code> a un objeto cliente; muestra el nombre mientras se escribe.</li>
+    <li>Al enviar, el cliente se añade al listado y el formulario se reinicia con un cliente nuevo vacío.</li>
+    <li>El listado parte de tres clientes y cada elemento se muestra como «nombre: dirección».</li>
   </ul>
-</div>
+  <div solucion>
+    <div>
+      <h4>Añadir elemento</h4>
+      <h5>contenido del campo: {{cliente.nombre}}</h5>
+      <form (submit)="addItem()" >
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" [(ngModel)]="cliente.nombre"
+               [ngModelOptions]="{standalone: true}"/> <br/>
+        <label for="direccion">Dirección</label>
+        <input id="direccion" type="text" [(ngModel)]="cliente.direccion"
+               [ngModelOptions]="{standalone: true}"/> <br/>
+        <input type="submit" value="Enviar">
+      </form>
+      <ul>
+        @for (item of listado; track $index) {
+          <li id="item-{{$index}}">
+            {{ item.nombre }}: {{item.direccion}}
+          </li>
+        }@empty {
+          <li> There are no items.</li>
+        }
+      </ul>
+    </div>
+  </div>
+</app-enunciado>
