@@ -108,13 +108,13 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
-  'src/app/components/signal-input/signal-input.component.ts': [
+  'src/app/components/signal-input-padre/signal-input-padre.component.ts': [
     {
-      ruta: 'src/app/components/signal-input/signal-input.component.ts',
+      ruta: 'src/app/components/signal-input-padre/signal-input-padre.component.ts',
       tipo: 'componente'
     },
     {
-      ruta: 'src/app/components/use-signal-input/use-signal-input.component.ts',
+      ruta: 'src/app/components/signal-input-hijo/signal-input-hijo.component.ts',
       tipo: 'componente'
     }
   ],

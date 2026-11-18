@@ -1,13 +1,13 @@
 import {Component, input, InputSignal, ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
-    selector: 'app-use-signal-input',
+    selector: 'app-signal-input-hijo',
     imports: [],
-    templateUrl: './use-signal-input.component.html',
+    templateUrl: './signal-input-hijo.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
-    styleUrl: './use-signal-input.component.css'
+    styleUrl: './signal-input-hijo.component.css'
 })
-export class UseSignalInputComponent {
+export class SignalInputHijoComponent {
   // `input()` crea un input de solo lectura; el valor predeterminado lo hace opcional.
   // Este componente (el que RECIBE el dato) lo maneja como signal: `value` es un
   // `InputSignal<number>` y se lee llamándolo, `value()`, tanto en la plantilla como aquí.

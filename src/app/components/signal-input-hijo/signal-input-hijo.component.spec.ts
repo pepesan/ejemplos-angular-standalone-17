@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UseSignalInputComponent } from './use-signal-input.component';
+import { SignalInputHijoComponent } from './signal-input-hijo.component';
 
-describe('UseSignalInputComponent', () => {
-  let component: UseSignalInputComponent;
-  let fixture: ComponentFixture<UseSignalInputComponent>;
+describe('SignalInputHijoComponent', () => {
+  let component: SignalInputHijoComponent;
+  let fixture: ComponentFixture<SignalInputHijoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UseSignalInputComponent]
+      imports: [SignalInputHijoComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(UseSignalInputComponent);
+    fixture = TestBed.createComponent(SignalInputHijoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
