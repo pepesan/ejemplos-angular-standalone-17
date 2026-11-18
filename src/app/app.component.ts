@@ -6,11 +6,12 @@ import { ApiErrorService } from './services/api-error.service';
 import { LastVisitedRouteService } from './services/last-visited-route.service';
 import { NavGroup, TEMARIO_UNITS } from './navigation/temario-menu';
 import { SiteHeaderComponent } from './navigation/site-header/site-header.component';
+import { FuenteEjemploComponent } from './navigation/fuente-ejemplo/fuente-ejemplo.component';
 import { TemarioMobileMenuComponent } from './navigation/temario-mobile-menu/temario-mobile-menu.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, NgbModule, SiteHeaderComponent, TemarioMobileMenuComponent],
+  imports: [RouterModule, NgbModule, SiteHeaderComponent, TemarioMobileMenuComponent, FuenteEjemploComponent],
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.component.css',
