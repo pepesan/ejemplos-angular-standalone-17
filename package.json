@@ -15,6 +15,8 @@
     "test:unit:coverage": "ng test --watch=false --coverage",
     "test:stories": "vitest run",
     "test:e2e": "playwright test",
+    "cobertura:stories": "vitest run --coverage --coverage.provider=v8 --coverage.include=src/app/**/*.ts --coverage.exclude=**/*.spec.ts --coverage.exclude=**/*.stories.ts --coverage.exclude=**/*.generated.ts --coverage.exclude=src/app/testing/** --coverage.reporter=text-summary --coverage.reporter=json-summary --coverage.reportsDirectory=coverage-stories",
+    "cobertura:e2e": "rm -rf .cobertura-e2e && COBERTURA_E2E=1 playwright test && node scripts/cobertura-e2e.mjs",
     "test:e2e:install": "playwright install chromium",
     "test:bdd": "start-server-and-test e2e:serve http://127.0.0.1:4300 cucumber-js",
     "e2e:serve": "ng serve --host 127.0.0.1 --port 4300 --proxy-config proxy.conf.json",
