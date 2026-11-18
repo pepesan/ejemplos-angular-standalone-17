@@ -39,6 +39,8 @@ Duración total: **30 horas teórico-prácticas**.
 
 - Creación y utilización de servicios.
 - Inyección de dependencias.
+- Servicios `@Service()` e `@Injectable()`: inyección con `inject()` y con constructor.
+- Ámbito de los servicios: singleton y servicios acotados a un componente.
 - Cliente HTTP.
 - Consulta y presentación de datos.
 - Gestión de estados de carga y errores.

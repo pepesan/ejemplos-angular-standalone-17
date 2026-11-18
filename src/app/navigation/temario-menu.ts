@@ -59,7 +59,9 @@ export const TEMARIO_UNITS: NavGroup[] = [
     id: 'temario-4',
     label: '4. Servicios y comunicación HTTP',
     items: [
-      { path: '/servicio-basico', label: 'V1 · Servicios e inyección de dependencias' },
+      { path: '/servicio-basico', label: 'V2 · Servicio básico con @Service() e inject() (@Service desde v22)' },
+      { path: '/v2/servicio-injectable', label: 'V2 · @Injectable: constructor frente a inject(), singleton y límites' },
+      { path: '/v2/servicio-sin-injectable', label: 'V2 · Servicio sin decorador, registrado en providers (no singleton)' },
       { path: '/v2/estado-compartido', label: 'V2 · Comunicación mediante estado compartido con Signals' },
       { path: '/ejercicio-servicios', label: 'V1 · Ejercicio de servicios' },
       { path: '/v2/consumo-api', label: 'V2 · HttpClient y estados de carga/error' },

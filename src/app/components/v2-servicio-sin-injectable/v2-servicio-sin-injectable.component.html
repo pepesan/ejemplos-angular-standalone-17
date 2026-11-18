@@ -1,0 +1,51 @@
+<section class="container py-3" aria-labelledby="servicio-sin-injectable-title">
+  <h1 id="servicio-sin-injectable-title">Servicio sin &#64;Injectable</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: <code>&#64;Service()</code> se introdujo en Angular 22.0.">
+    No existe en Angular 21.2 y sí en 22.0.0 (API pública, verificado en los tipos publicados de <code>&#64;angular/core</code>). Para versiones anteriores, usa <code>&#64;Injectable()</code>. <code>inject()</code> es API pública desde la v14.
+  </app-aviso-api>
+
+  <p>
+    Un servicio es una clase normal de TypeScript. El decorador (<code>&#64;Service()</code> o
+    <code>&#64;Injectable()</code>) no es lo que la convierte en servicio: lo que importa es
+    <strong>dónde se registra</strong> en <code>providers</code>.
+  </p>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h2 class="h5">Contador desde un servicio sin decorador</h2>
+      <p class="fs-4" aria-live="polite">Valor: {{ contador.valor() }}</p>
+      <button type="button" class="btn btn-primary me-2" (click)="contador.incrementar()">Incrementar</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="contador.reiniciar()">Reiniciar</button>
+    </div>
+  </div>
+
+  <h2 class="h5">Cómo funciona</h2>
+  <ol>
+    <li>El servicio es una clase sin decorador, ni <code>&#64;Service()</code> ni <code>&#64;Injectable()</code> (<code>ContadorPlanoService</code>).</li>
+    <li>El componente lo registra con <code>providers: [ContadorPlanoService]</code>.</li>
+    <li>Lo obtiene con <code>inject(ContadorPlanoService)</code>.</li>
+  </ol>
+
+  <h2 class="h5">Qué usar en cada caso (Angular 22)</h2>
+  <ul>
+    <li>
+      <strong>Servicio compartido por toda la app (singleton):</strong> <code>&#64;Service()</code>. Es lo que genera
+      <code>ng g service</code> y se registra en el inyector raíz. Existe una única instancia.
+    </li>
+    <li>
+      <strong>Estilo anterior:</strong> <code>&#64;Injectable(&#123; providedIn: 'root' &#125;)</code> hace lo mismo.
+      Sigue siendo válido y lo usan los otros ejemplos de servicios del proyecto; se genera con
+      <code>ng g service --injectable</code>.
+    </li>
+    <li>
+      <strong>Instancia propia por componente:</strong> sin decorador, como en este ejemplo, o con
+      <code>&#64;Service(&#123; autoProvided: false &#125;)</code>, y siempre declarado en <code>providers</code>. No es
+      singleton: cada componente que lo declare tiene su propia instancia.
+    </li>
+    <li>
+      <strong>Con dependencias en el constructor:</strong> sin decorador, Angular no puede inyectarlas. Si el servicio
+      las pide por el constructor, necesita <code>&#64;Injectable()</code>: <code>&#64;Service()</code> solo admite
+      <code>inject()</code> (guía oficial de servicios de angular.dev).
+    </li>
+  </ul>
+</section>

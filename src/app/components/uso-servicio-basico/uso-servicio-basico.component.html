@@ -1,5 +1,30 @@
-<div>
-  <h2>Propiedad: {{propiedadVisible}}</h2>
-  <h2>Método: {{propiedadCargada}}</h2>
+<section class="container py-3" aria-labelledby="servicio-basico-title">
+  <h1 id="servicio-basico-title">Servicio básico con &#64;Service() e inject()</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: &#64;Service() se introdujo en Angular 22.0.">
+    No existe en Angular 21.2. En versiones anteriores usa <code>&#64;Injectable(&#123; providedIn: 'root' &#125;)</code>.
+  </app-aviso-api>
 
-</div>
+  <p>
+    Un servicio es una clase con lógica o datos que varios componentes pueden compartir. Se marca con
+    <code>&#64;Service()</code> y el componente lo pide con <code>inject()</code>.
+  </p>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h2 class="h5">Resultado</h2>
+      <p class="mb-1">Propiedad del servicio: <strong>{{propiedadVisible}}</strong></p>
+      <p class="mb-0">Valor devuelto por un método: <strong>{{propiedadCargada}}</strong></p>
+    </div>
+  </div>
+
+  <h2 class="h5">¿Es singleton?</h2>
+  <p>
+    <strong>Sí.</strong> <code>&#64;Service()</code> registra el servicio en el inyector raíz: existe una única
+    instancia para toda la aplicación y todos los componentes que lo pidan reciben la misma. No hace falta declararlo
+    en <code>providers</code>. Si lo declaras en <code>providers</code> de un componente, ese componente tiene su propia
+    instancia y deja de ser singleton.
+  </p>
+  <p class="mb-0">
+    Siguiente paso: <a routerLink="/v2/servicio-injectable">&#64;Injectable con constructor frente a inject(), singleton y límites</a>.
+  </p>
+</section>
