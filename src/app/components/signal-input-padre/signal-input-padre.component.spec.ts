@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignalInputComponent } from './signal-input.component';
+import { SignalInputPadreComponent } from './signal-input-padre.component';
 
-describe('SignalInputComponent', () => {
-  let component: SignalInputComponent;
-  let fixture: ComponentFixture<SignalInputComponent>;
+describe('SignalInputPadreComponent', () => {
+  let component: SignalInputPadreComponent;
+  let fixture: ComponentFixture<SignalInputPadreComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SignalInputComponent]
+      imports: [SignalInputPadreComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SignalInputComponent);
+    fixture = TestBed.createComponent(SignalInputPadreComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
