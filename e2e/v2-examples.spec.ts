@@ -78,3 +78,50 @@ test('un ejercicio muestra su enunciado antes de la posible solución', async ({
   ]);
   expect(yEnunciado).toBeLessThan(ySolucion);
 });
+
+test.describe('CRUD de usuarios con JWT (backend local)', () => {
+  test('exige iniciar sesión y permite crear, filtrar, ordenar, paginar y borrar como admin', async ({ page }) => {
+    const email = `e2e-${Date.now()}@example.com`;
+    await page.goto('/v2/usuarios-crud');
+    await expect(page.getByRole('heading', { name: 'Inicia sesión' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+    await expect(page.getByText('Sesión:')).toBeVisible();
+    await expect(page.locator('tbody tr')).toHaveCount(5);
+
+    await page.getByLabel('Nombre', { exact: true }).fill('Usuario E2E');
+    await page.getByLabel('Email', { exact: true }).fill(email);
+    await page.getByRole('button', { name: 'Crear usuario' }).click();
+    await expect(page.getByText('«Usuario E2E» creado.')).toBeVisible();
+
+    await page.getByLabel('Buscar por nombre o email').fill(email);
+    await expect(page.locator('tbody tr')).toHaveCount(1);
+    await expect(page.locator('.rango')).toHaveText('1–1 de 1');
+
+    await page.getByRole('button', { name: 'Eliminar Usuario E2E' }).click();
+    await page.getByRole('button', { name: 'Confirmar el borrado de Usuario E2E' }).click();
+    await expect(page.getByText('«Usuario E2E» eliminado.')).toBeVisible();
+    await expect(page.getByText(/Ningún usuario coincide/)).toBeVisible();
+
+    await page.getByRole('button', { name: 'Cerrar sesión' }).click();
+    await expect(page.getByRole('heading', { name: 'Inicia sesión' })).toBeVisible();
+  });
+
+  test('ordena y pagina en el servidor', async ({ page }) => {
+    await page.goto('/v2/usuarios-crud');
+    await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+    await expect(page.locator('tbody tr').first()).toBeVisible();
+    await page.getByRole('button', { name: /^Nombre/ }).click();
+    await expect(page.locator('thead th').first()).toHaveAttribute('aria-sort', 'ascending');
+    await page.getByRole('button', { name: 'Siguiente' }).click();
+    await expect(page.getByText(/Página 2 de/)).toBeVisible();
+  });
+
+  test('un alumno solo consulta: sin formulario ni acciones', async ({ page }) => {
+    await page.goto('/v2/usuarios-crud');
+    await page.getByLabel('Usuario', { exact: true }).fill('alumno');
+    await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+    await expect(page.getByText(/solo permite consultar/)).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Crear usuario' })).toHaveCount(0);
+  });
+});

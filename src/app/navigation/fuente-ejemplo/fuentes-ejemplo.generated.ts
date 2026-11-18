@@ -24,6 +24,24 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/envio-post/envio-post.component.ts': [
+    {
+      ruta: 'src/app/components/envio-post/envio-post.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/envio-post.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/classes/post-data.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/classes/post-data-response.ts',
+      tipo: 'modelo'
+    }
+  ],
   'src/app/components/formulario-tipado/formulario-tipado.component.ts': [
     {
       ruta: 'src/app/components/formulario-tipado/formulario-tipado.component.ts',
@@ -46,6 +64,34 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/pactometro-avisos/pactometro-avisos.component.ts': [
+    {
+      ruta: 'src/app/components/pactometro-avisos/pactometro-avisos.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/pactometro.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/partidos/models/partido.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/pactometro-procesado/pactometro-procesado.component.ts': [
+    {
+      ruta: 'src/app/components/pactometro-procesado/pactometro-procesado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/pactometro.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/partidos/models/partido.ts',
+      tipo: 'modelo'
+    }
+  ],
   'src/app/components/pactometro/pactometro.component.ts': [
     {
       ruta: 'src/app/components/pactometro/pactometro.component.ts',
@@ -57,10 +103,6 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     },
     {
       ruta: 'src/app/components/partidos/models/partido.ts',
-      tipo: 'modelo'
-    },
-    {
-      ruta: 'src/app/components/uso-service/partido.ts',
       tipo: 'modelo'
     }
   ],
@@ -200,7 +242,7 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'servicio'
     },
     {
-      ruta: 'src/app/components/uso-service/partido.ts',
+      ruta: 'src/app/components/partidos/models/partido.ts',
       tipo: 'modelo'
     }
   ],
@@ -358,6 +400,20 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/components/v2-signal-forms/v2-signal-forms.component.ts',
       tipo: 'componente'
+    }
+  ],
+  'src/app/components/v2-usuarios-crud/v2-usuarios-crud.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-crud/v2-usuarios-crud.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
     }
   ],
   'src/app/ejercicios/ejercicio-condicionales/ejercicio-condicionales.component.ts': [

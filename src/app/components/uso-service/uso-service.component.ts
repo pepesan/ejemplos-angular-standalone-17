@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import {TodoService} from "../../services/todo.service";
 import { AsyncPipe } from "@angular/common";
-import {Partido} from "./partido";
+import {Partido} from "../partidos/models/partido";
 
 @Component({
     selector: 'app-uso-service',
