@@ -14,7 +14,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MiPipe implements PipeTransform {
 
-  transform(value: number, exponent = 1): number {
+  transform(value: number, exponent: number = 1): number {
     return Math.pow(value, exponent);
   }
 
