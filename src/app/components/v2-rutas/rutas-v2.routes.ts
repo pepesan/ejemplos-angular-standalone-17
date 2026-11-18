@@ -24,13 +24,13 @@ const resolverRecurso: ResolveFn<RecursoRuta> = (route) =>
   inject(HttpClient).get<RecursoRuta>(`/api/recursos/${route.paramMap.get('id')}`);
 
 export const V2_RUTAS: Routes = [
-  { path: '', pathMatch: 'full', component: V2RutasComponent, title: 'Routing moderno' },
-  { path: 'recurso/:id', component: V2DetalleRutaComponent, resolve: { recurso: resolverRecurso }, title: 'Detalle del recurso' },
+  { path: '', pathMatch: 'full', component: V2RutasComponent, data: { fuente: 'src/app/components/v2-rutas/v2-rutas.component.ts' }, title: 'Routing moderno' },
+  { path: 'recurso/:id', component: V2DetalleRutaComponent, data: { fuente: 'src/app/components/v2-rutas/v2-detalle-ruta.component.ts' }, resolve: { recurso: resolverRecurso }, title: 'Detalle del recurso' },
   {
-    path: 'privado', component: V2DetalleRutaComponent,
+    path: 'privado', component: V2DetalleRutaComponent, data: { fuente: 'src/app/components/v2-rutas/v2-detalle-ruta.component.ts' },
     canActivate: [accesoDemoGuard],
   },
-  { path: 'solo-miembros', component: V2DetalleRutaComponent, canMatch: [jwtCanMatch], title: 'Ruta protegida por JWT' },
-  { path: 'editor', component: V2EditorRutaComponent, canDeactivate: [confirmarSalidaEditor], title: 'Editor protegido' },
-  { path: '**', component: V2RutaNoEncontradaComponent },
+  { path: 'solo-miembros', component: V2DetalleRutaComponent, data: { fuente: 'src/app/components/v2-rutas/v2-detalle-ruta.component.ts' }, canMatch: [jwtCanMatch], title: 'Ruta protegida por JWT' },
+  { path: 'editor', component: V2EditorRutaComponent, data: { fuente: 'src/app/components/v2-rutas/v2-editor-ruta.component.ts' }, canDeactivate: [confirmarSalidaEditor], title: 'Editor protegido' },
+  { path: '**', component: V2RutaNoEncontradaComponent, data: { fuente: 'src/app/components/v2-rutas/v2-ruta-no-encontrada.component.ts' } },
 ];
