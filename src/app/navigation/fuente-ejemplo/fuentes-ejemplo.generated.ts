@@ -330,6 +330,16 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/v2-formulario-alta-signal/v2-formulario-alta-signal.component.ts': [
+    {
+      ruta: 'src/app/components/v2-formulario-alta-signal/v2-formulario-alta-signal.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/validators/reglas.ts',
+      tipo: 'validador'
+    }
+  ],
   'src/app/components/v2-formulario-registro/v2-formulario-registro.component.ts': [
     {
       ruta: 'src/app/components/v2-formulario-registro/v2-formulario-registro.component.ts',
@@ -337,6 +347,10 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     },
     {
       ruta: 'src/app/validators/contrasena.validators.ts',
+      tipo: 'validador'
+    },
+    {
+      ruta: 'src/app/validators/reglas.ts',
       tipo: 'validador'
     },
     {
@@ -432,6 +446,20 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/components/v2-signal-forms/v2-signal-forms.component.ts',
       tipo: 'componente'
+    }
+  ],
+  'src/app/components/v2-usuarios-crud-signal/v2-usuarios-crud-signal.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-crud-signal/v2-usuarios-crud-signal.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
     }
   ],
   'src/app/components/v2-usuarios-crud/v2-usuarios-crud.component.ts': [
