@@ -70,7 +70,7 @@ export const TEMARIO_UNITS: NavGroup[] = [
       { path: '/envio-post', label: 'V1 · Petición POST sencilla (JSONPlaceholder)' },
       { path: '/v2/consumo-api', label: 'V2 · HttpClient y estados de carga/error' },
       { path: '/v2/consumo-api-servicio', label: 'V2 · Consumo de API con un servicio (@Service desde v22)' },
-      { path: '/ejercicio-resultado', label: 'V1 · Ejercicio de consulta HTTP' },
+      { path: '/ejercicio-resultado', label: 'V2 · Ejercicio de consulta HTTP con toSignal y servicio' },
       { path: '/v2/autenticacion', label: 'V2 · Interceptor JWT y errores globales (interceptores funcionales desde v15)' },
       { path: '/v2/usuarios-crud', label: 'V2 · CRUD de usuarios y buenas prácticas de acceso a la API (@Service desde v22)' },
     ],
