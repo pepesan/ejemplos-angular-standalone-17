@@ -44,4 +44,21 @@ describe('V2ConsumoApiComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toContain('Recuperado');
   });
+
+  // 502/503/504 los devuelve el proxy de `ng serve` cuando el backend no está arrancado.
+  it('avisa de arrancar el backend cuando el proxy devuelve 502', () => {
+    const fixture = TestBed.createComponent(V2ConsumoApiComponent);
+    fixture.detectChanges();
+    http.expectOne(URL_RESULTADOS).flush('Bad Gateway', { status: 502, statusText: 'Bad Gateway' });
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('npm run backend');
+  });
+
+  it('no sugiere arrancar el backend ante un error 500 de la API', () => {
+    const fixture = TestBed.createComponent(V2ConsumoApiComponent);
+    fixture.detectChanges();
+    http.expectOne(URL_RESULTADOS).flush('Fallo', { status: 500, statusText: 'Server error' });
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).not.toContain('npm run backend');
+  });
 });

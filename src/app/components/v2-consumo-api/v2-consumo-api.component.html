@@ -8,6 +8,12 @@
     <p role="status">Cargando resultados…</p>
   } @else if (estado().status === 'error') {
     <p role="alert">{{ mensajeError() }}</p>
+    @if (backendCaido()) {
+      <div class="alert alert-warning" role="status">
+        <strong>¿Está arrancado el backend?</strong> Este ejemplo necesita el servidor didáctico local.
+        Ábrelo en otra terminal con <code>npm run backend</code> (escucha en el puerto 3001) y pulsa «Reintentar».
+      </div>
+    }
     <button class="btn btn-outline-primary" type="button" (click)="reintentar()">Reintentar</button>
   } @else if (cantidad() === 0) {
     <p>No hay resultados disponibles.</p>
