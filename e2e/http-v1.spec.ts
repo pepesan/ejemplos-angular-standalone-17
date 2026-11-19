@@ -72,3 +72,20 @@ test.describe('Petición POST sencilla', () => {
     await expect(page.locator('app-envio-post').getByRole('alert')).toContainText('No se pudo enviar el POST.');
   });
 });
+
+test.describe('Ejercicio de consulta HTTP (toSignal y servicio)', () => {
+  const URL_JSON = 'https://pactometro.cursosdedesarrollo.com/resultados.json';
+
+  test('pinta los partidos que entrega el servicio', async ({ page }) => {
+    await page.route(URL_JSON, (route) => route.fulfill({ json: [{ nombre: 'Partido de ejemplo', dipu: 3, imagen: 'x.png' }] }));
+    await page.route('**/img/**', (route) => route.fulfill({ status: 200, contentType: 'image/png', body: '' }));
+    await page.goto('/ejercicio-resultado');
+    await expect(page.getByText('Partido de ejemplo: 3')).toBeVisible();
+  });
+
+  test('muestra un aviso accesible si la petición falla', async ({ page }) => {
+    await page.route(URL_JSON, (route) => route.abort());
+    await page.goto('/ejercicio-resultado');
+    await expect(page.getByRole('alert').filter({ hasText: 'No se pudieron cargar los resultados' })).toBeVisible();
+  });
+});

@@ -10,6 +10,7 @@ import { SignalsComponent } from '../signals/signals.component';
 import { V2AuthComponent } from '../v2-auth/v2-auth.component';
 import { V2BusquedaComponent } from '../v2-busqueda/v2-busqueda.component';
 import { V2ConsumoApiComponent } from '../v2-consumo-api/v2-consumo-api.component';
+import { V2ConsumoApiServicioComponent } from '../v2-consumo-api-servicio/v2-consumo-api-servicio.component';
 import { V2EstadoComponent } from '../v2-estado/v2-estado.component';
 import { V2FundamentosComponent } from '../v2-fundamentos/v2-fundamentos.component';
 import { V2RutasComponent } from '../v2-rutas/v2-rutas.component';
@@ -30,6 +31,7 @@ const AVISOS: [string, Type<unknown>, 'moderno' | 'legado', string][] = [
   ['Signal Forms', V2SignalFormsComponent, 'moderno', 'estable desde Angular 22'],
   ['input()/output() frente a @Input/@Output', V2ComunicacionComponent, 'moderno', 'estable desde Angular 19'],
   ['@Service() (22.0)', V2ServicioSinInjectableComponent, 'moderno', 'se introdujo en Angular 22.0'],
+  ['@Service() en el servicio de resultados (22.0)', V2ConsumoApiServicioComponent, 'moderno', '@Service() desde Angular 22.0'],
   ['signal()/computed() en estado derivado', V2EstadoComponent, 'moderno', 'estable desde Angular 17'],
   ['introducción a Signals', SignalsComponent, 'moderno', 'estables desde Angular 17'],
   ['ejercicio de Signals', EjercicioSignalsComponent, 'moderno', 'estable desde Angular 17'],

@@ -1,4 +1,6 @@
-ul {
+/* Estilos acotados a los listados de partidos: el enunciado proyectado también pertenece a esta plantilla
+   y, sin la clase, sus <ul>/<li> heredaban la rejilla de tarjetas. */
+ul.listado-partidos {
   display: grid;
   gap: 20px;
   padding: 0;
@@ -7,30 +9,30 @@ ul {
 }
 
 @media (min-width: 320px) {
-  ul {
+  ul.listado-partidos {
     grid-template-columns: repeat(1, 1fr);
   }
 }
 
 @media (min-width: 768px) {
-  ul {
+  ul.listado-partidos {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  ul {
+  ul.listado-partidos {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 1440px) {
-  ul {
+  ul.listado-partidos {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-li {
+.listado-partidos li {
   display: flex;
   align-items: center;
   padding: 10px;
@@ -41,11 +43,11 @@ li {
   color: var(--app-text);
 }
 
-li:hover {
+.listado-partidos li:hover {
   background-color: var(--app-active-bg);
 }
 
-img {
+.listado-partidos img {
   margin-left: auto;
   border-radius: 5%;
 }
