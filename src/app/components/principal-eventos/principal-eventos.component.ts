@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import {Event} from "@angular/router";
 
 @Component({
     selector: 'app-principal-eventos',
@@ -63,7 +62,13 @@ export class PrincipalEventosComponent implements OnInit, OnDestroy {
   //   // this.value = event.value;
   //   console.log(this.value);
   // }
-
+  // Con `(keyup.enter)` la plantilla tipa `$event` como `Event` (no `KeyboardEvent`); `preventDefault` existe en ambos.
+  onInputEvento(event: Event, miInput: HTMLInputElement) {
+    event.preventDefault();
+    console.log(miInput);
+    console.log(miInput.id);
+    console.log(miInput.value);
+  }
 
   ngOnDestroy(): void {
     console.log("OnDestroy");
