@@ -219,3 +219,38 @@ test.describe('Catálogo de validadores predefinidos', () => {
     await expect(page.locator('#telefono-estado')).toContainText('Válido');
   });
 });
+
+test.describe('Formulario de alta con Signal Forms', () => {
+  async function rellenar(page: import('@playwright/test').Page, repite = 'abcd') {
+    await page.getByLabel('Username *').fill('anita');
+    await page.getByLabel('Password *', { exact: true }).fill('abcd');
+    await page.getByLabel('Repeat Password *').fill(repite);
+    await page.getByLabel('Email *').fill('ana@example.com');
+    await page.getByLabel('Acepto las condiciones *').check();
+  }
+
+  test('el botón está deshabilitado hasta que el formulario es válido', async ({ page }) => {
+    await page.goto('/v2/formulario-alta-signal');
+    await expect(page.getByRole('button', { name: 'Enviar' })).toBeDisabled();
+    await rellenar(page);
+    await expect(page.getByRole('button', { name: 'Enviar' })).toBeEnabled();
+  });
+
+  test('avisa si las contraseñas no coinciden', async ({ page }) => {
+    await page.goto('/v2/formulario-alta-signal');
+    await rellenar(page, 'abce');
+    await page.getByLabel('Repeat Password *').blur();
+    await expect(page.getByRole('alert').filter({ hasText: 'Las contraseñas no coinciden.' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Enviar' })).toBeDisabled();
+  });
+
+  test('envía, confirma y reinicia el formulario', async ({ page }) => {
+    await page.goto('/v2/formulario-alta-signal');
+    await rellenar(page);
+    await page.getByRole('button', { name: 'Enviar' }).click();
+    await expect(page.getByText('Alta recibida para anita.')).toBeVisible();
+    await expect(page.getByLabel('Username *')).toHaveValue('');
+    await expect(page.getByLabel('Acepto las condiciones *')).not.toBeChecked();
+    await expect(page.getByRole('alert')).toHaveCount(0);
+  });
+});

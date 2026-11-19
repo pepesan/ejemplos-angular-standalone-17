@@ -198,6 +198,13 @@ export const routes: Routes = [
     title: 'Signal Forms',
   },
   {
+    path: 'v2/formulario-alta-signal',
+    data: { fuente: 'src/app/components/v2-formulario-alta-signal/v2-formulario-alta-signal.component.ts' },
+    loadComponent: () => import('./components/v2-formulario-alta-signal/v2-formulario-alta-signal.component')
+      .then((module) => module.V2FormularioAltaSignalComponent),
+    title: 'Formulario de alta con Signal Forms',
+  },
+  {
     path: 'v2/busqueda-reactiva',
     data: { fuente: 'src/app/components/v2-busqueda/v2-busqueda.component.ts' },
     loadComponent: () => import('./components/v2-busqueda/v2-busqueda.component')

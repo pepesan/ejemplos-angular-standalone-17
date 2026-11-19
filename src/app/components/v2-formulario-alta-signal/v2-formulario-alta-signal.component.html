@@ -1,0 +1,127 @@
+<section class="container py-3" aria-labelledby="alta-signal-heading">
+  <h1 id="alta-signal-heading">Formulario de alta con Signal Forms (V2)</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: Signal Forms es estable desde Angular 22.">
+    Es el mismo formulario del ejercicio de formularios reactivos, con el valor en una signal y las reglas en un
+    esquema <code>form()</code>. En versiones anteriores, usa formularios reactivos.
+  </app-aviso-api>
+
+  <form (submit)="enviar($event)" novalidate>
+    <!-- Username -->
+    <div class="mb-3">
+      <label class="form-label" for="username">Username *</label>
+      <input id="username" class="form-control" type="text" [formField]="formulario.username"
+        [attr.aria-invalid]="formulario.username().touched() && formulario.username().invalid()"
+        aria-describedby="username-error" />
+      <div id="username-error">
+        @if (formulario.username().touched() && formulario.username().invalid()) {
+          @for (error of formulario.username().errors(); track error.kind) {
+            <p class="alert alert-danger py-1 mb-1" role="alert">{{ error.message }}</p>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label class="form-label" for="password">Password *</label>
+      <input id="password" class="form-control" type="password" autocomplete="new-password"
+        [formField]="formulario.password"
+        [attr.aria-invalid]="formulario.password().touched() && formulario.password().invalid()"
+        aria-describedby="password-error" />
+      <div id="password-error">
+        @if (formulario.password().touched() && formulario.password().invalid()) {
+          @for (error of formulario.password().errors(); track error.kind) {
+            <p class="alert alert-danger py-1 mb-1" role="alert">{{ error.message }}</p>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Repeat Password -->
+    <div class="mb-3">
+      <label class="form-label" for="repeat-password">Repeat Password *</label>
+      <input id="repeat-password" class="form-control" type="password" autocomplete="new-password"
+        [formField]="formulario.repeatPassword"
+        [attr.aria-invalid]="formulario.repeatPassword().touched() && formulario.repeatPassword().invalid()"
+        aria-describedby="repeat-password-error" />
+      <div id="repeat-password-error">
+        @if (formulario.repeatPassword().touched() && formulario.repeatPassword().invalid()) {
+          @for (error of formulario.repeatPassword().errors(); track error.kind) {
+            <p class="alert alert-danger py-1 mb-1" role="alert">{{ error.message }}</p>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label" for="email">Email *</label>
+      <input id="email" class="form-control" type="email" autocomplete="email" [formField]="formulario.email"
+        [attr.aria-invalid]="formulario.email().touched() && formulario.email().invalid()"
+        aria-describedby="email-error" />
+      <div id="email-error">
+        @if (formulario.email().touched() && formulario.email().invalid()) {
+          @for (error of formulario.email().errors(); track error.kind) {
+            <p class="alert alert-danger py-1 mb-1" role="alert">{{ error.message }}</p>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Gender (Radio) -->
+    <fieldset class="mb-3">
+      <legend class="form-label fs-6">Género *</legend>
+      @for (g of genders; track g.id) {
+        <div class="form-check">
+          <input class="form-check-input" type="radio" [id]="'gender-' + g.id" [value]="g.id"
+            [formField]="formulario.gender" />
+          <label class="form-check-label" [for]="'gender-' + g.id">{{ g.name }}</label>
+          <!-- Font Awesome (cargado en index.html). Decorativo: el nombre ya está en la etiqueta. -->
+          <i class="fas ms-1" [class]="g.icon" aria-hidden="true"></i>
+        </div>
+      }
+    </fieldset>
+
+    <!-- Orientation -->
+    <div class="mb-3">
+      <label class="form-label" for="orientation">Orientación *</label>
+      <select id="orientation" class="form-select" [formField]="formulario.orientation">
+        @for (o of orientations; track o.id) {
+          <option [value]="o.id">{{ o.name }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Relation Type -->
+    <div class="mb-3">
+      <label class="form-label" for="relation-type">Tipo de relación *</label>
+      <select id="relation-type" class="form-select" [formField]="formulario.relationType">
+        @for (r of relationTypes; track r.id) {
+          <option [value]="r.id">{{ r.name }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Conditions -->
+    <div class="form-check mb-3">
+      <input id="conditions" class="form-check-input" type="checkbox" [formField]="formulario.conditions"
+        [attr.aria-invalid]="formulario.conditions().touched() && formulario.conditions().invalid()"
+        aria-describedby="conditions-error" />
+      <label class="form-check-label" for="conditions">Acepto las condiciones *</label>
+      <div id="conditions-error">
+        @if (formulario.conditions().touched() && formulario.conditions().invalid()) {
+          @for (error of formulario.conditions().errors(); track error.kind) {
+            <p class="alert alert-danger py-1 mb-1" role="alert">{{ error.message }}</p>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Se mantiene deshabilitado mientras sea inválido, como en el ejercicio original. -->
+    <button type="submit" class="btn btn-success" [disabled]="formulario().invalid()">Enviar</button>
+  </form>
+
+  @if (confirmacion()) {
+    <p class="alert alert-success mt-3" role="status">{{ confirmacion() }}</p>
+  }
+</section>
