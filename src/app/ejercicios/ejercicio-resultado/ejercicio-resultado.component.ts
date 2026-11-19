@@ -1,47 +1,18 @@
-import { Component, signal, WritableSignal, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import {Resultado} from "./resultado";
-import {ResultadoService} from "./resultado.service";
-import { AsyncPipe } from "@angular/common";
-import {Observable, Subscription} from "rxjs";
-import {EnunciadoComponent} from "../enunciado/enunciado.component";
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { EnunciadoComponent } from '../enunciado/enunciado.component';
+import { EstadoResultados } from './resultado';
+import { ResultadoService } from './resultado.service';
 
 @Component({
   selector: 'app-ejercicio-resultado',
-  imports: [
-    AsyncPipe,
-    EnunciadoComponent
-  ],
+  imports: [EnunciadoComponent],
   templateUrl: './ejercicio-resultado.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './ejercicio-resultado.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './ejercicio-resultado.component.css',
 })
-export class EjercicioResultadoComponent implements OnDestroy {
-
-  public listado: Promise<Resultado[]> ;
-
-  // Comparación didáctica: la conversión de abajo es legado; usa firstValueFrom/lastValueFrom en código nuevo.
-  // La signal conserva el último resultado recibido del Observable.
-  public partidosSignal: WritableSignal<Resultado[]> = signal<Resultado[]>([]);
-  private resultadosObservable: Observable<Resultado[]>;
-  private resultadosObservableSubscription: Subscription;
-
-  constructor(private resultadoService: ResultadoService) {
-    // Ejemplo legado para comparar Promesa y Observable; `toPromise()` está obsoleto.
-    this.listado = this.resultadoService.getData().toPromise();
-
-    // La suscripción actualiza el estado local; se libera en ngOnDestroy.
-    this.resultadosObservable = this.resultadoService.getData();
-    this.resultadosObservableSubscription = this.resultadosObservable.subscribe(
-      data =>{
-        this.partidosSignal.set(data);
-      }
-    );
-  }
-
-
-  ngOnDestroy(): void {
-    this.resultadosObservableSubscription.unsubscribe();
-  }
-
-
+export class EjercicioResultadoComponent {
+  // `toSignal` se suscribe al Observable del servicio y se da de baja solo al destruir el componente:
+  // no hace falta `ngOnDestroy` ni el pipe `async`.
+  readonly estado = toSignal(inject(ResultadoService).estado(), { initialValue: { status: 'loading' } as EstadoResultados });
 }

@@ -1,35 +1,35 @@
 <app-enunciado titulo="Ejercicio de consulta HTTP">
-  <p>Consulta un JSON remoto con resultados de partidos y muéstralo de dos maneras.</p>
+  <p>Consulta un JSON remoto con resultados de partidos y muéstralo con una signal.</p>
   <ul>
-    <li>Crea un servicio <code>ResultadoService</code> con <code>HttpClient</code> que haga un <code>get</code> a <code>resultados.json</code> y devuelva un <code>Observable</code> de resultados (<code>nombre</code>, <code>dipu</code>, <code>imagen</code>). Si falla, debe devolver una lista vacía y registrar el error en consola.</li>
-    <li>Primer listado: convierte el Observable en <code>Promise</code> y píntalo con el pipe <code>async</code>. Es el enfoque legado: en código nuevo se usa <code>firstValueFrom</code>.</li>
-    <li>Segundo listado: suscríbete al Observable, guarda el último valor en una signal y pinta la lista con <code>&#64;for</code> y <code>&#64;empty</code>. Cancela la suscripción en <code>ngOnDestroy</code>.</li>
+    <li>Crea un servicio <code>ResultadoService</code> con <code>HttpClient</code> que haga un <code>get</code> a <code>resultados.json</code> y devuelva un <code>Observable</code> con el estado de la petición: <code>loading</code>, <code>success</code> (con los resultados: <code>nombre</code>, <code>dipu</code>, <code>imagen</code>) o <code>error</code>. Si falla, debe registrar el error en consola y no lanzar la excepción.</li>
+    <li>En el componente, convierte ese Observable en una signal con <code>toSignal</code>. No uses <code>subscribe</code>, <code>ngOnDestroy</code> ni el pipe <code>async</code>.</li>
+    <li>Pinta cada estado: un mensaje de carga, la lista con <code>&#64;for</code> y <code>&#64;empty</code>, y un aviso accesible (<code>role="alert"</code>) si la petición falla.</li>
     <li>Cada elemento muestra nombre, diputados y la imagen del partido con un texto alternativo.</li>
   </ul>
   <div solucion>
     <div>
-      <h3>Listado de partidos</h3>
-      <ul class="listado-partidos">
-        @for (resultado of listado | async; track resultado) {
-          <li>
-            {{resultado.nombre}}: {{resultado.dipu}}
-            <img src="https://pactometro.cursosdedesarrollo.com/img/{{resultado.imagen}}"
-              width="90px"
-              height="90px" alt="Logo partido {{resultado.nombre}}"/>
-          </li>
-        }
-      </ul>
       <h3>Listado de partidos con Señales y Control Flow</h3>
-      <ul class="listado-partidos">
-        @for (item of partidosSignal(); track item.nombre) {
-          <li>
-            {{ item.nombre }}: {{ item.dipu }}
-            <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90px" height="90px" alt="Logo partido {{ item.nombre }}" />
-          </li>
-          }@empty {
-          <li> There are no results.</li>
+      @let e = estado();
+      @switch (e.status) {
+        @case ('loading') {
+          <p role="status">Cargando resultados…</p>
         }
-      </ul>
+        @case ('error') {
+          <div class="alert alert-warning" role="alert">{{ e.mensaje }}</div>
+        }
+        @case ('success') {
+          <ul class="listado-partidos">
+            @for (item of e.items; track item.nombre) {
+              <li>
+                {{ item.nombre }}: {{ item.dipu }}
+                <img src="https://pactometro.cursosdedesarrollo.com/img/{{ item.imagen }}" width="90" height="90" alt="Logo partido {{ item.nombre }}" />
+              </li>
+            } @empty {
+              <li>No hay resultados disponibles.</li>
+            }
+          </ul>
+        }
+      }
     </div>
   </div>
 </app-enunciado>
