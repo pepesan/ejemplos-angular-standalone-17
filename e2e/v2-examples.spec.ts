@@ -152,3 +152,33 @@ test('el formulario tipado se vacía tras un envío correcto y mantiene la confi
   await expect(page.getByLabel('Acepto la política de privacidad')).not.toBeChecked();
   await expect(page.getByRole('alert')).toHaveCount(0);
 });
+
+test.describe('Registro con validadores personalizados', () => {
+  const SEGURA = 'Contrasena-Muy-Segura-2026!';
+
+  test('muestra los requisitos pendientes mientras se escribe la contraseña', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    await page.getByLabel('Contraseña', { exact: true }).fill('abc');
+    await expect(page.getByRole('listitem').filter({ hasText: 'Al menos 20 caracteres' })).toContainText('Pendiente');
+    await expect(page.getByRole('listitem').filter({ hasText: 'letra minúscula' })).toContainText('Cumplido');
+  });
+
+  test('avisa si las contraseñas válidas no coinciden', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    await page.getByLabel('Contraseña', { exact: true }).fill(SEGURA);
+    await page.getByLabel('Repite la contraseña').fill(SEGURA + 'x');
+    await page.getByLabel('Repite la contraseña').blur();
+    await expect(page.getByRole('alert').filter({ hasText: 'Las contraseñas no coinciden.' })).toBeVisible();
+  });
+
+  test('registra y vacía el formulario cuando todo es correcto', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    await page.getByLabel('Correo electrónico').fill('ana@example.com');
+    await page.getByLabel('Contraseña', { exact: true }).fill(SEGURA);
+    await page.getByLabel('Repite la contraseña').fill(SEGURA);
+    await page.getByRole('button', { name: 'Registrarme' }).click();
+    await expect(page.getByText('Registro correcto para ana@example.com.')).toBeVisible();
+    await expect(page.getByLabel('Contraseña', { exact: true })).toHaveValue('');
+    await expect(page.getByRole('alert')).toHaveCount(0);
+  });
+});

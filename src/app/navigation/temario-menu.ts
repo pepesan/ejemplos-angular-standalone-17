@@ -90,6 +90,7 @@ export const TEMARIO_UNITS: NavGroup[] = [
       { path: '/reactivos', label: 'V1 · FormControl, FormGroup y validadores' },
       { path: '/ejercicio-formulario-reactivo', label: 'V1 · Ejercicio de formularios reactivos' },
       { path: '/v2/formulario-tipado', label: 'V2 · Formulario reactivo tipado' },
+      { path: '/v2/formulario-registro', label: 'V2 · Registro con validadores personalizados (contraseña segura y coincidencia)' },
       { path: '/v2/signal-forms', label: 'V2 · Formularios basados en Signals (estable desde v22)' },
       { path: '/v2/accesibilidad', label: 'V2 · Accesibilidad y calidad en formularios' },
     ],

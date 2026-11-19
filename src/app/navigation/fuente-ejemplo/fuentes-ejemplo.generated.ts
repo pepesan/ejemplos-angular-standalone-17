@@ -330,10 +330,28 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/v2-formulario-registro/v2-formulario-registro.component.ts': [
+    {
+      ruta: 'src/app/components/v2-formulario-registro/v2-formulario-registro.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/validators/contrasena.validators.ts',
+      tipo: 'validador'
+    },
+    {
+      ruta: 'src/app/validators/validador-con-mensaje.ts',
+      tipo: 'validador'
+    }
+  ],
   'src/app/components/v2-formulario-tipado/v2-formulario-tipado.component.ts': [
     {
       ruta: 'src/app/components/v2-formulario-tipado/v2-formulario-tipado.component.ts',
       tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/validators/validador-con-mensaje.ts',
+      tipo: 'validador'
     }
   ],
   'src/app/components/v2-fundamentos/v2-fundamentos.component.ts': [

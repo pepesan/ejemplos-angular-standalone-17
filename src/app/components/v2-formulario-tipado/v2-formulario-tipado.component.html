@@ -1,6 +1,9 @@
 <section aria-labelledby="registro-heading">
   <h1 id="registro-heading">Formulario de inscripción (V2)</h1>
-  <p>Ejemplo de formulario reactivo tipado, validación y errores accesibles.</p>
+  <p>
+    Ejemplo de formulario reactivo tipado, validación y errores accesibles. Cada validador lleva su propio mensaje
+    (<code>conMensaje(validador, mensaje)</code>), así que la plantilla solo pinta el mensaje del primer error.
+  </p>
 
   <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
     <div class="mb-3">
@@ -10,11 +13,7 @@
         [attr.aria-describedby]="form.controls.nombre.touched && form.controls.nombre.invalid ? 'nombre-error' : null" />
       @if (form.controls.nombre.touched && form.controls.nombre.invalid) {
         <p id="nombre-error" class="text-danger" role="alert">
-          @if (form.controls.nombre.hasError('required')) {
-            Escribe tu nombre.
-          } @else {
-            El nombre debe tener al menos 3 caracteres.
-          }
+          {{ mensajeDe(form.controls.nombre) }}
         </p>
       }
     </div>
@@ -26,11 +25,7 @@
         [attr.aria-describedby]="form.controls.correo.touched && form.controls.correo.invalid ? 'correo-error' : null" />
       @if (form.controls.correo.touched && form.controls.correo.invalid) {
         <p id="correo-error" class="text-danger" role="alert">
-          @if (form.controls.correo.hasError('required')) {
-            Escribe tu correo electrónico.
-          } @else {
-            Introduce un correo electrónico válido.
-          }
+          {{ mensajeDe(form.controls.correo) }}
         </p>
       }
     </div>
@@ -41,7 +36,7 @@
         [attr.aria-describedby]="form.controls.aceptarPolitica.touched && form.controls.aceptarPolitica.invalid ? 'politica-error' : null" />
       <label for="aceptar-politica" class="form-check-label">Acepto la política de privacidad</label>
       @if (form.controls.aceptarPolitica.touched && form.controls.aceptarPolitica.invalid) {
-        <p id="politica-error" class="text-danger" role="alert">Debes aceptar la política de privacidad.</p>
+        <p id="politica-error" class="text-danger" role="alert">{{ mensajeDe(form.controls.aceptarPolitica) }}</p>
       }
     </div>
 

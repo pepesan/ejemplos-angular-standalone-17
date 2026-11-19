@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { conMensaje, mensajesDe } from '../../validators/validador-con-mensaje';
 
 @Component({
   selector: 'app-v2-formulario-tipado',
@@ -11,17 +12,32 @@ export class V2FormularioTipadoComponent {
   readonly form = new FormGroup({
     nombre: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.minLength(3)],
+      // Cada validador lleva su mensaje: el texto se define junto a la regla, no en la plantilla.
+      validators: [
+        conMensaje(Validators.required, 'Escribe tu nombre.'),
+        conMensaje<{ requiredLength: number }>(
+          Validators.minLength(3),
+          ({ requiredLength }) => `El nombre debe tener al menos ${requiredLength} caracteres.`,
+        ),
+      ],
     }),
     correo: new FormControl('', {
       nonNullable: true,
-      validators: [Validators.required, Validators.email],
+      validators: [
+        conMensaje(Validators.required, 'Escribe tu correo electrónico.'),
+        conMensaje(Validators.email, 'Introduce un correo electrónico válido.'),
+      ],
     }),
     aceptarPolitica: new FormControl(false, {
       nonNullable: true,
-      validators: [Validators.requiredTrue],
+      validators: [conMensaje(Validators.requiredTrue, 'Debes aceptar la política de privacidad.')],
     }),
   });
+
+  /** Primer mensaje del control: el que definió el validador que falló. La plantilla ya no decide los textos. */
+  mensajeDe(control: AbstractControl): string {
+    return mensajesDe(control.errors)[0] ?? '';
+  }
 
   readonly nombreConfirmado = signal<string | null>(null);
 
