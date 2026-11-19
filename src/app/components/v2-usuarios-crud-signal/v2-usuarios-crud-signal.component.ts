@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounce, email, form, FormField, maxLength, minLength, required, submit } from '@angular/forms/signals';
@@ -8,6 +9,12 @@ import {
 } from '../../services/usuarios-api.service';
 
 interface DatosUsuario { nombre: string; email: string; rol: Rol; }
+
+/**
+ * Con `ng serve` + proxy, si el backend no está arrancado el proxy responde 502/503/504 (o 0 si no hay conexión):
+ * es un fallo de entorno, no de la API, y conviene decirle al alumno cómo resolverlo.
+ */
+const ESTADOS_SIN_BACKEND = [0, 502, 503, 504];
 
 const USUARIO_VACIO: DatosUsuario = { nombre: '', email: '', rol: 'alumno' };
 
@@ -39,6 +46,8 @@ export class V2UsuariosCrudSignalComponent {
   // --- Sesión (JWT del backend) ---
   readonly perfil = signal<DemoProfile | null>(null);
   readonly errorLogin = signal<string | null>(null);
+  /** `true` si el backend no responde: se muestra un aviso para arrancarlo (`npm run backend`). */
+  readonly sinBackend = signal(false);
   readonly esAdmin = computed(() => this.perfil()?.role === 'admin');
   readonly modeloLogin = signal({ usuario: 'admin', clave: 'angular' });
   readonly formularioLogin = form(this.modeloLogin, (ruta) => {
@@ -110,6 +119,7 @@ export class V2UsuariosCrudSignalComponent {
         }
         this.pagina.set(pagina);
         this.cargando.set(false);
+        this.sinBackend.set(false);
       });
 
     // Cuando el modelo del filtro cambia (ya con el retardo aplicado) se vuelve a consultar desde la página 1.
@@ -135,10 +145,13 @@ export class V2UsuariosCrudSignalComponent {
       const { usuario, clave } = this.modeloLogin();
       try {
         await firstValueFrom(this.auth.login({ username: usuario, password: clave }));
-      } catch {
-        this.errorLogin.set('Usuario o contraseña incorrectos.');
+      } catch (error) {
+        // Sin backend no se sabe si las credenciales valen: se avisa de arrancarlo en vez de acusar al usuario.
+        if (this.esSinBackend(error)) this.sinBackend.set(true);
+        else this.errorLogin.set('Usuario o contraseña incorrectos.');
         return;
       }
+      this.sinBackend.set(false);
       await this.cargarPerfil();
     });
   }
@@ -147,8 +160,9 @@ export class V2UsuariosCrudSignalComponent {
     try {
       this.perfil.set(await firstValueFrom(this.auth.loadProfile()));
       this.recargar$.next();
-    } catch {
-      this.cerrarSesion('Tu sesión ha caducado. Inicia sesión de nuevo.');
+    } catch (error) {
+      if (this.esSinBackend(error)) this.sinBackend.set(true);
+      else this.cerrarSesion('Tu sesión ha caducado. Inicia sesión de nuevo.');
     }
   }
 
@@ -162,7 +176,22 @@ export class V2UsuariosCrudSignalComponent {
     this.aviso.set(mensaje ? null : 'Has cerrado la sesión.');
   }
 
+  private esSinBackend(error: unknown): boolean {
+    const estado = error instanceof HttpErrorResponse ? error.status : error instanceof ErrorApi ? error.estado : null;
+    return estado !== null && ESTADOS_SIN_BACKEND.includes(estado);
+  }
+
+  /** Vuelve a pedir el listado después de arrancar el backend. */
+  reintentar(): void {
+    this.sinBackend.set(false);
+    this.recargar$.next();
+  }
+
   private gestionarError(error: ErrorApi): void {
+    if (this.esSinBackend(error)) {
+      this.sinBackend.set(true);
+      return;
+    }
     // 401: el token no vale o ha caducado (vive 15 min) → volver al login.
     if (error.estado === 401) this.cerrarSesion('Tu sesión ha caducado. Inicia sesión de nuevo.');
     else this.errorGeneral.set(error.message);
@@ -231,6 +260,7 @@ export class V2UsuariosCrudSignalComponent {
         const guardado = await firstValueFrom(id === null ? this.api.crear(datos) : this.api.actualizar(id, datos));
         this.aviso.set(id === null ? `Usuario «${guardado.nombre}» creado.` : `Usuario «${guardado.nombre}» actualizado.`);
         this.cancelarEdicion();
+        this.sinBackend.set(false);
         this.recargar$.next(); // con paginación en servidor hay que volver a pedir la página
         return undefined;
       } catch (e) {

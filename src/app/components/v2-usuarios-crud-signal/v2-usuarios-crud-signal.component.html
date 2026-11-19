@@ -24,6 +24,15 @@
   <div class="avisos" aria-live="polite">
     @if (aviso(); as mensaje) { <p class="ok">{{ mensaje }}</p> }
   </div>
+  @if (sinBackend()) {
+    <div class="nota" role="alert">
+      <p><strong>No hay conexión con el backend.</strong> Este ejemplo necesita el servidor didáctico local.</p>
+      <p>Ábrelo en otra terminal con <code>npm run backend</code> (escucha en el puerto 3001) y vuelve a intentarlo.</p>
+      @if (perfil()) {
+        <button class="boton" type="button" (click)="reintentar()">Reintentar</button>
+      }
+    </div>
+  }
   @if (errorGeneral(); as mensaje) {
     <p class="error" role="alert">{{ mensaje }}</p>
   }

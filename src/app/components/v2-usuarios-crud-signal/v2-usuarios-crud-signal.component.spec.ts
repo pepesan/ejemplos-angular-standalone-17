@@ -5,6 +5,8 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { V2UsuariosCrudSignalComponent } from './v2-usuarios-crud-signal.component';
 
 describe('V2UsuariosCrudSignalComponent', () => {
+  // Título del aviso de «sin backend». No se busca `npm run backend`: la introducción de la página ya lo menciona.
+  const AVISO = 'No hay conexión con el backend';
   const usuarios = '/api/usuarios';
   const ana = { id: 1, nombre: 'Ana', email: 'ana@example.com', rol: 'profesor' };
   const luis = { id: 2, nombre: 'Luis', email: 'luis@example.com', rol: 'alumno' };
@@ -289,5 +291,61 @@ describe('V2UsuariosCrudSignalComponent', () => {
   it('muestra un estado vacío cuando no hay usuarios', async () => {
     await conSesion('admin', pagina([], { total: 0 }));
     expect(el().textContent).toContain('No hay usuarios todavía');
+  });
+
+  describe('sin conexión con el backend', () => {
+    it('el login con el backend apagado (status 0) avisa de arrancarlo y no acusa de credenciales incorrectas', async () => {
+      crear();
+      pulsar('form button[type="submit"]');
+      await ciclo();
+      http.expectOne('/api/auth/login').error(new ProgressEvent('error'));
+      await ciclo();
+      await refrescar();
+      expect(el().textContent).toContain(AVISO);
+      expect(el().textContent).not.toContain('incorrectos');
+    });
+
+    it('un 502 del proxy en el login también avisa de arrancar el backend', async () => {
+      crear();
+      pulsar('form button[type="submit"]');
+      await ciclo();
+      http.expectOne('/api/auth/login').flush('Bad Gateway', { status: 502, statusText: 'Bad Gateway' });
+      await ciclo();
+      await refrescar();
+      expect(el().querySelector('[role="alert"]')?.textContent).toContain(AVISO);
+    });
+
+    it('un 401 sigue siendo «credenciales incorrectas» y no muestra el aviso del backend', async () => {
+      crear();
+      pulsar('form button[type="submit"]');
+      await ciclo();
+      http.expectOne('/api/auth/login').flush({ message: 'x' }, { status: 401, statusText: 'Unauthorized' });
+      await ciclo();
+      await refrescar();
+      expect(el().textContent).toContain('incorrectos');
+      expect(el().textContent).not.toContain(AVISO);
+    });
+
+    it('si el listado falla con 502 avisa y «Reintentar» vuelve a pedirlo', async () => {
+      await conSesion('admin', pagina([ana, luis], { total: 12 }));
+      pulsar('.botones button:last-child');
+      listado().flush('Bad Gateway', { status: 502, statusText: 'Bad Gateway' });
+      await refrescar();
+      expect(el().textContent).toContain(AVISO);
+      expect(el().textContent).not.toContain('El servidor ha fallado');
+      pulsar('.nota button');
+      listado().flush(pagina());
+      await refrescar();
+      expect(el().textContent).not.toContain(AVISO);
+    });
+
+    it('un 500 de la API no sugiere arrancar el backend (ya está funcionando)', async () => {
+      await conSesion('admin', pagina([ana, luis], { total: 12 }));
+      pulsar('.botones button:last-child');
+      listado().flush('Fallo', { status: 500, statusText: 'Server Error' });
+      await refrescar();
+      expect(el().textContent).toContain('El servidor ha fallado');
+      expect(el().textContent).not.toContain(AVISO);
+    });
   });
 });

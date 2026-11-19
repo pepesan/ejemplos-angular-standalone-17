@@ -24,9 +24,10 @@ const backend = (role: 'admin' | 'student', extra: RutaMock[] = []) =>
       provideHttpClient(
         withInterceptors([
           interceptorMock([
+            // Las rutas extra van primero: `interceptorMock` usa la primera que coincide, así pueden sobrescribir las de por defecto.
+            ...extra,
             { metodo: 'POST', url: '/auth/login', cuerpo: { tokenType: 'Bearer', accessToken: 'jwt-falso', expiresInSeconds: 900 } },
             { url: '/auth/profile', cuerpo: { id: 'x', name: 'Persona de ejemplo', role } },
-            ...extra,
             { url: '/api/usuarios', cuerpo: { items, total: 12, page: 1, size: 5 } },
           ]),
         ]),
@@ -133,5 +134,15 @@ export const ErrorDelServidor: Story = {
   play: async ({ canvasElement }) => {
     const canvas = await entrar(canvasElement);
     await expect(await canvas.findByRole('alert')).toHaveTextContent('El servidor ha fallado');
+  },
+};
+
+// Backend apagado: el login falla sin respuesta (status 0) y la pantalla explica cómo arrancarlo.
+export const BackendApagado: Story = {
+  decorators: [backend('admin', [{ metodo: 'POST', url: '/auth/login', status: 0 }])],
+  play: async ({ canvasElement }) => {
+    const canvas = await entrar(canvasElement);
+    await expect(await canvas.findByText('No hay conexión con el backend.')).toBeVisible();
+    await expect(canvas.queryByText(/incorrectos/)).toBeNull();
   },
 };

@@ -298,4 +298,12 @@ test.describe('CRUD de usuarios con Signal Forms (backend local)', () => {
     await expect(page.getByText(/solo permite consultar/)).toBeVisible();
     await expect(page.getByRole('button', { name: 'Nuevo usuario' })).toHaveCount(0);
   });
+
+  test('avisa de arrancar el backend si no hay conexión', async ({ page }) => {
+    await page.route('**/api/auth/login', (route) => route.abort());
+    await page.goto('/v2/usuarios-crud-signal');
+    await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+    await expect(page.getByRole('alert').filter({ hasText: 'npm run backend' })).toBeVisible();
+    await expect(page.getByText('incorrectos')).toHaveCount(0);
+  });
 });
