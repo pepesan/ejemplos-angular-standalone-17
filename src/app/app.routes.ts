@@ -124,6 +124,13 @@ export const routes: Routes = [
     title: 'Formulario reactivo tipado',
   },
   {
+    path: 'v2/validadores-predefinidos',
+    data: { fuente: 'src/app/components/v2-validadores-predefinidos/v2-validadores-predefinidos.component.ts' },
+    loadComponent: () => import('./components/v2-validadores-predefinidos/v2-validadores-predefinidos.component')
+      .then((module) => module.V2ValidadoresPredefinidosComponent),
+    title: 'Validadores predefinidos',
+  },
+  {
     path: 'v2/formulario-registro',
     data: { fuente: 'src/app/components/v2-formulario-registro/v2-formulario-registro.component.ts' },
     loadComponent: () => import('./components/v2-formulario-registro/v2-formulario-registro.component')

@@ -448,6 +448,16 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'modelo'
     }
   ],
+  'src/app/components/v2-validadores-predefinidos/v2-validadores-predefinidos.component.ts': [
+    {
+      ruta: 'src/app/components/v2-validadores-predefinidos/v2-validadores-predefinidos.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/validators/validador-con-mensaje.ts',
+      tipo: 'validador'
+    }
+  ],
   'src/app/ejercicios/ejercicio-condicionales/ejercicio-condicionales.component.ts': [
     {
       ruta: 'src/app/ejercicios/ejercicio-condicionales/ejercicio-condicionales.component.ts',

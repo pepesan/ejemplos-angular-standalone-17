@@ -1,5 +1,5 @@
 import { FormControl, Validators } from '@angular/forms';
-import { conMensaje, mensajesDe } from './validador-con-mensaje';
+import { conMensaje, detallesDe, mensajesDe } from './validador-con-mensaje';
 
 describe('conMensaje', () => {
   it('conserva el nombre del error y añade el mensaje', () => {
@@ -20,5 +20,11 @@ describe('conMensaje', () => {
 
   it('usa un mensaje genérico si el error no lleva mensaje propio', () => {
     expect(mensajesDe({ raro: true })).toEqual(['El valor no es válido.']);
+  });
+
+  it('detallesDe devuelve el error original sin el envoltorio del mensaje', () => {
+    const control = new FormControl('ab', conMensaje(Validators.minLength(3), 'Muy corto.'));
+    expect(detallesDe(control.errors)).toEqual([{ clave: 'minlength', detalle: { requiredLength: 3, actualLength: 2 } }]);
+    expect(detallesDe(null)).toEqual([]);
   });
 });

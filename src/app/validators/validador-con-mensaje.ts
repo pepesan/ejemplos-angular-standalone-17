@@ -32,3 +32,8 @@ function llevaMensaje(error: unknown): error is ErrorConMensaje {
 export function mensajesDe(errores: ValidationErrors | null): string[] {
   return Object.values(errores ?? {}).map((error) => (llevaMensaje(error) ? error.mensaje : 'El valor no es válido.'));
 }
+
+/** Clave y detalle original de cada error (sin el envoltorio del mensaje): lo que devolvería el validador a secas. */
+export function detallesDe(errores: ValidationErrors | null): { clave: string; detalle: unknown }[] {
+  return Object.entries(errores ?? {}).map(([clave, error]) => ({ clave, detalle: llevaMensaje(error) ? error.detalle : error }));
+}

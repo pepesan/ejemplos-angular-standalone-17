@@ -199,3 +199,23 @@ test.describe('Registro con validadores personalizados', () => {
     await expect(contrasena).toHaveAttribute('type', 'password');
   });
 });
+
+test.describe('Catálogo de validadores predefinidos', () => {
+  test('muestra el error real y el mensaje de minLength', async ({ page }) => {
+    await page.goto('/v2/validadores-predefinidos');
+    await page.getByLabel('Usuario (3 a 12 caracteres)').fill('ab');
+    await expect(page.getByText('minlength: {"requiredLength":3,"actualLength":2}')).toBeVisible();
+    await expect(page.getByText('Mínimo 3 caracteres.')).toBeVisible();
+  });
+
+  test('exigir el teléfono cambia nullValidator por compose en caliente', async ({ page }) => {
+    await page.goto('/v2/validadores-predefinidos');
+    const telefono = page.getByLabel('Teléfono', { exact: true });
+    await telefono.fill('');
+    await expect(page.locator('#telefono-estado')).toContainText('Válido');
+    await page.getByLabel('Exigir teléfono').check();
+    await expect(page.locator('#telefono-estado')).toContainText('Escribe tu teléfono.');
+    await telefono.fill('600123456');
+    await expect(page.locator('#telefono-estado')).toContainText('Válido');
+  });
+});
