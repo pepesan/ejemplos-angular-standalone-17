@@ -9,7 +9,7 @@
   <div solucion>
     <div>
       <h3>Listado de partidos</h3>
-      <ul>
+      <ul class="listado-partidos">
         @for (resultado of listado | async; track resultado) {
           <li>
             {{resultado.nombre}}: {{resultado.dipu}}
@@ -20,7 +20,7 @@
         }
       </ul>
       <h3>Listado de partidos con Señales y Control Flow</h3>
-      <ul>
+      <ul class="listado-partidos">
         @for (item of partidosSignal(); track item.nombre) {
           <li>
             {{ item.nombre }}: {{ item.dipu }}
