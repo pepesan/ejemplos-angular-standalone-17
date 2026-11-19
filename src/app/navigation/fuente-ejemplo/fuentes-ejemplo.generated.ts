@@ -384,24 +384,40 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/components/v2-rutas/v2-detalle-ruta.component.ts',
       tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-rutas/rutas-v2.routes.ts',
+      tipo: 'rutas'
     }
   ],
   'src/app/components/v2-rutas/v2-editor-ruta.component.ts': [
     {
       ruta: 'src/app/components/v2-rutas/v2-editor-ruta.component.ts',
       tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-rutas/rutas-v2.routes.ts',
+      tipo: 'rutas'
     }
   ],
   'src/app/components/v2-rutas/v2-ruta-no-encontrada.component.ts': [
     {
       ruta: 'src/app/components/v2-rutas/v2-ruta-no-encontrada.component.ts',
       tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-rutas/rutas-v2.routes.ts',
+      tipo: 'rutas'
     }
   ],
   'src/app/components/v2-rutas/v2-rutas.component.ts': [
     {
       ruta: 'src/app/components/v2-rutas/v2-rutas.component.ts',
       tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-rutas/rutas-v2.routes.ts',
+      tipo: 'rutas'
     }
   ],
   'src/app/components/v2-seguridad/v2-seguridad.component.ts': [
@@ -473,6 +489,218 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     },
     {
       ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuario-editar.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuario-editar.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-navegacion.routes.ts',
+      tipo: 'rutas'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/guards/cambios-sin-guardar.guard.ts',
+      tipo: 'guarda'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuario-form.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuario-nuevo.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuario-nuevo.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-navegacion.routes.ts',
+      tipo: 'rutas'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/guards/cambios-sin-guardar.guard.ts',
+      tipo: 'guarda'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuario-form.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-listado.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-listado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-navegacion.routes.ts',
+      tipo: 'rutas'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/confirmar-borrado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-login.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-login.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-navegacion.routes.ts',
+      tipo: 'rutas'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-navegacion.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-navegacion.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-navegacion.routes.ts',
+      tipo: 'rutas'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-no-encontrado.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-no-encontrado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-navegacion.routes.ts',
+      tipo: 'rutas'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
       tipo: 'modelo'
     }
   ],
@@ -584,12 +812,20 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/modules/lazy-module/components/demo/demo.component.ts',
       tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/modules/lazy-module/lazy-module.module.ts',
+      tipo: 'modulo'
     }
   ],
   'src/app/modules/lazy-module/components/my-lazy/my-lazy.component.ts': [
     {
       ruta: 'src/app/modules/lazy-module/components/my-lazy/my-lazy.component.ts',
       tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/modules/lazy-module/lazy-module.module.ts',
+      tipo: 'modulo'
     }
   ],
   'src/app/pages/acordeon/acordeon.component.ts': [
@@ -608,18 +844,30 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/pages/child-a/child-a.component.ts',
       tipo: 'page'
+    },
+    {
+      ruta: 'src/app/app.routes.ts',
+      tipo: 'rutas'
     }
   ],
   'src/app/pages/child-b/child-b.component.ts': [
     {
       ruta: 'src/app/pages/child-b/child-b.component.ts',
       tipo: 'page'
+    },
+    {
+      ruta: 'src/app/app.routes.ts',
+      tipo: 'rutas'
     }
   ],
   'src/app/pages/detalle/detalle.component.ts': [
     {
       ruta: 'src/app/pages/detalle/detalle.component.ts',
       tipo: 'page'
+    },
+    {
+      ruta: 'src/app/app.routes.ts',
+      tipo: 'rutas'
     },
     {
       ruta: 'src/app/services/listado.service.ts',
@@ -638,6 +886,10 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'page'
     },
     {
+      ruta: 'src/app/app.routes.ts',
+      tipo: 'rutas'
+    },
+    {
       ruta: 'src/app/services/listado.service.ts',
       tipo: 'servicio'
     }
@@ -646,6 +898,10 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/pages/navegacion/navegacion.component.ts',
       tipo: 'page'
+    },
+    {
+      ruta: 'src/app/app.routes.ts',
+      tipo: 'rutas'
     }
   ],
   'src/app/pages/props-page/props-page.component.ts': [
@@ -704,6 +960,10 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/pages/sub-rutas/sub-rutas.component.ts',
       tipo: 'page'
+    },
+    {
+      ruta: 'src/app/app.routes.ts',
+      tipo: 'rutas'
     }
   ]
 };
