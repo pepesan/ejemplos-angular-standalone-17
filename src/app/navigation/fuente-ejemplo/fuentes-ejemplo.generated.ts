@@ -448,6 +448,20 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/v2-usuarios-crud-signal/v2-usuarios-crud-signal.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-crud-signal/v2-usuarios-crud-signal.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    }
+  ],
   'src/app/components/v2-usuarios-crud/v2-usuarios-crud.component.ts': [
     {
       ruta: 'src/app/components/v2-usuarios-crud/v2-usuarios-crud.component.ts',

@@ -60,6 +60,7 @@ Las credenciales `alumno` / `angular` y la clave JWT predeterminada son solo par
 - `/v2/formulario-registro`: formulario de registro con una pila de validadores por campo (predefinidos y propios: 20 caracteres como mínimo, número, minúscula, mayúscula y símbolo), un validador de grupo para que las dos contraseñas coincidan y mensajes definidos junto a cada validador (`conMensaje`).
 - `/v2/consumo-api`: `HttpClient` contra `/api/resultados`, estados de carga, vacío y error, e integración RxJS-Signals con `toSignal`.
 - `/v2/usuarios-crud`: CRUD de usuarios contra `/api/usuarios` (SQLite en memoria) con login/logout por JWT, listado paginado, filtrable y ordenable en el servidor, interfaz mobile first sin framework de UI y buenas prácticas de acceso a la API (`UsuariosApiService`).
+- `/v2/usuarios-crud-signal`: el mismo CRUD con los formularios (login, búsqueda y alta/edición) hechos con Signal Forms: `submit()` y `submitting()` en lugar de señales de estado, errores 400/409 del servidor asociados a su campo desde la acción de `submit()`, `debounce()` en el esquema del filtro y el mismo `UsuariosApiService`.
 - `/v2/comunicacion`: compara `@Input`/`@Output` con `input()`/`output()`, `ViewChild`, `ViewChildren` y proyección con `ng-content`.
 - `/v2/autenticacion`: login didáctico, emisión de JWT en el backend, interceptor Bearer, endpoint protegido e informe global de errores HTTP.
 - `/v2/rutas`: feature standalone con carga diferida, parámetros resueltos desde el backend, `CanActivate`, `CanMatch`, `CanDeactivate` y pantalla de ruta inexistente.
