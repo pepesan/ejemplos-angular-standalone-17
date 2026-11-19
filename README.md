@@ -54,7 +54,7 @@ Las credenciales `alumno` / `angular` y la clave JWT predeterminada son solo par
 - `/todos`: lista de tareas con Signals (unidad 2).
 - `/control-flow` y `/v2/seguridad`: control flow integrado y comparación entre interpolación literal y sanitización HTML (no usar `bypassSecurityTrustHtml` para contenido no confiable).
 - `/v2/i18n`: textos y formatos de fecha y moneda para dos locales, con actualización reactiva.
-- `/v2/formulario-tipado`: formulario reactivo no anulable y tipado, validación, `OnPush`, confirmación con Signals y mensajes de error accesibles. La ruta carga el componente standalone de forma diferida.
+- `/v2/formulario-tipado`: formulario reactivo no anulable y tipado, validación, `OnPush`, confirmación con Signals, mensajes de error accesibles y limpieza del formulario tras un envío correcto. La ruta carga el componente standalone de forma diferida.
 - `/v2/consumo-api`: `HttpClient` contra `/api/resultados`, estados de carga, vacío y error, e integración RxJS-Signals con `toSignal`.
 - `/v2/usuarios-crud`: CRUD de usuarios contra `/api/usuarios` (SQLite en memoria) con login/logout por JWT, listado paginado, filtrable y ordenable en el servidor, interfaz mobile first sin framework de UI y buenas prácticas de acceso a la API (`UsuariosApiService`).
 - `/v2/comunicacion`: compara `@Input`/`@Output` con `input()`/`output()`, `ViewChild`, `ViewChildren` y proyección con `ng-content`.

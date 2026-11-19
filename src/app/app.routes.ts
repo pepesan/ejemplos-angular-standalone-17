@@ -118,9 +118,9 @@ export const routes: Routes = [
   },
   {
     path: 'v2/formulario-tipado',
-    data: { fuente: 'src/app/components/formulario-tipado/formulario-tipado.component.ts' },
-    loadComponent: () => import('./components/formulario-tipado/formulario-tipado.component')
-      .then((module) => module.FormularioTipadoComponent),
+    data: { fuente: 'src/app/components/v2-formulario-tipado/v2-formulario-tipado.component.ts' },
+    loadComponent: () => import('./components/v2-formulario-tipado/v2-formulario-tipado.component')
+      .then((module) => module.V2FormularioTipadoComponent),
     title: 'Formulario reactivo tipado',
   },
   {

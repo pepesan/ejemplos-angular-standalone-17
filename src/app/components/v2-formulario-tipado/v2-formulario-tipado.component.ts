@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-formulario-tipado',
+  selector: 'app-v2-formulario-tipado',
   imports: [ReactiveFormsModule],
-  templateUrl: './formulario-tipado.component.html',
+  templateUrl: './v2-formulario-tipado.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormularioTipadoComponent {
+export class V2FormularioTipadoComponent {
   readonly form = new FormGroup({
     nombre: new FormControl('', {
       nonNullable: true,
@@ -31,5 +31,8 @@ export class FormularioTipadoComponent {
     if (this.form.invalid) return;
 
     this.nombreConfirmado.set(this.form.controls.nombre.value);
+    // Envío correcto: se vacía el formulario. Con controles `nonNullable`, `reset()` vuelve al valor inicial
+    // ('' y false) y además limpia touched/dirty, así que no aparecen errores de «campo obligatorio» al vaciarlo.
+    this.form.reset();
   }
 }

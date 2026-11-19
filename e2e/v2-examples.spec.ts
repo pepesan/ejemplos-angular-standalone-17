@@ -139,3 +139,16 @@ test('el ejemplo con servicio muestra los resultados que entrega ResultadosApiSe
   await expect(page.getByRole('heading', { name: 'Consumo de API con servicio (V2)' })).toBeVisible();
   await expect(page.getByText('Partido de ejemplo: 3 escaños')).toBeVisible();
 });
+
+test('el formulario tipado se vacía tras un envío correcto y mantiene la confirmación', async ({ page }) => {
+  await page.goto('/v2/formulario-tipado');
+  await page.getByLabel('Nombre').fill('Ana Pérez');
+  await page.getByLabel('Correo electrónico').fill('ana@example.com');
+  await page.getByLabel('Acepto la política de privacidad').check();
+  await page.getByRole('button', { name: 'Inscribirme' }).click();
+  await expect(page.getByText('Inscripción recibida para Ana Pérez.')).toBeVisible();
+  await expect(page.getByLabel('Nombre')).toHaveValue('');
+  await expect(page.getByLabel('Correo electrónico')).toHaveValue('');
+  await expect(page.getByLabel('Acepto la política de privacidad')).not.toBeChecked();
+  await expect(page.getByRole('alert')).toHaveCount(0);
+});

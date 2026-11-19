@@ -42,12 +42,6 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'modelo'
     }
   ],
-  'src/app/components/formulario-tipado/formulario-tipado.component.ts': [
-    {
-      ruta: 'src/app/components/formulario-tipado/formulario-tipado.component.ts',
-      tipo: 'componente'
-    }
-  ],
   'src/app/components/formularios/main-form/main-form.component.ts': [
     {
       ruta: 'src/app/components/formularios/main-form/main-form.component.ts',
@@ -333,6 +327,12 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     },
     {
       ruta: 'src/app/components/v2-estado/resumen-rendimiento.component.ts',
+      tipo: 'componente'
+    }
+  ],
+  'src/app/components/v2-formulario-tipado/v2-formulario-tipado.component.ts': [
+    {
+      ruta: 'src/app/components/v2-formulario-tipado/v2-formulario-tipado.component.ts',
       tipo: 'componente'
     }
   ],
