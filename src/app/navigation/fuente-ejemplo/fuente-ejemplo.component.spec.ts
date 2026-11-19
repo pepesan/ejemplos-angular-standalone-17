@@ -85,3 +85,45 @@ describe('LIMITE_VISIBLES', () => {
     expect(largos.length).toBeLessThan(10);
   });
 });
+
+// Los ejemplos de rutas deben mostrar el fichero donde se declaran sus rutas, aunque ningún componente lo importe.
+describe('ficheros de rutas en los ejemplos de rutas', () => {
+  const rutaDe = (parte: string) => Object.entries(FUENTES_EJEMPLO).find(([raiz]) => raiz.endsWith(parte))![1];
+  const conRutas = (parte: string, fichero: string, tipo: string) =>
+    rutaDe(parte).some((e) => e.ruta.endsWith(fichero) && e.tipo === tipo);
+
+  it('el fichero de rutas dedicado aparece como «rutas» en cada pantalla de su feature', () => {
+    for (const pantalla of ['v2-rutas.component.ts', 'v2-detalle-ruta.component.ts', 'v2-editor-ruta.component.ts']) {
+      expect(conRutas(pantalla, 'rutas-v2.routes.ts', 'rutas')).toBe(true);
+    }
+    for (const pantalla of ['v2-usuarios-listado.component.ts', 'v2-usuario-nuevo.component.ts', 'v2-usuarios-login.component.ts']) {
+      expect(conRutas(pantalla, 'usuarios-navegacion.routes.ts', 'rutas')).toBe(true);
+    }
+  });
+
+  it('el módulo con lazy loading muestra el módulo donde declara sus rutas', () => {
+    expect(conRutas('my-lazy.component.ts', 'lazy-module.module.ts', 'modulo')).toBe(true);
+  });
+
+  it('los ejemplos clásicos de navegación muestran app.routes.ts', () => {
+    // Con la carpeta: «listado.component.ts» a secas también coincidiría con otros ejemplos.
+    for (const pantalla of [
+      '/pages/navegacion/navegacion.component.ts',
+      '/pages/sub-rutas/sub-rutas.component.ts',
+      '/pages/child-a/child-a.component.ts',
+      '/pages/listado/listado.component.ts',
+      '/pages/detalle/detalle.component.ts',
+    ]) {
+      expect(conRutas(pantalla, 'app.routes.ts', 'rutas')).toBe(true);
+    }
+  });
+
+  it('el fichero de rutas va justo después del fichero principal', () => {
+    expect(rutaDe('/v2-usuarios-navegacion/v2-usuarios-listado.component.ts')[1].tipo).toBe('rutas');
+  });
+
+  it('un ejemplo que no es de rutas no lleva fichero de rutas', () => {
+    expect(rutaDe('uso-pipes.component.ts').some((e) => e.tipo === 'rutas')).toBe(false);
+  });
+});
+

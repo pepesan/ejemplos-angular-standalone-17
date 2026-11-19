@@ -25,3 +25,20 @@ test('/reactivos pliega la lista larga y permite desplegarla', async ({ page }) 
   await aviso.getByRole('button', { name: 'Mostrar 4 más' }).click();
   await expect(aviso.getByRole('listitem')).toHaveCount(9);
 });
+
+test('un ejemplo de rutas muestra su fichero de rutas con la píldora «Rutas»', async ({ page }) => {
+  await page.goto('/v2/rutas');
+  const aviso = page.getByRole('complementary', { name: /Ficheros? del ejemplo/ });
+  const fila = aviso.getByRole('listitem').filter({ hasText: 'rutas-v2.routes.ts' });
+  await expect(fila).toBeVisible();
+  await expect(fila.getByText('Rutas', { exact: true })).toBeVisible();
+});
+
+test('los ejemplos clásicos de navegación muestran app.routes.ts', async ({ page }) => {
+  await page.goto('/nav');
+  const aviso = page.getByRole('complementary', { name: /Ficheros? del ejemplo/ });
+  const fila = aviso.getByRole('listitem').filter({ hasText: 'app.routes.ts' });
+  await expect(fila).toBeVisible();
+  await expect(fila.getByText('Rutas', { exact: true })).toBeVisible();
+});
+
