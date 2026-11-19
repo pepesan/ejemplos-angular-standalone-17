@@ -130,3 +130,12 @@ test.describe('CRUD de usuarios con JWT (backend local)', () => {
     await expect(page.getByRole('button', { name: 'Nuevo usuario' })).toHaveCount(0);
   });
 });
+
+test('el ejemplo con servicio muestra los resultados que entrega ResultadosApiService', async ({ page }) => {
+  await page.route('**/api/resultados', (route) => route.fulfill({ json: [
+    { nombre: 'Partido de ejemplo', dipu: 3, imagen: 'partido.png' },
+  ] }));
+  await page.goto('/v2/consumo-api-servicio');
+  await expect(page.getByRole('heading', { name: 'Consumo de API con servicio (V2)' })).toBeVisible();
+  await expect(page.getByText('Partido de ejemplo: 3 escaños')).toBeVisible();
+});

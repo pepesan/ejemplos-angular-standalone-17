@@ -1,0 +1,37 @@
+<section class="container py-3" aria-labelledby="api-servicio-heading">
+  <h1 id="api-servicio-heading">Consumo de API con servicio (V2)</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: @Service() desde Angular 22.0.">
+    En versiones anteriores se declara con <code>&#64;Injectable({{ '{' }} providedIn: 'root' {{ '}' }})</code>, que es equivalente.
+  </app-aviso-api>
+  <p>
+    Igual que el ejemplo anterior, pero el acceso a la API vive en <code>ResultadosApiService</code>.
+    El componente lo inyecta con <code>inject()</code> y solo pinta los estados de carga, error y vacío.
+  </p>
+  @let e = estado();
+  @switch (e.status) {
+    @case ('loading') {
+      <p role="status">Cargando resultados…</p>
+    }
+    @case ('error') {
+      <p role="alert">No se pudieron cargar los resultados.</p>
+      @if (e.backendCaido) {
+        <div class="alert alert-warning" role="status">
+          <strong>¿Está arrancado el backend?</strong> Este ejemplo necesita el servidor didáctico local.
+          Ábrelo en otra terminal con <code>npm run backend</code> (escucha en el puerto 3001) y recarga la página.
+        </div>
+      }
+    }
+    @case ('success') {
+      @if (e.items.length === 0) {
+        <p>No hay resultados disponibles.</p>
+      } @else {
+        <p>{{ e.items.length }} partidos disponibles</p>
+        <ul>
+          @for (partido of e.items; track partido.nombre) {
+            <li>{{ partido.nombre }}: {{ partido.dipu }} escaños</li>
+          }
+        </ul>
+      }
+    }
+  }
+</section>
