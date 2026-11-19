@@ -219,3 +219,91 @@ test.describe('Catálogo de validadores predefinidos', () => {
     await expect(page.locator('#telefono-estado')).toContainText('Válido');
   });
 });
+
+test.describe('Formulario de alta con Signal Forms', () => {
+  async function rellenar(page: import('@playwright/test').Page, repite = 'abcd') {
+    await page.getByLabel('Username *').fill('anita');
+    await page.getByLabel('Password *', { exact: true }).fill('abcd');
+    await page.getByLabel('Repeat Password *').fill(repite);
+    await page.getByLabel('Email *').fill('ana@example.com');
+    await page.getByLabel('Acepto las condiciones *').check();
+  }
+
+  test('el botón está deshabilitado hasta que el formulario es válido', async ({ page }) => {
+    await page.goto('/v2/formulario-alta-signal');
+    await expect(page.getByRole('button', { name: 'Enviar' })).toBeDisabled();
+    await rellenar(page);
+    await expect(page.getByRole('button', { name: 'Enviar' })).toBeEnabled();
+  });
+
+  test('avisa si las contraseñas no coinciden', async ({ page }) => {
+    await page.goto('/v2/formulario-alta-signal');
+    await rellenar(page, 'abce');
+    await page.getByLabel('Repeat Password *').blur();
+    await expect(page.getByRole('alert').filter({ hasText: 'Las contraseñas no coinciden.' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Enviar' })).toBeDisabled();
+  });
+
+  test('envía, confirma y reinicia el formulario', async ({ page }) => {
+    await page.goto('/v2/formulario-alta-signal');
+    await rellenar(page);
+    await page.getByRole('button', { name: 'Enviar' }).click();
+    await expect(page.getByText('Alta recibida para anita.')).toBeVisible();
+    await expect(page.getByLabel('Username *')).toHaveValue('');
+    await expect(page.getByLabel('Acepto las condiciones *')).not.toBeChecked();
+    await expect(page.getByRole('alert')).toHaveCount(0);
+  });
+});
+
+test.describe('CRUD de usuarios con Signal Forms (backend local)', () => {
+  test('crea, filtra y borra como admin, y muestra el 409 junto al campo', async ({ page }) => {
+    const email = `e2e-signal-${Date.now()}@example.com`;
+    await page.goto('/v2/usuarios-crud-signal');
+    await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+    await expect(page.getByText('Sesión:')).toBeVisible();
+    await expect(page.locator('tbody tr')).toHaveCount(5);
+
+    // Alta inválida: los avisos del esquema aparecen junto a cada campo.
+    await page.getByRole('button', { name: 'Nuevo usuario' }).click();
+    await page.getByRole('button', { name: 'Crear usuario' }).click();
+    await expect(page.getByText('El nombre es obligatorio.')).toBeVisible();
+
+    await page.getByLabel('Nombre', { exact: true }).fill('Usuario Signal');
+    await page.getByLabel('Email', { exact: true }).fill(email);
+    await page.getByRole('button', { name: 'Crear usuario' }).click();
+    await expect(page.getByText('«Usuario Signal» creado.')).toBeVisible();
+    await expect(page.getByRole('dialog')).toHaveCount(0);
+
+    // Email repetido: el 409 del servidor se muestra junto al campo.
+    await page.getByRole('button', { name: 'Nuevo usuario' }).click();
+    await page.getByLabel('Nombre', { exact: true }).fill('Otro Usuario');
+    await page.getByLabel('Email', { exact: true }).fill(email);
+    await page.getByRole('button', { name: 'Crear usuario' }).click();
+    await expect(page.locator('#e-email')).not.toBeEmpty();
+    await page.getByRole('button', { name: 'Cancelar' }).click();
+
+    await page.getByLabel('Buscar por nombre o email').fill(email);
+    await expect(page.locator('tbody tr')).toHaveCount(1);
+
+    await page.getByRole('button', { name: 'Eliminar Usuario Signal' }).click();
+    await page.getByRole('button', { name: 'Confirmar el borrado de Usuario Signal' }).click();
+    await expect(page.getByText('«Usuario Signal» eliminado.')).toBeVisible();
+    await expect(page.getByText(/Ningún usuario coincide/)).toBeVisible();
+  });
+
+  test('un alumno solo consulta: sin formulario ni acciones', async ({ page }) => {
+    await page.goto('/v2/usuarios-crud-signal');
+    await page.getByLabel('Usuario', { exact: true }).fill('alumno');
+    await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+    await expect(page.getByText(/solo permite consultar/)).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Nuevo usuario' })).toHaveCount(0);
+  });
+
+  test('avisa de arrancar el backend si no hay conexión', async ({ page }) => {
+    await page.route('**/api/auth/login', (route) => route.abort());
+    await page.goto('/v2/usuarios-crud-signal');
+    await page.getByRole('button', { name: 'Iniciar sesión' }).click();
+    await expect(page.getByRole('alert').filter({ hasText: 'npm run backend' })).toBeVisible();
+    await expect(page.getByText('incorrectos')).toHaveCount(0);
+  });
+});

@@ -159,6 +159,13 @@ export const routes: Routes = [
     title: 'CRUD de usuarios',
   },
   {
+    path: 'v2/usuarios-crud-signal',
+    data: { fuente: 'src/app/components/v2-usuarios-crud-signal/v2-usuarios-crud-signal.component.ts' },
+    loadComponent: () => import('./components/v2-usuarios-crud-signal/v2-usuarios-crud-signal.component')
+      .then((module) => module.V2UsuariosCrudSignalComponent),
+    title: 'CRUD de usuarios con Signal Forms',
+  },
+  {
     path: 'v2/comunicacion',
     data: { fuente: 'src/app/components/v2-comunicacion/v2-comunicacion.component.ts' },
     loadComponent: () => import('./components/v2-comunicacion/v2-comunicacion.component')
@@ -196,6 +203,13 @@ export const routes: Routes = [
     loadComponent: () => import('./components/v2-signal-forms/v2-signal-forms.component')
       .then((module) => module.V2SignalFormsComponent),
     title: 'Signal Forms',
+  },
+  {
+    path: 'v2/formulario-alta-signal',
+    data: { fuente: 'src/app/components/v2-formulario-alta-signal/v2-formulario-alta-signal.component.ts' },
+    loadComponent: () => import('./components/v2-formulario-alta-signal/v2-formulario-alta-signal.component')
+      .then((module) => module.V2FormularioAltaSignalComponent),
+    title: 'Formulario de alta con Signal Forms',
   },
   {
     path: 'v2/busqueda-reactiva',

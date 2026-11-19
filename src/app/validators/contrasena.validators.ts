@@ -1,22 +1,25 @@
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { coincidenSiHayValor, contieneMayuscula, contieneMinuscula, contieneNumero, contieneSimbolo } from './reglas';
 import { conMensaje } from './validador-con-mensaje';
 
 export const LONGITUD_MINIMA_CONTRASENA = 20;
 
-/** Validador propio reutilizable: falla (con la clave dada) si el valor no contiene nada que cumpla el patrón. */
-function debeContener(clave: string, patron: RegExp): ValidatorFn {
+/**
+ * Adaptador: convierte una regla pura (`reglas.ts`) en un validador reactivo que falla, con la clave dada,
+ * si el valor no la cumple.
+ */
+function debeCumplir(clave: string, regla: (valor: string) => boolean): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const valor = String(control.value ?? '');
     // Valor vacío: lo comprueba `required`, para no mostrar todos los errores a la vez.
-    return valor === '' || patron.test(valor) ? null : { [clave]: true };
+    return valor === '' || regla(valor) ? null : { [clave]: true };
   };
 }
 
-export const tieneNumero = debeContener('numero', /\d/);
-export const tieneMinuscula = debeContener('minuscula', /\p{Ll}/u);
-export const tieneMayuscula = debeContener('mayuscula', /\p{Lu}/u);
-// Símbolo: cualquier carácter que no sea letra, número ni espacio.
-export const tieneSimbolo = debeContener('simbolo', /[^\p{L}\p{N}\s]/u);
+export const tieneNumero = debeCumplir('numero', contieneNumero);
+export const tieneMinuscula = debeCumplir('minuscula', contieneMinuscula);
+export const tieneMayuscula = debeCumplir('mayuscula', contieneMayuscula);
+export const tieneSimbolo = debeCumplir('simbolo', contieneSimbolo);
 
 /** Requisitos de la contraseña, en el orden en que se enseñan al usuario. La clave coincide con la del error. */
 export const REQUISITOS_CONTRASENA = [
@@ -50,8 +53,8 @@ export function validadoresContrasena(): ValidatorFn[] {
  */
 export function coinciden(campo: string, repetido: string): ValidatorFn {
   return conMensaje((grupo: AbstractControl): ValidationErrors | null => {
-    const a = grupo.get(campo)?.value;
-    const b = grupo.get(repetido)?.value;
-    return a && b && a !== b ? { noCoinciden: true } : null;
+    const a = String(grupo.get(campo)?.value ?? '');
+    const b = String(grupo.get(repetido)?.value ?? '');
+    return coincidenSiHayValor(a, b) ? null : { noCoinciden: true };
   }, 'Las contraseñas no coinciden.');
 }

@@ -1,0 +1,183 @@
+<section class="crud" aria-labelledby="usuarios-heading">
+  <h1 id="usuarios-heading">CRUD de usuarios con Signal Forms (V2)</h1>
+  <p class="nota" role="note">
+    <strong>Disponibilidad: Signal Forms y &#64;Service() estables desde Angular 22.</strong>
+    Mismo CRUD y mismo <code>UsuariosApiService</code> que el ejemplo de la unidad 4, con los formularios hechos con
+    <code>form()</code>.
+  </p>
+  <p>
+    CRUD de usuarios contra <code>/api/usuarios</code> (SQLite en memoria; arranca con <code>npm run backend</code>).
+    Listado paginado y filtrable en el servidor.
+  </p>
+
+  <details class="practicas">
+    <summary>Qué cambia respecto al CRUD con formularios reactivos</summary>
+    <ol>
+      <li><strong>Estado en signals:</strong> cada formulario es una signal (<code>modeloUsuario</code>) más un esquema <code>form()</code> con las reglas.</li>
+      <li><strong><code>submit()</code> y <code>submitting()</code></strong> sustituyen a las señales <code>guardando</code> e <code>iniciandoSesion</code> y evitan el doble envío.</li>
+      <li><strong>Errores del servidor por campo:</strong> la acción de <code>submit()</code> los devuelve asociados a su campo; no hace falta una señal aparte.</li>
+      <li><strong><code>debounce()</code> en el esquema</strong> del filtro en lugar de <code>debounceTime</code> de RxJS.</li>
+      <li><strong>RxJS donde sigue haciendo falta:</strong> el listado usa <code>switchMap</code> para cancelar peticiones obsoletas.</li>
+    </ol>
+  </details>
+
+  <div class="avisos" aria-live="polite">
+    @if (aviso(); as mensaje) { <p class="ok">{{ mensaje }}</p> }
+  </div>
+  @if (sinBackend()) {
+    <div class="nota" role="alert">
+      <p><strong>No hay conexión con el backend.</strong> Este ejemplo necesita el servidor didáctico local.</p>
+      <p>Ábrelo en otra terminal con <code>npm run backend</code> (escucha en el puerto 3001) y vuelve a intentarlo.</p>
+      @if (perfil()) {
+        <button class="boton" type="button" (click)="reintentar()">Reintentar</button>
+      }
+    </div>
+  }
+  @if (errorGeneral(); as mensaje) {
+    <p class="error" role="alert">{{ mensaje }}</p>
+  }
+
+  @if (!perfil()) {
+    <!-- ===== Sin sesión ===== -->
+    <form class="tarjeta" (submit)="iniciarSesion($event)" novalidate aria-labelledby="login-titulo">
+      <h2 id="login-titulo">Inicia sesión</h2>
+      <p class="ayuda">Cuentas de prueba (contraseña <code>angular</code>): <strong>admin</strong> puede crear, editar y borrar; <strong>alumno</strong> solo consulta.</p>
+      <div class="campo">
+        <label for="l-usuario">Usuario</label>
+        <input id="l-usuario" [formField]="formularioLogin.usuario" autocomplete="username" autocapitalize="none" spellcheck="false"
+               [attr.aria-invalid]="formularioLogin.usuario().touched() && formularioLogin.usuario().invalid() ? 'true' : null"
+               aria-describedby="e-l-usuario">
+        <p id="e-l-usuario" class="error-campo">
+          @if (formularioLogin.usuario().touched() && formularioLogin.usuario().invalid()) { {{ formularioLogin.usuario().errors()[0].message }} }
+        </p>
+      </div>
+      <div class="campo">
+        <label for="l-clave">Contraseña</label>
+        <input id="l-clave" type="password" [formField]="formularioLogin.clave" autocomplete="current-password"
+               [attr.aria-invalid]="formularioLogin.clave().touched() && formularioLogin.clave().invalid() ? 'true' : null"
+               aria-describedby="e-l-clave">
+        <p id="e-l-clave" class="error-campo">
+          @if (formularioLogin.clave().touched() && formularioLogin.clave().invalid()) { {{ formularioLogin.clave().errors()[0].message }} }
+        </p>
+      </div>
+      @if (errorLogin(); as mensaje) { <p class="error" role="alert">{{ mensaje }}</p> }
+      <button class="boton primario" type="submit" [disabled]="formularioLogin().submitting()">
+        {{ formularioLogin().submitting() ? 'Entrando…' : 'Iniciar sesión' }}
+      </button>
+    </form>
+  } @else {
+    <!-- ===== Con sesión ===== -->
+    <div class="sesion">
+      <span>Sesión: <strong>{{ perfil()?.name }}</strong> ({{ perfil()?.role }})</span>
+      <button class="boton" type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+    </div>
+
+    @if (esAdmin()) {
+      <dialog #dialogo class="dlg" aria-labelledby="form-titulo" (close)="restablecer()" (click)="clicFondo($event)">
+        <form class="dlg-form" (submit)="guardar($event)" novalidate>
+          <header class="dlg-cabecera">
+            <h2 id="form-titulo">{{ editandoId() === null ? 'Nuevo usuario' : 'Editar usuario #' + editandoId() }}</h2>
+            <button class="boton" type="button" (click)="cancelarEdicion()" aria-label="Cerrar">×</button>
+          </header>
+          <div class="campo">
+            <label for="u-nombre">Nombre</label>
+            <input id="u-nombre" [formField]="formulario.nombre" autocomplete="off" autofocus
+                   [attr.aria-invalid]="formulario.nombre().touched() && formulario.nombre().invalid() ? 'true' : null"
+                   aria-describedby="e-nombre">
+            <p id="e-nombre" class="error-campo">
+              @if (formulario.nombre().touched() && formulario.nombre().invalid()) { {{ formulario.nombre().errors()[0].message }} }
+            </p>
+          </div>
+          <div class="campo">
+            <label for="u-email">Email</label>
+            <input id="u-email" type="email" inputmode="email" [formField]="formulario.email" autocomplete="off" autocapitalize="none"
+                   [attr.aria-invalid]="formulario.email().touched() && formulario.email().invalid() ? 'true' : null"
+                   aria-describedby="e-email">
+            <p id="e-email" class="error-campo">
+              @if (formulario.email().touched() && formulario.email().invalid()) { {{ formulario.email().errors()[0].message }} }
+            </p>
+          </div>
+          <div class="campo">
+            <label for="u-rol">Rol</label>
+            <select id="u-rol" [formField]="formulario.rol">
+              @for (rol of roles; track rol) { <option [value]="rol">{{ rol }}</option> }
+            </select>
+          </div>
+          @if (errorGeneral(); as mensaje) { <p class="error" role="alert">{{ mensaje }}</p> }
+          <div class="acciones">
+            <button class="boton primario" type="submit" [disabled]="formulario().submitting()">
+              {{ formulario().submitting() ? 'Guardando…' : editandoId() === null ? 'Crear usuario' : 'Guardar cambios' }}
+            </button>
+            <button class="boton" type="button" (click)="cancelarEdicion()">Cancelar</button>
+          </div>
+        </form>
+      </dialog>
+    } @else {
+      <p class="nota" role="note">Tu rol solo permite consultar: crear, editar y borrar requiere ser <strong>admin</strong>.</p>
+    }
+
+    <div class="titulo-lista">
+      <h2>Usuarios</h2>
+      @if (esAdmin()) {
+        <button class="boton primario" type="button" (click)="nuevo()">Nuevo usuario</button>
+      }
+    </div>
+    <div class="herramientas">
+      <div class="campo">
+        <label for="filtro">Buscar por nombre o email</label>
+        <input id="filtro" type="search" [formField]="formularioBusqueda.q" autocomplete="off" placeholder="Ej.: ana">
+      </div>
+    </div>
+
+    @if (!pagina() && cargando()) {
+      <p role="status">Cargando usuarios…</p>
+    } @else if (pagina(); as p) {
+      @if (p.total === 0) {
+        <p class="vacio">
+          {{ consulta().q ? 'Ningún usuario coincide con «' + consulta().q + '».' : 'No hay usuarios todavía.' }}
+        </p>
+      } @else {
+        <table [attr.aria-busy]="cargando()">
+          <caption class="oculto">Lista de usuarios, {{ rango() }}</caption>
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Email</th>
+              <th scope="col">Rol</th>
+              @if (esAdmin()) { <th scope="col">Acciones</th> }
+            </tr>
+          </thead>
+          <tbody>
+            @for (usuario of p.items; track usuario.id) {
+              <tr>
+                <td data-label="Nombre">{{ usuario.nombre }}</td>
+                <td data-label="Email">{{ usuario.email }}</td>
+                <td data-label="Rol">{{ usuario.rol }}</td>
+                @if (esAdmin()) {
+                  <td class="celda-acciones">
+                    <button class="boton" type="button" (click)="editar(usuario)" [attr.aria-label]="'Editar ' + usuario.nombre">Editar</button>
+                    @if (confirmandoId() === usuario.id) {
+                      <button class="boton peligro" type="button" (click)="eliminar(usuario)" [attr.aria-label]="'Confirmar el borrado de ' + usuario.nombre">Confirmar</button>
+                      <button class="boton" type="button" (click)="confirmandoId.set(null)">No</button>
+                    } @else {
+                      <button class="boton" type="button" (click)="confirmandoId.set(usuario.id)" [attr.aria-label]="'Eliminar ' + usuario.nombre">Eliminar</button>
+                    }
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <nav class="paginador" aria-label="Paginación">
+          <p class="rango" role="status">{{ rango() }}</p>
+          <div class="botones">
+            <button class="boton" type="button" (click)="irAPagina(p.page - 1)" [disabled]="p.page <= 1">Anterior</button>
+            <span>Página {{ p.page }} de {{ totalPaginas() }}</span>
+            <button class="boton" type="button" (click)="irAPagina(p.page + 1)" [disabled]="p.page >= totalPaginas()">Siguiente</button>
+          </div>
+        </nav>
+      }
+    }
+  }
+</section>

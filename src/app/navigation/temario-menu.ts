@@ -93,7 +93,9 @@ export const TEMARIO_UNITS: NavGroup[] = [
       { path: '/v2/validadores-predefinidos', label: 'V2 · Catálogo de validadores predefinidos (Validators)' },
       { path: '/v2/formulario-registro', label: 'V2 · Registro con validadores personalizados (contraseña segura y coincidencia)' },
       { path: '/v2/signal-forms', label: 'V2 · Formularios basados en Signals (estable desde v22)' },
+      { path: '/v2/formulario-alta-signal', label: 'V2 · Formulario de alta con Signal Forms (el ejercicio reactivo, con signals)' },
       { path: '/v2/accesibilidad', label: 'V2 · Accesibilidad y calidad en formularios' },
+      { path: '/v2/usuarios-crud-signal', label: 'V2 · CRUD de usuarios con Signal Forms (@Service desde v22)' },
     ],
   },
   {
