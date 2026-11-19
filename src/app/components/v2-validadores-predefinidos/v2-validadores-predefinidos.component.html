@@ -1,0 +1,81 @@
+<section aria-labelledby="catalogo-heading">
+  <h1 id="catalogo-heading">Validadores predefinidos de Angular (V2)</h1>
+  <p>
+    Catálogo de los validadores de la clase <code>Validators</code>. Escribe en cada campo y mira, debajo, el objeto
+    de error real que devuelve el validador. Los textos de aviso se definen junto a cada validador con
+    <code>conMensaje</code>.
+  </p>
+
+  <form [formGroup]="form" novalidate>
+    @for (entrada of catalogo; track entrada.id) {
+      <div class="card mb-3">
+        <div class="card-body">
+          <h2 class="h6">{{ entrada.etiqueta }}</h2>
+          <p class="small text-body-secondary mb-2">
+            @for (validador of entrada.validadores; track validador) {
+              <code class="me-2">{{ validador }}</code>
+            }
+          </p>
+          <p class="small mb-2" [id]="entrada.id + '-ayuda'">{{ entrada.explicacion }}</p>
+
+          @if (entrada.tipo === 'checkbox') {
+            <div class="form-check">
+              <input [id]="entrada.id" class="form-check-input" type="checkbox" [formControl]="$any(entrada.control)"
+                [attr.aria-describedby]="entrada.id + '-ayuda ' + entrada.id + '-estado'" />
+              <label [for]="entrada.id" class="form-check-label">{{ entrada.etiqueta }}</label>
+            </div>
+          } @else {
+            <label [for]="entrada.id" class="form-label visually-hidden">{{ entrada.etiqueta }}</label>
+            <input [id]="entrada.id" class="form-control" [type]="entrada.tipo" [formControl]="$any(entrada.control)"
+              [attr.aria-invalid]="entrada.control.invalid"
+              [attr.aria-describedby]="entrada.id + '-ayuda ' + entrada.id + '-estado'" />
+          }
+
+          <div [id]="entrada.id + '-estado'" aria-live="polite">
+            @if (entrada.control.invalid) {
+              <p class="text-danger mt-2 mb-1">{{ mensajeDe(entrada.control) }}</p>
+            } @else {
+              <p class="text-success mt-2 mb-1">Válido</p>
+            }
+            <pre class="small bg-body-tertiary rounded p-2 mb-0"><code>errors = {{ erroresDe(entrada.control) }}</code></pre>
+          </div>
+        </div>
+      </div>
+    }
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="h6">Teléfono (validadores que cambian en caliente)</h2>
+        <p class="small text-body-secondary mb-2">
+          <code class="me-2">Validators.compose([...])</code><code class="me-2">Validators.nullValidator</code>
+        </p>
+        <p class="small mb-2" id="telefono-ayuda">
+          Con la casilla desmarcada el campo usa <code>nullValidator</code>, que nunca falla. Al marcarla se aplica
+          <code>compose</code> con <code>required</code>, <code>pattern</code> y <code>minLength</code> juntos.
+        </p>
+        <div class="form-check mb-2">
+          <input id="exigir-telefono" class="form-check-input" type="checkbox" formControlName="exigirTelefono"
+            (change)="alternarTelefono()" />
+          <label for="exigir-telefono" class="form-check-label">Exigir teléfono</label>
+        </div>
+        <label for="telefono" class="form-label visually-hidden">Teléfono</label>
+        <input id="telefono" class="form-control" type="tel" formControlName="telefono" autocomplete="tel"
+          [attr.aria-invalid]="form.controls.telefono.invalid"
+          aria-describedby="telefono-ayuda telefono-estado" />
+        <div id="telefono-estado" aria-live="polite">
+          @if (form.controls.telefono.invalid) {
+            <p class="text-danger mt-2 mb-1">{{ mensajeDe(form.controls.telefono) }}</p>
+          } @else {
+            <p class="text-success mt-2 mb-1">Válido</p>
+          }
+          <pre class="small bg-body-tertiary rounded p-2 mb-0"><code>errors = {{ erroresDe(form.controls.telefono) }}</code></pre>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <p class="small text-body-secondary">
+    Nota: <code>Validators.composeAsync</code> combina validadores asíncronos y no se incluye aquí porque Angular no
+    trae ninguno predefinido. Los validadores propios están en el ejemplo de registro.
+  </p>
+</section>

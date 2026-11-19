@@ -42,12 +42,6 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'modelo'
     }
   ],
-  'src/app/components/formulario-tipado/formulario-tipado.component.ts': [
-    {
-      ruta: 'src/app/components/formulario-tipado/formulario-tipado.component.ts',
-      tipo: 'componente'
-    }
-  ],
   'src/app/components/formularios/main-form/main-form.component.ts': [
     {
       ruta: 'src/app/components/formularios/main-form/main-form.component.ts',
@@ -336,6 +330,30 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/v2-formulario-registro/v2-formulario-registro.component.ts': [
+    {
+      ruta: 'src/app/components/v2-formulario-registro/v2-formulario-registro.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/validators/contrasena.validators.ts',
+      tipo: 'validador'
+    },
+    {
+      ruta: 'src/app/validators/validador-con-mensaje.ts',
+      tipo: 'validador'
+    }
+  ],
+  'src/app/components/v2-formulario-tipado/v2-formulario-tipado.component.ts': [
+    {
+      ruta: 'src/app/components/v2-formulario-tipado/v2-formulario-tipado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/validators/validador-con-mensaje.ts',
+      tipo: 'validador'
+    }
+  ],
   'src/app/components/v2-fundamentos/v2-fundamentos.component.ts': [
     {
       ruta: 'src/app/components/v2-fundamentos/v2-fundamentos.component.ts',
@@ -428,6 +446,16 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/services/usuarios-api.service.ts',
       tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-validadores-predefinidos/v2-validadores-predefinidos.component.ts': [
+    {
+      ruta: 'src/app/components/v2-validadores-predefinidos/v2-validadores-predefinidos.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/validators/validador-con-mensaje.ts',
+      tipo: 'validador'
     }
   ],
   'src/app/ejercicios/ejercicio-condicionales/ejercicio-condicionales.component.ts': [
