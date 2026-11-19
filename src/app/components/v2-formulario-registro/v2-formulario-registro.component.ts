@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   REQUISITOS_CONTRASENA,
@@ -39,6 +39,14 @@ export class V2FormularioRegistroComponent {
 
   readonly correoRegistrado = signal<string | null>(null);
 
+  // Estado del botón «Ver»: con `true` el campo pasa de type="password" a type="text".
+  readonly verContrasena = signal(false);
+  readonly verRepite = signal(false);
+
+  alternar(visible: WritableSignal<boolean>): void {
+    visible.update((v) => !v);
+  }
+
   /** Primer mensaje del control: el que definió el validador que falló. */
   mensajeDe(control: AbstractControl): string {
     return mensajesDe(control.errors)[0] ?? '';
@@ -61,5 +69,8 @@ export class V2FormularioRegistroComponent {
     this.correoRegistrado.set(this.form.controls.correo.value);
     // Las contraseñas no se muestran ni se guardan: se vacía todo el formulario tras el registro.
     this.form.reset();
+    // Tras registrar, los campos vuelven a ocultar su contenido.
+    this.verContrasena.set(false);
+    this.verRepite.set(false);
   }
 }

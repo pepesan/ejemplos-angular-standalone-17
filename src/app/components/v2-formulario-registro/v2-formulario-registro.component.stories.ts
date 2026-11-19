@@ -45,3 +45,18 @@ export const RegistroCorrecto: Story = {
     await expect(canvas.getByLabelText('Contraseña')).toHaveValue('');
   },
 };
+
+// El botón «Ver» cambia el campo de password a text (y vuelve a ocultarlo) sin alterar su valor.
+export const VerContrasena: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const campo = canvas.getByLabelText('Contraseña');
+    await userEvent.type(campo, SEGURA);
+    await expect(campo).toHaveAttribute('type', 'password');
+    await userEvent.click(canvas.getByRole('button', { name: 'Ver contraseña' }));
+    await expect(campo).toHaveAttribute('type', 'text');
+    await expect(campo).toHaveValue(SEGURA);
+    await userEvent.click(canvas.getByRole('button', { name: 'Ocultar contraseña' }));
+    await expect(campo).toHaveAttribute('type', 'password');
+  },
+};

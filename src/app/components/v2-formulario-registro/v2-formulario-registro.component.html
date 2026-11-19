@@ -19,9 +19,15 @@
 
     <div class="mb-3">
       <label for="contrasena" class="form-label">Contraseña</label>
-      <input id="contrasena" class="form-control" type="password" formControlName="contrasena" autocomplete="new-password"
-        aria-describedby="requisitos"
-        [attr.aria-invalid]="mostrarError(form.controls.contrasena)" />
+      <div class="input-group">
+        <input id="contrasena" class="form-control" [type]="verContrasena() ? 'text' : 'password'" formControlName="contrasena"
+          autocomplete="new-password" aria-describedby="requisitos"
+          [attr.aria-invalid]="mostrarError(form.controls.contrasena)" />
+        <button class="btn btn-outline-secondary" type="button" aria-controls="contrasena" (click)="alternar(verContrasena)">
+          <span aria-hidden="true">{{ verContrasena() ? 'Ocultar' : 'Ver' }}</span>
+          <span class="visually-hidden">{{ verContrasena() ? 'Ocultar contraseña' : 'Ver contraseña' }}</span>
+        </button>
+      </div>
       <ul id="requisitos" class="list-unstyled small mt-2 mb-0">
         @for (requisito of requisitos; track requisito.clave) {
           @let ok = cumple(form.controls.contrasena, requisito.clave);
@@ -39,9 +45,15 @@
 
     <div class="mb-3">
       <label for="repite" class="form-label">Repite la contraseña</label>
-      <input id="repite" class="form-control" type="password" formControlName="repite" autocomplete="new-password"
-        [attr.aria-invalid]="mostrarError(form.controls.repite) || (form.controls.repite.touched && form.hasError('noCoinciden'))"
-        [attr.aria-describedby]="mostrarError(form.controls.repite) || (form.controls.repite.touched && form.hasError('noCoinciden')) ? 'repite-error' : null" />
+      <div class="input-group">
+        <input id="repite" class="form-control" [type]="verRepite() ? 'text' : 'password'" formControlName="repite" autocomplete="new-password"
+          [attr.aria-invalid]="mostrarError(form.controls.repite) || (form.controls.repite.touched && form.hasError('noCoinciden'))"
+          [attr.aria-describedby]="mostrarError(form.controls.repite) || (form.controls.repite.touched && form.hasError('noCoinciden')) ? 'repite-error' : null" />
+        <button class="btn btn-outline-secondary" type="button" aria-controls="repite" (click)="alternar(verRepite)">
+          <span aria-hidden="true">{{ verRepite() ? 'Ocultar' : 'Ver' }}</span>
+          <span class="visually-hidden">{{ verRepite() ? 'Ocultar la repetición de la contraseña' : 'Ver la repetición de la contraseña' }}</span>
+        </button>
+      </div>
       @if (mostrarError(form.controls.repite)) {
         <p id="repite-error" class="text-danger" role="alert">{{ mensajeDe(form.controls.repite) }}</p>
       } @else if (form.controls.repite.touched && form.hasError('noCoinciden')) {

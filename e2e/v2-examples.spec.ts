@@ -181,4 +181,21 @@ test.describe('Registro con validadores personalizados', () => {
     await expect(page.getByLabel('Contraseña', { exact: true })).toHaveValue('');
     await expect(page.getByRole('alert')).toHaveCount(0);
   });
+
+  test('el botón Ver muestra y oculta el contenido de cada contraseña', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    const contrasena = page.getByLabel('Contraseña', { exact: true });
+    await contrasena.fill(SEGURA);
+    await expect(contrasena).toHaveAttribute('type', 'password');
+    await page.getByRole('button', { name: 'Ver contraseña' }).click();
+    await expect(contrasena).toHaveAttribute('type', 'text');
+    await expect(contrasena).toHaveValue(SEGURA);
+    await page.getByRole('button', { name: 'Ocultar contraseña' }).click();
+    await expect(contrasena).toHaveAttribute('type', 'password');
+
+    const repite = page.getByLabel('Repite la contraseña');
+    await page.getByRole('button', { name: 'Ver la repetición de la contraseña' }).click();
+    await expect(repite).toHaveAttribute('type', 'text');
+    await expect(contrasena).toHaveAttribute('type', 'password');
+  });
 });

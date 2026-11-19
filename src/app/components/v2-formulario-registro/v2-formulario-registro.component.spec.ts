@@ -66,4 +66,52 @@ describe('V2FormularioRegistroComponent', () => {
     expect(texto()).toContain('Registro correcto para ana@example.com.');
     expect(texto()).not.toContain(SEGURA);
   });
+
+  describe('botón «Ver»', () => {
+    const campo = (id: string) => fixture.nativeElement.querySelector(`#${id}`) as HTMLInputElement;
+    const boton = (id: string) => fixture.nativeElement.querySelector(`button[aria-controls="${id}"]`) as HTMLButtonElement;
+
+    it('los dos campos empiezan ocultos', () => {
+      expect(campo('contrasena').type).toBe('password');
+      expect(campo('repite').type).toBe('password');
+      expect(boton('contrasena').textContent).toContain('Ver');
+    });
+
+    it('alterna el tipo del campo entre password y text sin tocar su valor', () => {
+      component.form.controls.contrasena.setValue(SEGURA);
+      boton('contrasena').click();
+      fixture.detectChanges();
+      expect(campo('contrasena').type).toBe('text');
+      expect(campo('contrasena').value).toBe(SEGURA);
+      expect(boton('contrasena').textContent).toContain('Ocultar');
+
+      boton('contrasena').click();
+      fixture.detectChanges();
+      expect(campo('contrasena').type).toBe('password');
+    });
+
+    it('cada campo tiene su propio botón', () => {
+      boton('repite').click();
+      fixture.detectChanges();
+      expect(campo('repite').type).toBe('text');
+      expect(campo('contrasena').type).toBe('password');
+    });
+
+    it('los botones no envían el formulario', () => {
+      expect(boton('contrasena').type).toBe('button');
+      boton('contrasena').click();
+      fixture.detectChanges();
+      expect(component.form.controls.correo.touched).toBe(false);
+    });
+
+    it('tras registrar vuelven a ocultar el contenido', () => {
+      boton('contrasena').click();
+      boton('repite').click();
+      component.form.setValue({ correo: 'ana@example.com', contrasena: SEGURA, repite: SEGURA });
+      component.registrar();
+      fixture.detectChanges();
+      expect(campo('contrasena').type).toBe('password');
+      expect(campo('repite').type).toBe('password');
+    });
+  });
 });
