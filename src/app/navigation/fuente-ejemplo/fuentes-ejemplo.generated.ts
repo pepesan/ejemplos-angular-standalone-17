@@ -294,10 +294,6 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'modelo'
     },
     {
-      ruta: 'src/app/components/v2-consumo-api/v2-consumo-api.component.ts',
-      tipo: 'componente'
-    },
-    {
       ruta: 'src/app/components/v2-consumo-api-servicio/resultados-api.service.ts',
       tipo: 'servicio'
     }

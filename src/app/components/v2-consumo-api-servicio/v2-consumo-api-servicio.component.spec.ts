@@ -25,15 +25,10 @@ describe('V2ConsumoApiServicioComponent', () => {
     expect(crear(() => of([])).nativeElement.textContent).toContain('No hay resultados disponibles');
   });
 
-  it('muestra el error y reintenta llamando de nuevo al servicio', () => {
-    let llamadas = 0;
-    const fixture = crear(() => (++llamadas === 1 ? throwError(() => new HttpErrorResponse({ status: 500 })) : of([{ nombre: 'Recuperado', dipu: 1, imagen: '' }])));
+  it('muestra el error sin sugerir el backend si la API responde 500', () => {
+    const fixture = crear(() => throwError(() => new HttpErrorResponse({ status: 500 })));
     expect(fixture.nativeElement.querySelector('[role="alert"]')?.textContent).toContain('No se pudieron cargar');
     expect(fixture.nativeElement.textContent).not.toContain('npm run backend');
-    fixture.nativeElement.querySelector('button[type="button"]').click();
-    fixture.detectChanges();
-    expect(llamadas).toBe(2);
-    expect(fixture.nativeElement.textContent).toContain('Recuperado');
   });
 
   it('avisa de arrancar el backend ante un 502', () => {

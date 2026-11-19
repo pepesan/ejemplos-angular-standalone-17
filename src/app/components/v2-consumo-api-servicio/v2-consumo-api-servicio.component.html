@@ -4,33 +4,34 @@
     En versiones anteriores se declara con <code>&#64;Injectable({{ '{' }} providedIn: 'root' {{ '}' }})</code>, que es equivalente.
   </app-aviso-api>
   <p>
-    Igual que el ejemplo anterior, pero el acceso a la API se ha movido a <code>ResultadosApiService</code>.
-    El componente lo inyecta con <code>inject()</code> y solo gestiona los estados de carga, error y vacío.
+    Igual que el ejemplo anterior, pero el acceso a la API vive en <code>ResultadosApiService</code>.
+    El componente lo inyecta con <code>inject()</code> y solo pinta los estados de carga, error y vacío.
   </p>
-  @if (estado().status === 'loading') {
-    <p role="status">Cargando resultados…</p>
-  } @else if (estado().status === 'error') {
-    <p role="alert">{{ mensajeError() }}</p>
-    @if (backendCaido()) {
-      <div class="alert alert-warning" role="status">
-        <strong>¿Está arrancado el backend?</strong> Este ejemplo necesita el servidor didáctico local.
-        Ábrelo en otra terminal con <code>npm run backend</code> (escucha en el puerto 3001) y pulsa «Reintentar».
-      </div>
+  @let e = estado();
+  @switch (e.status) {
+    @case ('loading') {
+      <p role="status">Cargando resultados…</p>
     }
-    <button class="btn btn-outline-primary" type="button" (click)="reintentar()">Reintentar</button>
-  } @else if (cantidad() === 0) {
-    <p>No hay resultados disponibles.</p>
-  } @else {
-    <p>{{ cantidad() }} partidos disponibles</p>
-    <ul>
-      @for (partido of recursos(); track partido.nombre) {
-        <li>
-          @if (partido.imagen) {
-            <img [src]="partido.imagen" [alt]="'Logo de ' + partido.nombre" width="48" height="48" loading="lazy">
-          }
-          {{ partido.nombre }}: {{ partido.dipu }} escaños
-        </li>
+    @case ('error') {
+      <p role="alert">No se pudieron cargar los resultados.</p>
+      @if (e.backendCaido) {
+        <div class="alert alert-warning" role="status">
+          <strong>¿Está arrancado el backend?</strong> Este ejemplo necesita el servidor didáctico local.
+          Ábrelo en otra terminal con <code>npm run backend</code> (escucha en el puerto 3001) y recarga la página.
+        </div>
       }
-    </ul>
+    }
+    @case ('success') {
+      @if (e.items.length === 0) {
+        <p>No hay resultados disponibles.</p>
+      } @else {
+        <p>{{ e.items.length }} partidos disponibles</p>
+        <ul>
+          @for (partido of e.items; track partido.nombre) {
+            <li>{{ partido.nombre }}: {{ partido.dipu }} escaños</li>
+          }
+        </ul>
+      }
+    }
   }
 </section>
