@@ -2,6 +2,9 @@
 // Genera src/app/navigation/fuente-ejemplo/fuentes-ejemplo.generated.ts a partir del grafo de imports:
 // para cada `data: { fuente }` de las rutas, lista el fichero principal y todo lo que importa dentro de src/app
 // (componentes, pipes, directivas, servicios, modelos...), clasificado por tipo. Uso: npm run fuentes
+// En los EJEMPLOS DE RUTAS añade además el fichero donde se declaran sus rutas (píldora «Rutas»), aunque ningún
+// componente lo importe: el fichero de rutas dedicado (p. ej. `rutas-v2.routes.ts`, `lazy-module.module.ts`) y,
+// para los ejemplos de navegación clásicos, `app.routes.ts` (ver EJEMPLOS_EN_APP_ROUTES).
 // Con `--check` (npm run fuentes:check) no escribe: sale con código 1 si el fichero generado está desfasado.
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, normalize } from 'node:path';
@@ -42,15 +45,32 @@ function tipoDe(fichero) {
   if (/@Directive\s*\(/.test(src)) return 'directiva';
   if (/@Component\s*\(/.test(src)) return fichero.includes('/pages/') ? 'page' : 'componente';
   if (/@Injectable\s*\(/.test(src)) return 'servicio';
-  if (/:\s*(CanActivateFn|CanMatchFn|CanDeactivateFn|ResolveFn|HttpInterceptorFn)\b/.test(src)) return 'guarda';
+  // Un fichero que exporta un array `Routes` es de rutas aunque declare también sus guardas (`rutas-v2.routes.ts`).
   if (/\bRoutes\b/.test(src) && /export const \w+:\s*Routes/.test(src)) return 'rutas';
+  if (/:\s*(CanActivateFn|CanMatchFn|CanDeactivateFn|ResolveFn|HttpInterceptorFn)\b/.test(src)) return 'guarda';
   return 'modelo';
 }
 
-// Raíces: todos los `fuente: '...'` declarados en ficheros de rutas.
+// Ejemplos de rutas cuyas rutas viven en `app.routes.ts` (el resto de ejemplos de rutas tiene un fichero dedicado).
+const FICHERO_APP_ROUTES = 'src/app/app.routes.ts';
+const EJEMPLOS_EN_APP_ROUTES = new Set([
+  'src/app/pages/navegacion/navegacion.component.ts',
+  'src/app/pages/sub-rutas/sub-rutas.component.ts',
+  'src/app/pages/child-a/child-a.component.ts',
+  'src/app/pages/child-b/child-b.component.ts',
+  'src/app/pages/listado/listado.component.ts',
+  'src/app/pages/detalle/detalle.component.ts',
+]);
+
+// Raíces: todos los `fuente: '...'` declarados en ficheros de rutas. Si el fichero que los declara es un fichero
+// de rutas DEDICADO (no `app.routes.ts`, que declara los ejemplos sueltos), se recuerda para añadirlo al ejemplo.
 const raices = new Set();
+const rutasDedicadas = new Map();
 for (const f of ficherosTs(RAIZ)) {
-  for (const m of readFileSync(f, 'utf8').matchAll(/fuente:\s*'([^']+)'/g)) raices.add(m[1]);
+  for (const m of readFileSync(f, 'utf8').matchAll(/fuente:\s*'([^']+)'/g)) {
+    raices.add(m[1]);
+    if (!EXCLUIDOS.test(f)) rutasDedicadas.set(m[1], f);
+  }
 }
 
 const mapa = {};
@@ -64,6 +84,9 @@ for (const raiz of [...raices].sort()) {
     importsDe(f).forEach(visitar);
   };
   visitar(raiz);
+  // El fichero de rutas va justo después del principal (el primero siempre es el propio ejemplo).
+  const ficheroDeRutas = rutasDedicadas.get(raiz) ?? (EJEMPLOS_EN_APP_ROUTES.has(raiz) ? FICHERO_APP_ROUTES : null);
+  if (ficheroDeRutas && !orden.includes(ficheroDeRutas)) orden.splice(1, 0, ficheroDeRutas);
   mapa[raiz] = orden.map((ruta) => ({ ruta, tipo: tipoDe(ruta) }));
 }
 

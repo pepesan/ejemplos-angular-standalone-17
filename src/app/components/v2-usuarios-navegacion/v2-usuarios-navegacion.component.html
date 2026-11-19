@@ -1,0 +1,44 @@
+<section class="crud" aria-labelledby="usuarios-heading">
+  <h1 id="usuarios-heading">CRUD con navegación (V2)</h1>
+  <app-aviso-api tipo="moderno" titulo="Disponibilidad: router con carga diferida, guardas funcionales y resolvers estables; Signal Forms y @Service() desde Angular 22.">
+    Listado, alta y edición son <strong>rutas</strong>: cada pantalla tiene su URL y se puede compartir, recargar y volver atrás.
+  </app-aviso-api>
+  <p>
+    CRUD de usuarios contra <code>/api/usuarios</code> (SQLite en memoria; arranca con <code>npm run backend</code>).
+    Cuentas de prueba (contraseña <code>angular</code>): <strong>admin</strong> puede crear, editar y borrar; <strong>alumno</strong> solo consulta.
+  </p>
+
+  <details class="practicas">
+    <summary>Qué enseña este ejemplo</summary>
+    <ol>
+      <li><strong>Carga diferida (lazy):</strong> toda la feature se descarga solo al entrar en esta ruta (<code>loadChildren</code>).</li>
+      <li><strong>Guardas funcionales:</strong> <code>sesionGuard</code> (asíncrona) exige sesión y <code>adminGuard</code> exige el rol; devuelven un <code>UrlTree</code> en vez de navegar ellas.</li>
+      <li><strong>Resolver:</strong> la edición recibe el usuario ya cargado; si no existe, un <code>RedirectCommand</code> lleva a «no encontrado».</li>
+      <li><strong><code>canDeactivate</code>:</strong> pregunta antes de salir de un formulario con cambios sin guardar.</li>
+      <li><strong>Estado en la URL:</strong> filtro y página viajan en <code>?q=&amp;page=</code> y llegan al listado como <code>input()</code> (<code>withComponentInputBinding</code>).</li>
+      <li><strong>Signal Forms:</strong> <code>submit()</code> con errores 400/409 asociados a su campo y <code>dirty()</code> para detectar cambios sin guardar.</li>
+      <li><strong>Un formulario, dos pantallas:</strong> <code>UsuarioFormComponent</code> es presentacional y lo reutilizan alta y edición.</li>
+      <li><strong>Borrado en un modal</strong> (<code>&lt;dialog&gt;</code> nativo) con confirmación y su propio error.</li>
+      <li><strong>Accesibilidad:</strong> enlaces reales, página activa con <code>aria-current</code>, avisos con <code>aria-live</code> y título de página por ruta.</li>
+    </ol>
+  </details>
+
+  @if (sesion.perfil(); as perfil) {
+    <div class="sesion">
+      <span>Sesión: <strong>{{ perfil.name }}</strong> ({{ perfil.role }})</span>
+      <button class="boton" type="button" (click)="cerrarSesion()">Cerrar sesión</button>
+    </div>
+    <nav class="menu" aria-label="Usuarios">
+      <a [routerLink]="base" routerLinkActive ariaCurrentWhenActive="page" [routerLinkActiveOptions]="{ exact: true }">Listado</a>
+      @if (sesion.esAdmin()) {
+        <a [routerLink]="[base, 'nuevo']" routerLinkActive ariaCurrentWhenActive="page">Nuevo usuario</a>
+      }
+    </nav>
+  }
+
+  <div class="avisos" aria-live="polite">
+    @if (avisos.aviso(); as mensaje) { <p class="ok">{{ mensaje }}</p> }
+  </div>
+
+  <router-outlet />
+</section>

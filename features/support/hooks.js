@@ -12,7 +12,8 @@ BeforeAll(async function () {
 
 Before(async function () {
   this.baseUrl = baseUrl;
-  this.context = await browser.newContext();
+  // Con `baseURL`, `page.goto('/ruta')` funciona con rutas relativas, como en Playwright.
+  this.context = await browser.newContext({ baseURL: baseUrl });
   this.page = await this.context.newPage();
 });
 
