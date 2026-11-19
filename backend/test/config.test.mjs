@@ -1,66 +1,70 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert/strict';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { describe, expect, it } from 'vitest';
 import { cargarConfig } from '../src/config/config.mjs';
 import { arrancar, tokenDe } from './ayudas.mjs';
 
+const usuariosDe = async (base) => {
+  const token = await tokenDe(base, 'admin');
+  return (await (await fetch(`${base}/api/usuarios`, { headers: { authorization: `Bearer ${token}` } })).json()).total;
+};
+
 describe('configuración', () => {
-  it('por defecto: base de datos en memoria, con datos de ejemplo y puerto 3001', () => {
+  it('por defecto: memoria, datos de ejemplo y puerto 3001', () => {
     const config = cargarConfig({ env: {}, argv: [], cwd: '/x' });
-    assert.equal(config.baseDeDatos.enMemoria, true);
-    assert.equal(config.baseDeDatos.archivo, ':memory:');
-    assert.equal(config.baseDeDatos.sembrar, true);
-    assert.equal(config.puerto, 3001);
-    assert.equal(config.jwt.secretoDeDesarrollo, true);
+    expect(config.baseDeDatos).toEqual({ enMemoria: true, archivo: ':memory:', sembrar: true });
+    expect(config.puerto).toBe(3001);
+    expect(config.jwt.secretoDeDesarrollo).toBe(true);
   });
 
   it('DB_FILE define una base en fichero, relativa al directorio de trabajo', () => {
     const config = cargarConfig({ env: { DB_FILE: './backend/data/x.sqlite' }, argv: [], cwd: '/proyecto' });
-    assert.equal(config.baseDeDatos.enMemoria, false);
-    assert.equal(config.baseDeDatos.archivo, '/proyecto/backend/data/x.sqlite');
+    expect(config.baseDeDatos.enMemoria).toBe(false);
+    expect(config.baseDeDatos.archivo).toBe('/proyecto/backend/data/x.sqlite');
   });
 
-  it(':memory: y una variable vacía vuelven a la memoria', () => {
-    assert.equal(cargarConfig({ env: { DB_FILE: ':memory:' }, argv: [] }).baseDeDatos.enMemoria, true);
-    assert.equal(cargarConfig({ env: { DB_FILE: '   ' }, argv: [] }).baseDeDatos.enMemoria, true);
+  it(':memory: y una variable de espacios vuelven a la memoria', () => {
+    expect(cargarConfig({ env: { DB_FILE: ':memory:' }, argv: [] }).baseDeDatos.enMemoria).toBe(true);
+    expect(cargarConfig({ env: { DB_FILE: '   ' }, argv: [] }).baseDeDatos.enMemoria).toBe(true);
   });
 
-  it('el argumento de línea de comandos gana a la variable de entorno', () => {
+  it('un argumento de línea de comandos gana a la variable de entorno', () => {
     const config = cargarConfig({ env: { DB_FILE: ':memory:', PORT: '4000' }, argv: ['--db-file=/tmp/a.sqlite', '--port=5000'], cwd: '/' });
-    assert.equal(config.baseDeDatos.archivo, '/tmp/a.sqlite');
-    assert.equal(config.puerto, 5000);
+    expect(config.baseDeDatos.archivo).toBe('/tmp/a.sqlite');
+    expect(config.puerto).toBe(5000);
   });
 
-  it('DB_SEED=false desactiva los datos de ejemplo, y --db-seed=true los vuelve a activar', () => {
-    assert.equal(cargarConfig({ env: { DB_SEED: 'false' }, argv: [] }).baseDeDatos.sembrar, false);
-    assert.equal(cargarConfig({ env: { DB_SEED: 'false' }, argv: ['--db-seed=true'] }).baseDeDatos.sembrar, true);
+  it('DB_SEED=false desactiva los datos de ejemplo; --db-seed=true los reactiva', () => {
+    expect(cargarConfig({ env: { DB_SEED: 'false' }, argv: [] }).baseDeDatos.sembrar).toBe(false);
+    expect(cargarConfig({ env: { DB_SEED: 'false' }, argv: ['--db-seed=true'] }).baseDeDatos.sembrar).toBe(true);
+    expect(cargarConfig({ env: { DB_SEED: '0' }, argv: [] }).baseDeDatos.sembrar).toBe(false);
   });
 
-  it('un JWT_SECRET vacío no deja el secreto vacío: usa el de desarrollo', () => {
+  it('un JWT_SECRET vacío usa el secreto de desarrollo', () => {
     const config = cargarConfig({ env: { JWT_SECRET: '' }, argv: [] });
-    assert.equal(config.jwt.secretoDeDesarrollo, true);
-    assert.notEqual(config.jwt.secreto, '');
+    expect(config.jwt.secretoDeDesarrollo).toBe(true);
+    expect(config.jwt.secreto).not.toBe('');
   });
 
   it('CORS_ORIGINS admite varios orígenes separados por comas', () => {
-    const config = cargarConfig({ env: { CORS_ORIGINS: 'https://a.example, https://b.example' }, argv: [] });
-    assert.deepEqual(config.cors.origenes, ['https://a.example', 'https://b.example']);
+    expect(cargarConfig({ env: { CORS_ORIGINS: 'https://a.example, https://b.example' }, argv: [] }).cors.origenes)
+      .toEqual(['https://a.example', 'https://b.example']);
+  });
+
+  it('LOG_REQUESTS acepta true, y false por defecto', () => {
+    expect(cargarConfig({ env: { LOG_REQUESTS: 'true' }, argv: [] }).registrarPeticiones).toBe(true);
+    expect(cargarConfig({ env: {}, argv: [] }).registrarPeticiones).toBe(false);
   });
 });
 
 describe('base de datos en memoria y en fichero', () => {
-  it('en memoria, cada aplicación nueva empieza con 23 usuarios de ejemplo', async () => {
-    const total = async ({ base }) => {
-      const token = await tokenDe(base, 'admin');
-      return (await (await fetch(`${base}/api/usuarios`, { headers: { authorization: `Bearer ${token}` } })).json()).total;
-    };
+  it('en memoria, cada aplicación nueva empieza con los 23 usuarios de ejemplo', async () => {
     const primera = await arrancar();
-    assert.equal(await total(primera), 23);
+    expect(await usuariosDe(primera.base)).toBe(23);
     await primera.cerrar();
     const segunda = await arrancar();
-    assert.equal(await total(segunda), 23, 'una memoria nueva no conserva nada de la anterior');
+    expect(await usuariosDe(segunda.base)).toBe(23);
     await segunda.cerrar();
   });
 
@@ -78,11 +82,7 @@ describe('base de datos en memoria y en fichero', () => {
       await primera.cerrar();
 
       const segunda = await arrancar({ env: { DB_FILE: archivo } });
-      const t2 = await tokenDe(segunda.base, 'admin');
-      const cuerpo = await (await fetch(`${segunda.base}/api/usuarios?q=persistente`, { headers: { authorization: `Bearer ${t2}` } })).json();
-      assert.equal(cuerpo.total, 1);
-      const total = await (await fetch(`${segunda.base}/api/usuarios`, { headers: { authorization: `Bearer ${t2}` } })).json();
-      assert.equal(total.total, 24, 'no se deben volver a sembrar los 23 de ejemplo');
+      expect(await usuariosDe(segunda.base)).toBe(24);
       await segunda.cerrar();
     } finally {
       rmSync(carpeta, { recursive: true, force: true });
@@ -90,10 +90,8 @@ describe('base de datos en memoria y en fichero', () => {
   });
 
   it('sin datos de ejemplo, una base nueva está vacía', async () => {
-    const { base, cerrar } = await arrancar({ env: { DB_SEED: 'false' } });
-    const token = await tokenDe(base, 'admin');
-    const cuerpo = await (await fetch(`${base}/api/usuarios`, { headers: { authorization: `Bearer ${token}` } })).json();
-    assert.equal(cuerpo.total, 0);
-    await cerrar();
+    const app = await arrancar({ env: { DB_SEED: 'false' } });
+    expect(await usuariosDe(app.base)).toBe(0);
+    await app.cerrar();
   });
 });

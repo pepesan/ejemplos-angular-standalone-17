@@ -1,6 +1,12 @@
-import { describe, it } from 'node:test';
-import assert from 'node:assert/strict';
+import { describe, expect, it } from 'vitest';
 import { crearRouter } from '../src/http/router.mjs';
+
+/** Router con un manejador de errores que responde con el estado del error (como la aplicación real). */
+const nuevoRouter = () => {
+  const router = crearRouter();
+  router.alFallar((ctx, error) => ctx.json(error.estado ?? 500, { message: error.message }));
+  return router;
+};
 
 /** Contexto mínimo para probar el router sin HTTP real. */
 const ctxDe = (method, pathname) => {
@@ -14,13 +20,6 @@ const ctxDe = (method, pathname) => {
   };
 };
 
-/** Router con un manejador de errores que responde con el estado del error (como hace la aplicación real). */
-const nuevoRouter = () => {
-  const router = crearRouter();
-  router.alFallar((ctx, error) => ctx.json(error.estado ?? 500, { message: error.message }));
-  return router;
-};
-
 describe('router', () => {
   it('ejecuta los middleware globales antes que la ruta, en orden', async () => {
     const router = nuevoRouter();
@@ -29,18 +28,35 @@ describe('router', () => {
     router.use(async (_c, siguiente) => { orden.push('global-2'); await siguiente(); });
     router.get('/api/x', async () => orden.push('ruta'));
     await router.atender(ctxDe('GET', '/api/x'));
-    assert.deepEqual(orden, ['global-1', 'global-2', 'ruta', 'global-1-fin']);
+    expect(orden).toEqual(['global-1', 'global-2', 'ruta', 'global-1-fin']);
   });
 
-  it('extrae parámetros y aplica la restricción de la ruta (\\d+)', async () => {
+  it('un middleware de ruta que llama a siguiente() termina la cadena sin error', async () => {
+    const router = nuevoRouter();
+    const orden = [];
+    router.get('/api/y', async (_c, siguiente) => { orden.push('mw'); await siguiente(); }, async () => orden.push('handler'));
+    const ctx = ctxDe('GET', '/api/y');
+    await router.atender(ctx);
+    expect(orden).toEqual(['mw', 'handler']);
+  });
+
+  it('extrae parámetros y aplica la restricción (\\d+)', async () => {
     const router = nuevoRouter();
     let recibido;
     router.get('/api/u/:id(\\d+)', async (ctx) => (recibido = ctx.params));
     await router.atender(ctxDe('GET', '/api/u/42'));
-    assert.deepEqual(recibido, { id: '42' });
+    expect(recibido).toEqual({ id: '42' });
     const rechazada = ctxDe('GET', '/api/u/abc');
     await router.atender(rechazada);
-    assert.equal(rechazada.registro.estado, 404);
+    expect(rechazada.registro.estado).toBe(404);
+  });
+
+  it('decodifica los parámetros con caracteres codificados', async () => {
+    const router = nuevoRouter();
+    let recibido;
+    router.get('/api/r/:nombre', async (ctx) => (recibido = ctx.params));
+    await router.atender(ctxDe('GET', '/api/r/a%20b'));
+    expect(recibido).toEqual({ nombre: 'a b' });
   });
 
   it('un método no admitido devuelve 405 con Allow', async () => {
@@ -49,23 +65,23 @@ describe('router', () => {
     router.post('/api/x', async () => {});
     const ctx = ctxDe('DELETE', '/api/x');
     await router.atender(ctx);
-    assert.equal(ctx.registro.estado, 405);
-    assert.equal(ctx.registro.cabeceras.allow, 'GET, POST');
+    expect(ctx.registro.estado).toBe(405);
+    expect(ctx.registro.cabeceras.allow).toBe('GET, POST');
   });
 
   it('un error lanzado por un middleware llega al manejador de errores', async () => {
-    const router = nuevoRouter();
+    const router = crearRouter();
     router.use(async () => { throw new Error('fallo'); });
     router.alFallar((ctx, error) => ctx.json(500, { message: error.message }));
     const ctx = ctxDe('GET', '/cualquiera');
     await router.atender(ctx);
-    assert.deepEqual(ctx.registro.cuerpo, { message: 'fallo' });
+    expect(ctx.registro.cuerpo).toEqual({ message: 'fallo' });
   });
 
   it('sin manejador de errores, el error se relanza (nunca se pierde en silencio)', async () => {
     const router = crearRouter();
     router.use(async () => { throw new Error('sin manejador'); });
-    await assert.rejects(router.atender(ctxDe('GET', '/x')), /sin manejador/);
+    await expect(router.atender(ctxDe('GET', '/x'))).rejects.toThrow('sin manejador');
   });
 
   it('llamar dos veces a siguiente() es un error de programación', async () => {
@@ -74,6 +90,6 @@ describe('router', () => {
     router.get('/x', async () => {});
     const ctx = ctxDe('GET', '/x');
     await router.atender(ctx);
-    assert.match(ctx.registro.cuerpo.message, /más de una vez/);
+    expect(ctx.registro.cuerpo.message).toMatch(/más de una vez/);
   });
 });

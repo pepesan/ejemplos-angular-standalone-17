@@ -22,8 +22,10 @@
     "e2e:serve": "ng serve --host 127.0.0.1 --port 4300 --proxy-config proxy.conf.json",
     "storybook": "ng run proyecto:storybook",
     "build-storybook": "ng run proyecto:build-storybook",
-    "test:all": "npm run fuentes:check && npm run test:unit && npm run test:stories && npm run test:e2e && npm run test:bdd",
-    "test:backend": "node --test \"backend/test/**/*.test.mjs\""
+    "test:all": "npm run fuentes:check && npm run test:unit && npm run test:stories && npm run test:e2e && npm run test:bdd && npm run test:backend:coverage && npm run test:backend:bdd",
+    "test:backend": "vitest run --config backend/vitest.config.mjs",
+    "test:backend:coverage": "vitest run --config backend/vitest.config.mjs --coverage",
+    "test:backend:bdd": "cucumber-js --config backend/cucumber.cjs"
   },
   "private": true,
   "dependencies": {

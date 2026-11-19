@@ -59,7 +59,7 @@ export function crearApp(config = cargarConfig()) {
     /** Cierra el servidor, las conexiones abiertas y la base de datos. */
     cerrar() {
       return new Promise((resolver) => {
-        servidor.closeAllConnections?.();
+        servidor.closeAllConnections();
         servidor.close(() => {
           db.close();
           resolver();
