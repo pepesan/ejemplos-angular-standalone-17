@@ -139,3 +139,83 @@ test('el ejemplo con servicio muestra los resultados que entrega ResultadosApiSe
   await expect(page.getByRole('heading', { name: 'Consumo de API con servicio (V2)' })).toBeVisible();
   await expect(page.getByText('Partido de ejemplo: 3 escaños')).toBeVisible();
 });
+
+test('el formulario tipado se vacía tras un envío correcto y mantiene la confirmación', async ({ page }) => {
+  await page.goto('/v2/formulario-tipado');
+  await page.getByLabel('Nombre').fill('Ana Pérez');
+  await page.getByLabel('Correo electrónico').fill('ana@example.com');
+  await page.getByLabel('Acepto la política de privacidad').check();
+  await page.getByRole('button', { name: 'Inscribirme' }).click();
+  await expect(page.getByText('Inscripción recibida para Ana Pérez.')).toBeVisible();
+  await expect(page.getByLabel('Nombre')).toHaveValue('');
+  await expect(page.getByLabel('Correo electrónico')).toHaveValue('');
+  await expect(page.getByLabel('Acepto la política de privacidad')).not.toBeChecked();
+  await expect(page.getByRole('alert')).toHaveCount(0);
+});
+
+test.describe('Registro con validadores personalizados', () => {
+  const SEGURA = 'Contrasena-Muy-Segura-2026!';
+
+  test('muestra los requisitos pendientes mientras se escribe la contraseña', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    await page.getByLabel('Contraseña', { exact: true }).fill('abc');
+    await expect(page.getByRole('listitem').filter({ hasText: 'Al menos 20 caracteres' })).toContainText('Pendiente');
+    await expect(page.getByRole('listitem').filter({ hasText: 'letra minúscula' })).toContainText('Cumplido');
+  });
+
+  test('avisa si las contraseñas válidas no coinciden', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    await page.getByLabel('Contraseña', { exact: true }).fill(SEGURA);
+    await page.getByLabel('Repite la contraseña').fill(SEGURA + 'x');
+    await page.getByLabel('Repite la contraseña').blur();
+    await expect(page.getByRole('alert').filter({ hasText: 'Las contraseñas no coinciden.' })).toBeVisible();
+  });
+
+  test('registra y vacía el formulario cuando todo es correcto', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    await page.getByLabel('Correo electrónico').fill('ana@example.com');
+    await page.getByLabel('Contraseña', { exact: true }).fill(SEGURA);
+    await page.getByLabel('Repite la contraseña').fill(SEGURA);
+    await page.getByRole('button', { name: 'Registrarme' }).click();
+    await expect(page.getByText('Registro correcto para ana@example.com.')).toBeVisible();
+    await expect(page.getByLabel('Contraseña', { exact: true })).toHaveValue('');
+    await expect(page.getByRole('alert')).toHaveCount(0);
+  });
+
+  test('el botón Ver muestra y oculta el contenido de cada contraseña', async ({ page }) => {
+    await page.goto('/v2/formulario-registro');
+    const contrasena = page.getByLabel('Contraseña', { exact: true });
+    await contrasena.fill(SEGURA);
+    await expect(contrasena).toHaveAttribute('type', 'password');
+    await page.getByRole('button', { name: 'Ver contraseña' }).click();
+    await expect(contrasena).toHaveAttribute('type', 'text');
+    await expect(contrasena).toHaveValue(SEGURA);
+    await page.getByRole('button', { name: 'Ocultar contraseña' }).click();
+    await expect(contrasena).toHaveAttribute('type', 'password');
+
+    const repite = page.getByLabel('Repite la contraseña');
+    await page.getByRole('button', { name: 'Ver la repetición de la contraseña' }).click();
+    await expect(repite).toHaveAttribute('type', 'text');
+    await expect(contrasena).toHaveAttribute('type', 'password');
+  });
+});
+
+test.describe('Catálogo de validadores predefinidos', () => {
+  test('muestra el error real y el mensaje de minLength', async ({ page }) => {
+    await page.goto('/v2/validadores-predefinidos');
+    await page.getByLabel('Usuario (3 a 12 caracteres)').fill('ab');
+    await expect(page.getByText('minlength: {"requiredLength":3,"actualLength":2}')).toBeVisible();
+    await expect(page.getByText('Mínimo 3 caracteres.')).toBeVisible();
+  });
+
+  test('exigir el teléfono cambia nullValidator por compose en caliente', async ({ page }) => {
+    await page.goto('/v2/validadores-predefinidos');
+    const telefono = page.getByLabel('Teléfono', { exact: true });
+    await telefono.fill('');
+    await expect(page.locator('#telefono-estado')).toContainText('Válido');
+    await page.getByLabel('Exigir teléfono').check();
+    await expect(page.locator('#telefono-estado')).toContainText('Escribe tu teléfono.');
+    await telefono.fill('600123456');
+    await expect(page.locator('#telefono-estado')).toContainText('Válido');
+  });
+});
