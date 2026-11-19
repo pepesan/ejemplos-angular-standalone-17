@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6,6 +7,12 @@ import { AuthService, DemoProfile } from '../../services/auth.service';
 import {
   ColumnaOrden, ConsultaUsuarios, ErrorApi, PaginaUsuarios, Rol, Usuario, UsuariosApiService,
 } from '../../services/usuarios-api.service';
+
+/**
+ * Con `ng serve` + proxy, si el backend no está arrancado el proxy responde 502/503/504 (o 0 si no hay conexión):
+ * es un fallo de entorno, no de la API, y conviene decirle al alumno cómo resolverlo.
+ */
+const ESTADOS_SIN_BACKEND = [0, 502, 503, 504];
 
 @Component({
   selector: 'app-v2-usuarios-crud',
@@ -32,6 +39,8 @@ export class V2UsuariosCrudComponent {
   // --- Sesión (JWT del backend) ---
   readonly perfil = signal<DemoProfile | null>(null);
   readonly errorLogin = signal<string | null>(null);
+  /** `true` si el backend no responde: se muestra un aviso para arrancarlo (`npm run backend`). */
+  readonly sinBackend = signal(false);
   readonly iniciandoSesion = signal(false);
   readonly esAdmin = computed(() => this.perfil()?.role === 'admin');
   readonly formularioLogin = this.fb.group({
@@ -95,6 +104,7 @@ export class V2UsuariosCrudComponent {
         }
         this.pagina.set(pagina);
         this.cargando.set(false);
+        this.sinBackend.set(false);
       });
 
     // Filtro con retardo: espera 300 ms sin teclear antes de consultar al servidor.
@@ -124,11 +134,14 @@ export class V2UsuariosCrudComponent {
       .subscribe({
         next: () => {
           this.iniciandoSesion.set(false);
+          this.sinBackend.set(false);
           this.cargarPerfil();
         },
-        error: () => {
+        error: (error: unknown) => {
           this.iniciandoSesion.set(false);
-          this.errorLogin.set('Usuario o contraseña incorrectos.');
+          // Sin backend no se sabe si las credenciales valen: se avisa de arrancarlo en vez de acusar al usuario.
+          if (this.esSinBackend(error)) this.sinBackend.set(true);
+          else this.errorLogin.set('Usuario o contraseña incorrectos.');
         },
       });
   }
@@ -142,7 +155,10 @@ export class V2UsuariosCrudComponent {
           this.perfil.set(perfil);
           this.recargar$.next();
         },
-        error: () => this.cerrarSesion('Tu sesión ha caducado. Inicia sesión de nuevo.'),
+        error: (error: unknown) => {
+          if (this.esSinBackend(error)) this.sinBackend.set(true);
+          else this.cerrarSesion('Tu sesión ha caducado. Inicia sesión de nuevo.');
+        },
       });
   }
 
@@ -156,7 +172,22 @@ export class V2UsuariosCrudComponent {
     this.aviso.set(mensaje ? null : 'Has cerrado la sesión.');
   }
 
+  private esSinBackend(error: unknown): boolean {
+    const estado = error instanceof HttpErrorResponse ? error.status : error instanceof ErrorApi ? error.estado : null;
+    return estado !== null && ESTADOS_SIN_BACKEND.includes(estado);
+  }
+
+  /** Vuelve a pedir el listado después de arrancar el backend. */
+  reintentar(): void {
+    this.sinBackend.set(false);
+    this.recargar$.next();
+  }
+
   private gestionarError(error: ErrorApi): void {
+    if (this.esSinBackend(error)) {
+      this.sinBackend.set(true);
+      return;
+    }
     // 401: el token no vale o ha caducado (vive 15 min) → volver al login.
     if (error.estado === 401) this.cerrarSesion('Tu sesión ha caducado. Inicia sesión de nuevo.');
     else this.errorGeneral.set(error.message);
@@ -256,6 +287,7 @@ export class V2UsuariosCrudComponent {
         this.guardando.set(false);
         this.aviso.set(id === null ? `Usuario «${guardado.nombre}» creado.` : `Usuario «${guardado.nombre}» actualizado.`);
         this.cancelarEdicion();
+        this.sinBackend.set(false);
         this.recargar$.next(); // con paginación en servidor hay que volver a pedir la página
       },
       error: (error: ErrorApi) => {
