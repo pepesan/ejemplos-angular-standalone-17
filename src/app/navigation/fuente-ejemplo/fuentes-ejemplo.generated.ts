@@ -284,6 +284,24 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'componente'
     }
   ],
+  'src/app/components/v2-consumo-api-servicio/v2-consumo-api-servicio.component.ts': [
+    {
+      ruta: 'src/app/components/v2-consumo-api-servicio/v2-consumo-api-servicio.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/partidos/models/partido.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-consumo-api/v2-consumo-api.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-consumo-api-servicio/resultados-api.service.ts',
+      tipo: 'servicio'
+    }
+  ],
   'src/app/components/v2-consumo-api/v2-consumo-api.component.ts': [
     {
       ruta: 'src/app/components/v2-consumo-api/v2-consumo-api.component.ts',
