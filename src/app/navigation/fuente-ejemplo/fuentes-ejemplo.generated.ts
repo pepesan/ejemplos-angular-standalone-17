@@ -476,6 +476,194 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'modelo'
     }
   ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuario-editar.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuario-editar.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/guards/cambios-sin-guardar.guard.ts',
+      tipo: 'guarda'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuario-form.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuario-nuevo.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuario-nuevo.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/guards/cambios-sin-guardar.guard.ts',
+      tipo: 'guarda'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuario-form.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-listado.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-listado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/confirmar-borrado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-login.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-login.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/aviso-sin-backend.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sin-backend.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/usuarios-api.service.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-navegacion.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-navegacion.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/sesion-usuarios.service.ts',
+      tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/services/auth.service.ts',
+      tipo: 'servicio'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/usuarios-avisos.service.ts',
+      tipo: 'modelo'
+    }
+  ],
+  'src/app/components/v2-usuarios-navegacion/v2-usuarios-no-encontrado.component.ts': [
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/v2-usuarios-no-encontrado.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-usuarios-navegacion/ruta-base.ts',
+      tipo: 'modelo'
+    }
+  ],
   'src/app/components/v2-validadores-predefinidos/v2-validadores-predefinidos.component.ts': [
     {
       ruta: 'src/app/components/v2-validadores-predefinidos/v2-validadores-predefinidos.component.ts',

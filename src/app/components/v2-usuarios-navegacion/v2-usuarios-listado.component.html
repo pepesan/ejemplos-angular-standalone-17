@@ -1,0 +1,78 @@
+<div class="titulo-lista">
+  <h2>Usuarios</h2>
+</div>
+
+@if (denegado()) {
+  <p class="nota" role="note">Esa pantalla requiere el rol <strong>admin</strong>. Tu rol solo permite consultar.</p>
+} @else if (!sesion.esAdmin()) {
+  <p class="nota" role="note">Tu rol solo permite consultar: crear, editar y borrar requiere ser <strong>admin</strong>.</p>
+}
+
+<div class="herramientas">
+  <div class="campo">
+    <label for="filtro">Buscar por nombre o email</label>
+    <input id="filtro" type="search" [formField]="formularioFiltro.q" autocomplete="off" placeholder="Ej.: ana">
+  </div>
+</div>
+
+@let e = estado();
+@switch (e.status) {
+  @case ('cargando') { <p role="status">Cargando usuarios…</p> }
+  @case ('error') {
+    @if (e.sinBackend) {
+      <app-aviso-sin-backend [reintentable]="true" (reintentar)="reintentar()" />
+    } @else {
+      <p class="error" role="alert">{{ e.mensaje }}</p>
+    }
+  }
+  @case ('ok') {
+    @if (e.pagina.total === 0) {
+      <p class="vacio">{{ q() ? 'Ningún usuario coincide con «' + q() + '».' : 'No hay usuarios todavía.' }}</p>
+    } @else {
+      <table>
+        <caption class="oculto">Lista de usuarios, {{ rango() }}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rol</th>
+            @if (sesion.esAdmin()) { <th scope="col">Acciones</th> }
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of e.pagina.items; track usuario.id) {
+            <tr>
+              <td data-label="Nombre">{{ usuario.nombre }}</td>
+              <td data-label="Email">{{ usuario.email }}</td>
+              <td data-label="Rol">{{ usuario.rol }}</td>
+              @if (sesion.esAdmin()) {
+                <td class="celda-acciones">
+                  <a class="boton" [routerLink]="[base, usuario.id, 'editar']" [attr.aria-label]="'Editar ' + usuario.nombre">Editar</a>
+                  <button class="boton" type="button" (click)="pedirBorrado(usuario)" [attr.aria-label]="'Eliminar ' + usuario.nombre">Eliminar</button>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <nav class="paginador" aria-label="Paginación">
+        <p class="rango" role="status">{{ rango() }}</p>
+        <div class="botones">
+          <a [routerLink]="[]" [queryParams]="{ page: e.pagina.page - 1 }" queryParamsHandling="merge"
+             [attr.aria-disabled]="e.pagina.page <= 1 ? 'true' : null" [attr.tabindex]="e.pagina.page <= 1 ? -1 : null">Anterior</a>
+          <span>Página {{ e.pagina.page }} de {{ totalPaginas() }}</span>
+          <a [routerLink]="[]" [queryParams]="{ page: e.pagina.page + 1 }" queryParamsHandling="merge"
+             [attr.aria-disabled]="e.pagina.page >= totalPaginas() ? 'true' : null" [attr.tabindex]="e.pagina.page >= totalPaginas() ? -1 : null">Siguiente</a>
+        </div>
+      </nav>
+    }
+  }
+}
+
+<app-confirmar-borrado
+  [usuario]="aBorrar()"
+  [eliminando]="eliminando()"
+  [error]="errorBorrado()"
+  (confirmar)="eliminar()"
+  (cancelar)="cancelarBorrado()" />

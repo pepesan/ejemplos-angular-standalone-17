@@ -1,0 +1,26 @@
+<h2 id="login-titulo">Inicia sesión</h2>
+@if (sinBackend()) { <app-aviso-sin-backend /> }
+<form class="tarjeta" (submit)="iniciarSesion($event)" novalidate aria-labelledby="login-titulo">
+  <div class="campo">
+    <label for="l-usuario">Usuario</label>
+    <input id="l-usuario" [formField]="formulario.usuario" autocomplete="username" autocapitalize="none" spellcheck="false"
+           [attr.aria-invalid]="formulario.usuario().touched() && formulario.usuario().invalid() ? 'true' : null"
+           aria-describedby="e-l-usuario">
+    <p id="e-l-usuario" class="error-campo">
+      @if (formulario.usuario().touched() && formulario.usuario().invalid()) { {{ formulario.usuario().errors()[0].message }} }
+    </p>
+  </div>
+  <div class="campo">
+    <label for="l-clave">Contraseña</label>
+    <input id="l-clave" type="password" [formField]="formulario.clave" autocomplete="current-password"
+           [attr.aria-invalid]="formulario.clave().touched() && formulario.clave().invalid() ? 'true' : null"
+           aria-describedby="e-l-clave">
+    <p id="e-l-clave" class="error-campo">
+      @if (formulario.clave().touched() && formulario.clave().invalid()) { {{ formulario.clave().errors()[0].message }} }
+    </p>
+  </div>
+  @if (error(); as mensaje) { <p class="error" role="alert">{{ mensaje }}</p> }
+  <button class="boton primario" type="submit" [disabled]="formulario().submitting()">
+    {{ formulario().submitting() ? 'Entrando…' : 'Iniciar sesión' }}
+  </button>
+</form>

@@ -198,6 +198,12 @@ export const routes: Routes = [
     loadChildren: () => import('./components/v2-rutas/rutas-v2.routes').then((module) => module.V2_RUTAS),
   },
   {
+    path: 'v2/usuarios-navegacion',
+    // Toda la feature se descarga solo al entrar en esta URL (carga diferida de rutas hijas standalone).
+    loadChildren: () => import('./components/v2-usuarios-navegacion/usuarios-navegacion.routes')
+      .then((module) => module.USUARIOS_NAVEGACION_RUTAS),
+  },
+  {
     path: 'v2/signal-forms',
     data: { fuente: 'src/app/components/v2-signal-forms/v2-signal-forms.component.ts' },
     loadComponent: () => import('./components/v2-signal-forms/v2-signal-forms.component')
