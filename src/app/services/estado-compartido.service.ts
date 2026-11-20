@@ -1,4 +1,4 @@
-import { computed, Service, signal } from '@angular/core';
+import { computed, Service, Signal, signal, WritableSignal } from '@angular/core';
 
 /**
  * ESTADO COMPARTIDO CON SIGNALS en un servicio `@Service()` (Angular 22.0 o posterior).
@@ -16,10 +16,10 @@ import { computed, Service, signal } from '@angular/core';
  */
 @Service()
 export class EstadoCompartidoService {
-  private readonly valorInterno = signal(0);
+  private readonly valorInterno: WritableSignal<number> = signal(0);
 
-  readonly valor = this.valorInterno.asReadonly();
-  readonly doble = computed(() => this.valor() * 2);
+  readonly valor: Signal<number> = this.valorInterno.asReadonly();
+  readonly doble: Signal<number> = computed(() => this.valor() * 2);
 
   incrementar(): void {
     this.valorInterno.update((valor) => valor + 1);

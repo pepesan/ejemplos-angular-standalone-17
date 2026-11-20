@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, ElementRef, inject, Signal, signal, viewChild, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
-import { debounce, email, form, FormField, maxLength, minLength, required, submit } from '@angular/forms/signals';
+import { debounce, email, FieldTree, form, FormField, maxLength, minLength, required, submit } from '@angular/forms/signals';
 import { Subject, catchError, EMPTY, firstValueFrom, skip, switchMap, tap } from 'rxjs';
 import { AuthService, DemoProfile } from '../../services/auth.service';
 import {
@@ -9,6 +9,10 @@ import {
 } from '../../services/usuarios-api.service';
 
 interface DatosUsuario { nombre: string; email: string; rol: Rol; }
+/** Modelo del formulario de inicio de sesión. */
+interface DatosLogin { usuario: string; clave: string; }
+/** Modelo del formulario del filtro del listado. */
+interface DatosBusqueda { q: string; }
 
 /**
  * Con `ng serve` + proxy, si el backend no está arrancado el proxy responde 502/503/504 (o 0 si no hay conexión):
@@ -37,54 +41,54 @@ const USUARIO_VACIO: DatosUsuario = { nombre: '', email: '', rol: 'alumno' };
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2UsuariosCrudSignalComponent {
-  private readonly api = inject(UsuariosApiService);
-  readonly auth = inject(AuthService);
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly api: UsuariosApiService = inject(UsuariosApiService);
+  readonly auth: AuthService = inject(AuthService);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
 
   readonly roles: Rol[] = ['alumno', 'profesor', 'admin'];
 
   // --- Sesión (JWT del backend) ---
-  readonly perfil = signal<DemoProfile | null>(null);
-  readonly errorLogin = signal<string | null>(null);
+  readonly perfil: WritableSignal<DemoProfile | null> = signal<DemoProfile | null>(null);
+  readonly errorLogin: WritableSignal<string | null> = signal<string | null>(null);
   /** `true` si el backend no responde: se muestra un aviso para arrancarlo (`npm run backend`). */
-  readonly sinBackend = signal(false);
-  readonly esAdmin = computed(() => this.perfil()?.role === 'admin');
-  readonly modeloLogin = signal({ usuario: 'admin', clave: 'angular' });
-  readonly formularioLogin = form(this.modeloLogin, (ruta) => {
+  readonly sinBackend: WritableSignal<boolean> = signal(false);
+  readonly esAdmin: Signal<boolean> = computed(() => this.perfil()?.role === 'admin');
+  readonly modeloLogin: WritableSignal<DatosLogin> = signal<DatosLogin>({ usuario: 'admin', clave: 'angular' });
+  readonly formularioLogin: FieldTree<DatosLogin> = form(this.modeloLogin, (ruta) => {
     required(ruta.usuario, { message: 'Escribe el usuario.' });
     required(ruta.clave, { message: 'Escribe la contraseña.' });
   });
 
   // --- Listado: consulta (filtro y página) y resultado ---
-  readonly consulta = signal<ConsultaUsuarios>({ q: '', page: 1, size: 5, sort: 'id', dir: 'asc' });
-  readonly pagina = signal<PaginaUsuarios | null>(null);
-  readonly cargando = signal(false);
-  readonly errorGeneral = signal<string | null>(null);
+  readonly consulta: WritableSignal<ConsultaUsuarios> = signal<ConsultaUsuarios>({ q: '', page: 1, size: 5, sort: 'id', dir: 'asc' });
+  readonly pagina: WritableSignal<PaginaUsuarios | null> = signal<PaginaUsuarios | null>(null);
+  readonly cargando: WritableSignal<boolean> = signal(false);
+  readonly errorGeneral: WritableSignal<string | null> = signal<string | null>(null);
   /** Mensaje de confirmación de la última acción; se anuncia a lectores de pantalla (aria-live). */
-  readonly aviso = signal<string | null>(null);
-  readonly totalPaginas = computed(() => {
+  readonly aviso: WritableSignal<string | null> = signal<string | null>(null);
+  readonly totalPaginas: Signal<number> = computed(() => {
     const p = this.pagina();
     return p ? Math.max(Math.ceil(p.total / p.size), 1) : 1;
   });
-  readonly rango = computed(() => {
+  readonly rango: Signal<string> = computed(() => {
     const p = this.pagina();
     if (!p || p.total === 0) return '';
     return `${(p.page - 1) * p.size + 1}–${(p.page - 1) * p.size + p.items.length} de ${p.total}`;
   });
-  private readonly recargar$ = new Subject<void>();
+  private readonly recargar$: Subject<void> = new Subject<void>();
 
   // Filtro: el esquema espera 300 ms sin teclear antes de pasar el valor al modelo (`debounce`).
-  readonly modeloBusqueda = signal({ q: '' });
-  readonly formularioBusqueda = form(this.modeloBusqueda, (ruta) => {
+  readonly modeloBusqueda: WritableSignal<DatosBusqueda> = signal<DatosBusqueda>({ q: '' });
+  readonly formularioBusqueda: FieldTree<DatosBusqueda> = form(this.modeloBusqueda, (ruta) => {
     debounce(ruta.q, 300);
   });
-  private readonly textoBusqueda = computed(() => this.modeloBusqueda().q.trim());
+  private readonly textoBusqueda: Signal<string> = computed(() => this.modeloBusqueda().q.trim());
 
   // --- Alta y edición ---
-  readonly editandoId = signal<number | null>(null);
-  readonly confirmandoId = signal<number | null>(null);
-  readonly modeloUsuario = signal<DatosUsuario>({ ...USUARIO_VACIO });
-  readonly formulario = form(this.modeloUsuario, (ruta) => {
+  readonly editandoId: WritableSignal<number | null> = signal<number | null>(null);
+  readonly confirmandoId: WritableSignal<number | null> = signal<number | null>(null);
+  readonly modeloUsuario: WritableSignal<DatosUsuario> = signal<DatosUsuario>({ ...USUARIO_VACIO });
+  readonly formulario: FieldTree<DatosUsuario> = form(this.modeloUsuario, (ruta) => {
     required(ruta.nombre, { message: 'El nombre es obligatorio.' });
     minLength(ruta.nombre, 2, { message: 'El nombre debe tener al menos 2 caracteres.' });
     maxLength(ruta.nombre, 80, { message: 'El nombre no puede superar los 80 caracteres.' });
@@ -92,7 +96,7 @@ export class V2UsuariosCrudSignalComponent {
     email(ruta.email, { message: 'Introduce un email válido.' });
     required(ruta.rol, { message: 'Elige un rol.' });
   });
-  private readonly dialogo = viewChild<ElementRef<HTMLDialogElement>>('dialogo');
+  private readonly dialogo: Signal<ElementRef<HTMLDialogElement> | undefined> = viewChild<ElementRef<HTMLDialogElement>>('dialogo');
 
   constructor() {
     // switchMap cancela la petición anterior si llega otra: nunca se pinta una respuesta antigua

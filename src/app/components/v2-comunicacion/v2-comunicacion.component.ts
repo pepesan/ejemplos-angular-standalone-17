@@ -1,4 +1,4 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, EventEmitter, inject, Input, Output, QueryList, ViewChild, ViewChildren, input, output, signal } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, DestroyRef, ElementRef, EventEmitter, inject, Input, InputSignal, Output, OutputEmitterRef, QueryList, ViewChild, ViewChildren, WritableSignal, input, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AvisoApiComponent } from '../aviso-api/aviso-api.component';
 
@@ -10,7 +10,7 @@ import { AvisoApiComponent } from '../aviso-api/aviso-api.component';
 })
 export class BotonEventoClasicoComponent {
   @Input({ required: true }) texto!: string;
-  @Output() seleccion = new EventEmitter<string>();
+  @Output() seleccion: EventEmitter<string> = new EventEmitter<string>();
 }
 
 @Component({
@@ -22,8 +22,8 @@ export class BotonEventoClasicoComponent {
 // DISPONIBILIDAD: `input()` y `output()` son estables desde Angular 19 (según angular.dev).
 // Sustituyen a `@Input()` y `@Output()` + `EventEmitter` del componente clásico anterior.
 export class BotonEventoSignalComponent {
-  readonly texto = input.required<string>();
-  readonly seleccion = output<string>();
+  readonly texto: InputSignal<string> = input.required<string>();
+  readonly seleccion: OutputEmitterRef<string> = output<string>();
 }
 
 @Component({
@@ -42,13 +42,13 @@ export class PanelProyectadoComponent {}
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2ComunicacionComponent {
-  private readonly destroyRef = inject(DestroyRef);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
   @ViewChild('campoNombre') private campoNombre?: ElementRef<HTMLInputElement>;
   @ViewChildren(BotonEventoSignalComponent) botonesSignal!: QueryList<BotonEventoSignalComponent>;
 
-  readonly mostrarBotonExtra = signal(true);
-  readonly cantidadBotonesSignal = signal(0);
-  readonly ultimoEvento = signal('Todavía no se ha emitido ningún evento.');
+  readonly mostrarBotonExtra: WritableSignal<boolean> = signal(true);
+  readonly cantidadBotonesSignal: WritableSignal<number> = signal(0);
+  readonly ultimoEvento: WritableSignal<string> = signal('Todavía no se ha emitido ningún evento.');
 
   constructor() {
     // Las queries se rellenan tras crear la vista; escucha también los cambios de hijos posteriores.

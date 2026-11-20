@@ -211,6 +211,13 @@ export const routes: Routes = [
     title: 'Signal Forms',
   },
   {
+    path: 'v2/signal-forms-schema',
+    data: { fuente: 'src/app/components/v2-signal-forms-schema/v2-signal-forms-schema.component.ts' },
+    loadComponent: () => import('./components/v2-signal-forms-schema/v2-signal-forms-schema.component')
+      .then((module) => module.V2SignalFormsSchemaComponent),
+    title: 'Signal Forms con esquema',
+  },
+  {
     path: 'v2/formulario-alta-signal',
     data: { fuente: 'src/app/components/v2-formulario-alta-signal/v2-formulario-alta-signal.component.ts' },
     loadComponent: () => import('./components/v2-formulario-alta-signal/v2-formulario-alta-signal.component')

@@ -41,6 +41,21 @@ test('valida un Signal Form estable y confirma el envío válido', async ({ page
   await expect(page.getByRole('status')).toContainText('Lucía');
 });
 
+test('Signal Forms con el esquema aparte valida, deja la empresa libre y confirma el envío', async ({ page }) => {
+  await page.goto('/v2/signal-forms-schema');
+  await page.getByRole('button', { name: 'Guardar contacto' }).click();
+  await expect(page.getByText('Escribe tu nombre.')).toBeVisible();
+  await expect(page.getByText('Escribe tu correo.')).toBeVisible();
+  await page.getByLabel('Nombre').fill('Lucía');
+  await page.getByLabel('Correo electrónico').fill('no-es-un-correo');
+  await page.getByRole('button', { name: 'Guardar contacto' }).click();
+  await expect(page.getByText('Introduce un correo válido.')).toBeVisible();
+  await page.getByLabel('Correo electrónico').fill('lucia@example.com');
+  // La empresa se queda vacía: no tiene reglas y no impide guardar.
+  await page.getByRole('button', { name: 'Guardar contacto' }).click();
+  await expect(page.getByRole('status')).toContainText('Lucía');
+});
+
 test('cancela consultas obsoletas y deja cargar el bloque diferido', async ({ page }) => {
   await page.route('**/api/cursos?q=angular', (route) => route.fulfill({ json: [
     { id: 1, nombre: 'Angular moderno' },

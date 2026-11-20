@@ -462,6 +462,16 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'servicio'
     }
   ],
+  'src/app/components/v2-signal-forms-schema/v2-signal-forms-schema.component.ts': [
+    {
+      ruta: 'src/app/components/v2-signal-forms-schema/v2-signal-forms-schema.component.ts',
+      tipo: 'componente'
+    },
+    {
+      ruta: 'src/app/components/v2-signal-forms-schema/contacto.schema.ts',
+      tipo: 'modelo'
+    }
+  ],
   'src/app/components/v2-signal-forms/v2-signal-forms.component.ts': [
     {
       ruta: 'src/app/components/v2-signal-forms/v2-signal-forms.component.ts',

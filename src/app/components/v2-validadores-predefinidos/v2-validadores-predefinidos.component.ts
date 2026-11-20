@@ -14,6 +14,18 @@ interface EntradaCatalogo {
   control: FormControl<string> | FormControl<number | null> | FormControl<boolean>;
 }
 
+/** Controles del formulario del catálogo. `edad` admite `null` porque un `<input type="number">` vacío no tiene valor. */
+interface CatalogoControles {
+  nombre: FormControl<string>;
+  condiciones: FormControl<boolean>;
+  edad: FormControl<number | null>;
+  usuario: FormControl<string>;
+  correo: FormControl<string>;
+  codigoPostal: FormControl<string>;
+  exigirTelefono: FormControl<boolean>;
+  telefono: FormControl<string>;
+}
+
 /**
  * Catálogo de TODOS los validadores predefinidos de la clase `Validators`: `required`, `requiredTrue`, `min`,
  * `max`, `minLength`, `maxLength`, `email`, `pattern`, `compose` y `nullValidator`. Cada campo enseña, en vivo,
@@ -27,7 +39,7 @@ interface EntradaCatalogo {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2ValidadoresPredefinidosComponent {
-  readonly form = new FormGroup({
+  readonly form: FormGroup<CatalogoControles> = new FormGroup({
     nombre: new FormControl('', {
       nonNullable: true,
       validators: [conMensaje(Validators.required, 'Escribe tu nombre.')],

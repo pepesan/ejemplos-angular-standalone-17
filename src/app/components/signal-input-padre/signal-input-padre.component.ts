@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, WritableSignal } from '@angular/core';
 import {SignalInputHijoComponent} from "../signal-input-hijo/signal-input-hijo.component";
 
 import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
@@ -14,7 +14,7 @@ import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 })
 export class SignalInputPadreComponent {
   // Estado local como signal: el hijo recibe su valor actual mediante `[value]="counter()"`.
-  counter = signal(10);
+  counter: WritableSignal<number> = signal(10);
   onIncrement() {
     this.counter.update(v => v + 1);
   }
