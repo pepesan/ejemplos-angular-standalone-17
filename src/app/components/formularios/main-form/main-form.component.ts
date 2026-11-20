@@ -3,13 +3,14 @@ import {Hero} from "./hero";
 import {PowerSeleccionadoDirective} from "./power-seleccionado.directive";
 
 import {FormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common"; // legado: solo para la demo de *ngIf
+// Legado: solo hace falta si se descomenta la demo de *ngIf de la plantilla.
+// import {NgIf} from "@angular/common";
 
 @Component({
     selector: 'app-main-form',
     imports: [
     FormsModule,
-    NgIf,
+    // NgIf, // legado: descomentar junto con el bloque *ngIf de la plantilla
     PowerSeleccionadoDirective
 ],
     templateUrl: './main-form.component.html',
