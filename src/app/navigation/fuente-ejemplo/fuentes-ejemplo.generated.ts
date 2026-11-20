@@ -952,6 +952,14 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
       tipo: 'validador'
     },
     {
+      ruta: 'src/app/validators/ConfirmedControlValidator.ts',
+      tipo: 'validador'
+    },
+    {
+      ruta: 'src/app/components/reactivos/form-validate-passwords/passwords-form.model.ts',
+      tipo: 'modelo'
+    },
+    {
       ruta: 'src/app/components/reactivos/my-custom-validation/my-custom-validation.component.ts',
       tipo: 'componente'
     },
