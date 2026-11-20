@@ -12,6 +12,14 @@ export function ConfirmedValidator(controlName: string): AsyncValidatorFn {
     console.log("Password Value: "+matchingControl.value);
     // Angular recibe null si coinciden o un ValidationErrors con ambos valores si no coinciden.
     return control.value !== matchingControl.value
-      ? of({confirmedValidator: {value: control.value, confirmed: matchingControl.value}}) : of(null);
+      ?
+      of({
+          confirmedValidator:
+            {
+              value: control.value, // valor del campo donde esta la validacion
+              confirmed: matchingControl.value // valor del campo pasado como parametro
+            }
+        }) :
+      of(null);
   };
 }

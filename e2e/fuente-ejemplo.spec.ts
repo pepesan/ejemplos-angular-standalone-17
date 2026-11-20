@@ -1,4 +1,8 @@
 import { expect, test } from './fixtures';
+import { FUENTES_EJEMPLO } from '../src/app/navigation/fuente-ejemplo/fuentes-ejemplo.generated';
+
+// Nº de ficheros del ejemplo de reactivos: sale de las fuentes generadas para que el test no se rompa al añadir uno.
+const FICHEROS_REACTIVOS = FUENTES_EJEMPLO['src/app/pages/reactivos/reactivos.component.ts'].length;
 
 // Contrato de usuario: cada ejemplo avisa de los ficheros que lo implementan, con una píldora por tipo.
 test('/pipes lista componente, directiva y pipe antes del ejemplo', async ({ page }) => {
@@ -22,8 +26,8 @@ test('/reactivos pliega la lista larga y permite desplegarla', async ({ page }) 
   await page.goto('/reactivos');
   const aviso = page.getByRole('complementary', { name: 'Ficheros del ejemplo' });
   await expect(aviso.getByRole('listitem')).toHaveCount(5);
-  await aviso.getByRole('button', { name: 'Mostrar 4 más' }).click();
-  await expect(aviso.getByRole('listitem')).toHaveCount(9);
+  await aviso.getByRole('button', { name: `Mostrar ${FICHEROS_REACTIVOS - 5} más` }).click();
+  await expect(aviso.getByRole('listitem')).toHaveCount(FICHEROS_REACTIVOS);
 });
 
 test('un ejemplo de rutas muestra su fichero de rutas con la píldora «Rutas»', async ({ page }) => {
