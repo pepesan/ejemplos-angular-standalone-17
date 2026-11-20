@@ -12,17 +12,17 @@
       [(ngModel)]="model.name"
       name="name"
       #name="ngModel"/>
-    <div [hidden]="name.valid || name.untouched"
-      class="alert alert-danger">
-      <h4>Errores presentados con Directivas (ngIf) · enfoque legado</h4>
-      <!-- Enfoque legado, solo demostrativo: en código nuevo usar @if (ver el bloque siguiente). -->
-      <div *ngIf="name.errors?.['required']">
-        Name is required.
-      </div>
-      <div *ngIf="name.errors?.['minlength']">
-        Name must be at least 4 characters long.
-      </div>
-    </div>
+<!--    <div [hidden]="name.valid || name.untouched"-->
+<!--      class="alert alert-danger">-->
+<!--      <h4>Errores presentados con Directivas (ngIf) · enfoque legado</h4>-->
+<!--      &lt;!&ndash; Enfoque legado, solo demostrativo: en código nuevo usar @if (ver el bloque siguiente). &ndash;&gt;-->
+<!--      <div *ngIf="name.errors?.['required']">-->
+<!--        Name is required.-->
+<!--      </div>-->
+<!--      <div *ngIf="name.errors?.['minlength']">-->
+<!--        Name must be at least 4 characters long.-->
+<!--      </div>-->
+<!--    </div>-->
     @if (name.invalid && (name.dirty || name.touched)) {
       <div class="alert alert-danger">
         <h4>Errores presentados con Control Flow</h4>

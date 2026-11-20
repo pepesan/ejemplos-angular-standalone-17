@@ -1,7 +1,15 @@
 <h1>Ejemplo FormGroup Básico</h1>
-<form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <label for="firstName">First Name:</label>
-  <input id="firstName" class="form-control" type="text" formControlName="firstName">
+<form
+  class="form-group"
+  [formGroup]="profileForm"
+  (ngSubmit)="onSubmit()">
+  <label
+    for="firstName">First Name:</label>
+  <input
+    id="firstName"
+    class="form-control"
+    type="text"
+    formControlName="firstName">
   <!-- Validación anterior con *ngIf, conservada para compararla con el @if activo debajo. -->
   <!--div *ngIf="profileForm.controls['firstName'].status=='INVALID'"
        class="alert alert-danger">
@@ -23,8 +31,11 @@
       }
       @if (profileForm.controls['firstName'].hasError('minlength')) {
         <div>
-          Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
-          the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
+          Your name has only
+          {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}}
+          characters while
+          the min lenght is
+          {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
         </div>
       }
     </div>
