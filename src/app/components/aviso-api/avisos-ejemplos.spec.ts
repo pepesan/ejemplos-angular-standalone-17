@@ -21,6 +21,7 @@ import { SignalQueriesComponent } from '../signal-queries/signal-queries.compone
 import { UseSignalModelComponent } from '../use-signal-model/use-signal-model.component';
 import { V2ComunicacionComponent } from '../v2-comunicacion/v2-comunicacion.component';
 import { V2SignalFormsComponent } from '../v2-signal-forms/v2-signal-forms.component';
+import { V2SignalFormsSchemaComponent } from '../v2-signal-forms-schema/v2-signal-forms-schema.component';
 
 // Cada ejemplo avisa de la disponibilidad de su API (moderna) o de que es el enfoque clásico (legado).
 const AVISOS: [string, Type<unknown>, 'moderno' | 'legado', string][] = [
@@ -29,6 +30,7 @@ const AVISOS: [string, Type<unknown>, 'moderno' | 'legado', string][] = [
   ['queries con signals', SignalQueriesComponent, 'moderno', 'estable desde Angular 19'],
   ['effect()', SignalEffectComponent, 'moderno', 'estable desde Angular 20'],
   ['Signal Forms', V2SignalFormsComponent, 'moderno', 'estable desde Angular 22'],
+  ['Signal Forms con esquema aparte', V2SignalFormsSchemaComponent, 'moderno', 'estable desde Angular 22'],
   ['input()/output() frente a @Input/@Output', V2ComunicacionComponent, 'moderno', 'estable desde Angular 19'],
   ['@Service() (22.0)', V2ServicioSinInjectableComponent, 'moderno', 'se introdujo en Angular 22.0'],
   ['@Service() en el servicio de resultados (22.0)', V2ConsumoApiServicioComponent, 'moderno', '@Service() desde Angular 22.0'],
