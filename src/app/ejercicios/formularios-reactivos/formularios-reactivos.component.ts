@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {NgClass} from "@angular/common";
 import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
@@ -38,6 +38,37 @@ export class FormulariosReactivosComponent {
     { id: 4, name: "Networking" }
   ];
 
+  // --- Código anterior (enfoque legado), conservado para compararlo con el nuevo ---
+  // El validador de grupo recibía `group: FormGroup`. Eso no encaja con `ValidatorFn` (que recibe un
+  // `AbstractControl`), así que TypeScript resolvía `fb.group(...)` con el overload ANTIGUO, marcado @deprecated
+  // («This API is not typesafe...»), y el IDE subrayaba la llamada.
+  //
+  // constructor(private fb: FormBuilder) {
+  //   this.formulario = this.fb.group({
+  //     username: ['', [Validators.required, Validators.minLength(4)]],
+  //     password: ['', [Validators.required, Validators.minLength(4)]],
+  //     repeatPassword: ['', [Validators.required, Validators.minLength(4)]],
+  //     email: ['', [Validators.required, Validators.email]],
+  //     gender: ['male', Validators.required],
+  //     orientation: ['hetero', Validators.required],
+  //     relationType: [3, Validators.required],
+  //     conditions: [false, Validators.requiredTrue]
+  //   }, { validators: this.passwordMatchValidator });
+  // }
+  //
+  // passwordMatchValidator(group: FormGroup) {
+  //   return group.get('password')?.value === group.get('repeatPassword')?.value
+  //     ? null : { mismatch: true };
+  // }
+
+  // --- Código actual: sin API deprecada ---
+  // El validador de grupo se declara como `ValidatorFn` (recibe un `AbstractControl` y devuelve
+  // `ValidationErrors | null`). Con ese tipo, `fb.group(controles, { validators })` usa el overload vigente
+  // (`AbstractControlOptions`), que sí es seguro con los tipos.
+  passwordMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null =>
+    group.get('password')?.value === group.get('repeatPassword')?.value
+      ? null : { mismatch: true };
+
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
@@ -49,11 +80,6 @@ export class FormulariosReactivosComponent {
       relationType: [3, Validators.required],
       conditions: [false, Validators.requiredTrue]
     }, { validators: this.passwordMatchValidator });
-  }
-
-  passwordMatchValidator(group: FormGroup) {
-    return group.get('password')?.value === group.get('repeatPassword')?.value
-      ? null : { mismatch: true };
   }
 
   onSubmit() {
