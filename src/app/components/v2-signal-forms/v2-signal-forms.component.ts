@@ -4,7 +4,8 @@ import { email, form, FormField, required } from '@angular/forms/signals';
 import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 // DISPONIBILIDAD: Signal Forms (`form()` de `@angular/forms/signals`) es estable desde Angular 22
 // (según angular.dev). Para código con versiones anteriores, usa formularios reactivos.
-interface Contacto { nombre: string; correo: string; }
+// `empresa` es opcional: forma parte del modelo, pero el esquema no le añade ninguna regla de validación.
+interface Contacto { nombre: string; correo: string; empresa: string; }
 
 @Component({
   selector: 'app-v2-signal-forms', standalone: true, imports: [
@@ -15,7 +16,8 @@ interface Contacto { nombre: string; correo: string; }
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2SignalFormsComponent {
-  readonly modelo = signal<Contacto>({ nombre: '', correo: '' });
+  readonly modelo
+    = signal<Contacto>({ nombre: '', correo: '', empresa: '' });
   readonly formulario
     = form(
       this.modelo,

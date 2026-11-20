@@ -24,9 +24,25 @@
         type="email"
         [formField]="formulario.correo"
         aria-describedby="signal-correo-error">
+      <!-- Un @if por tipo de error: getError(kind) devuelve el primer error de ese tipo o undefined. -->
       @if (formulario.correo().touched() && formulario.correo().invalid()) {
-        <p id="signal-correo-error" role="alert">{{ formulario.correo().errors()[0].message }}</p>
+        <div id="signal-correo-error" role="alert">
+          @if (formulario.correo().getError('required'); as error) {
+            <p class="error-required">{{ error.message }}</p>
+          }
+          @if (formulario.correo().getError('email'); as error) {
+            <p class="error-email">{{ error.message }}</p>
+          }
+        </div>
       }
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="signal-empresa">Empresa (opcional)</label>
+      <!-- Sin reglas en el esquema y sin bloque de errores: este campo no se valida. -->
+      <input
+        class="form-control"
+        id="signal-empresa"
+        [formField]="formulario.empresa">
     </div>
     <button class="btn btn-primary" type="submit">Guardar contacto</button>
   </form>
