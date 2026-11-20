@@ -106,6 +106,7 @@ export const TEMARIO_UNITS: NavGroup[] = [
       { path: '/nav', label: 'V1 · Navegación entre componentes' },
       { path: '/subrutas', label: 'V1 · Rutas anidadas' },
       { path: '/lazy', label: 'V1 · Lazy loading de módulos' },
+      { path: '/list', label: 'V1 · Listado con navegación a detalle por parámetro (/list/:id)' },
       { path: '/v2/rutas', label: 'V2 · Guards funcionales, resolvers y lazy loading standalone' },
       { path: '/v2/usuarios-navegacion', label: 'V2 · CRUD con navegación: listado, alta y edición por rutas (borrado en modal)' },
     ],
