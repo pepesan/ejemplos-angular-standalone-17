@@ -1,4 +1,6 @@
 <h1>Formulario de Edición</h1>
+
+
 <form (submit)="onSubmit($event);heroForm.reset()" #heroForm="ngForm">
   <div class="form-group">
     <label for="name">Name *</label>
@@ -12,32 +14,26 @@
       #name="ngModel"/>
     <div [hidden]="name.valid || name.untouched"
       class="alert alert-danger">
-      <h4>Errores presentados con Directivas (ngIf)</h4>
-      @if (name.errors?.['required']) {
-        <div>
-          Name is required.
-        </div>
-      }
-      @if (name.errors?.['minlength']) {
-        <div>
-          Name must be at least 4 characters long.
-        </div>
-      }
+      <h4>Errores presentados con Directivas (ngIf) · enfoque legado</h4>
+      <!-- Enfoque legado, solo demostrativo: en código nuevo usar @if (ver el bloque siguiente). -->
+      <div *ngIf="name.errors?.['required']">
+        Name is required.
+      </div>
+      <div *ngIf="name.errors?.['minlength']">
+        Name must be at least 4 characters long.
+      </div>
     </div>
-    <div [hidden]="name.valid || name.untouched"
-      class="alert alert-danger">
-      <h4>Errores presentados con Control Flow</h4>
-      @if (name.errors?.['required']) {
-        <div>
-          Name is required.
-        </div>
-      }
-      @if (name.errors?.['minlength']) {
-        <div>
-          Name must be at least 4 characters long.
-        </div>
-      }
-    </div>
+    @if (name.invalid && (name.dirty || name.touched)) {
+      <div class="alert alert-danger">
+        <h4>Errores presentados con Control Flow</h4>
+        @if (name.hasError('required')) {
+          <div>Name is required.</div>
+        }
+        @if (name.hasError('minlength')) {
+          <div>Name must be at least 4 characters long.</div>
+        }
+      </div>
+    }
   </div>
   <div class="form-group">
     <label for="alterEgo">Alter Ego?</label>
@@ -49,6 +45,7 @@
     <select class="form-control"
       id="power"
       required
+      appPowerSeleccionado
       [(ngModel)]="model.power"
       name="power"
       #power="ngModel">
@@ -62,11 +59,14 @@
       <option> There are no pows.</option>
     }
   </select>
-  <div [hidden]="power.value != '0'" class="alert alert-danger">
-    Power is required
-  </div>
+  @if (power.hasError('powerRequerido')) {
+    <div class="alert alert-danger">Power is required</div>
+  }
 </div>
-<button type="submit" class="btn btn-success" [disabled]="heroForm.form.invalid || power.value == '0'">Submit</button>
+<button
+  type="submit"
+  class="btn btn-success"
+  [disabled]="heroForm.form.invalid">Submit</button>
 <!--button type="button" class="btn btn-default"
 (click)="newHero(); heroForm.reset()">New Hero</button-->
 </form>

@@ -50,6 +50,10 @@ export const FUENTES_EJEMPLO: Record<string, ElementoFuente[]> = {
     {
       ruta: 'src/app/components/formularios/main-form/hero.ts',
       tipo: 'modelo'
+    },
+    {
+      ruta: 'src/app/components/formularios/main-form/power-seleccionado.directive.ts',
+      tipo: 'directiva'
     }
   ],
   'src/app/components/formularios/radios/radios.component.ts': [
