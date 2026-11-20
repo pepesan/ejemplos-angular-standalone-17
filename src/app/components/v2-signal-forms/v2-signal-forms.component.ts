@@ -4,7 +4,11 @@ import { email, form, FormField, required } from '@angular/forms/signals';
 import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 // DISPONIBILIDAD: Signal Forms (`form()` de `@angular/forms/signals`) es estable desde Angular 22
 // (según angular.dev). Para código con versiones anteriores, usa formularios reactivos.
-interface Contacto { nombre: string; correo: string; }
+// `empresa` es opcional: forma parte del modelo, pero el esquema no le añade ninguna regla de validación.
+
+
+// Modelo de datos a manejar por el formulario
+interface Contacto { nombre: string; correo: string; empresa: string; }
 
 @Component({
   selector: 'app-v2-signal-forms', standalone: true, imports: [
@@ -15,12 +19,16 @@ interface Contacto { nombre: string; correo: string; }
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2SignalFormsComponent {
-  readonly modelo = signal<Contacto>({ nombre: '', correo: '' });
-  readonly formulario = form(this.modelo, (ruta) => {
-    required(ruta.nombre, { message: 'Escribe tu nombre.' });
-    required(ruta.correo, { message: 'Escribe tu correo.' });
-    email(ruta.correo, { message: 'Introduce un correo válido.' });
-  });
+  readonly modelo
+    = signal<Contacto>({ nombre: '', correo: '', empresa: '' });
+  readonly formulario
+    = form(
+      this.modelo,
+      (ruta) => {
+        required(ruta.nombre, { message: 'Escribe tu nombre.' });
+        required(ruta.correo, { message: 'Escribe tu correo.' });
+        email(ruta.correo, { message: 'Introduce un correo válido.' });
+      });
   readonly confirmacion = signal('');
 
   guardar(event: SubmitEvent): void {
