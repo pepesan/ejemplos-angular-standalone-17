@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Signal, WritableSignal, inject, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, debounceTime, distinctUntilChanged, map, Observable, of, startWith, switchMap } from 'rxjs';
@@ -13,9 +13,9 @@ type EstadoBusqueda = { status: 'idle' | 'loading' | 'success' | 'error'; cursos
   templateUrl: './v2-busqueda.component.html', changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2BusquedaComponent {
-  private readonly http = inject(HttpClient);
-  readonly termino = signal('');
-  readonly estado = toSignal(toObservable(this.termino).pipe(
+  private readonly http: HttpClient = inject(HttpClient);
+  readonly termino: WritableSignal<string> = signal('');
+  readonly estado: Signal<EstadoBusqueda> = toSignal(toObservable(this.termino).pipe(
     debounceTime(250), distinctUntilChanged(),
     switchMap((termino): Observable<EstadoBusqueda> => {
       if (!termino.trim()) return of({ status: 'idle', cursos: [] } as EstadoBusqueda);

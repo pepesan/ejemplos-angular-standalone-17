@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { form, FormField } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { FieldTree, form, FormField } from '@angular/forms/signals';
 
 import { AvisoApiComponent } from '../aviso-api/aviso-api.component';
 import { CONTACTO_VACIO, Contacto, contactoSchema } from './contacto.schema';
@@ -14,11 +14,11 @@ import { CONTACTO_VACIO, Contacto, contactoSchema } from './contacto.schema';
 })
 export class V2SignalFormsSchemaComponent {
   // Por un lado, los campos (el modelo)...
-  readonly modelo = signal<Contacto>({ ...CONTACTO_VACIO });
+  readonly modelo: WritableSignal<Contacto> = signal<Contacto>({ ...CONTACTO_VACIO });
   // ...y por otro las reglas (el esquema), que se enlazan al crear el formulario.
-  readonly formulario
+  readonly formulario: FieldTree<Contacto>
     = form(this.modelo, contactoSchema);
-  readonly confirmacion = signal('');
+  readonly confirmacion: WritableSignal<string> = signal('');
 
   guardar(event: SubmitEvent): void {
     event.preventDefault();

@@ -1,12 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, ElementRef, inject, Signal, signal, viewChild, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject, catchError, debounceTime, distinctUntilChanged, EMPTY, switchMap, tap } from 'rxjs';
 import { AuthService, DemoProfile } from '../../services/auth.service';
 import {
   ColumnaOrden, ConsultaUsuarios, ErrorApi, PaginaUsuarios, Rol, Usuario, UsuariosApiService,
 } from '../../services/usuarios-api.service';
+
+/** Controles del formulario de inicio de sesión. */
+interface LoginControles { usuario: FormControl<string>; clave: FormControl<string>; }
+/** Controles del formulario de alta y edición de un usuario. */
+interface UsuarioControles { nombre: FormControl<string>; email: FormControl<string>; rol: FormControl<Rol>; }
 
 /**
  * Con `ng serve` + proxy, si el backend no está arrancado el proxy responde 502/503/504 (o 0 si no hay conexión):
@@ -23,10 +28,10 @@ const ESTADOS_SIN_BACKEND = [0, 502, 503, 504];
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2UsuariosCrudComponent {
-  private readonly api = inject(UsuariosApiService);
-  readonly auth = inject(AuthService);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly fb = inject(NonNullableFormBuilder);
+  private readonly api: UsuariosApiService = inject(UsuariosApiService);
+  readonly auth: AuthService = inject(AuthService);
+  private readonly destroyRef: DestroyRef = inject(DestroyRef);
+  private readonly fb: NonNullableFormBuilder = inject(NonNullableFormBuilder);
 
   readonly roles: Rol[] = ['alumno', 'profesor', 'admin'];
   readonly tamanos = [5, 10, 20];
@@ -37,47 +42,47 @@ export class V2UsuariosCrudComponent {
   ];
 
   // --- Sesión (JWT del backend) ---
-  readonly perfil = signal<DemoProfile | null>(null);
-  readonly errorLogin = signal<string | null>(null);
+  readonly perfil: WritableSignal<DemoProfile | null> = signal<DemoProfile | null>(null);
+  readonly errorLogin: WritableSignal<string | null> = signal<string | null>(null);
   /** `true` si el backend no responde: se muestra un aviso para arrancarlo (`npm run backend`). */
-  readonly sinBackend = signal(false);
-  readonly iniciandoSesion = signal(false);
-  readonly esAdmin = computed(() => this.perfil()?.role === 'admin');
-  readonly formularioLogin = this.fb.group({
+  readonly sinBackend: WritableSignal<boolean> = signal(false);
+  readonly iniciandoSesion: WritableSignal<boolean> = signal(false);
+  readonly esAdmin: Signal<boolean> = computed(() => this.perfil()?.role === 'admin');
+  readonly formularioLogin: FormGroup<LoginControles> = this.fb.group({
     usuario: ['admin', Validators.required],
     clave: ['angular', Validators.required],
   });
 
   // --- Listado: consulta (filtro, orden, página) y resultado ---
-  readonly consulta = signal<ConsultaUsuarios>({ q: '', page: 1, size: 5, sort: 'id', dir: 'asc' });
-  readonly pagina = signal<PaginaUsuarios | null>(null);
-  readonly cargando = signal(false);
-  readonly errorGeneral = signal<string | null>(null);
+  readonly consulta: WritableSignal<ConsultaUsuarios> = signal<ConsultaUsuarios>({ q: '', page: 1, size: 5, sort: 'id', dir: 'asc' });
+  readonly pagina: WritableSignal<PaginaUsuarios | null> = signal<PaginaUsuarios | null>(null);
+  readonly cargando: WritableSignal<boolean> = signal(false);
+  readonly errorGeneral: WritableSignal<string | null> = signal<string | null>(null);
   /** Mensaje de confirmación de la última acción; se anuncia a lectores de pantalla (aria-live). */
-  readonly aviso = signal<string | null>(null);
-  readonly totalPaginas = computed(() => {
+  readonly aviso: WritableSignal<string | null> = signal<string | null>(null);
+  readonly totalPaginas: Signal<number> = computed(() => {
     const p = this.pagina();
     return p ? Math.max(Math.ceil(p.total / p.size), 1) : 1;
   });
-  readonly rango = computed(() => {
+  readonly rango: Signal<string> = computed(() => {
     const p = this.pagina();
     if (!p || p.total === 0) return '';
     return `${(p.page - 1) * p.size + 1}–${(p.page - 1) * p.size + p.items.length} de ${p.total}`;
   });
-  readonly busqueda = this.fb.control('');
-  private readonly recargar$ = new Subject<void>();
+  readonly busqueda: FormControl<string> = this.fb.control('');
+  private readonly recargar$: Subject<void> = new Subject<void>();
 
   // --- Alta y edición ---
-  readonly guardando = signal(false);
-  readonly editandoId = signal<number | null>(null);
-  readonly confirmandoId = signal<number | null>(null);
-  readonly erroresServidor = signal<Partial<Record<'nombre' | 'email' | 'rol', string>>>({});
-  readonly formulario = this.fb.group({
+  readonly guardando: WritableSignal<boolean> = signal(false);
+  readonly editandoId: WritableSignal<number | null> = signal<number | null>(null);
+  readonly confirmandoId: WritableSignal<number | null> = signal<number | null>(null);
+  readonly erroresServidor: WritableSignal<Partial<Record<'nombre' | 'email' | 'rol', string>>> = signal<Partial<Record<'nombre' | 'email' | 'rol', string>>>({});
+  readonly formulario: FormGroup<UsuarioControles> = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
     email: ['', [Validators.required, Validators.email]],
     rol: ['alumno' as Rol, Validators.required],
   });
-  private readonly dialogo = viewChild<ElementRef<HTMLDialogElement>>('dialogo');
+  private readonly dialogo: Signal<ElementRef<HTMLDialogElement> | undefined> = viewChild<ElementRef<HTMLDialogElement>>('dialogo');
 
   constructor() {
     // switchMap cancela la petición anterior si llega otra: nunca se pinta una respuesta antigua

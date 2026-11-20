@@ -1,4 +1,4 @@
-import {Component, effect, signal, ChangeDetectionStrategy} from '@angular/core';
+import {Component, effect, signal, WritableSignal, ChangeDetectionStrategy} from '@angular/core';
 
 import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 // DISPONIBILIDAD: `effect()` es estable desde Angular 20 (según angular.dev). `linkedSignal()` también.
@@ -14,7 +14,7 @@ import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
     styleUrl: './signal-effect.component.css'
 })
 export class SignalEffectComponent {
-  count = signal(0);
+  count: WritableSignal<number> = signal(0);
 
   constructor() {
     // Este efecto solo registra cambios; no calcula estado que la interfaz necesite derivar.

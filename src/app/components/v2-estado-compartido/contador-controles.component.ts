@@ -19,5 +19,5 @@ import { EstadoCompartidoService } from '../../services/estado-compartido.servic
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContadorControlesComponent {
-  readonly estado = inject(EstadoCompartidoService);
+  readonly estado: EstadoCompartidoService = inject(EstadoCompartidoService);
 }

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { email, form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { email, FieldTree, form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
 import { AvisoApiComponent } from '../aviso-api/aviso-api.component';
 import { coincidenSiHayValor } from '../../validators/reglas';
 
@@ -14,6 +14,11 @@ interface Alta {
   relationType: string;
   conditions: boolean;
 }
+
+/** Opción de un `<select>` o de un grupo de radios. */
+interface Opcion { id: string; name: string; }
+/** Opción de género: además lleva el icono de Font Awesome. */
+interface OpcionGenero extends Opcion { icon: string; }
 
 const INICIAL: Alta = {
   username: '',
@@ -38,20 +43,20 @@ const INICIAL: Alta = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2FormularioAltaSignalComponent {
-  readonly genders = [
+  readonly genders: OpcionGenero[] = [
     { name: 'Masculino', id: 'male', icon: 'fa-male' },
     { name: 'Femenino', id: 'female', icon: 'fa-female' },
     { name: 'No binario', id: 'no-binary', icon: 'fa-genderless' },
     { name: 'Otro', id: 'other', icon: 'fa-user' },
   ];
 
-  readonly orientations = [
+  readonly orientations: Opcion[] = [
     { name: 'Hetero', id: 'hetero' },
     { name: 'Homo', id: 'homo' },
     { name: 'Bi', id: 'bi' },
   ];
 
-  readonly relationTypes = [
+  readonly relationTypes: Opcion[] = [
     { id: '1', name: 'Amistad' },
     { id: '2', name: 'Relación seria' },
     { id: '3', name: 'Relación casual' },
@@ -59,9 +64,9 @@ export class V2FormularioAltaSignalComponent {
   ];
 
   /** Fuente de verdad del formulario: el valor vive en esta signal. */
-  readonly modelo = signal<Alta>({ ...INICIAL });
+  readonly modelo: WritableSignal<Alta> = signal<Alta>({ ...INICIAL });
 
-  readonly formulario = form(this.modelo, (ruta) => {
+  readonly formulario: FieldTree<Alta> = form(this.modelo, (ruta) => {
     required(ruta.username, { message: 'Username obligatorio.' });
     minLength(ruta.username, 4, { message: 'Username debe tener mínimo 4 caracteres.' });
 
@@ -92,7 +97,7 @@ export class V2FormularioAltaSignalComponent {
     );
   });
 
-  readonly confirmacion = signal('');
+  readonly confirmacion: WritableSignal<string> = signal('');
 
   async enviar(event: SubmitEvent): Promise<void> {
     event.preventDefault();

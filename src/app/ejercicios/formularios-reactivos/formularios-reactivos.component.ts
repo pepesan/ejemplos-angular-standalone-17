@@ -3,6 +3,11 @@ import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validation
 import {NgClass} from "@angular/common";
 import {EnunciadoComponent} from "../enunciado/enunciado.component";
 
+/** Opción de un `<select>` o de un grupo de radios; el identificador puede ser texto o número. */
+interface Opcion<Id extends string | number = string> { id: Id; name: string; }
+/** Opción de género: además lleva el icono de Font Awesome. */
+interface OpcionGenero extends Opcion { icon: string; }
+
 @Component({
   selector: 'app-formularios-reactivos',
   imports: [
@@ -18,20 +23,20 @@ export class FormulariosReactivosComponent {
 
   formulario: FormGroup;
 
-  genders = [
+  genders: OpcionGenero[] = [
     { name: "Masculino", id: "male", icon: "fa-male" },
     { name: "Femenino", id: "female", icon: "fa-female" },
     { name: "No binario", id: "no-binary", icon: "fa-genderless" },
     { name: "Otro", id: "other", icon: "fa-user" }
   ];
 
-  orientations = [
+  orientations: Opcion[] = [
     { name: "Hetero", id: "hetero" },
     { name: "Homo", id: "homo" },
     { name: "Bi", id: "bi" }
   ];
 
-  relationTypes = [
+  relationTypes: Opcion<number>[] = [
     { id: 1, name: "Amistad" },
     { id: 2, name: "Relación seria" },
     { id: 3, name: "Relación casual" },
