@@ -17,5 +17,5 @@ import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 })
 export class UseSignalModelComponent {
   // El componente hijo puede actualizar este modelo y el enlace [(isAdmin)] refleja el cambio aquí.
-  protected isAdmin = false;
+  protected isAdmin: boolean = false;
 }

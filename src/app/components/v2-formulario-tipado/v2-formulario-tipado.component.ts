@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { conMensaje, mensajesDe } from '../../validators/validador-con-mensaje';
+
+/** Controles del formulario: cada clave es un `FormControl` tipado y no nulo (se crean con `nonNullable`). */
+interface FormularioTipadoControles {
+  nombre: FormControl<string>;
+  correo: FormControl<string>;
+  aceptarPolitica: FormControl<boolean>;
+}
 
 @Component({
   selector: 'app-v2-formulario-tipado',
@@ -9,7 +16,7 @@ import { conMensaje, mensajesDe } from '../../validators/validador-con-mensaje';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2FormularioTipadoComponent {
-  readonly form = new FormGroup({
+  readonly form: FormGroup<FormularioTipadoControles> = new FormGroup({
     nombre: new FormControl('', {
       nonNullable: true,
       // Cada validador lleva su mensaje: el texto se define junto a la regla, no en la plantilla.
@@ -39,7 +46,7 @@ export class V2FormularioTipadoComponent {
     return mensajesDe(control.errors)[0] ?? '';
   }
 
-  readonly nombreConfirmado = signal<string | null>(null);
+  readonly nombreConfirmado: WritableSignal<string | null> = signal<string | null>(null);
 
   submit(): void {
     this.nombreConfirmado.set(null);

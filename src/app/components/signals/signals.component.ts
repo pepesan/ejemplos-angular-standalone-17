@@ -26,8 +26,8 @@ export class SignalsComponent implements OnInit{
   );
 
   // `linkedSignal` parte del valor de `count`, pero permite editarse de forma independiente.
-  count = signal(0);
-  linkedCount = linkedSignal(() => this.count());
+  count: WritableSignal<number> = signal(0);
+  linkedCount: WritableSignal<number> = linkedSignal(() => this.count());
 
   ngOnInit(): void {
     this.countSignal.set(2)

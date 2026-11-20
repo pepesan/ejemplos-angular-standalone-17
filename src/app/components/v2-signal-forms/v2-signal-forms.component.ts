@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { email, form, FormField, required } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { email, FieldTree, form, FormField, required } from '@angular/forms/signals';
 
 import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 // DISPONIBILIDAD: Signal Forms (`form()` de `@angular/forms/signals`) es estable desde Angular 22
@@ -19,9 +19,9 @@ interface Contacto { nombre: string; correo: string; empresa: string; }
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2SignalFormsComponent {
-  readonly modelo
+  readonly modelo: WritableSignal<Contacto>
     = signal<Contacto>({ nombre: '', correo: '', empresa: '' });
-  readonly formulario
+  readonly formulario: FieldTree<Contacto>
     = form(
       this.modelo,
       (ruta) => {
@@ -29,7 +29,7 @@ export class V2SignalFormsComponent {
         required(ruta.correo, { message: 'Escribe tu correo.' });
         email(ruta.correo, { message: 'Introduce un correo válido.' });
       });
-  readonly confirmacion = signal('');
+  readonly confirmacion: WritableSignal<string> = signal('');
 
   guardar(event: SubmitEvent): void {
     event.preventDefault();

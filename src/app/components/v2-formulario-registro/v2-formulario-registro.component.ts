@@ -7,6 +7,13 @@ import {
 } from '../../validators/contrasena.validators';
 import { conMensaje, mensajesDe } from '../../validators/validador-con-mensaje';
 
+/** Controles del formulario de registro: todos son `FormControl<string>` no nulos. */
+interface RegistroControles {
+  correo: FormControl<string>;
+  contrasena: FormControl<string>;
+  repite: FormControl<string>;
+}
+
 /**
  * Registro con validadores personalizados. Cada campo de contraseña combina validadores predefinidos
  * (`required`, `minLength`) y propios (número, minúscula, mayúscula, símbolo). Además, un validador de GRUPO
@@ -19,9 +26,9 @@ import { conMensaje, mensajesDe } from '../../validators/validador-con-mensaje';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class V2FormularioRegistroComponent {
-  readonly requisitos = REQUISITOS_CONTRASENA;
+  readonly requisitos: typeof REQUISITOS_CONTRASENA = REQUISITOS_CONTRASENA;
 
-  readonly form = new FormGroup(
+  readonly form: FormGroup<RegistroControles> = new FormGroup(
     {
       correo: new FormControl('', {
         nonNullable: true,
@@ -37,11 +44,11 @@ export class V2FormularioRegistroComponent {
     { validators: [coinciden('contrasena', 'repite')] },
   );
 
-  readonly correoRegistrado = signal<string | null>(null);
+  readonly correoRegistrado: WritableSignal<string | null> = signal<string | null>(null);
 
   // Estado del botón «Ver»: con `true` el campo pasa de type="password" a type="text".
-  readonly verContrasena = signal(false);
-  readonly verRepite = signal(false);
+  readonly verContrasena: WritableSignal<boolean> = signal(false);
+  readonly verRepite: WritableSignal<boolean> = signal(false);
 
   alternar(visible: WritableSignal<boolean>): void {
     visible.update((v) => !v);
