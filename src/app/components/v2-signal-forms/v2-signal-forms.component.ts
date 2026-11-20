@@ -5,6 +5,9 @@ import {AvisoApiComponent} from "../aviso-api/aviso-api.component";
 // DISPONIBILIDAD: Signal Forms (`form()` de `@angular/forms/signals`) es estable desde Angular 22
 // (según angular.dev). Para código con versiones anteriores, usa formularios reactivos.
 // `empresa` es opcional: forma parte del modelo, pero el esquema no le añade ninguna regla de validación.
+
+
+// Modelo de datos a manejar por el formulario
 interface Contacto { nombre: string; correo: string; empresa: string; }
 
 @Component({

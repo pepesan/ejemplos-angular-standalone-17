@@ -16,7 +16,8 @@ export class V2SignalFormsSchemaComponent {
   // Por un lado, los campos (el modelo)...
   readonly modelo = signal<Contacto>({ ...CONTACTO_VACIO });
   // ...y por otro las reglas (el esquema), que se enlazan al crear el formulario.
-  readonly formulario = form(this.modelo, contactoSchema);
+  readonly formulario
+    = form(this.modelo, contactoSchema);
   readonly confirmacion = signal('');
 
   guardar(event: SubmitEvent): void {
