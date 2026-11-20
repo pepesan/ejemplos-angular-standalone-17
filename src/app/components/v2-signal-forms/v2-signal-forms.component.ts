@@ -16,11 +16,14 @@ interface Contacto { nombre: string; correo: string; }
 })
 export class V2SignalFormsComponent {
   readonly modelo = signal<Contacto>({ nombre: '', correo: '' });
-  readonly formulario = form(this.modelo, (ruta) => {
-    required(ruta.nombre, { message: 'Escribe tu nombre.' });
-    required(ruta.correo, { message: 'Escribe tu correo.' });
-    email(ruta.correo, { message: 'Introduce un correo válido.' });
-  });
+  readonly formulario
+    = form(
+      this.modelo,
+      (ruta) => {
+        required(ruta.nombre, { message: 'Escribe tu nombre.' });
+        required(ruta.correo, { message: 'Escribe tu correo.' });
+        email(ruta.correo, { message: 'Introduce un correo válido.' });
+      });
   readonly confirmacion = signal('');
 
   guardar(event: SubmitEvent): void {
