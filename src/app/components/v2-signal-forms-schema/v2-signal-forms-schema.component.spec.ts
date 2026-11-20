@@ -2,7 +2,7 @@ import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { form } from '@angular/forms/signals';
 import { describe, expect, it } from 'vitest';
-import { CONTACTO_VACIO, Contacto, contactoSchema } from './contacto.schema';
+import { CONTACTO_VACIO, Contacto, contactoSchema, contactoSchemaFn } from './contacto.schema';
 import { V2SignalFormsSchemaComponent } from './v2-signal-forms-schema.component';
 
 describe('contactoSchema (el esquema, sin renderizar ningún componente)', () => {
@@ -31,6 +31,32 @@ describe('contactoSchema (el esquema, sin renderizar ningún componente)', () =>
   it('no valida la empresa: ni vacía ni con cualquier valor', () => {
     expect(crear({ nombre: 'Lucía', correo: 'lucia@example.com', empresa: '' }).empresa().invalid()).toBe(false);
     expect(crear({ nombre: 'Lucía', correo: 'lucia@example.com', empresa: '  ??? 1' }).empresa().invalid()).toBe(false);
+  });
+});
+
+describe('contactoSchemaFn (la misma definición como función suelta)', () => {
+  const crear = (esquema: typeof contactoSchema | typeof contactoSchemaFn, valor: Partial<Contacto> = {}) =>
+    TestBed.runInInjectionContext(() => form(signal<Contacto>({ ...CONTACTO_VACIO, ...valor }), esquema));
+
+  it.each([
+    ['vacío', {}],
+    ['correo mal formado', { nombre: 'Lucía', correo: 'no-es-un-correo' }],
+    ['válido', { nombre: 'Lucía', correo: 'lucia@example.com' }]
+  ] as [string, Partial<Contacto>][])('da el mismo resultado que schema() con el formulario %s', (_caso, valor) => {
+    const conSchema = crear(contactoSchema, valor);
+    const conFuncion = crear(contactoSchemaFn, valor);
+
+    expect(conFuncion().valid()).toBe(conSchema().valid());
+    expect(conFuncion.nombre().errors().map((e) => e.message)).toEqual(conSchema.nombre().errors().map((e) => e.message));
+    expect(conFuncion.correo().errors().map((e) => e.message)).toEqual(conSchema.correo().errors().map((e) => e.message));
+  });
+
+  it('exige nombre y correo, y no valida la empresa', () => {
+    const f = crear(contactoSchemaFn);
+
+    expect(f.nombre().getError('required')?.message).toBe('Escribe tu nombre.');
+    expect(f.correo().getError('required')?.message).toBe('Escribe tu correo.');
+    expect(f.empresa().invalid()).toBe(false);
   });
 });
 
