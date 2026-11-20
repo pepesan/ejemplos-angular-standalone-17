@@ -13,14 +13,14 @@
   </div>
 </div-->
 @if (
-  profileForm.controls['firstName'].status=='INVALID'
-  && profileForm.controls['firstName'].touched
+  profileForm.controls['firstName'].invalid
+  && (profileForm.controls['firstName'].dirty || profileForm.controls['firstName'].touched)
   ) {
   <div class="alert alert-danger">
-    @if(profileForm.controls['firstName'].errors?.['required']){
+    @if (profileForm.controls['firstName'].hasError('required')) {
       <div>Name is required.</div>
     }
-    @if(profileForm.controls['firstName'].errors?.['minlength']){
+    @if (profileForm.controls['firstName'].hasError('minlength')) {
       <div>
         Your name has only {{profileForm.controls['firstName'].errors?.['minlength']?.actualLength}} characters while
         the min lenght is {{profileForm.controls['firstName'].errors?.['minlength']?.requiredLength}}
@@ -38,11 +38,11 @@
   <input id="city" class="form-control" type="text" formControlName="city">
   <label for="state">State:</label>
   <input id="state" class="form-control" type="text" formControlName="state">
-  @if (profileForm.get('address.state')!.invalid && profileForm.get('address.state')!.touched) {
+  @if (profileForm.get('address.state')!.invalid && (profileForm.get('address.state')!.dirty || profileForm.get('address.state')!.touched)) {
     <div
       class="alert alert-danger"
       >
-      @if (profileForm.get('address.state')!.errors?.['required']) {
+      @if (profileForm.get('address.state')!.hasError('required')) {
         <div>
           El campo <strong>state</strong> es obligatorio.
         </div>

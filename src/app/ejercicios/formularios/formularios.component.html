@@ -23,19 +23,20 @@
                [(ngModel)]="model.username"
                name="username"
                #username="ngModel"/>
-        <div [hidden]="username.valid || username.untouched"
-             class="alert alert-danger">
-          @if (username.errors?.['required']) {
-            <div>
-              Username is required.
-            </div>
-          }
-          @if (username.errors?.['minlength']) {
-            <div>
-              Username must be at least 4 characters long.
-            </div>
-          }
-        </div>
+        @if (username.invalid && (username.dirty || username.touched)) {
+          <div class="alert alert-danger">
+            @if (username.hasError('required')) {
+              <div>
+                Username is required.
+              </div>
+            }
+            @if (username.hasError('minlength')) {
+              <div>
+                Username must be at least 4 characters long.
+              </div>
+            }
+          </div>
+        }
       </div>
       <div class="form-group">
         <label for="password">Password *</label>
@@ -47,19 +48,20 @@
                [(ngModel)]="model.password"
                name="password"
                #password="ngModel"/>
-        <div [hidden]="password.valid || password.untouched"
-             class="alert alert-danger">
-          @if (password.errors?.['required']) {
-            <div>
-              Password is required.
-            </div>
-          }
-          @if (password.errors?.['minlength']) {
-            <div>
-              Password must be at least 4 characters long.
-            </div>
-          }
-        </div>
+        @if (password.invalid && (password.dirty || password.touched)) {
+          <div class="alert alert-danger">
+            @if (password.hasError('required')) {
+              <div>
+                Password is required.
+              </div>
+            }
+            @if (password.hasError('minlength')) {
+              <div>
+                Password must be at least 4 characters long.
+              </div>
+            }
+          </div>
+        }
       </div>
       <div class="form-group">
         <label for="repeatPassword">Repeat Password *</label>
@@ -71,21 +73,20 @@
                [(ngModel)]="model.repeatPassword"
                name="repeatPassword"
                #repeatPassword="ngModel"/>
-        <div [hidden]="repeatPassword.valid || repeatPassword.untouched"
-             class="alert alert-danger">
-          @if (repeatPassword.errors?.['required']) {
-            <div>
-              Repeat Password is required.
-            </div>
-          }
-          @if (repeatPassword.errors?.['minlength']) {
-            <div>
-              Repeat Password must be at least 4 characters long.
-            </div>
-          }
-
-
-        </div>
+        @if (repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)) {
+          <div class="alert alert-danger">
+            @if (repeatPassword.hasError('required')) {
+              <div>
+                Repeat Password is required.
+              </div>
+            }
+            @if (repeatPassword.hasError('minlength')) {
+              <div>
+                Repeat Password must be at least 4 characters long.
+              </div>
+            }
+          </div>
+        }
         <!-- Mensaje adicional para no coincidencia -->
         @if (repeatPassword.valid && model.password != model.repeatPassword){
           <div class="alert alert-danger">
@@ -102,19 +103,20 @@
                  [(ngModel)]="model.email"
                  name="email"
                  #email="ngModel"/>
-          <div [hidden]="email.valid || email.untouched"
-               class="alert alert-danger">
-            @if (email.errors?.['required']) {
-              <div>
-                Email is required.
-              </div>
-            }
-            @if (email.errors?.['pattern']) {
-              <div>
-                Email must be well formated.
-              </div>
-            }
-          </div>
+          @if (email.invalid && (email.dirty || email.touched)) {
+            <div class="alert alert-danger">
+              @if (email.hasError('required')) {
+                <div>
+                  Email is required.
+                </div>
+              }
+              @if (email.hasError('pattern')) {
+                <div>
+                  Email must be well formated.
+                </div>
+              }
+            </div>
+          }
         </div>
       </div>
       @for (elemento of genders; track elemento.id) {

@@ -1,12 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {Hero} from "./hero";
+import {PowerSeleccionadoDirective} from "./power-seleccionado.directive";
 
 import {FormsModule} from "@angular/forms";
+import {NgIf} from "@angular/common"; // legado: solo para la demo de *ngIf
 
 @Component({
     selector: 'app-main-form',
     imports: [
-    FormsModule
+    FormsModule,
+    NgIf,
+    PowerSeleccionadoDirective
 ],
     templateUrl: './main-form.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
