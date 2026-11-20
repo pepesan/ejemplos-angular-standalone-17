@@ -30,7 +30,13 @@ export class FormValidatePasswordsComponent {
     // FormBuilder tipado: `nonNullable` evita que `reset()` deje `null` y los controles quedan como FormControl<string>.
     // Los controles se crean antes que el grupo porque el validador necesita la referencia a `password`.
     const password = fb.nonNullable.control('', Validators.required);
-    const repeatedPassword = fb.nonNullable.control('', [Validators.required, ConfirmedControlValidator(password)]);
+    const repeatedPassword
+      = fb.nonNullable.control(
+        '',
+      [
+        Validators.required,
+        ConfirmedControlValidator(password)
+      ]);
     this.controlesForm = fb.nonNullable.group({ password, repeatedPassword });
     // Angular solo revalida el control que cambia: si se edita la contraseña después, se revalida la repetida a mano.
     password.valueChanges.pipe(takeUntilDestroyed()).subscribe(() => repeatedPassword.updateValueAndValidity());
