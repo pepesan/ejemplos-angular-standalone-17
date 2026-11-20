@@ -25,7 +25,9 @@ for (const { unidad, path, label } of rutas) {
     await page.goto(path);
 
     // La ruta existe (no cae en la página de «ruta no encontrada») y el contenido principal se ha pintado.
-    await expect(page).toHaveURL(new RegExp(`${path.replace(/[/-]/g, '\\$&')}$`));
+    // Una ruta protegida por guarda de sesión acaba en su `/login?returnUrl=...` (la redirección es asíncrona),
+    // así que se aceptan ambas URLs: comprobar solo la original dependía de quién ganaba la carrera.
+    await expect(page).toHaveURL(new RegExp(`${path.replace(/[/-]/g, '\\$&')}(/login\\?returnUrl=.*)?$`));
     await expect(page.getByRole('heading', { name: 'Ruta no encontrada' })).toHaveCount(0);
     await expect(page.locator('main, app-root').first()).toContainText(/\S{3,}/);
     await expect(page.locator('app-root')).toBeVisible();
