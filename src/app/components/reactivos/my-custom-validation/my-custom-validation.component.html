@@ -1,15 +1,15 @@
 <h2>Formulario con validación custom</h2>
 <form class="form-group" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <input type="text" id="name" name="name" class="form-control" formControlName="name"/>
-  @if (profileForm.controls['name']?.invalid && profileForm.controls['name'].status=='INVALID') {
+  @if (profileForm.controls['name'].invalid && (profileForm.controls['name'].dirty || profileForm.controls['name'].touched)) {
     <div
       class="alert alert-danger">
-      @if (profileForm.controls['name'].errors?.['required'] == true) {
+      @if (profileForm.controls['name'].hasError('required')) {
         <div>
           Name is required.
         </div>
       }
-      @if (profileForm.controls['name'].errors?.['forbiddenName']) {
+      @if (profileForm.controls['name'].hasError('forbiddenName')) {
         <div>
           El nombre no pude ser bob porque has puesto {{profileForm.controls['name'].errors?.['forbiddenName'].value}}
         </div>
