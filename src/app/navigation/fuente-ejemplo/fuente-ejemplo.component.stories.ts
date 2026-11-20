@@ -4,6 +4,10 @@ import type { Meta, StoryObj } from '@storybook/angular-vite';
 import { expect, userEvent, within } from 'storybook/test';
 import { FuenteEjemploComponent, MAPA_FUENTES } from './fuente-ejemplo.component';
 import { ElementoFuente, TipoElemento } from './fuente-ejemplo.tipos';
+import { FUENTES_EJEMPLO } from './fuentes-ejemplo.generated';
+
+// Nº de ficheros del ejemplo de reactivos: sale de las fuentes generadas para que la story no se rompa al añadir uno.
+const FICHEROS_REACTIVOS = FUENTES_EJEMPLO['src/app/pages/reactivos/reactivos.component.ts'].length;
 
 /** Router mínimo: el aviso solo lee la jerarquía de `data.fuente` de la ruta activa. */
 function routerCon(fuente?: string) {
@@ -52,16 +56,16 @@ export const VariosFicherosReales: Story = {
   },
 };
 
-// Con más de 5 ficheros (aquí 9) la lista se pliega; el botón expone aria-expanded y despliega el resto.
+// Con más de 5 ficheros (aquí FICHEROS_REACTIVOS) la lista se pliega; el botón expone aria-expanded y despliega el resto.
 export const ListaLargaReactivos: Story = {
   render: () => ({ moduleMetadata: { providers: [routerCon('src/app/pages/reactivos/reactivos.component.ts')] } }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getAllByRole('listitem')).toHaveLength(5);
-    const boton = canvas.getByRole('button', { name: 'Mostrar 4 más' });
+    const boton = canvas.getByRole('button', { name: `Mostrar ${FICHEROS_REACTIVOS - 5} más` });
     await expect(boton).toHaveAttribute('aria-expanded', 'false');
     await userEvent.click(boton);
-    await expect(canvas.getAllByRole('listitem')).toHaveLength(9);
+    await expect(canvas.getAllByRole('listitem')).toHaveLength(FICHEROS_REACTIVOS);
     await expect(canvas.getByRole('button', { name: 'Mostrar menos' })).toHaveAttribute('aria-expanded', 'true');
   },
 };
