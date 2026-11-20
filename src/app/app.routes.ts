@@ -88,7 +88,11 @@ export const routes: Routes = [
   { path: 'ejercicio-eventos', component: EjercicioEventosComponent, data: { fuente: 'src/app/ejercicios/ejercicio-eventos/ejercicio-eventos.component.ts' } },
   { path: 'ejercicio-formulario', component: FormulariosComponent, data: { fuente: 'src/app/ejercicios/formularios/formularios.component.ts' } },
   { path: 'ejercicio-formulario-reactivo', component: FormulariosReactivosComponent, data: { fuente: 'src/app/ejercicios/formularios-reactivos/formularios-reactivos.component.ts' } },
-  { path: 'subrutas', component: SubRutasComponent, data: { fuente: 'src/app/pages/sub-rutas/sub-rutas.component.ts' },
+  {
+    path: 'subrutas',
+    component: SubRutasComponent,
+    data: { fuente: 'src/app/pages/sub-rutas/sub-rutas.component.ts'
+    },
     children: [
       {
         path: 'a', // child route path
@@ -102,13 +106,18 @@ export const routes: Routes = [
   },
   { path: 'nav', component: NavegacionComponent, data: { fuente: 'src/app/pages/navegacion/navegacion.component.ts' } },
   { path: 'list', component: ListadoComponent, data: { fuente: 'src/app/pages/listado/listado.component.ts' } },
-  { path: 'list/:id', component: DetalleComponent, data: { fuente: 'src/app/pages/detalle/detalle.component.ts' } },  // Route with parameter
+  {
+    path: 'list/:id',
+    component: DetalleComponent,
+    data: { fuente: 'src/app/pages/detalle/detalle.component.ts' }
+  },  // Route with parameter
   { path: 'acordeon', component: AcordeonComponent, data: { fuente: 'src/app/pages/acordeon/acordeon.component.ts' } },
   { path: 'alertas', component: AlertasComponent, data: { fuente: 'src/app/pages/alertas/alertas.component.ts' } },
   { path: 'form-bootstrap', component: FormBootstrapComponent, data: { fuente: 'src/app/pages/form-bootstrap/form-bootstrap.component.ts' } },
   {
     path: 'lazy',
-    loadChildren: () => import('./modules/lazy-module/lazy-module.module').then(m => m.LazyModuleModule) },
+    loadChildren: () => import('./modules/lazy-module/lazy-module.module')
+       .then(m => m.LazyModuleModule) },
   {
     path: 'v2/fundamentos',
     data: { fuente: 'src/app/components/v2-fundamentos/v2-fundamentos.component.ts' },
