@@ -1,0 +1,1 @@
+Prueba de conexión entre GitHub y Jira para la actividad GHP-1.
